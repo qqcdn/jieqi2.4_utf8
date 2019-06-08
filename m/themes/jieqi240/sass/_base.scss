@@ -1,0 +1,91 @@
+// »ù±¾ÔªËØ
+
+body {
+  line-height: $line-height;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  color: $body-color;
+  background-color: $body-bg;
+  word-wrap: $body-word-wrap;
+  word-break: $body-word-break;
+  @if $body-use-behavior {
+    _behavior: $body-behavior;
+  }
+}
+
+ul {
+  list-style: $list-style;
+  line-height: $line-height-list;
+}
+
+ol {
+  line-height: $line-height-list;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin-bottom: .5em;
+  margin-left: 0;
+}
+
+blockquote, q {
+  quotes: none;
+  &:before, &:after {
+    content: '';
+    content: none;
+  }
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  background-color: transparent;
+  &:focus, &:hover, &:active {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+    outline: 0;
+  }
+}
+
+input {
+  vertical-align: middle;
+}
+
+hr {
+  margin: $spacer-y auto;
+  border: 0;
+  border-top: $hr-border-width solid $hr-border-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1em;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  color: $headings-color;
+}
+
+.h1, .h2, .h3 {
+  margin-bottom: $headings-margin-bottom;
+}
+.h4, .h5, .h6 {
+  margin-bottom: $headings-margin-bottom;
+}
+
+.h1 { font-size: $font-size-h1; }
+.h2 { font-size: $font-size-h2; }
+.h3 { font-size: $font-size-h3; }
+.h4 { font-size: $font-size-h4; }
+.h5 { font-size: $font-size-h5; }
+.h6 { font-size: $font-size-h6; }
+
+img {
+  border: 0;
+  vertical-align: middle;
+}

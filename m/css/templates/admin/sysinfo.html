@@ -1,0 +1,15 @@
+<table class="grid" width="100%" align="center">
+<caption>系统信息及优化建议</caption>
+  <tr>
+    <th width="20%">变量名</th>
+    <th width="20%">变量值</th>
+    <th width="60%">推荐或备注</th>
+  </tr>
+{?section name=i loop=$sysinfos?}
+  <tr>
+    <td>{?$sysinfos[i].name?}</td>
+    <td><span class="{?$sysinfos[i].state?}">{?$sysinfos[i].value?}</span></td>
+    <td><span class="{?$sysinfos[i].state?}">{?$sysinfos[i].note?}</span></td>
+  </tr>
+{?/section?}
+</table>

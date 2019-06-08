@@ -1,0 +1,27 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<table width="100%" cellpadding="0" cellspacing="1" class="grid">
+  <caption>
+  《{?$articlename?}》{?if $actname != ''?}{?$actname?}{?else?}互动{?/if?}记录
+  </caption>
+  <tr>
+    <td colspan="4" class="title">合计次数：{?$actlogsum['count']?}，合计{?$egoldname?}：{?$actlogsum['actnum']?}</td>
+  </tr>
+  <tr align="center">
+    <td width="40%" class="head">会员名称</td>
+	<td width="20%" class="head">动作时间</td>
+	<td width="20%" class="head">动作名称</td>
+    <td width="20%" class="head">数量</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$actlogrows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'system':'user':$actlogrows[i].uid?}" target="_blank">{?$actlogrows[i].uname?}</a></td>
+    <td align="center">{?$actlogrows[i].addtime|date:'Y-m-d H:i:s'?}</td>
+    <td align="center">{?$actlogrows[i].actname?}</td>
+    <td align="center">{?$actlogrows[i].actnum?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,44 @@
+<form name="frmsearch" method="get" action="articlehurry.php?do=submit">
+<table width="100%" align="center" cellpadding="0" cellspacing="1" class="grid">
+    <tr>
+        <td>关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="15" maxlength="50"> 
+            <label class="radio"><input type="radio" name="keytype" value="0" checked="checked">书名</label>
+            <label class="radio"><input type="radio" name="keytype" class="radio" value="1">催更人</label> 
+			&nbsp;&nbsp;
+            <button type="submit" name="btnsearch" class="button">搜 索</button>
+			&nbsp; <a href="{?$jieqi_modules['article']['url']?}/admin/articlehurry.php">显示全部</a>
+        </td>
+    </tr>
+</table>
+</form>
+<br />
+<table width="100%" cellpadding="0" cellspacing="1" class="grid">
+  <tr align="center">
+    <td colspan="7" class="title">催更记录</td>
+  </tr>
+  <tr align="center">
+    <td width="25%" class="head">催更小说</td> 
+    <td width="15%" class="head">提交时间</td>
+    <td width="15%" class="head">提交人</td>
+    <td width="10%" class="head">催更{?$egoldname?}</td>
+    <td width="10%" class="head">最少字数</td>
+    <td width="15%" class="head">截止更新时间</td>
+    <td width="10%" class="head">状态</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$hurryrows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'article':'article':$hurryrows[i].articleid:'info'?}" target="_blank">{?$hurryrows[i].articlename?}</a></td>
+    <td align="center">{?$hurryrows[i].addtime|date:m-d H:i:s?}</td>
+    <td><a href="{?function jieqi_geturl:'system':'user':$hurryrows[i].uid:'info'?}" target="_blank">{?$hurryrows[i].uname?}</a></td>
+    <td align="center">{?$hurryrows[i].payegold?}</td>
+    <td align="center">{?$hurryrows[i].minwords?}</td>
+    <td align="center">{?$hurryrows[i].overtime|date:'m-d H:i:s'?}</td>
+    <td align="center">{?if $hurryrows[i].payflag == 1?}<font color="green">已成功</font>{?elseif $hurryrows[i].payflag == 2?}<font color="red">已失败</font>{?else?}进行中{?/if?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+

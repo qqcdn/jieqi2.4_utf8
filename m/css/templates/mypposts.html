@@ -1,0 +1,19 @@
+{?set $jieqi_pagetitle = "我的留言帖子-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "我的留言帖子"?}
+{?set jieqi_page_rows = "15"?}
+{?set $jieqi_nofootlink = "1"?}
+
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+	<ul class="ullist">
+	{?section name=i loop=$postrows?}
+	<li>
+	<div>{?$postrows[i].posttext?}</div>
+	<div class="gray"><em>{?$postrows[i].posttime|date:"m-d H:i"?}</em>{?if $postrows[i].istopic > 0?}<span class="hot">主题：</span>{?else?}<span class="hot">回复：</span>{?/if?}<a href="{?$jieqi_url?}/ptopicshow.php?tid={?$postrows[i].topicid?}"{?if $postrows[i].display_n == 1?} class="note"{?/if?}>{?$postrows[i].title|truncate:'24':'..'?}</a></div>
+	</li>
+	{?/section?}
+	</ul>
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

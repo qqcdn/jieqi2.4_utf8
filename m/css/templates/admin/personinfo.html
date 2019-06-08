@@ -1,0 +1,74 @@
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>查看用户联系方式 | <a href="{?$jieqi_url?}/admin/personmanage.php?id={?$_request['id']?}">修改联系方式</a></caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">用户名：</td>
+  <td class="tdr">{?$uservals['uname']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">昵称：</td>
+  <td class="tdr">{?$uservals['name']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">真实姓名：</td>
+  <td class="tdr">{?$personsvars['realname']?}</td>
+</tr>
+<tr valign="middle" align="left">
+<td class="tdl" width="25%">性别：</td>
+<td class="tdr">{?$personsvars['gender']?}</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">电话：</td>
+  <td class="tdr">{?$personsvars['telephone']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">手机：</td>
+  <td class="tdr">{?$personsvars['mobilephone']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">证件类型：</td>
+  <td class="tdr">{?if $personsvars['idcardtype'] == ''?}身份证{?else?}{?$personsvars['idcardtype']?}{?/if?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">证件号码：</td>
+  <td class="tdr">{?$personsvars['idcard']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">收款银行：</td>
+  <td class="tdr">{?$personsvars['banktype']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">银行所在地：</td>
+  <td class="tdr">{?$personsvars['bankname']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">卡号：</td>
+  <td class="tdr">{?$personsvars['bankcard']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">持卡人姓名：</td>
+  <td class="tdr">{?$personsvars['bankuser']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">联系地址：</td>
+  <td class="tdr">{?$personsvars['address']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">邮编：</td>
+  <td class="tdr">{?$personsvars['zipcode']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">补充信息：</td>
+  <td class="tdr">{?$personsvars['mynote']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">管理员备注：</td>
+  <td class="tdr">{?$personsvars['ownermark']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">信息锁定：</td>
+  <td class="tdr">{?if $personsvars['denyedit'] > 0?}<span class="hot">已锁定</span>{?else?}未锁定{?/if?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">&nbsp;</td>
+  <td class="tdr"><a href="{?$jieqi_url?}/admin/personmanage.php?id={?$_request['id']?}">&gt;&gt;修改联系方式</a></td>
+</tr>
+</table>

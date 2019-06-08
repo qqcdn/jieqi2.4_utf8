@@ -1,0 +1,38 @@
+<script type="text/javascript">
+function frmsortadd_validate(){
+  if(document.frmsortadd.sortname.value == ""){
+    alert("请输入分类名称");
+    document.frmsortadd.sortname.focus();
+    return false;
+  }
+}
+</script>
+<br /><br />
+<form name="frmsortadd" id="frmsortadd" action="sortadd.php" method="post" onsubmit="return frmsortadd_validate();">
+<table style="width:60%; min-width:480px;" class="grid" cellspacing="1" align="center">
+<caption>增加分类</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">上级分类：</td>
+  <td class="tdr">
+  <select name="parentid" id="parentid" class="select">
+    <option value="0"{?if $parentid == 0?} selected{?/if?}>无(作为顶级分类)</option>
+	{?section name=i loop=$sortrows?}
+    <option value="{?$sortrows[i].sortid?}"{?if $parentid == $sortrows[i].sortid?} selected{?/if?}>{?$sortrows[i].layer|str_repeat:'&nbsp;&nbsp;'?}├{?$sortrows[i].sortname?}</option>
+	{?/section?}
+  </select></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">分类名称：</td>
+  <td class="tdr">
+  <input type="text" class="text" name="sortname" id="sortname" size="20" maxlength="30" value="" />
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">
+  &nbsp;
+  <input type="hidden" name="act" value="sortadd" />{?$jieqi_token_input?}
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">增加分类</button></td>
+</tr>
+</table>
+</form>

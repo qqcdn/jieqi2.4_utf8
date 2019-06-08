@@ -1,0 +1,21 @@
+{?set $jieqi_pagetitle = "订阅统计-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "订阅统计"?}
+
+<div class="block">
+	<div class="blocktitle">{?$obookname?}</div>
+	<div class="blockhead"><!--章节数：{?$ochaptersum['count']?}，-->总价格：{?$ochaptersum['saleprice']?}，总销量：{?$ochaptersum['allsale']?}，销售额：{?$ochaptersum['sumemoney']?}</div>
+	<div class="blockcontent" id="jieqi_page_contents">
+		{?section name=i loop=$ochapterrows?}
+		<div class="c_row cf">
+			<h4><a href="{?$ochapterrows[i].url_chapter?}">{?$ochapterrows[i].chaptername?}</a></h4>
+			<p class="gray" style="line-height:2;">
+				价格：{?$ochapterrows[i].saleprice?}，销量：{?$ochapterrows[i].allsale?}，总额：{?$ochapterrows[i].sumemoney?}
+			</p>
+			<p>
+				<a class="btnlink" href="{?$obook_dynamic_url?}/chapterbuylog.php?cid={?$ochapterrows[i].ochapterid?}&oid={?$obookid?}">查看详细订阅记录</a>
+			</p>
+		</div>
+		{?/section?}
+	</div>
+</div>
+<div class="pages">{?$url_jumppage?}</div>

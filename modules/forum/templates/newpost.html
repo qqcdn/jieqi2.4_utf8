@@ -1,0 +1,72 @@
+<div class="c_nav"><a href="{?$jieqi_modules['forum']['url']?}/index.php">论坛首页</a> &gt; <a href="{?function jieqi_geturl:'forum':topiclist:1:$forumid?}">{?$forumname?}</a>{?if $topicid > 0?} &gt; <a href="{?function jieqi_geturl:'forum':showtopic:$topicid:1:1?}">{?$topictitle?}</a>{?/if?}</div>
+
+<script type="text/javascript">
+    function frmnewpost_validate(){
+        {?if $topicid == 0?}
+        if(document.frmnewpost.topictitle.value == ""){
+            alert("请输入标题");
+            document.frmnewpost.topictitle.focus();
+            return false;
+        }
+        {?/if?}
+        if(document.frmnewpost.posttext.value == ""){
+            alert("请输入内容");
+            document.frmnewpost.posttext.focus();
+            return false;
+        }
+        {?if $postcheckcode > 0?}
+        if(document.frmnewpost.checkcode.value == ""){
+            alert("请输入验证码");
+            document.frmnewpost.checkcode.focus();
+            return false;
+        }
+        {?/if?}
+    }
+</script>
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/attaches.js"></script>
+<form name="frmnewpost" id="frmnewpost" action="{?$jieqi_modules['forum']['url']?}/newpost.php" method="post" onsubmit="return frmnewpost_validate();" enctype="multipart/form-data">
+    <table width="100%" class="grid" cellspacing="1" align="center">
+        <caption>{?if $topicid > 0?}发表回复{?else?}发表新主题{?/if?}</caption>
+        <tr valign="middle" align="left">
+            <td class="tdl" width="20%">标题：</td>
+            <td class="tdr"><input type="text" class="text" name="topictitle" id="topictitle" size="60" maxlength="60" value="" /></td>
+        </tr>
+        <tr valign="middle" align="left">
+            <td class="tdl">内容：</td>
+            <td class="tdr">
+	            <textarea class="textarea" name="posttext" id="posttext" rows="12" cols="60">{?$posttext?}</textarea>
+	            <script type="text/javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("posttext");});</script>
+	        </td>
+        </tr>
+        {?if $postcheckcode > 0?}
+        <tr valign="middle" align="left">
+            <td class="tdl">验证码：</td>
+            <td class="tdr"><input type="text" class="text" style="width:6em;" name="checkcode" id="checkcode" onfocus="if(this.form.imgccode.style.display == 'none'){this.form.imgccode.src = '{?$jieqi_url?}/checkcode.php?rand={?$jieqi_time?}';this.form.imgccode.style.display = '';}" title="点击显示验证码"><img name="imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码"></td>
+        </tr>
+        {?/if?}
+        {?if $canupload == true && $maxattachnum > 0?}
+        <tr valign="middle" align="left">
+            <td class="tdl">附件限制：</td>
+            <td class="tdr">文件类型：{?$attachtype?}, 图片最大：{?$maximagesize?}K, 文件最大：{?$maxfilesize?}K，最多附件数：{?$maxattachnum?}</td>
+        </tr>
+        <tr valign="middle" align="left">
+            <td class="tdl">附件上传：</td>
+            <td class="tdr">
+                <input type="file" class="file" name="attachfile[]" id="attachfile" onchange="Attaches.addFile('attachfile', 'attachdiv', true);" /><button type="button" class="filebutton" onclick="if(document.all){document.getElementById('attachfile').outerHTML += '';}else{document.getElementById('attachfile').value = '';}">清空</button>
+                <div id="attachdiv"></div>
+            </td>
+        </tr>
+        {?/if?}
+        <tr valign="middle" align="left">
+            <td class="tdl">
+                &nbsp;
+                <input type="hidden" name="act" value="newpost" />{?$jieqi_token_input?}
+                <input type="hidden" name="fid" value="{?$forumid?}" />
+                {?if $topicid > 0?}<input type="hidden" name="tid" value="{?$topicid?}" />{?/if?}
+            </td>
+            <td class="tdr">
+                <button type="submit" class="button" name="submit"> 发表 </button>
+            </td>
+        </tr>
+    </table>
+</form>

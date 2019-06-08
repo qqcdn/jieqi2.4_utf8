@@ -1,0 +1,29 @@
+{?set $jieqi_pagetitle = "管理草稿-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "管理草稿"?}
+
+<ul class="ultab">
+	<li><a href="{?$jieqi_modules['article']['url']?}/draft.php"{?if $_request['type'] == 0?} class="selected"{?/if?}>全部草稿</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/draft.php?type=1"{?if $_request['type'] == 1?} class="selected"{?/if?}>私人草稿</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/draft.php?type=2"{?if $_request['type'] == 2?} class="selected"{?/if?}>定时章节</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/draft.php?type=3"{?if $_request['type'] == 3?} class="selected"{?/if?}>待审章节</a></li>
+</ul>
+<div class="blockb">
+	<div class="blockcontent" id="jieqi_page_contents">
+		{?section name=i loop=$draftrows?}
+		<div class="c_row cf">
+			<h4><a href="{?$article_static_url?}/articlemanage.php?id={?$draftrows[i].articleid?}">{?$draftrows[i].articlename?}</a></h4>
+			<div class="hot" style="line-height:2;">
+				<a class="db" href="{?$article_static_url?}/draftedit.php?id={?$draftrows[i].draftid?}">
+				{?$draftrows[i].chaptername?} {?if $draftrows[i].isvip_n == 1?}<span class="note">vip</span>{?/if?}
+				{?if $draftrows[i].pubdate > 0?}<p class="note fss">定时发表：{?$draftrows[i].pubdate|date:m-d H:i?}</p>{?/if?}
+				</a>
+			</div>
+			<p>
+				<a class="btnlink" href="{?$article_static_url?}/draftedit.php?id={?$draftrows[i].draftid?}">编辑</a> <a class="btnlink" href="javascript:if(confirm('确实要删除该章节么？')) document.location='{?$draftrows[i].url_delete?}';">删除</a>{?if $draftrows[i].display_n == 0?} <a class="btnlink" href="{?if $draftrows[i].isvip_n == 1?}{?$article_static_url?}/newchapter.php?aid={?$draftrows[i].articleid?}&draftid={?$draftrows[i].draftid?}{?else?}{?$article_static_url?}/newchapter.php?aid={?$draftrows[i].articleid?}&draftid={?$draftrows[i].draftid?}{?/if?}">发表</a>{?/if?}
+			</p>
+		</div>
+		{?/section?}
+	</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

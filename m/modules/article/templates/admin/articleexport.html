@@ -1,0 +1,88 @@
+<form name="frmexport" method="post" action="{?$jieqi_modules['article']['url']?}/admin/articleexport.php">
+<table width="100%" class="grid" align="center">
+<caption>小说批量导出成EXCEL</caption>
+<tr>
+  <td class="tdl">小说分类：</td>
+  <td class="tdr">
+	<select class="select" size="1" onchange="showtypes(this)" name="sortid" id="sortid">
+		<option value="0">不限分类</option>
+		{?section name=i loop=$sortrows?}
+		<option value="{?$i['key']?}"{?if $_request['sortid'] == $i['key']?} selected="selected"{?/if?}>{?$sortrows[i].caption?}</option>
+		{?/section?}
+		</select>
+		<span id="typeselect" name="typeselect"></span>
+        <script type="text/javascript">
+        function showtypes(obj){
+          var typeselect=document.getElementById('typeselect');
+          typeselect.innerHTML='';
+          {?section name=i loop=$sortrows?}
+	      {?if $sortrows[i].types != ''?}
+	      if(obj.options[obj.selectedIndex].value == {?$i['key']?}) typeselect.innerHTML='<select class="select" size="1" name="typeid" id="typeid"><option value="0">不限子类</option>{?section name=j loop=$sortrows[i].types?}<option value="{?$j['key']?}"{?if $_request['typeid'] == $j['key']?} selected="selected"{?/if?}>{?$sortrows[i]['types'][j]?}</option>{?/section?}</select>';
+	      {?/if?}
+          {?/section?}
+         }
+		 {?if $_request['sortid'] > 0?}showtypes(document.getElementById('sortid'));{?/if?}
+	</script>
+  </td>
+</tr>
+<tr>
+  <td class="tdl">签约状态：</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="issign" value="-1" checked="checked" />不限</label>
+  <label class="radio"><input type="radio" name="issign" value="0" />未签约</label>
+  <label class="radio"><input type="radio" name="issign" value="1" />已签约</label>
+  <label class="radio"><input type="radio" name="issign" value="10" />VIP签约</label>
+  </td>
+</tr>
+<tr>
+  <td class="tdl">时间限制：</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="upfield" value="0" checked="checked">更新时间</label> &nbsp;
+  <label class="radio"><input type="radio" name="upfield" value="1">入库时间</label> <br />
+  <input name="upday" type="text" id="upday" size="10" maxlength="11" class="text"> 天以内 <span class="hot">（留空表示不限）</span>
+  </td>
+</tr>
+<tr>
+  <td class="tdl">关键字：<br />小说名称或ID<br /><br />多个小说名则是每个一行，如：<br />小说一<br />小说二<br />小说三<br />
+  多个ID用英文逗号分开，不要换行，如：<br />12,34,56,78<br /></td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="idname" value="1" checked="checked">按小说名，每个一行</label> &nbsp; 
+  <label class="radio"><input type="radio" name="idname" value="0">按小说序号，逗号分隔</label><br />
+  <textarea class="textarea" name="articles" id="articles" rows="20" cols="70"></textarea></td>
+</tr>
+<tr>
+  <td class="tdl">排序条件：</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="order" value="articlename" checked="checked" />小说名称</label>
+  <label class="radio"><input type="radio" name="order" value="articleid" />小说序号(ID)</label>
+  <label class="radio"><input type="radio" name="order" value="postdate" />入库时间</label>
+  <label class="radio"><input type="radio" name="order" value="lastupdate" />更新时间</label>
+  <label class="radio"><input type="radio" name="order" value="size" />总字数</label>
+  <label class="radio"><input type="radio" name="order" value="monthsize" />本月更新字数</label>
+  <label class="radio"><input type="radio" name="order" value="weeksize" />本周更新字数</label>
+  <label class="radio"><input type="radio" name="order" value="allvisit" />总点击</label>
+  <label class="radio"><input type="radio" name="order" value="monthvisit" />月点击</label>
+  <label class="radio"><input type="radio" name="order" value="weekvisit" />周点击</label>
+  </td>
+</tr>
+<tr>
+  <td class="tdl">排列顺序：</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="asc" value="1" checked="checked" />正序（从小到大）</label>
+  <label class="radio"><input type="radio" name="asc" value="0" />倒序（从大到小）</label>
+  </td>
+</tr>
+  <tr>
+    <td class="tdl">导出格式：</td>
+    <td class="tdr">
+      <label class="radio"><input type="radio" name="format" value="1" checked="checked" />文本（导出速度快，可用EXCEL打开）</label>
+      <label class="radio"><input type="radio" name="format" value="2" />EXCEL5（兼容老版本）</label>
+      <label class="radio"><input type="radio" name="format" value="3" />EXCEL2007（兼容新版本）</label>
+    </td>
+  </tr>
+<tr>
+  <td class="tdl">&nbsp;<input type="hidden" name="act" value="export" />{?$jieqi_token_input?}</td>
+  <td class="tdr"><button type="submit" name="btnsearch" class="button">导出成EXCEL</button> <span class="hot">点击导出后请耐心等待，稍后会提示EXCEL文件下载</span></td>
+</tr>
+</table>
+</form>

@@ -1,0 +1,17 @@
+{?set $jieqi_pagetitle = "分类阅读-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "分类"?}
+
+{?section name=i loop=$sortrows?}
+<div class="block">
+    <div class="blocktitle"><a class="db" href="{?function jieqi_geturl:'article':'articlelist':1:$i['key']?}"><i class="iconfont hot">&#xee66;</i> {?$sortrows[i].caption?}<i class="iconfont fr">&#xee6a;</i></a></div>
+    {?if $sortrows[i].types|count > 0?}
+    <div class="blockcontent">
+        <ul class="ullist cf">
+        {?section name=j loop=$sortrows[i].types?}
+        <li style="float:left;width:25%;text-align:center;line-height:2.5;"><a class="db" href="{?$jieqi_modules['article']['url']?}/articlefilter.php?sortid={?$i['key']?}&typeid={?$j['key']?}">{?$sortrows[i].types[j]?}</a></li>
+        {?/section?}
+        </ul>
+    </div>
+    {?/if?}
+</div>
+{?/section?}

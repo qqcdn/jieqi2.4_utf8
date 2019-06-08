@@ -1,0 +1,28 @@
+{?set $jieqi_pagetitle = "管理章节-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "管理章节"?}
+
+<div class="block">
+	<div class="blocktitle"><a href="{?$url_articleinfo?}">《{?$articlename?}》</a></div>
+	<div class="blockcontent">
+		<div class="tc mb"><a class="btnlink" href="{?$article_static_url?}/newvolume.php?aid={?$articleid?}">新建分卷</a> 
+   		<a class="btnlink" href="{?$article_static_url?}/newchapter.php?aid={?$articleid?}">增加章节</a> 
+   		<a class="btnlink" href="{?$article_static_url?}/articleedit.php?id={?$articleid?}">编辑小说</a></div>
+		<ul class="ulrow">
+ {?section name=i loop=$chapterrows?}
+ {?if $chapterrows[i].chaptertype == 0?}
+ <li>
+ {?if $chapterrows[i].isvip_n == 0 || $candelete > 0?}
+ <a class="btnlink b_hot b_s fr" id="act_delete_{?$chapterrows[i].chapterid?}" href="javascript:;" onclick="if(confirm('确实要删除该章节么？')) Ajax.Tip('{?$chapterrows[i].url_chapterdelete?}{?$jieqi_token_url?}', {method: 'POST'});">删除</a>
+ {?/if?} 
+ <a href="{?$chapterrows[i].url_chapteredit?}">{?$chapterrows[i].chaptername?} {?if $chapterrows[i].isvip_n > 0?}<span class="hot">vip</span>{?/if?}</a>
+ </li>
+ {?else?}
+ <li class="note">
+<a class="btnlink b_hot b_s fr" id="act_delete_{?$chapterrows[i].chapterid?}" href="javascript:;" onclick="if(confirm('确实要删除该分卷么？')) Ajax.Tip('{?$chapterrows[i].url_chapterdelete?}{?$jieqi_token_url?}', {method: 'POST'});">删除</a>
+ <b><a href="{?$chapterrows[i].url_chapteredit?}">{?$chapterrows[i].chaptername?}</a></b> 
+ </li>
+ {?/if?}
+ {?/section?}
+ </ul>
+	</div>
+</div>

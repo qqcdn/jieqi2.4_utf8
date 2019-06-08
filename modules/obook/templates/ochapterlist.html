@@ -1,0 +1,26 @@
+{?set jieqi_blocks_module = "obook"?}
+{?set jieqi_blocks_config = "guideblocks"?}
+{?set jieqi_page_rows = "50"?}
+<table class="grid" width="100%" align="center">
+<caption>{?$obooktitle?}</caption>
+  <tr align="center">
+    <th width="20%">书名</th>
+    <th width="40%">最新章节</th>
+    <th width="13%">字数</th>
+    <th width="15%">价格</th>
+    <th width="12%">发布</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$ochapterrows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'article':'article':$ochapterrows[i].articleid:'info'?}" target="_blank">{?$ochapterrows[i].obookname?}</a></td>
+    <td><a href="{?$ochapterrows[i].url_chapter?}" target="_blank">{?$ochapterrows[i].chaptername?}</a></td>
+    <td align="center">{?$ochapterrows[i].words?}</td>
+    <td align="center">{?$ochapterrows[i].saleprice?}</td>
+    <td align="center">{?$ochapterrows[i].lastupdate|date:'Y-m-d'?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+

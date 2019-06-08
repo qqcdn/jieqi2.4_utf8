@@ -1,0 +1,29 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "guideblocks"?}
+{?set jieqi_page_rows = "30"?}
+<table class="grid" width="100%" align="center">
+<caption>{?$tagtitle?}</caption>
+  <tr align="center">
+    <th width="25%">标签名称</th>
+    <th width="15%">加入时间</th>
+    <th width="12%">小说数</th>
+	<th width="12%">日点击</th>
+    <th width="12%">周点击</th>
+    <th width="12%">月点击</th>
+	<th width="12%">总点击</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$tagrows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'article':'tagarticle':1:$tagrows[i].tagname_n?}">{?$tagrows[i].tagname?}</a></td>
+    <td align="center">{?$tagrows[i].addtime|date:'Y-m-d'?}</td>
+    <td align="center">{?$tagrows[i].linknum?}</td>
+	<td align="center">{?$tagrows[i].dayvisit?}</td>
+    <td align="center">{?$tagrows[i].weekvisit?}</td>
+    <td align="center">{?$tagrows[i].monthvisit?}</td>
+	<td align="center">{?$tagrows[i].allvisit?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

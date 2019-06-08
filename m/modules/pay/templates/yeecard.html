@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>{?$title?}</title>
+<link rel="stylesheet" type="text/css" media="all" href="{?$jieqi_themeurl?}style.css" />
+<script language="javascript" type="text/javascript" src="{?$jieqi_url?}/scripts/common.js"></script>
+</head>
+<body>
+<div style="width:100%; text-align:center; padding-top:150px;">
+  <div style="margin:auto; width:40%;">
+    <div class="block">
+      <div class="blocktitle">娆㈣繋浣跨敤鍦ㄧ嚎鍏呭€?/div>
+      <div class="blockcontent">
+	    <div style="padding:10px; text-align:left;">
+		<form name="frmpaypost" id="frmpaypost" method="get" action="{?$url_pay?}">
+		镇ㄥソ锛寋?$buyname?}! <br />
+		镇ㄩ€夋嫨镄勪氦鏄撶被鍨嬩负锛?<br />
+		<span class="hot"> * 鍏呭€纳?$egold?}{?$egoldname?}锛屾敮浠橀噾棰濓细{?$money?}鍏?/span><br />
+		绯荤粺灏呜嚜锷ㄨ烦杞埌涓嬩竴姝ワ紝濡傛湭璺宠浆锛岃镣瑰向钬滆繘鍏ヤ笅涓€姝モ€濄€?br /><br />
+		{?section name=i loop=$payvars?}
+		<input type="hidden" name="{?$i['key']?}" value="{?$payvars[i]?}">
+		{?/section?}
+		<button type="submit" class="button"> 杩涘叆涓嬩竴姝?</button><br /><br />
+		</form>
+		</div>
+	  </div>
+	  <div class="blocknote"><a href="{?$jieqi_url?}/">杩斿洖缃戠珯棣栭〉</a></div>
+	</div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function autopaypost(){
+	document.getElementById('frmpaypost').submit();
+}
+if (window.attachEvent){
+	window.attachEvent('onload',autopaypost);
+}else{
+	window.addEventListener('load',autopaypost,false);
+} 
+</script>
+
+</body>
+</html>

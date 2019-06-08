@@ -1,0 +1,79 @@
+//按钮
+
+.button, .btnlink, .filebutton {
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: $button-line-height;
+  padding: $button-padding;
+  margin: $button-margin;
+  color: $button-color;
+  background: $button-bg;
+  @include box-border($button-border, $button-border-radius, $button-box-shadow);
+}
+
+.button:hover, .btnlink:hover {
+  color: $button-color;
+  text-decoration: none;
+  background: darken($button-bg, 10%);
+  @if $button-border-color != transparent {border-color: darken($button-border-color, 12%);}
+}
+
+.b_b {
+  display: block;
+  width: 100%;
+}
+
+.b_s {
+  font-size: $font-size-sm;
+  padding: $button-padding-sm;
+}
+
+.b_l {
+  font-size: $font-size-lg;
+  padding: $button-padding-lg;
+}
+
+.b_hot {
+  @include button-color($brand-warning, $color-bg);
+}
+.b_note {
+  @include button-color($brand-info, $color-bg);
+}
+.b_gray {
+  @include button-color($gray-light, $color-bg);
+}
+.b_success {
+  @include button-color($brand-success, $color-bg);
+}
+.b_error {
+  @include button-color($brand-danger, $color-bg);
+}
+.b_primary {
+  @include button-color($brand-primary, $color-bg);
+}
+
+.buttons {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  .button {
+    position: relative;
+    float: left;
+    margin: 0;
+    + .button {
+      @if $button-border != 0 {margin-left: -$button-border;}
+    }
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+    &:first-child:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  > .button:last-child:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

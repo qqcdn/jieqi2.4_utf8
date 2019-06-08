@@ -1,0 +1,40 @@
+<form name="frmquery" method="post" action="{?$jieqi_url?}/admin/online.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="hide">
+          <tr>
+            <td width="30%" valign="middle">在线人数：{?$rowcount?}</td>
+            <td width="70%" align="right" valign="middle">用户名称：
+            <input name="username" type="text" class="text" id="username" size="20" maxlength="30">
+            <button type="submit" name="Submit" class="button">搜 索</button>&nbsp;&nbsp;</td>
+          </tr>
+        </table></td>
+    </tr>
+</table>
+</form>
+<br />
+<table class="grid" width="100%" align="center">
+<caption>用户列表</caption>
+  <tr align="center" class="head">
+    <td width="20%" valign="middle">用户名</td>
+    <td width="10%" valign="middle">登陆时间</td>
+    <td width="15%" valign="middle">等级</td>
+    <td width="15%" valign="middle">IP</td>
+    <td width="25%" valign="middle">来路</td>
+    <td width="15%" valign="middle">操作</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$userrows?}
+  <tr valign="middle">
+    <td><a href="{?function jieqi_geturl:'system':'user':$userrows[i].uid:'info'?}" target="_blank">{?$userrows[i].name?}</a></td>
+    <td align="center">{?$userrows[i].logintime|date:'m-d H:i:s'?}</td>
+    <td align="center">{?$userrows[i].group?}</td>
+    <td align="center">{?$userrows[i].ip?}</td>
+    <td align="left">{?$userrows[i].location?}</td>
+    <td align="center"><a id="act_delete_{?$userrows[i].sid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_url?}/admin/online.php?sid={?$userrows[i].sid?}&act=del{?$jieqi_token_url?}', {method: 'POST'});">强制下线</a></td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+

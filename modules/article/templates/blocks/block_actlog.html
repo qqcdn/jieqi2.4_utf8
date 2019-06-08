@@ -1,0 +1,13 @@
+<ul class="ultop">
+{?section name=i loop=$actlogrows?}
+  <li>
+  <span class="fr">{?$actlogrows[i].addtime|date:'H:i'?}</span><a href="{?function jieqi_geturl:'system':'user':$actlogrows[i].uid:'info'?}" target="_blank">{?$actlogrows[i].uname?}</a>
+  <br />
+  {?if $actlogrows[i].actname == 'tip'?}
+    {?if $actlogrows[i].acttype > 0?}赠送 {?$actlogrows[i].actnum?} {?$tiptyperows[$actlogrows[i].acttype].unit?}{?$tiptyperows[$actlogrows[i].acttype].caption?}{?else?}打赏 {?$actlogrows[i].actnum?} {?$egoldname?}{?/if?}
+  {?elseif $actlogrows[i].actname == 'vipvote'?}
+  投了 {?$actlogrows[i].actnum?} 张月票
+  {?/if?}
+  </li>
+{?/section?}
+</ul>

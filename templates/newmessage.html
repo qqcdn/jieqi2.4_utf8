@@ -1,0 +1,57 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "写新消息-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="站内消息" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_message_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<script type="text/javascript">
+function frmnewmessage_validate(){
+  if(typeof(document.frmnewmessage.receiver) != "undefined"){
+    if(document.frmnewmessage.receiver.value == "" ){
+      alert("请输入收件人");
+	  document.frmnewmessage.receiver.focus();
+	  return false;
+    }
+  }
+  if(document.frmnewmessage.title.value == ""){
+    alert("请输入标题");
+	window.document.frmnewmessage.title.focus();
+	return false;
+  }
+}
+</script>
+<form name="frmnewmessage" id="frmnewmessage" action="{?$jieqi_url?}/newmessage.php?do=submit" method="post" onsubmit="return frmnewmessage_validate();">
+<table width="100%" class="grid" cellspacing="1" align="center" style="min-width:480px;">
+<!-- <caption>写新消息</caption> -->
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">收件人：</td>
+  <td class="tdr" width="75%">
+  {?if $tosys > 0?}
+  网站管理员<input type="hidden" name="tosys" value="{?$tosys?}" />
+  {?else?}
+  <input type="text" class="text" style="width:90%;" name="receiver" value="{?$receiver?}" />
+  {?/if?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">标题：</td>
+  <td class="tdr"><input type="text" class="text" style="width:90%;" name="title" value="{?$title?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">内容：</td>
+  <td class="tdr"><textarea class="textarea" style="width:90%;height:10em;" name="content">{?$content?}</textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;</td>
+  <td class="tdr">
+	{?if $ajax_request > 0?}
+      <button type="button" name="submit" class="button" style="cursor:pointer;" onclick="Ajax.Request('frmnewmessage',{onLoading:function(){Form.disable('frmnewmessage');},onComplete:function(){alert(this.response.replace(/<br[^<>]*>/g,'\n'));Form.enable('frmnewmessage');closeDialog();
+}});">发 送</button>
+      {?else?}
+      <button type="submit" class="button" name="submit">发 送</button>
+      {?/if?}
+	<input type="hidden" name="act" value="add" />
+	{?$jieqi_token_input?}
+  </td>
+</tr>
+</table>
+</form>

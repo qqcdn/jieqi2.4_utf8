@@ -1,0 +1,383 @@
+//界面
+
+.jieqiQuote, .jieqiCode, .jieqiNote {
+  border: $border-width solid $border-color;
+  border-left: 5px solid $border-color;
+  padding: 0.3em;
+  color: $color-dark;
+  background: $color-light;
+}
+
+.divbox, .textbox {
+  border: $border-width solid $border-color;
+  padding: 0.5em;
+  margin-bottom: 0.6em;
+  background: $body-bg;
+}
+
+.divbg {
+  padding: 0.5em;
+  margin: 0.5em 0;
+  background: $color-light;
+}
+
+.ajaxtip {
+  position: absolute;
+  border: $border-width solid $border-color;
+  background: #fff;
+  color: #ff0000;
+  padding: 0.2em 0.3em;
+  z-index: $zindex-tooltip;
+}
+
+.msgbox {
+  margin: 5em auto;
+  width: 40%;
+  min-width: 300px;
+  border: $border-width solid $border-color;
+}
+
+#dialog, .dialog {
+  position: absolute;
+  visibility: hidden;
+  border: 1px solid $border-color-dark;
+  background: #fff;
+  @include border-radius($border-radius-xl);
+  @include box-shadow(0 5px 15px #757575);
+}
+
+.dialog_t {
+  color: $border-color-dark;
+  font-size: $font-size-lg;
+  font-weight: bold;
+  line-height: 2.5em;
+  padding-left: 1em;
+  border-bottom: 1px solid $border-color-dark;
+  a {
+    text-decoration: none;
+    display: inline-block;
+    float: right;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    color: $border-color-dark;
+    background-color: $color-light;
+    border: 2px solid $border-color;
+    margin: 10px;
+    &:hover {
+      color: $color-bg;
+      background-color: $brand-warning;
+    }
+  }
+}
+
+.dialog_c {
+  padding: 0.8em 0.6em 0.4em 0.6em;
+  .form {
+    border: 0;
+    legend {
+      display: none;
+    }
+  }
+}
+
+#mask, .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: $gray-light;
+  filter: alpha(opacity = 30);
+  opacity: 0.3;
+}
+
+.pages {
+  padding: 0.5em 0;
+  overflow: auto;
+  a.pagemore {
+    display: block;
+    float: none;
+    border: $border-width solid $border-color;
+    background: $gray-lighter;
+    font-size: $font-size-lg;
+    text-align: center;
+    line-height: 2;
+  }
+}
+
+.pagelink {
+  border: $border-width solid $border-color;
+  float: right;
+  background: #fff;
+  line-height: 2em;
+  padding: 0;
+  a, strong, em, kbd {
+    float: left;
+    padding: 0 0.4em;
+  }
+  a {
+    &.first, &.last, &.prev, &.next, &.pgroup, &.ngroup {
+      float: left;
+      padding: 0 0.4em;
+    }
+    &:hover {
+      background-color: #fff;
+    }
+  }
+  strong {
+    font-weight: bold;
+    color: $color-bg;
+    background: $brand-warning;
+  }
+  kbd {
+    border-left: $border-width solid $border-color;
+  }
+  em {
+    border-right: $border-width solid $border-color;
+    font-style: normal;
+    a {
+      display: inline-block;
+      float: none;
+      background: $color-light;
+      border: $border-width solid $border-color;
+      line-height: 18px;
+      padding: 0 2px;
+      margin: 0 3px;
+    }
+  }
+  input {
+    border: $border-width solid $border-color;
+    padding: 0.12em;
+    text-align: center;
+  }
+}
+
+img {
+  &.avatar {
+    border: 0;
+  }
+  &.avatars {
+    width: 48px;
+    height: 48px;
+    padding: 3px;
+    margin: 0.25em;
+    border: $border-width solid $border-color;
+    @include border-radius($border-radius);
+    cursor: pointer;
+  }
+  &.avatari {
+    width: 1em;
+    height: 1em;
+    border: $border-width solid $border-color;
+    margin-bottom: -0.2em;
+    @include border-radius($border-radius-sm);
+  }
+  &.smile {
+    width: 20px;
+    height: 20px;
+    margin: 0 1px;
+  }
+}
+
+// tab标签
+
+.tablist {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    float: left;
+    list-style: none;
+    margin-right: 0.2em;
+    a {
+      display: block;
+      float: left;
+      height: 30px;
+      line-height: 30px;
+      padding: 0 0.6em;
+      font-weight: normal;
+      background: $tab-bg;
+      text-decoration: none;
+      color: $tab-color;
+      border: $border-width solid $border-color;
+      border-bottom: none;
+      &.selected {
+        font-weight: bold;
+        background: $tab-selected-bg;
+        color: $tab-selected-color;
+        text-decoration: none;
+        border-top: 2px solid $brand-warning;
+        position: relative;
+        margin-bottom: -1px;
+      }
+    }
+  }
+}
+
+.tabcontent {
+  clear: both;
+  border: $border-width solid $border-color;
+  padding: 0.6em;
+}
+
+// 下拉菜单
+.dropico {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: $gropico-width solid;
+  border-top-color: $gropico-color;
+  border-right: $gropico-width solid transparent;
+  border-left: $gropico-width solid transparent;
+}
+
+.d_up .dropico {
+  border-top: none;
+  border-bottom: $gropico-width solid;
+  border-bottom-color: $gropico-color;
+  border-right: $gropico-width solid transparent;
+  border-left: $gropico-width solid transparent;
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  padding: 0;
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+    &.droplink {
+      display: block;
+      position: relative;
+      z-index: $zindex-dropdown;
+      margin: -1px 0 0 0;
+      padding: 1px 5px 0 5px;
+    }
+  }
+  &:hover a.droplink {
+    padding: 0 4px 0 4px;
+    border: $dropdown-border;
+    border-bottom: none;
+    background: $dropdown-bg-focus;
+  }
+}
+
+.d_up:hover a.droplink {
+  padding: 0 4px 0 4px;
+  border: $dropdown-border;
+  border-top: none;
+  background: $dropdown-bg-focus;
+}
+
+.dropdown:hover {
+  div, ul {
+    display: block;
+  }
+}
+
+.dropbox, .droplist {
+  display: none;
+  position: absolute;
+  left: 0;
+  z-index: $zindex-dropdown;
+  margin-top: -1px;
+  font-size: $droplist-font-size;
+  font-weight: $droplist-font-weight;
+  min-width: $droplist-min-width;
+  background: $droplist-bg;
+  @include box-border($droplist-border, $droplist-border-radius, $droplist-box-shadow);
+}
+
+.dropbox{
+  margin-top: 0;
+}
+
+.d_up .droplist {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: -1px;
+}
+
+.droplist {
+  li {
+    float: none;
+    padding: 0;
+    a {
+      display: block;
+      text-align: left;
+      text-indent: 1em;
+      text-decoration: none;
+      line-height: $droplist-line-height;
+      color: $droplist-color;
+      &:hover {
+        background: $color-light;
+        text-decoration: none;
+      }
+    }
+  }
+  .divider {
+    height: 1px;
+    font-size: 0;
+    margin: 5px 0;
+    overflow: hidden;
+    background-color: $color-light;
+  }
+}
+
+// 下拉导航
+.dropmenu {
+  a {
+    display: block;
+    background: $dropnav-bg;
+    color: $dropnav-color;
+    @include box-border($dropnav-border, $dropnav-border-radius, $dropnav-box-shadow);
+  }
+  li {
+    float: left;
+    &:hover > a {
+      background: $dropnav-bg-focus;
+      color: $dropnav-color-focus;
+      @include box-border($dropnav-border-focus, $dropnav-border-radius-focus, $dropnav-box-shadow-focus);
+    }
+    ul {
+      display: none;
+      position: absolute;
+      margin-top: 0px;
+      z-index: $zindex-navbar;
+      background: $dropmenu-bg;
+      min-width: $dropmenu-min-width;
+      @include box-border($dropmenu-border, $dropmenu-border-radius, $dropmenu-box-shadow);
+
+      li {
+        float: none;
+        padding: 0;
+        background: transparent;
+        line-height: $dropmenu-line-height;
+      }
+      a {
+        display: block;
+        text-align: left;
+        font-weight: normal;
+        color: $dropmenu-color;
+        text-decoration: none;
+        &:hover {
+          background: $dropmenu-bg-focus;
+          color: $dropmenu-color-focus;
+          @include border-radius(0);
+        }
+      }
+    }
+    &:hover ul {
+      display: block;
+    }
+  }
+}

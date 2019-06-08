@@ -1,0 +1,16 @@
+<ul class="ulhover">
+{?section name=i loop=$articlerows?}
+	<li onmouseover="selecttab(this)"{?if $i['order'] == 1 ?} class="selected"{?/if?}>
+		<span><em>{?$articlerows[i].author?}</em> {?if $i['order'] < 4?}<b>{?$i['order']?}</b>{?else?}<i>{?$i['order']?}</i>{?/if?}<a href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a></span>
+		<div class="cf">
+			{?if $i['order'] < 4?}<b>{?$i['order']?}</b>{?else?}<i>{?$i['order']?}</i>{?/if?}
+			<a href="{?$articlerows[i].url_articleinfo?}" target="_blank"><img src="{?$articlerows[i].url_simage?}" alt="{?$articlerows[i].articlename?}"></a>
+			<p>
+			<a class="hot" href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a><br />
+			作者：{?$articlerows[i].author?}<br />
+			分类：{?$articlerows[i].sort?}
+			</p>
+		</div>
+	</li>
+{?/section?}
+</ul>

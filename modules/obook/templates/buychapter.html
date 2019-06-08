@@ -1,0 +1,37 @@
+<form name="frmbuychapter" method="post" action="{?$url_buychapter?}">
+ <table class="grid" width="60%" align="center">
+    <caption>订阅VIP作品</caption>
+	<tr>
+	  <td class="tdl" width="25%">当前用户：</td>
+	  <td class="tdr" width="75%">{?$username?}</td>
+    </tr>
+	<tr>
+	  <td class="tdl">账户余额：</td>
+	  <td class="tdr">{?$useregold?}{?$egoldname?}</td>
+    </tr>
+	<tr>
+	  <td class="tdl">当前章节：</td>
+	  <td class="tdr">《{?$obookname?} - {?$chaptername?}》</td>
+    </tr>
+	<tr>
+	  <td class="tdl">订阅方式：</td>
+	  <td class="tdr">
+	  <label class="radio"><input type="radio" name="buytype" value="0" checked="checked" /> 只订阅本章节（<span class="hot">{?$saleprice?}</span> {?$egoldname?}）</label><br />
+	  <label class="radio"><input type="radio" name="buytype" value="1" /> 订阅本章并在阅读本书其它VIP章节时自动订阅</label>
+	  {?if $obookprice > 0?}<br /><label class="radio"><input type="radio" name="buytype" value="2" /> 整本订阅本书，价格更实惠（<span class="hot">{?$obookprice?}</span> {?$egoldname?}）</label>{?/if?}
+	  </td>
+    </tr>
+	<tr align="center">
+	  <td colspan="2">
+	  <input type="hidden" name="act" value="buy">{?$jieqi_token_input?}
+      <input type="hidden" name="cid" value="{?$cid?}">
+	  <button type="submit" class="button" name="submit">确定购买并阅读</button>
+	  </td>
+    </tr>
+	<tr align="center">
+	  <td colspan="2" class="foot">
+	  <a href="{?function jieqi_geturl:'article':'article':$articleid:'index':$articlecode?}">返回目录</a> | <a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">返回书页</a> | <a href="{?$url_buyegold?}">帐户充值</a>
+	  </td> 
+    </tr>
+  </table>
+</form>

@@ -1,0 +1,121 @@
+{?set $jieqi_pagetitle = "编辑草稿-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "编辑草稿"?}
+<script type="text/javascript">
+var customprice = '{?$customprice?}';
+function frmchapteredit_validate(){
+  if(document.frmchapteredit.chaptername.value == ""){
+    alert("请输入章节标题");
+    document.frmchapteredit.chaptername.focus();
+    return false;
+  }
+}
+//统计输入字数
+function show_inputwords(txt){
+	txt = $_(txt);
+	var words = (arguments.length > 1) ? $_(arguments[1]) : $_(txt.id + '_words');
+	words.innerHTML = txt.value.replace(/[\x00-\x08\x0e-\x1f\x21-\xff]+/gi, 'w').replace(/\s/g, '').length;
+}
+//显示默认字数
+addEvent(window, 'load', function(){show_inputwords('chaptercontent');});
+</script>
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/attaches.js"></script>
+<form class="form" name="frmchapteredit" id="frmchapteredit" action="{?$jieqi_modules['article']['url']?}/draftedit.php?do=submit" method="post" onsubmit="return frmchapteredit_validate();" enctype="multipart/form-data">
+<fieldset>
+	<div class="frow">
+		<label class="col4 flabel">小说名称：</label>
+		<div class="col8 last">
+		{?if $isvip == 0?}
+		<select class='select'  size='1' name='articleid' id='articleid'>
+		<option value='0'>--请选择--</option>
+		{?section name=i loop=$articlerows?}
+		<option value='{?$articlerows[i].articleid?}'{?if $articlerows[i].checked > 0?} selected{?/if?}>{?$articlerows[i].articlename?}</option>
+		{?/section?}
+		</select>
+		{?else?}
+		<select class='select'  size='1' name='obookid' id='obookid'>
+		<option value='0'>--请选择--</option>
+		{?section name=i loop=$obookrows?}
+		<option value='{?$obookrows[i].obookid?}'{?if $obookrows[i].checked > 0?} selected{?/if?}>{?$obookrows[i].obookname?}</option>
+		{?/section?}
+		</select>
+		{?/if?}
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">章节标题：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="chaptername" id="chaptername" maxlength="50" value="{?$chaptername?}" />
+		</div>
+	</div>
+	{?if $isvip > 0 && $customprice > 0?}
+	<div class="frow">
+		<label class="col4 flabel">本章定价：</label>
+		<div class="col8 last">
+			<input type='text' class='text' name='saleprice' id='saleprice' size='10' maxlength='10' value='{?$saleprice?}' /><br /><span class="hot">{?$egoldname?}(留空则自动按字数计价)</span>
+		</div>
+	</div>
+	{?/if?}
+	{?if $uptiming > 0?}
+	<div class="frow">
+		<label class="col4 flabel">定时发表：</label>
+		<div class="col8 last">
+			<label class="radio"><input type="radio" name="uptiming" value="0"{?if $pubdate == 0?} checked="checked"{?/if?} onclick="document.getElementById('pubtime').style.display='none';" />否</label> &nbsp; 
+			<label class="radio"><input type="radio" name="uptiming" value="1"{?if $pubdate > 0?} checked="checked"{?/if?} onclick="document.getElementById('pubtime').style.display='';" />是</label> &nbsp; 
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">发表时间：</label>
+		<div class="col8 last">
+			<p><input type="text" class="text" style="width:4em;" name="pubyear" id="pubyear" maxlength="4" value="{?$pubyear?}" />年<input type="text" class="text" style="width:2.4em;" name="pubmonth" id="pubmonth" maxlength="2" value="{?$pubmonth?}" />月<input type="text" class="text" style="width:2.4em;" name="pubday" id="pubday" maxlength="2" value="{?$pubday?}" />日</p>
+			<p><input type="text" class="text" style="width:2.4em;" name="pubhour" id="pubhour" maxlength="2" value="{?$pubhour?}" />时<input type="text" class="text" style="width:2.4em;" name="pubminute" id="pubminute" maxlength="2" value="{?$pubminute?}" />分</p>
+		</div>
+	</div>
+	{?/if?}
+	<div class="frow">
+		<div class="row">
+		<label class="col4 flabel">章节内容：</label>
+		<div class="col8 last">
+			已输入 <span class="hot" id="chaptercontent_words">0</span> 字
+		</div>
+		</div>
+		<div class="row">
+		<textarea class="textarea" name="chaptercontent" id="chaptercontent" rows="15" onkeyup="show_inputwords(this);" oninput="show_inputwords(this);" onpropertychange="show_inputwords(this);">{?$chaptercontent?}</textarea>
+		</div>
+	</div>
+	{?if $attachnum > 0?}
+	<div class="frow">
+		<label class="col4 flabel">现有附件：</label>
+		<div class="col8 last">
+			{?section name=i loop=$attachrows?}
+  			<label class="checkbox"><input type="checkbox" name="oldattach[]" value="{?$attachrows[i].attachid?}" checked="checked" />{?$attachrows[i].name?}</label>
+  			{?/section?}
+  			<p class="hot">（取消打勾表示删除该附件）</p>
+		</div>
+	</div>
+	{?/if?}
+	{?if $canupload == true && $maxattachnum > 0?}
+	<div class="frow">
+		<label class="col4 flabel">附件限制：</label>
+		<div class="col8 last">
+			<span class="hot">文件类型：{?$attachtype?}, 图片最大：{?$maximagesize?}K, 文件最大：{?$maxfilesize?}K</span>
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">附件上传：</label>
+		<div class="col8 last">
+			<input type="file" class="file" name="attachfile[]" id="attachfile" onchange="Attaches.addFile('attachfile', 'attachdiv', true);" /><button type="button" class="filebutton" onclick="if(document.all){document.getElementById('attachfile').outerHTML += '';}else{document.getElementById('attachfile').value = '';}">清空</button>
+  			<div id="attachdiv"></div>
+		</div>
+	</div>
+	{?/if?}
+	<div class="frow">
+		<label class="col4 flabel">&nbsp;</label>
+		<div class="col8 last">
+			<button type="submit" class="button" name="submit">提 交</button>
+			<input type="hidden" name="act" value="update" />{?$jieqi_token_input?}
+  			<input type="hidden" name="id" value="{?$id?}" />
+  			<input type="hidden" name="isvip" value="{?$isvip?}" />
+		</div>
+	</div>
+</fieldset>
+</form>

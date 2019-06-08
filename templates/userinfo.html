@@ -1,0 +1,112 @@
+<br />
+<table class="grid" width="600" align="center">
+  <caption>
+  <a href="javascript:;" onclick="openDialog('{?$jieqi_url?}/newmessage.php?receiver={?$name|urlencode?}&ajax_gets=jieqi_contents', false);">发送消息</a> | <a id="addfriends" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_url?}/addfriends.php?id={?$uid?}&act=add{?$jieqi_token_url?}', {method: 'POST'});">加为好友</a> | <a href="{?$jieqi_url?}/ptopics.php?oid={?$uid?}">会客室</a>
+  </caption>
+  <tr>
+    <th colspan="3">基本信息</th>
+  </tr>
+  <tr align="left">
+    <td width="100" class="tdl">用户ID：</td>
+    <td width="280" class="tdr">{?$uid?}</td>
+    <td width="214" rowspan="7" class="tdr" align="center">
+	<img src="{?function jieqi_geturl:'system':'avatar':$uid:'l':$avatar?}" class="avatar" alt="头像"><br />
+	{?if $jieqi_modules['badge']['publish'] > 0?}
+	<br />
+    {?if $url_group != ""?}<img src="{?$url_group?}" border="0" title="{?$jieqi_groupname?}"><br />{?/if?}
+	{?if $url_honor != ""?}<img src="{?$url_honor?}" border="0" title="{?$jieqi_honor?}"><br />{?/if?}
+    {?section name=i loop=$badgerows?}<img src="{?$badgerows[i].imageurl?}" border="0" title="{?$badgerows[i].caption?}">{?/section?}
+    {?/if?}
+	</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">用户名：</td>
+    <td class="tdr">{?$uname?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">昵称：</td>
+    <td class="tdr">{?$name?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">等级：</td>
+    <td class="tdr">{?$group?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">头衔：</td>
+    <td class="tdr">{?$honor?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">性别：</td>
+    <td class="tdr">{?$sex?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">网站/微博：</td>
+    <td class="tdr"><a href="{?$url?}" target="_blank">{?$url?}</a></td>
+  </tr>
+  {?if $ismaster == 1?}
+  <tr align="left">
+    <td class="tdl">Email：</td>
+    <td colspan="2" class="tdr"><a href="mailto:{?$email?}">{?$email?}</a></td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">QQ：</td>
+    <td colspan="2" class="tdr">{?$qq?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">MSN：</td>
+    <td colspan="2" class="tdr"><a href="mailto:{?$msn?}">{?$msn?}</a></td>
+  </tr>
+  {?/if?}
+  <tr>
+    <th colspan="3">积分相关</th>
+  </tr>
+  <tr align="left">
+    <td class="tdl">注册日期：</td>
+    <td colspan="2" class="tdr">{?$regdate|date:'Y-m-d'?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">贡献值：</td>
+    <td colspan="2" class="tdr">{?$credit?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">经验值：</td>
+    <td colspan="2" class="tdr">{?$experience?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">现有积分：</td>
+    <td colspan="2" class="tdr">{?$score?}</td>
+  </tr>
+  {?if $ismaster == 1?}
+  <tr>
+    <th colspan="3">VIP信息</th>
+  </tr>
+  <tr align="left">
+    <td class="tdl">VIP类型：</td>
+    <td colspan="2" class="tdr">{?if $isvip <= 0?}非vip会员{?else?}VIP会员{?/if?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">{?$egoldname?}</td>
+    <td colspan="2" class="tdr">{?$egold?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">分成收入：</td>
+    <td colspan="2" class="tdr">{?$esilver|fen2yuan?}元{?if $esilver > 0?} &nbsp; [<a href="{?$jieqi_url?}/admin/settlenew.php?uid={?$uid?}">提现</a>]{?/if?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">最后登录：</td>
+    <td colspan="2" class="tdr">{?$lastlogin|date:'Y-m-d H:i'?} (IP：{?if $setting['lastip'] != ''?}{?$setting['lastip']?}{?else?}{?$setting['regip']?}{?/if?})</td>
+  </tr>
+  {?/if?}
+  <tr>
+    <th colspan="3">其他信息</th>
+  </tr>
+  <tr align="left">
+    <td class="tdl">用户签名：</td>
+    <td colspan="2" class="tdr">{?$sign?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">个人简介：</td>
+    <td colspan="2" class="tdr">{?$intro?}</td>
+  </tr>
+</table>
+<br />

@@ -1,0 +1,12 @@
+<div class="blockcontent">
+{?section name=i loop=$articlerows?}
+{?if $i['order'] < 2?}
+	<h3 class="tc"><a class="hot" href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a></h3>
+	<div style="padding:4px 0; margin-bottom:3px; border-bottom:1px dashed #dddddd;">{?$articlerows[i].intro|truncate:106:'..'?}</div>
+{?else?}
+	{?if $i['order'] == 2?}<ul class="ultwo">{?/if?}
+	<li><span class="note">[{?$articlerows[i].sort|truncate:4:''?}]</span><a href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a></li>
+	{?if $i['order'] == $i['count']?}</ul>{?/if?}
+{?/if?}
+{?/section?}						
+</div>

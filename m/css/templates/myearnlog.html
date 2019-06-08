@@ -1,0 +1,27 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "我的分成记录-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="推广分成" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_channelnav_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<table width="100%" cellpadding="0" cellspacing="1" class="grid">
+  <caption>我的分成记录</caption>
+  <tr align="center">
+    <td width="20%" class="head">分成时间</td>
+    <td width="20%" class="head">分成金额</td>
+	<td width="20%" class="head">消费者</td>
+	<td width="20%" class="head">消费金额</td>
+	<td width="20%" class="head">消费模式</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$earnrows?}
+  <tr>
+    <td align="center">{?$earnrows[i].logtime|date:Y-m-d H:i?}</td>
+    <td align="center">{?$earnrows[i].emoney|fen2yuan?}元</td>
+    <td align="center"><a href="{?function jieqi_geturl:'system':'user':$earnrows[i].fromuid?}" target="_blank">{?$earnrows[i].fromuname?}</a></td>
+    <td align="center">{?$earnrows[i].money|fen2yuan?}{?if $earnrows[i].moneytype == 1?}美元{?else?}元{?/if?}</td>
+    <td align="center">{?if $earnrows[i].earntype == 1?}充值{?else?}{?$earnrows[i].earntype?}{?/if?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

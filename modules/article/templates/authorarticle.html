@@ -1,0 +1,27 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "guideblocks"?}
+{?set jieqi_page_rows = "30"?}
+<table class="grid" width="100%" align="center">
+<caption>“{?$author?}” 的小说列表</caption>
+  <tr align="center">
+    <th width="25%">小说名称</th>
+    <th width="30%">最新章节</th>
+    <th width="15%">作者</th>
+	<th width="9%">字数</th>
+    <th width="13%">更新</th>
+    <th width="8%">状态</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td><a href="{?$articlerows[i].url_articleindex?}" class="gray" target="_blank">[目录]</a><a href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename?}</a></td>
+    <td>{?if $articlerows[i].vipchapterid > 0?}<a href="{?$articlerows[i].url_vipchapter?}" target="_blank">{?$articlerows[i].vipvolume?} {?$articlerows[i].vipchapter?}</a><span class="hot">vip</span>{?else?}<a href="{?$articlerows[i].url_lastchapter?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a>{?/if?}</td>
+    <td>{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author?}</a>{?/if?}</td>
+	<td>{?$articlerows[i].words?}</td>
+    <td align="center">{?$articlerows[i].lastupdate|date:'Y-m-d'?}</td>
+    <td align="center">{?$articlerows[i].fullflag?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

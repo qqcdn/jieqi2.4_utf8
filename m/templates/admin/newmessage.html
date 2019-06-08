@@ -1,0 +1,40 @@
+<script type="text/javascript">
+function frmnewmessage_validate(){
+  if(typeof(document.frmnewmessage.receiver) != "undefined"){
+    if(document.frmnewmessage.receiver.value == "" ){
+      alert("请输入收件人");
+	  document.frmnewmessage.receiver.focus();
+	  return false;
+    }
+  }
+  if(document.frmnewmessage.title.value == ""){
+    alert("请输入标题");
+	window.document.frmnewmessage.title.focus();
+	return false;
+  }
+}
+</script>
+<form name="frmnewmessage" id="frmnewmessage" action="{?$jieqi_url?}/admin/newmessage.php?do=submit" method="post" onsubmit="return frmnewmessage_validate();">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>写新消息</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">收件人：</td>
+  <td class="tdr" width="75%"><input type="text" class="text" style="width:90%;" name="receiver" value="{?$receiver?}" /></td>
+</tr>
+  <tr valign="middle" align="left">
+  <td class="tdl">标题：</td>
+  <td class="tdr"><input type="text" class="text" style="width:90%;" name="title" value="{?$title?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">内容：</td>
+  <td class="tdr"><textarea class="textarea" style="width:90%;height:10em;" name="content">{?$content?}</textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;</td>
+  <td class="tdr">
+    <button type="submit" class="button" name="submit">发 送</button>
+	<input type="hidden" name="act" value="add" />{?$jieqi_token_input?}
+  </td>
+</tr>
+</table>
+</form>

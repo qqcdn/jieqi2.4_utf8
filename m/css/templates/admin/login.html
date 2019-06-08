@@ -1,0 +1,43 @@
+<script type="text/javascript">
+function loginfocus() {
+	if(document.getElementById('username')) document.getElementById('username').focus();
+	else if(document.getElementById('password')) document.getElementById('password').focus();
+}
+if (document.all){
+	window.attachEvent('onload',loginfocus);
+}else{
+	window.addEventListener('load',loginfocus,false);
+}
+</script>
+
+<form name="frmlogin" method="post" action="{?$url_login?}">
+ <table class="grid" align="center" style="width:400px;margin:100px auto;">
+   <caption>杰奇网站管理系统后台</caption>
+    <tr align="center">
+      <td><table width="100%" class="hide">
+        <tr>
+          <td width="35%" align="right" valign="middle">用户名：</td>
+          <td width="65%">{?if $jieqi_username == ''?}<input type="text" class="text" size="20" style="width:120px" name="username" id="username" onKeyPress="javascript: if (event.keyCode==32) return false;">{?else?}{?$jieqi_username?}{?/if?}</td>
+        </tr>
+        <tr>
+          <td align="right" valign="middle">密　码：</td>
+          <td><input type="password" class="text" size="20" style="width:120px" name="password" id="password"></td>
+        </tr>
+        {?if $show_checkcode == 1?}
+        <tr>
+          <td align="right" valign="middle">验证码：</td>
+          <td><input type="text" class="text" style="width:6em;" name="checkcode" id="checkcode" onfocus="if(this.form.imgccode.style.display == 'none'){this.form.imgccode.src = '{?$jieqi_url?}/checkcode.php?rand={?$jieqi_time?}';this.form.imgccode.style.display = '';}" title="点击显示验证码"><img name="imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码"></td>
+        </tr>
+        {?/if?}
+        <tr>
+		  <td><input type="hidden" name="act" value="login"></td>
+          <td><button type="submit" class="button" name="submit">登 录</button>
+		  </td>
+          </tr>
+      </table></td>
+    </tr>
+	<tr align="center"> 
+      <td class="foot"><a href="{?$jieqi_url?}/">返回首页</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:history.back(1);">返回上页</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{?$jieqi_url?}/getpass.php">取回密码</a></td>
+    </tr>
+  </table>
+</form>

@@ -1,0 +1,26 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "我的留言主题-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="会员工具" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_userbox_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<table class="grid" width="100%">
+  <caption>我的留言主题 | <a href="{?$jieqi_url?}/mypposts.php">查看留言帖子</a></caption>
+  <tr class="head">
+    <th width="54%">主题</th>
+	<th width="13%">会客室主人</th>
+    <th width="13%">回复/查看</th>
+    <th width="20%">发表时间</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$ptopicrows?}
+  <tr>
+    <td>{?if $ptopicrows[i].display_n == 1?}<span class="hot">[待审]</span>{?/if?}{?if $ptopicrows[i].istop == 1?}<span class="hot">[顶]</span>{?/if?}{?if $ptopicrows[i].isgood == 1?}<span class="hot">[精]</span>{?/if?}<a href="{?$jieqi_url?}/ptopicshow.php?tid={?$ptopicrows[i].topicid?}" target="_blank"{?if $ptopicrows[i].display_n == 1?} class="note"{?/if?}>{?$ptopicrows[i].title|truncate:'54':'..'?}</a></td>
+    <td><a href="{?$jieqi_url?}/ptopics.php?oid={?$ptopicrows[i].ownerid?}" target="_blank">{?$ptopicrows[i].ownername?}</a></td>
+    <td align="center">{?$ptopicrows[i].replies?}/{?$ptopicrows[i].views?}</td>
+    <td align="center">{?$ptopicrows[i].posttime|date:"Y-m-d H:i:s"?}
+	</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

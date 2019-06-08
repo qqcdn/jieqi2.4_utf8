@@ -1,0 +1,81 @@
+<form name="frmquery" method="get" action="{?$jieqi_url?}/admin/users.php">
+<table class="grid" width="100%" align="center">
+  <tr>
+	<td>
+		状态：
+		<select class="select" size="1" name="display">
+		  <option value="">不限</option>
+		  <option value="vip"{?if $_request['display'] == 'vip'?} selected="selected"{?/if?}>VIP会员</option>
+		  <option value="free"{?if $_request['display'] == 'free'?} selected="selected"{?/if?}>免费会员</option>
+		  <!-- <option value="monthly"{?if $_request['display'] == 'monthly'?} selected="selected"{?/if?}>包月会员</option> -->
+		</select>
+		用户组：
+		<select class="select" size="1" name="groupid">
+		<option value="0">不限</option>
+		{?section name=i loop=$grouprows?}
+		<option value="{?$grouprows[i].groupid?}"{?if $_request['groupid'] == $grouprows[i].groupid?} selected="selected"{?/if?}>{?$grouprows[i].groupname?}</option>
+		{?/section?}
+		</select>
+		排序：
+		<select class="select" size="1" name="order">
+		  <option value="uid"{?if $_request['order'] == 'uid'?} selected="selected"{?/if?}>注册时间</option>
+		  <option value="lastlogin"{?if $_request['order'] == 'lastlogin'?} selected="selected"{?/if?}>最后登录</option>
+		  <option value="score"{?if $_request['order'] == 'score'?} selected="selected"{?/if?}>积分</option>
+		  <option value="egold"{?if $_request['order'] == 'egold'?} selected="selected"{?/if?}>{?$egoldname?}</option>
+		  <option value="esilver"{?if $_request['order'] == 'esilver'?} selected="selected"{?/if?}>分成收入</option>
+		</select>
+		<select class="select" size="1" name="asc">
+		  <option value="0"{?if $_request['asc'] == 0?} selected="selected"{?/if?}>倒序</option>
+		  <option value="1"{?if $_request['asc'] == 1?} selected="selected"{?/if?}>顺序</option>
+		</select>
+		<div style="margin-top:0.5em;">
+		搜索条件：
+		<input name="keyword" type="text" class="text" id="keyword" size="20" maxlength="50" value="{?$_request['keyword']?}">
+		<label class="radio"><input type="radio" name="keytype" value="name"{?if $_request['keytype'] == 'name' || $_request['keytype'] == ''?} checked="checked"{?/if?} />昵称</label> 
+		<label class="radio"><input type="radio" name="keytype" value="uname"{?if $_request['keytype'] == 'uname'?} checked="checked"{?/if?} />用户名</label> 
+		<label class="radio"><input type="radio" name="keytype" value="uid"{?if $_request['keytype'] == 'uid'?} checked="checked"{?/if?} />用户ID</label> 
+		<label class="radio"><input type="radio" name="keytype" value="email"{?if $_request['keytype'] == 'email'?} checked="checked"{?/if?} />Email</label>
+		<label class="radio"><input type="radio" name="keytype" value="channel"{?if $_request['keytype'] == 'channel'?} checked="checked"{?/if?} />来源渠道</label> 
+		&nbsp;&nbsp;
+        <button type="submit" name="Submit" class="button">搜 索</button>&nbsp;&nbsp;
+   	    </div>
+	</td>
+</table>
+</form>
+
+<form action="" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>用户列表<span class="fss">（用户数：{?$userstat['cot']?}，总{?$egoldname?}：{?$userstat['sumegold']?}，总分成：{?$userstat['sumesilver']|fen2yuan?}）</span></caption>
+  <tr align="center" class="head">
+    <td width="6%">ID</td>
+    <td width="9%">昵称(用户名)</td>
+	<td width="12%">Email</td>
+	<td width="11%">最后登录</td>
+    <td width="8%">等级</td>
+    <td width="7%">来源</td>
+    <td width="7%">积分</td>
+    <td width="7%">{?$egoldname?}</td>
+    <td width="7%">分成(元)</td>
+	<td width="10%">VIP状态</td>
+    <td width="16%">操作</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$userrows?}
+  <tr>
+    <td align="center">{?$userrows[i].uid?}</td>
+    <td><a href="{?function jieqi_geturl:'system':'user':$userrows[i].uid:'info'?}" target="_blank">{?$userrows[i].name?}</a>{?if $userrows[i].name != $userrows[i].uname?}<br /><span class="gray fss">({?$userrows[i].uname?})</span>{?/if?}</td>
+	<td><a href="mailto:{?$userrows[i].email?}">{?$userrows[i].email?}</a></td>
+	<td align="center"><span title="{?if $userrows[i]['setting']['lastip']|isset == true?}{?$userrows[i]['setting']['lastip']?}{?elseif $userrows[i]['setting']['regip']|isset == true?}{?$userrows[i]['setting']['regip']?}{?/if?}">{?$userrows[i].lastlogin|date:'y-m-d H:i'?}</span></td>
+    <td align="center">{?$userrows[i].group?}</td>
+    <td align="center">{?if $userrows[i].channel|is_numeric == true?}<a href="{?function jieqi_geturl:'system':'user':$userrows[i].channel:'info'?}" target="_blank">{?$userrows[i].channel?}</a>{?else?}{?$userrows[i].channel?}{?/if?}</td>
+    <td align="center">{?$userrows[i].score?}</td>
+    <td align="center">{?$userrows[i].egold?}</td>
+    <td align="center">{?$userrows[i].esilver|fen2yuan?}</td>
+	<td align="center">{?if $userrows[i].monthly > 0?}包月:{?$userrows[i].overtime|date:'Y-m-d'?}{?elseif $userrows[i].isvip > 0?}VIP会员{?else?}免费会员{?/if?}</td>
+    <td align="center"><a href="{?$jieqi_url?}/admin/usermanage.php?id={?$userrows[i].uid?}">管理</a> | <a href="{?$jieqi_url?}/admin/personmanage.php?id={?$userrows[i].uid?}">资料</a>{?if $jieqi_modules['pay']['publish'] > 0?} | <a href="{?$jieqi_modules['pay']['url']?}/admin/changeegold.php?uid={?$userrows[i].uid?}">充值</a>{?/if?} | <a href="{?$jieqi_url?}/admin/settlenew.php?uid={?$userrows[i].uid?}">提现</a></td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

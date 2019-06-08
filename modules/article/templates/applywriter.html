@@ -1,0 +1,52 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "申请成为作者-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="会员工具" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_userbox_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<script type="text/javascript">
+function formcheck(){
+  if(document.getElementById('applytext').value == "") {
+    alert('请输入申请小说样章！');
+	document.getElementById('applytext').focus();
+    return false;
+  }
+}
+//统计输入字数
+function show_inputwords(txt){
+	txt = $_(txt);
+	var words = (arguments.length > 1) ? $_(arguments[1]) : $_(txt.id + '_words');
+	words.innerHTML = txt.value.replace(/[\x00-\x08\x0e-\x1f\x21-\xff]+/gi, 'w').replace(/\s/g, '').length;
+}
+//显示默认字数
+addEvent(window, 'load', function(){show_inputwords('applytext');});
+</script>
+<form action="{?$jieqi_modules['article']['url']?}/applywriter.php" method="post" onsubmit="return formcheck();">
+<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="grid">
+	<caption>申请成为作者</caption>
+	<tr>
+		<td style="padding:10px;font-size:14px;line-height:180%;">
+		<p>
+		<strong>一、作者申请条例：</strong><br />
+		&nbsp;&nbsp;&nbsp; 1、发表小说必须为原创作品。<br />
+		&nbsp;&nbsp;&nbsp; 2、有比较稳定的写作时间和写作速度。<br />
+		&nbsp;&nbsp;&nbsp; 3、小说内容不得含有色情、政治及其他违规内容。<br />
+		</p>
+		<p>
+		<strong>二、申请要求：</strong><br />
+		&nbsp;&nbsp;&nbsp; 1、请先完善您的真实联系信息，如未设置，<a class="hot" href="{?$jieqi_url?}/persondetail.php" target="_blank">&gt;&gt;点击进入</a>。<br />
+		&nbsp;&nbsp;&nbsp; 2、申请原创作者必须提交不少于5000字的原创小说样章，由斑竹审核通过才能发表小说。<br /><br />
+		</p>
+		<div style="margin:5px 0;">
+		<strong>请在下面输入小说样章：</strong>  (已输入 <span class="hot" id="applytext_words">0</span> 字)
+		</div>
+		<textarea id="applytext" name="applytext" cols="80" rows="15" onkeyup="show_inputwords(this);" oninput="show_inputwords(this);" onpropertychange="show_inputwords(this);"></textarea>
+		</td>
+	</tr>
+	<tr>
+    <td align="center" class="foot">
+	<input name="act" type="hidden" value="applywriter" />{?$jieqi_token_input?}
+	<button type="submit" name="submit" id="submit" class="button"> 同意并申请 </button>
+	</td>
+  </tr>
+</table>
+</form>

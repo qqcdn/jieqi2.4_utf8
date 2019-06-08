@@ -1,0 +1,35 @@
+<br />
+<form action="attachlist.php" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>附件管理</caption>
+  <tr align="center">
+    <th width="5%">选择</td>
+    <th width="20%">附件名称</td>
+	<th width="15%">附件类型</td>
+	<th width="20%">附件大小</td>
+	<th width="20%">上传人</td>
+	<th width="20%">上传日期</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+ {?section name=i loop=$attachrows?}
+  <tr align="center">
+    <td align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$attachrows[i].attachid?}" /></td>
+    <td><a href="{?$jieqi_url?}{?$attachrows[i].attachpath?}" target="_blank">{?$attachrows[i].attachname?}</a></td>
+	<td >{?$attachrows[i].attachtype?} </td>
+	<td>{?$attachrows[i].attachsize?}</td>
+	<td><a href="{?function jieqi_geturl:'system':'user':$attachrows[i].userid:'info'?}" target="_blank">{?$attachrows[i].username?}</a></td>
+	<td>{?$attachrows[i].addtime|date:'Y-m-d H:i:s'?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+  <tr>
+    <td colspan="6" align="center">
+		<button type="button" name="allcheck" class="button" onclick="for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = true; }">全部选中</button>&nbsp;
+		<button type="button" name="nocheck" class="button" onclick="for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = false; }">全部取消</button>&nbsp;
+		<button type="button" name="delcheck" class="button" onclick="if(confirm('确实要删除选中记录么？')) this.form.submit();">删除选中记录</button>
+		<input name="act" type="hidden" value="delete" />{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

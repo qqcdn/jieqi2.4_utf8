@@ -1,0 +1,8 @@
+<ul class="ulmul">
+{?section name=i loop=$userrows?}
+<li style="text-align:center;float:left;width:30%;">
+<a href="{?function jieqi_geturl:'system':'user':$userrows[i].uid?}"><img src="{?function jieqi_geturl:'system':'avatar':$userrows[i].uid:'s':$userrows[i].avatar?}" class="avatars" alt="Í·Ïñ"><br />{?$userrows[i].name?}</a>
+</li>
+{?/section?}
+</ul>
+<div class="more cb"><a href="{?$jieqi_url?}/topuser.php?sort={?$sort?}" target="_blank">¸ü¶à...</a></div>

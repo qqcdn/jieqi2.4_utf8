@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset={?$jieqi_charset?}" />
+<title>{?$title?}</title>
+<link rel="stylesheet" type="text/css" media="all" href="{?$jieqi_themeurl?}style.css" />
+<script language="javascript" type="text/javascript" src="{?$jieqi_url?}/scripts/common.js"></script>
+</head>
+<body>
+<div style="width:100%; text-align:center; padding-top:30px;">
+  <div style="margin:auto; width:90%;">
+    <div class="block">
+      <div class="blocktitle">欢迎使用在线充值</div>
+      <div class="blockcontent">
+	    <div style="padding:10px; text-align:left;">
+		<form name="frmpaypost" id="frmpaypost" method="get" action="{?$url_pay?}">
+		您好，{?$buyname?}! <br />
+		您选择的交易类型为： <br />
+		<span class="hot"> * 充值{?$egold?}{?$egoldname?}，支付金额：{?$money?}元</span><br />
+		系统将自动跳转到下一步，如未跳转，请点击“进入下一步”。<br /><br />
+		{?section name=i loop=$payvars?}
+		<input type="hidden" name="{?$i['key']?}" value="{?$payvars[i]?}">
+		{?/section?}
+		<button type="submit" class="button"> 进入下一步 </button><br /><br />
+		</form>
+		</div>
+	  </div>
+	  <div class="blocknote"><a href="{?$jieqi_url?}/">返回网站首页</a></div>
+	</div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function autopaypost(){
+	document.getElementById('frmpaypost').submit();
+}
+if (window.attachEvent){
+	window.attachEvent('onload',autopaypost);
+}else{
+	window.addEventListener('load',autopaypost,false);
+} 
+</script>
+
+</body>
+</html>

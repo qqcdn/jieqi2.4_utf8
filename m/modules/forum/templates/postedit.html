@@ -1,0 +1,32 @@
+{?set $jieqi_pagetitle = "编辑帖子-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "编辑帖子"?}
+
+
+<form class="form cf" name="frmpost" id="frmpost" action="{?$jieqi_modules['forum']['url']?}/postedit.php?do=submit" method="post">
+    <fieldset>
+    <div class="frow">
+      <p>标题：</p>
+      <input type="text" class="text" name="topictitle" id="topictitle" value="{?$subject?}" style="width:95%;" />
+    </div>
+
+    <div class="frow">
+      <p>内容：</p>
+			<textarea class="textarea" name="posttext" style="width:100%;height:5em;">{?$posttext?}</textarea>
+    </div>
+
+    {?if $postcheckcode > 0?}
+		<div class="frow">验证码：<input type="text" class="text" style="width:6em;" name="checkcode" id="checkcode" onfocus="if(this.form.imgccode.style.display == 'none'){this.form.imgccode.src = '{?$jieqi_url?}/checkcode.php?rand={?$jieqi_time?}';this.form.imgccode.style.display = '';}" title="点击显示验证码"><img name="imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码"></div>
+		{?/if?}
+
+    <div class="frow">
+      <button type="submit" class="button" name="submit">保存</button>
+	  <input type="hidden" name="act" value="update" />{?$jieqi_token_input?}
+      <input type="hidden" name="pid" value="{?$postid?}" />
+	  {?if $attachnum > 0?}
+	  {?section name=i loop=$attachrows?}
+      <input type="hidden" name="oldattach[]" value="{?$attachrows[i].attachid?}" />
+      {?/section?}
+      {?/if?}
+    </div>
+    </fieldset>
+</form>

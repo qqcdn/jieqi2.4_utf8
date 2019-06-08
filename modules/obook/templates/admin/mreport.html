@@ -1,0 +1,91 @@
+{?set jieqi_page_rows = "50"?}
+<table class="grid" width="100%" align="center">
+	<tr>
+	<td>
+	  <form name="frmmake" method="post" action="{?$obook_dynamic_url?}/admin/mreport.php">
+		选择年月：
+	  <select name="ryear">
+	  {?section name=i loop=$ryearrows?}
+	  <option value="{?$ryearrows[i]?}"{?if $ryearrows[i] == $dyear?} selected="selected"{?/if?}>{?$ryearrows[i]?}年</option>
+	  {?/section?}
+	  </select>
+	  <select name="rmonth">
+	  {?section name=i loop=$rmonthrows?}
+	  <option value="{?$rmonthrows[i]?}"{?if $rmonthrows[i] == $dmonth?} selected="selected"{?/if?}>{?$rmonthrows[i]?}月</option>
+	  {?/section?}
+	  </select>
+	  <input type="hidden" name="act" value="make" />{?$jieqi_token_input?}
+	  <button type="submit" name="btnsearch" class="button">生成月报表</button>
+	  <span class="hot">注意：只能生成本月之前的报表，如果数据较多请耐心等待！</span>
+	  </form>
+	</td>
+	</tr>
+    <tr>
+      <td>
+	  <form name="frmsearch" method="get" action="{?$obook_dynamic_url?}/admin/mreport.php">
+	  {?if $customsites|count > 0?}
+	  来源：
+	  <select class="select" size="1" name="siteid">
+		  <option value="0">不限</option>
+		  <option value="-1"{?if $_request['siteid'] == '-1'?} selected="selected"{?/if?}>本站原创</option>
+		  <option value="-2"{?if $_request['siteid'] == '-2'?} selected="selected"{?/if?}>他站作品</option>
+		  {?section name=i loop=$customsites?}
+		  <option value="{?$i['key']?}"{?if $_request['siteid'] == $i['key']?} selected="selected"{?/if?}>{?$customsites[i].name?}</option>
+		  {?/section?}
+	  </select>
+	  {?/if?}
+	  条件：
+	  <select class="select" size="1" name="keytype">
+		  <option value="obookname"{?if $_request['keytype'] == 'obookname'?} selected="selected"{?/if?}>书名</option>
+		  <option value="author"{?if $_request['keytype'] == 'author'?} selected="selected"{?/if?}>作者</option>
+		  <option value="agent"{?if $_request['keytype'] == 'agent'?} selected="selected"{?/if?}>编辑</option>
+	  </select>
+	  <input name="keyword" type="text" size="20" maxlength="60" class="text" value="{?$_request['keyword']?}">
+	  &nbsp; 月份：从 <input name="startmonth" type="text" class="text" size="10" maxlength="10" value="{?$_request['startmonth']?}"> 到 <input name="endmonth" type="text" class="text" size="10" maxlength="10" value="{?$_request['endmonth']?}">
+	  结果：
+	  <select class="select" size="1" name="format">
+		  <option value=""{?if $_request['format'] == ''?} selected="selected"{?/if?}>直接显示</option>
+		  <option value="exceltxt"{?if $_request['keytype'] == 'exceltxt'?} selected="selected"{?/if?}>EXCEL文本</option>
+		  <option value="excel5"{?if $_request['keytype'] == 'excel5'?} selected="selected"{?/if?}>EXCEL5</option>
+		  <option value="excel2007"{?if $_request['keytype'] == 'excel2007'?} selected="selected"{?/if?}>EXCEL2007</option>
+	  </select>
+	  &nbsp; <button type="submit" name="Submit" class="button">搜  索</button>
+	  月份格式：201205
+	  </form>
+	  </td>
+    </tr>
+	<tr>
+		<td>
+		总记录数：{?$mreportstat['cot']?}， 总订阅：{?$mreportstat['sumegold']|intval?}， 总打赏：{?$mreportstat['sumtip']|intval?}， 总收入：{?$mreportstat['sumemoney']|intval?}
+		</td>
+	</tr>
+</table>
+
+
+
+<table class="grid" width="100%" align="center">
+<caption>
+销售统计月报表
+</caption>
+  <tr align="center">
+    <th width="12%">统计月份</th>
+    <th width="23%">小说名称</th>
+    <th width="20%">作者/编辑</th>
+    <th width="15%">总订阅</th>
+	<th width="15%">总打赏</th>
+    <th width="15%">总收入</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$mreportrows?}
+  <tr>
+    <td align="center">{?$mreportrows[i].reportmonth?}</td>
+    <td><a href="{?function jieqi_geturl:'article':'article':$mreportrows[i].articleid:'info'?}" target="_blank">{?$mreportrows[i].obookname?}</a></td>
+    <td>{?if $mreportrows[i].authorid == 0?}{?$mreportrows[i].author?}{?else?}<a href="{?$jieqi_url?}/admin/personmanage.php?id={?$mreportrows[i].authorid?}" target="_blank">{?$mreportrows[i].author?}</a>{?/if?} / {?if $mreportrows[i].agentid == 0?}{?$mreportrows[i].agent?}{?else?}<a href="{?$jieqi_url?}/admin/personmanage.php?id={?$mreportrows[i].agentid?}" target="_blank">{?$mreportrows[i].agent?}</a>{?/if?}</td>
+    <td align="center">{?$mreportrows[i].sumegold?}</td>
+	<td align="center">{?$mreportrows[i].sumtip?}</td>
+    <td align="center">{?$mreportrows[i].sumemoney?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

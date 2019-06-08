@@ -1,0 +1,60 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "修改资料-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="用户设置" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_userset_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<script type="text/javascript">
+function jieqiFormValidate_useredit(){
+  if(document.useredit.email.value == ""){
+    alert("请输入Email");
+    document.useredit.email.focus();
+    return false;
+  }
+}
+</script>
+<form name="useredit" id="useredit" action="{?$jieqi_url?}/useredit.php?do=submit" method="post" onsubmit="return jieqiFormValidate_useredit();">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>修改资料</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">用户名：</td>
+  <td class="tdr">{?$username?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">昵称：</td>
+  <td class="tdr"><input type="text" class="text" name="nickname" id="nickname" size="25" maxlength="39" value="{?$nickname?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">Email：</td>
+  <td class="tdr">{?if $verify['email'] > 0?}{?$email?}{?else?}<input type="text" class="text" name="email" id="email" size="25" maxlength="60" value="{?$email?}" />{?/if?}
+<!-- &nbsp;<label class="checkbox"><input type="checkbox" name="showset_email" value="1"{?if $showset['email'] > 0?} checked="checked"{?/if?} />公开邮箱</label> -->
+</td>
+</tr>
+<tr valign="middle" align="left">
+<td class="tdl" width="25%">性别：</td>
+<td class="tdr">
+{?section name=i loop=$sex['items']?}
+	<label class="radio"><input type="radio" name="sex" value="{?$i['key']?}"{?if $i['key'] == $sex_n?} checked="checked"{?/if?}  />{?$sex['items'][i]?}</label>
+{?/section?}
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">QQ：</td>
+  <td class="tdr"><input type="text" class="text" name="qq" id="qq" size="25" maxlength="15" value="{?$qq?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">网站/微博：</td>
+  <td class="tdr"><input type="text" class="text" name="url" id="url" size="25" maxlength="100" value="{?$url?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">用户签名：</td>
+  <td class="tdr"><textarea class="textarea" name="sign" id="sign" rows="6" cols="60">{?$sign?}</textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">个人简介：</td>
+  <td class="tdr"><textarea class="textarea" name="intro" id="intro" rows="6" cols="60">{?$intro?}</textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">&nbsp;<input type="hidden" name="act" value="update" /><input type="hidden" name="nextstep" value="{?$nextstep?}" />{?$jieqi_token_input?}</td>
+  <td class="tdr"><button type="submit" class="button" name="submit">保 存</button></td>
+</tr>
+</table>
+</form>

@@ -1,0 +1,6 @@
+<ul class="ulnav">
+<li><a href="{?$jieqi_url?}/userlist.php">全部成员</a></li>
+{?section name=i loop=$grouprows?}
+<li><a href="{?$jieqi_url?}/userlist.php?group={?$grouprows[i].groupid?}">{?$grouprows[i].groupname?}</a></li>
+{?/section?}
+</ul>

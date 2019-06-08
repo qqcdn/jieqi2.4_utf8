@@ -1,0 +1,41 @@
+<script type="text/javascript">
+function frmsetpass_validate(){
+  if(document.frmsetpass.newpass.value == ""){
+    alert("请输入密码");
+    document.frmsetpass.newpass.focus();
+    return false;
+  }
+  if(document.frmsetpass.repass.value == ""){
+    alert("请输入确认密码");
+    document.frmsetpass.repass.focus();
+    return false;
+  }
+}
+</script>
+
+<form name="frmsetpass" id="frmsetpass" action="{?$jieqi_url?}/setpass.php?do=submit" method="post" onsubmit="return frmsetpass_validate();">
+<table class="grid" width="60%" style="min-width:480px;">
+<caption>重设密码</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">用户名：</td>
+  <td class="tdr">{?$username?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">密码：</td>
+  <td class="tdr"><input type="password" class="text" name="newpass" id="newpass" size="25" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">确认密码：<span class="hot">(必填)</span></td>
+  <td class="tdr"><input type="password" class="text" name="repass" id="repass" size="25" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">&nbsp;</td>
+  <td class="tdr">
+  <button type="submit" class="button" name="submit">提 交</button>
+  <input type="hidden" name="act" value="newpass" />{?$jieqi_token_input?}
+  <input type="hidden" name="id" value="{?$id?}" />
+  <input type="hidden" name="checkcode" id="checkcode" value="{?$checkcode?}" />
+  </td>
+</tr>
+</table>
+</form>

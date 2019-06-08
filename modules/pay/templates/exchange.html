@@ -1,0 +1,34 @@
+<script type="text/javascript">
+function frmexchange_validate(){
+  if(typeof(document.frmexchange.money) != "undefined"){
+    if(document.frmexchange.money.value == "" ){
+      alert("请输入兑换金额");
+	  document.frmexchange.money.focus();
+	  return false;
+    }
+  }
+}
+</script>
+<form name="frmexchange" id="frmexchange" action="{?$jieqi_modules['pay']['url']?}/exchange.php?do=submit" method="post" onsubmit="return frmexchange_validate();">
+<table width="500" class="grid" cellspacing="1" align="center">
+<caption>兑换{?$egoldname?}</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">当前收入：</td>
+  <td class="tdr">{?$esilver|fen2yuan?}元</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">兑换金额：</td>
+  <td class="tdr"><input type="text" class="text" name="money" size="8" maxlength="11" value="" /> 元{?if $exchangemin > 0?} <span class="hot">（最少{?$exchangemin?}元）</span>{?/if?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">兑换比例：</td>
+  <td class="tdr">1元 = {?$exchangerate?}{?$egoldname?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;
+  <input type="hidden" name="act" value="post" />{?$jieqi_token_input?}
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提 交</button></td>
+</tr>
+</table>
+</form>

@@ -1,0 +1,9 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "helpblocks"?}
+{?set $jieqi_pagetitle = "{$blockval['title']}-{$jieqi_sitename}"?}
+{?if $blockval['content']|isset == true?}
+<div class="c_main">
+	<div class="c_title">{?$blockval['title']?}</div>
+	<div class="c_content">{?$blockval['content']?}</div>
+</div>
+{?/if?}

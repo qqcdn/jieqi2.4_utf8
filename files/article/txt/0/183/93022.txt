@@ -1,0 +1,139 @@
+﻿    htmlheadtitleapache tomcat/7.0.62 - error report/titlestyle!--h1 {font-family:tahoma,arial,sans-serif;color:white;background-color:#525d76;font-size:22px;} h2 {font-family:tahoma,arial,sans-serif;color:white;background-color:#525d76;font-size:16px;} h3 {font-family:tahoma,arial,sans-serif;color:white;background-color:#525d76;font-size:14px;} body {font-family:tahoma,arial,sans-serif;color:black;background-color:white;} b {font-family:tahoma,arial,sans-serif;color:white;background-color:#525d76;} p {font-family:tahoma,arial,sans-serif;background:white;color:black;font-size:12px;}a {color : black;}a.name {color : black;}hr {color : #525d76;}--/style /headbodyh1 status 500 - 160/h1hr size=1 noshade=noshade\r
+
+    btype/b exception report/p\r
+
+    bmessage/b u160/u/p\r
+
+    bdescription/b uthe server encountered an internal error that prevented it from fulfilling this request./u/p\r
+
+    bexception/b
+
+    java.lang.arrayindexoutofboundsexception: 160
+
+    .alibaba.fastjson.serializer.serializewriter.writestringwithdoublequote(serializewriter.java:868)
+
+    .alibaba.fastjson.serializer.serializewriter.writestringwithdoublequote(serializewriter.java:602)
+
+    .alibaba.fastjson.serializer.serializewriter.writestring(serializewriter.java:1366)
+
+    .alibaba.fastjson.serializer.stringcodec.write(stringcodec.java:49)
+
+    .alibaba.fastjson.serializer.stringcodec.write(stringcodec.java:34)
+
+    .alibaba.fastjson.serializer.mapserializer.write(mapserializer.java:188)
+
+    .alibaba.fastjson.serializer.jsonserializer.write(jsonserializer.java:369)
+
+    .alibaba.fastjson.json.tojsonstring(json.java:418)
+
+    .alibaba.fastjson.json.tojsonstring(json.java:406)
+
+    .encrypt.action.execute(action.java:68)
+
+    sun.reflect.generatedmethodaccessor38.invoke(unknown source)
+
+    sun.reflect.delegatingmethodaccessorimpl.invoke(delegatingmethodaccessorimpl.java:43)
+
+    java.lang.reflect.method.invoke(method.java:606)
+
+    .opensymphony.xwork2.defaultactioninvocation.invokeaction(defaultactioninvocation.java:452)
+
+    .opensymphony.xwork2.defaultactioninvocation.invokeactiononly(defaultactioninvocation.java:291)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:254)
+
+    .opensymphony.xwork2.interceptor.defaultworkflowinterceptor.dointercept(defaultworkflowinterceptor.java:176)
+
+    .opensymphony.xwork2.interceptor.methodfilterinterceptor.intercept(methodfilterinterceptor.java:98)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.validator.validationinterceptor.dointercept(validationinterceptor.java:263)
+
+    org.apache.struts2.interceptor.validation.annotationvalidationinterceptor.dointercept(annotationvalidationinterceptor.java:68)
+
+    .opensymphony.xwork2.interceptor.methodfilterinterceptor.intercept(methodfilterinterceptor.java:98)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.conversionerrorinterceptor.intercept(conversionerrorinterceptor.java:133)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.parametersinterceptor.dointercept(parametersinterceptor.java:207)
+
+    .opensymphony.xwork2.interceptor.methodfilterinterceptor.intercept(methodfilterinterceptor.java:98)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.parametersinterceptor.dointercept(parametersinterceptor.java:207)
+
+    .opensymphony.xwork2.interceptor.methodfilterinterceptor.intercept(methodfilterinterceptor.java:98)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.staticparametersinterceptor.intercept(staticparametersinterceptor.java:190)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    org.apache.struts2.interceptor.multiselectinterceptor.intercept(multiselectinterceptor.java:75)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    org.apache.struts2.interceptor.checkboxinterceptor.intercept(checkboxinterceptor.java:94)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    org.apache.struts2.interceptor.fileuploadinterceptor.intercept(fileuploadinterceptor.java:243)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.modeldriveninterceptor.intercept(modeldriveninterceptor.java:100)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.scopedmodeldriveninterceptor.intercept(scopedmodeldriveninterceptor.java:141)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    org.apache.struts2.interceptor.debugging.debugginginterceptor.intercept(debugginginterceptor.java:267)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.chaininginterceptor.intercept(chaininginterceptor.java:142)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.prepareinterceptor.dointercept(prepareinterceptor.java:166)
+
+    .opensymphony.xwork2.interceptor.methodfilterinterceptor.intercept(methodfilterinterceptor.java:98)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.i18ninterceptor.intercept(i18ninterceptor.java:176)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    org.apache.struts2.interceptor.servletconfiginterceptor.intercept(servletconfiginterceptor.java:164)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.aliasinterceptor.intercept(aliasinterceptor.java:190)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    .opensymphony.xwork2.interceptor.exceptionmappinginterceptor.intercept(exceptionmappinginterceptor.java:187)
+
+    .opensymphony.xwork2.defaultactioninvocation.invoke(defaultactioninvocation.java:248)
+
+    org.apache.struts2.impl.strutsactionproxy.execute(strutsactionproxy.java:52)
+
+    org.apache.struts2.dispatcher.dispatcher.serviceaction(dispatcher.java:485)
+
+    org.apache.struts2.dispatcher.ng.executeoperations.executeaction(executeoperations.java:77)
+
+    org.apache.struts2.dispatcher.ng.filter.strutsprepareandexecutefilter.dofilter(strutsprepareandexecutefilter.java:91)
+
+    /pre/p\r
+
+    bnote/b uthe full stack trace of the root cause is available in the apache tomcat/7.0.62 logs./u/phr size=1 noshade=noshadeh3apache tomcat/7.0.62/h3/body/html

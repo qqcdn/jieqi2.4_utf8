@@ -1,0 +1,23 @@
+{?set $jieqi_pagetitle = "{$tagname}-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "{$tagname}"?}
+{?set jieqi_page_rows = "15"?}
+
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+  {?section name=i loop=$articlerows?}
+  <div class="al-row cf">
+  <a class="cf" href="{?$articlerows[i].url_articleinfo?}">
+  <img src="{?$articlerows[i].url_simage?}" />
+  <p class="al-aname nw">{?$articlerows[i].articlename?}<em>{?$articlerows[i].sort?}</em></p>
+  <p class="nw"><span>更新：</span>{?if $articlerows[i].vipchapterid > 0?}{?$articlerows[i].vipchapter?}{?else?}{?$articlerows[i].lastchapter?}{?/if?} </p>
+  <p>
+    <span>作者：{?$articlerows[i].author?}</span>
+    <em>{?$articlerows[i].words?}字</em>
+  </p>
+  </a>
+  </div>
+  {?/section?}
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

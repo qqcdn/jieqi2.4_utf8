@@ -1,0 +1,35 @@
+<br />
+{?section name=i loop=$forumcats?}
+<table class="grid" width="100%" align="center">
+<caption>{?$forumcats[i].name?} [序号：{?$forumcats[i].order?}]&nbsp; <a href="{?$jieqi_modules['forum']['url']?}/admin/forumcatmanage.php?id={?$forumcats[i].catid?}">管理分类</a> | <a id="act_delc_{?$forumcats[i].catid?}" href="javascript:;" onclick="if(confirm('确实要删除该分类么？')) Ajax.Tip('{?$jieqi_modules['forum']['url']?}/admin/forumdel.php?type=forumcat&id={?$forumcats[i].catid?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除分类</a>{?$forumcats[i].manage?}</caption>
+    <tr align="center" class="head">
+        <td width="5%">&nbsp;</td>
+        <td width="50%">论坛</td>
+        <td width="10%">主题数</td>
+        <td width="10%">帖子数</td>
+        <td width="25%">进入管理</td>
+    </tr>
+	{?section name=j loop=$forums[i]?}
+    <tr>
+        <td align="center" valign="middle"><span class="iconfont note">&#xee3a;</span></td>
+      <td valign="middle">
+		<a href="{?function jieqi_geturl:'forum':topiclist:1:$forums[i][j].forumid?}"><strong>{?$forums[i][j].forumname?}</strong></a> [序号：{?$forums[i][j].order?}] </td>
+        <td align="center" valign="middle">{?$forums[i][j].topics?}</td>
+        <td align="center" valign="middle">{?$forums[i][j].posts?}</td>
+        <td valign="middle"><a href="{?$jieqi_modules['forum']['url']?}/admin/forummanage.php?id={?$forums[i][j].forumid?}">管理论坛</a> | <a id="act_delf_{?$forums[i][j].forumid?}" href="javascript:;" onclick="if(confirm('确实要删除该论坛么？')) Ajax.Tip('{?$jieqi_modules['forum']['url']?}/admin/forumdel.php?type=forum&id={?$forums[i][j].forumid?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除论坛</a></td>
+    </tr>
+	{?/section?}
+</table>
+<br />
+{?/section?}
+<br />
+<br />
+{?$forumcat_form?}
+<br />
+<br />
+{?$forum_form?}
+<br />
+<br />
+{?$union_form?}
+<br />
+<br />

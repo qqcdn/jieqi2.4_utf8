@@ -1,0 +1,29 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<table class="grid" width="100%" align="center">
+    <caption>《<a href="{?$url_articleinfo?}" target="_blank">{?$articlename?}</a>》 | <a href="{?$jieqi_modules['article']['url']?}/votenew.php?aid={?$articleid?}">增加新投票</a></caption>
+  <tr align="center">
+    <th width="50%">投票主题</th>
+    <th width="12%">开始日期</th>
+	<th width="12%">结束日期</th>
+	<th width="10%">状态</th>
+    <th width="16%">操作</th>
+  </tr>
+  {?section name=i loop=$voterows?}
+  <tr>
+    <td><a href="{?$jieqi_modules['article']['url']?}/voteresult.php?id={?$voterows[i].voteid?}&aid={?$articleid?}" target="_blank">{?$voterows[i].title?}</a></td>
+    <td align="center">{?if $voterows[i].starttime > 0?}{?$voterows[i].starttime|date:Y-m-d?}{?/if?}</td>
+    <td align="center">{?if $voterows[i].endtime > 0 && $voterows[i].ispublish == 0?}{?$voterows[i].endtime|date:Y-m-d?}{?/if?}</td>
+	<td align="center">{?if $voterows[i].ispublish == 0?}未发布{?else?}<span class="hot">发布中</span>{?/if?}</td>
+	<td align="center">
+	<a href="{?$jieqi_modules['article']['url']?}/voteedit.php?id={?$voterows[i].voteid?}&aid={?$articleid?}">编辑</a> 
+	<a id="act_delete_{?$voterows[i].voteid?}" href="javascript:;" onclick="if(confirm('确实要删除本投票么？')) Ajax.Tip('{?$jieqi_modules['article']['url']?}/votearticle.php?vid={?$voterows[i].voteid?}&id={?$articleid?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除</a> 
+	{?if $voterows[i].ispublish == 0?}
+	<a id="act_publish_{?$voterows[i].voteid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/votearticle.php?vid={?$voterows[i].voteid?}&id={?$articleid?}&act=publish{?$jieqi_token_url?}', {method: 'POST'});">发布</a>
+	{?else?}
+	<a id="act_cancel_{?$voterows[i].voteid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/votearticle.php?vid={?$voterows[i].voteid?}&id={?$articleid?}&act=cancel{?$jieqi_token_url?}', {method: 'POST'});">取消</a>
+	{?/if?}
+	</td>
+  </tr>
+  {?/section?}
+</table>

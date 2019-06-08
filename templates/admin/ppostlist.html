@@ -1,0 +1,50 @@
+<form name="frmsearch" method="get" action="{?$jieqi_url?}/admin/ppostlist.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+      <td>
+	  <span class="fr">[<a href="{?$jieqi_url?}/admin/ppostlist.php"{?if $display === ''?} class="hot"{?/if?}>全部</a>] &nbsp;&nbsp; [<a href="{?$jieqi_url?}/admin/ppostlist.php?display=0"{?if $display === 0?} class="hot"{?/if?}>已审</a>] &nbsp;&nbsp; [<a href="{?$jieqi_url?}/admin/ppostlist.php?display=1"{?if $display === 1?} class="hot"{?/if?}>待审</a>]&nbsp;</span>
+        发表人：
+            <input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50">
+            <input type="hidden" name="keytype" value="1">
+            <button type="submit" name="btnsearch" class="button">搜 索</button>
+	  </td>
+    </tr>
+</table>
+</form>
+<form name="frmsearch" method="get" action="{?$jieqi_url?}/admin/ppostlist.php">
+<table class="grid" width="100%" align="center">
+  <tr>
+    <td width="5%" class="head">&nbsp;</td>
+    <td width="45%" class="head">主题</td>
+    <td width="15%" class="head">发表人</td>
+    <td width="20%" class="head">发表时间</td>
+	  <td width="15%" class="head">操作</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$postrows?}
+  <tr>
+  	<td class="topic" align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$postrows[i].postid?}"></td>
+    <td class="topic">{?if $postrows[i].istopic > 0?}<span class="hot">主题：</span>{?else?}<span class="hot">回复：</span>{?/if?}<a href="{?$jieqi_url?}/ptopicshow.php?tid=={?$postrows[i].topicid?}" target="_blank"{?if $postrows[i].display_n == 1?} class="note"{?/if?}>{?$postrows[i].title?}</a></td>
+    <td class="topic"><a href="{?function jieqi_geturl:'system':'user':$postrows[i].posterid?}" target="_blank">{?$postrows[i].poster?}</a></td>
+    <td class="topic" align="center">{?$postrows[i].posttime|date:"Y-m-d H:i:s"?}</td>
+	<td class="topic" align="center"><a id="act_delete_{?$postrows[i].postid?}" href="javascript:;" onclick="if(confirm('确实要删除该帖子么？')) Ajax.Tip('{?$jieqi_url?}/admin/ppostlist.php?tid={?$postrows[i].topicid?}&pid={?$postrows[i].postid?}&istopic={?$postrows[i].istopic?}&display={?$display?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除</a>{?if $postrows[i].display_n == 1?} | <a id="act_audit_{?$postrows[i].postid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_url?}/admin/ppostlist.php?tid={?$postrows[i].topicid?}&pid={?$postrows[i].postid?}&istopic={?$postrows[i].istopic?}&display={?$display?}&act=audit{?$jieqi_token_url?}', {method: 'POST'});">审核</a>{?/if?}</td>
+  </tr>
+  <tr>
+    <td colspan="5">
+		<div style="padding:3px;border:0;height:150px;width:100%;overflow-y:scroll;">{?$postrows[i].posttext?}</div>
+	  </td>
+  </tr>
+  {?/section?}
+  </tbody>
+  <tr>
+    <td align="center"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></td>
+    <td colspan="4">
+      <button type="submit" name="batchdelete" class="button" onclick="if(confirm('确实要删除选中记录么？')){document.getElementById('act').value='delete'; this.form.submit();}">批量删除</button> &nbsp;
+      <button type="submit" name="batchaudit" class="button" onclick="if(confirm('确实要批量审核通过么？')){document.getElementById('act').value='audit'; this.form.submit();}">批量审核</button>
+      <input name="act" id="act" type="hidden" value="">{?$jieqi_token_input?}
+      <input name="display" type="hidden" value="{?$display?}">
+    </td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

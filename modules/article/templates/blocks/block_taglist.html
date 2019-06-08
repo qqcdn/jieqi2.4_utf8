@@ -1,0 +1,6 @@
+<ul class="ultop">
+{?section name=i loop=$tagrows?}
+  <li><a href="{?$jieqi_modules['article']['url']?}/tagarticle.php?tag={?$tagrows[i].tagname|urlencode?}" target="_blank">{?$tagrows[i].tagname?}</a>({?$tagrows[i].sortnum?})</li>
+{?/section?}
+</ul>
+<div class="more"><a href="{?$url_more?}">更多...</a></div> 

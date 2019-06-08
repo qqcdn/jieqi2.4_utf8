@@ -1,0 +1,14 @@
+<ul class="ulnav">
+  <li><i class="iconfont">&#xee22;</i><a href="{?$article_dynamic_url?}/myarticle.php">作家首页</a></li>
+  <li><i class="iconfont">&#xee4c;</i><a href="{?$article_static_url?}/newarticle.php">发表新作</a></li>
+  <li><i class="iconfont">&#xee48;</i><a href="{?$article_dynamic_url?}/masterpage.php">管理小说</a></li>
+  {?if $jieqi_modules['obook']['publish'] > 0?}
+  <li><i class="iconfont">&#xee42;</i><a href="{?$jieqi_modules['obook']['url']?}/masterpage.php">收入管理</a></li>
+  <li><i class="iconfont">&#xee46;</i><a href="{?$jieqi_modules['obook']['url']?}/mreport.php">销售月报</a></li>
+  {?/if?}
+  <li><i class="iconfont">&#xee49;</i><a href="{?$article_dynamic_url?}/newdraft.php">新建草稿</a></li>
+  <li><i class="iconfont">&#xee51;</i><a href="{?$article_dynamic_url?}/draft.php">管理草稿</a></li>
+  <!-- <li><i class="iconfont">&#xee24;</i><a href="{?$jieqi_url?}/persondetail.php">联系方式</a></li> -->
+  <li><i class="iconfont">&#xee3a;</i><a href="{?$jieqi_url?}/ptopics.php?oid=self">用户留言</a></li>
+  <li><i class="iconfont">&#xee27;</i><a href="{?$article_dynamic_url?}/authorpage.php">我的专栏</a></li>
+</ul>

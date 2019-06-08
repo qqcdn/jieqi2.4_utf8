@@ -1,0 +1,33 @@
+{?set $jieqi_pagetitle = "搜索-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "搜索"?}
+
+<form class="form" name="articlesearch" method="post" action="{?$jieqi_modules['article']['url']?}/search.php">
+    <fieldset>
+        <div class="frow">
+            <label class="col4 flabel">条　件：</label>
+            <div class="col8 last">
+                <select name="searchtype" id="searchtype" class="select" style="width:120px">
+				<option value="all" selected="selected">综合</option>
+				<option value="articlename">小说名称</option>
+				<option value="author">小说作者</option>
+				<option value="keywords">关键字</option>
+				</select>
+            </div>
+        </div>
+
+        <div class="frow">
+            <label class="col4 flabel">关键字：</label>
+            <div class="col8 last">
+			<input name="searchkey" type="text" class="text" id="searchkey" size="20" maxlength="50">
+            </div>
+        </div>
+
+        <div class="frow">
+            <label class="col4 flabel"><input type="hidden" name="act" value="search">{?$jieqi_token_input?}</label>
+            <div class="col8 last">
+            <button type="submit" class="button" name="submit">&nbsp;搜&nbsp;索&nbsp;</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>

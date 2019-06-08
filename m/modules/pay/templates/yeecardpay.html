@@ -1,0 +1,68 @@
+{?set jieqi_blocks_module = "pay"?}
+{?set jieqi_blocks_config = "payblocks"?}
+{?set $jieqi_pagetitle = "点卡充值-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="充值导航" module="pay" filename="block_paylist_tab" classname="BlockSystemCustom" side="-1" title="" vars="" template="" contenttype="4" custom="1" publish="3" hasvars="0"?}
+
+<form name="frmalipay" method="post" action="{?$jieqi_modules['pay']['url']?}/yeecard.php">
+<table class="grid" width="100%" align="center">
+  <caption>点卡充值</caption>
+  <tr>
+    <td style="font-size:14px;line-height:200%;padding:20px;">
+      <table class="hide" width="100%" border="0" cellspacing="0" cellpadding="3">
+              <tr>
+                <td align="left"><strong>请输入点卡信息：</strong></td>
+              </tr>
+			  <tr>
+                <td>
+				点卡类型：
+				<select class="select" size="1" name="cardtype">
+				<option value="SZX">神州行</option>
+				<option value="UNICOM">联通卡</option>
+				<option value="TELECOM">电信卡</option>
+				<option value="JUNNET">骏网一卡通</option>
+				<option value="SNDACARD">盛大卡</option>
+				<option value="ZHENGTU">征途卡</option>
+				<option value="QQCARD">Q币卡</option>
+				<option value="JIUYOU">久游卡</option>
+				<option value="YPCARD">易宝e卡通</option>
+				<option value="NETEASE">网易卡</option>
+				<option value="WANMEI">完美卡</option>
+				<option value="SOHU">搜狐卡</option>
+				<option value="ZONGYOU">纵游一卡通</option>
+				<option value="TIANXIA">天下一卡通</option>
+				<option value="TIANHONG">天宏一卡通</option>
+				</select>
+				</td>
+              </tr>
+              <tr>
+                <td>
+				点卡金额：
+				<select class="select" size="1" name="egold">
+				<option value="10000">100元(兑换10000{?$egoldname?})</option>
+				<option value="5000">50元(兑换5000{?$egoldname?})</option>
+				<option value="3000">30元(兑换3000{?$egoldname?})</option>
+				<option value="2000">20元(兑换2000{?$egoldname?})</option>
+				<option value="1500">15元(兑换1500{?$egoldname?})</option>
+				<option value="1000">10元(兑换1000{?$egoldname?})</option>
+				</select>
+				</td>
+              </tr>
+              <tr>
+                <td>点卡卡号：<input type="text" class="text" name="cardno" size="25" maxlength="50" value="" /></td>
+              </tr>
+              <tr>
+                <td>点卡密码：<input type="text" class="text" name="cardpwd" size="25" maxlength="50" value="" /></td>
+              </tr>
+              <tr>
+                <td><input type="submit" name="Submit" value="进入下一步" class="button" >
+                    <input type="hidden" name="act" value="pay">{?$jieqi_token_input?}</td>
+              </tr>
+          </table>
+    </td>
+  </tr>
+</table>
+</form>
+<div class="textbox">
+<strong>说明：</strong><br />支持各类点卡充值，请务必选择正确的点卡类型以及对应的金额。<br />
+</div>

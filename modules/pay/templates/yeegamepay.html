@@ -1,0 +1,110 @@
+{?set jieqi_blocks_module = "pay"?}
+{?set jieqi_blocks_config = "payblocks"?}
+{?set $jieqi_pagetitle = "游戏点卡充值-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="充值导航" module="pay" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_paylist_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+
+<script type="text/javascript">
+//检查选中项
+function selectRadioValue(radioName) {
+    var radioObj = document.getElementsByName(radioName);
+    var radioValue = "";
+    for (var i = 0; i < radioObj.length; i++) {
+        if (radioObj[i].checked) {
+            radioValue = radioObj[i].value;
+            break;
+        }
+    }
+    return radioValue;
+}
+//卡类可选项
+function showPaySelect() {
+    var payselect = document.getElementById('payselect');
+    var paytypes = [['QQ', 'Q币卡'], ['SD', '盛大卡'], ['JW', '骏网一卡通'], ['ZT', '征途卡'], ['JY', '久游卡'], ['WY', '网易卡'], ['SH', '搜狐卡'], ['WM', '完美卡'], ['CARDTW', '32一卡通'], ['ZY', '纵游一卡通'], ['TH', '天宏一卡通']];
+
+	var html = '';
+    html += '<ul>';
+    for (var i = 0; i < paytypes.length; i++) {
+        html += '<li style="line-height:250%;float:left;width:25%;overflow:hidden;"><label class="radio"><input type="radio" name="cardtype" value="' + paytypes[i][0] + '" onchange="showSubPaySelect();" onClick="this.blur();"';
+		if(i == 0) html += ' checked="checked"';
+		html += '> ' + paytypes[i][1] + '</label></li>';
+    }
+    html += '</ul>';
+	payselect.innerHTML = html;
+}
+//输出一行金额选项html
+function htmlSubPaySelect(cardtypes) {
+    var egoldrate = 75;
+    var html = '';
+    html += '<ul>';
+    for (var i = 0; i < cardtypes.length; i++) {
+        var egold = cardtypes[i] * egoldrate;
+        html += '<li style="line-height:250%;float:left;width:50%;"><label class="radio"><input type="radio" name="egold" value="' + egold + '"';
+		if(i == 0) html += ' checked="checked"';
+		html += '> ' + egold + '{?$egoldname?}（' + cardtypes[i] + '元）</label></li>';
+    }
+    html += '</ul>';
+    return html;
+}
+//切换可选项
+function showSubPaySelect() {
+    var subpayselect = document.getElementById('subpayselect');
+    var selectvalue = selectRadioValue('cardtype');
+
+    var cardtypes = {'JW':[5, 6, 10, 15, 30, 50, 100], 'SD':[5, 10, 30, 35, 45, 100, 350, 1000], 'ZT':[5, 10, 15, 18, 20, 25, 30, 50, 60, 68, 100, 120, 180, 208, 250, 300, 468, 500], 'QQ':[5, 10, 15, 20, 30, 60, 100, 200], 'JY':[2, 5, 10, 15, 20, 25, 30, 50, 100], 'WY':[10, 15, 20, 30, 50], 'WM':[15, 30, 50, 100], 'SH':[5, 10, 15, 30, 40, 100], 'ZY':[5, 10, 15, 30, 50, 100], 'TH':[5, 10, 15, 20, 30, 50, 100], 'CARDTW':[5, 10, 15, 20, 25, 30, 50, 100, 500]};
+
+    if(typeof cardtypes[selectvalue] != 'undefined') subpayselect.innerHTML = htmlSubPaySelect(cardtypes[selectvalue]);
+}
+if (window.attachEvent) {
+    window.attachEvent('onload', function(){showPaySelect();showSubPaySelect();});
+} else {
+    window.addEventListener('load', function(){showPaySelect();showSubPaySelect();}, false);
+}
+
+function frmpay_validate(){
+	showMask();
+	displayDialog(document.getElementById('paydialog').innerHTML);
+}
+</script>
+
+<div id="paydialog" style="display:none;">
+<div>
+	<div style="padding:20px;font-size:120%;">
+	提交成功，卡类充值较慢，请您稍等1分钟后查看账户余额变化！
+	</div>
+	<div style="text-align:center;padding:20px">
+		<a class="btnlink" href="{?$jieqi_url?}/userdetail.php">查看我帐户</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+		<a class="btnlink" href="javascript:;" onclick="closeDialog();">本页继续充值</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+	</div>
+</div>
+</div>
+
+<form name="frmpay" method="post" action="{?$jieqi_modules['pay']['url']?}/yeecard.php" target="_blank" onsubmit="return frmpay_validate();">
+<table class="grid" width="100%" align="center">
+<!--   <caption>游戏点卡充值</caption> -->
+  <tr>
+    <td style="font-size:14px;line-height:200%;padding:20px;">
+	<div id="payselect"></div>
+	</td>
+  </tr>
+  <tr>
+    <td style="font-size:14px;line-height:200%;padding:20px;">
+	<div id="subpayselect"></div>
+	</td>
+  </tr>
+  <tr>
+    <td style="font-size:14px;line-height:200%;padding:20px;">
+	<button type="submit" name="Submit" class="button">进入下一步</button>
+    <input type="hidden" name="act" value="pay" />{?$jieqi_token_input?}
+    <input type="hidden" name="jumpurl" value="{?$jumpurl?}" />
+	<input type="hidden" name="type" value="yeegame" />
+	</td>
+  </tr>
+</table>
+</form>
+<div class="textbox">
+<strong>说明：</strong><br />
+1、游戏点卡充值，兑换比例：<span class="hot">1</span>元=<span class="hot">75</span>{?$egoldname?}<br />
+2、卡类充值较慢，请您稍等1分钟后查看账户余额变化。<br />
+3、本接口支持多种游戏点卡充值，请务必选择正确的点卡类型以及对应的金额。<br />
+</div>

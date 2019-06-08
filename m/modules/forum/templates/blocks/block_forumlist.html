@@ -1,0 +1,8 @@
+<dl class="dlnav">
+{?section name=i loop=$forumcats?}
+<dt>{?$forumcats[i]?}</dt>
+{?section name=j loop=$forums[i]?}
+<dd><a href="{?function jieqi_geturl:'forum':topiclist:1:$forums[i][j].forumid?}">{?$forums[i][j].forumname?}</a></dd>
+{?/section?}
+{?/section?}
+</dl>

@@ -1,0 +1,45 @@
+<script type="text/javascript">
+function frmgiftbuy_validate(){
+  if(document.frmgiftbuy.num.value == ""){
+    alert("请输入购买数量");
+    document.frmgiftbuy.num.focus();
+    return false;
+  }
+  return true;
+}
+</script>
+<br />
+<form name="frmgiftbuy" id="frmgiftbuy" action="{?$jieqi_modules['article']['url']?}/giftbuy.php?do=submit&jumpurl={?$jumpurl?}" method="post" onsubmit="return frmgiftbuy_validate();" enctype="mulgiftart/form-data">
+<table width="500" class="grid" cellspacing="1" align="center">
+<caption>我要购买</caption>
+<tr valign="middle" align="left">
+  <td width="20%">我拥有</td>
+  <td>
+    {?if $giftvals['sprice'] > 0?}{?$userscore?}积分{?else?}{?$useregold?}{?$egoldname?}{?/if?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td width="20%">购买内容</td>
+  <td>
+	{?$giftvals['caption']?} （单价：{?if $giftvals['sprice'] > 0?}{?$giftvals['sprice']?}积分<input type="hidden" name="currency" value="score" />{?else?}{?$giftvals['eprice']?}{?$egoldname?}<input type="hidden" name="currency" value="egold" />{?/if?}）
+	<input type="hidden" name="type" value="{?$gift_type?}" />
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td width="20%">购买数量</td>
+  <td>
+  <input type="text" class="text" name="num" id="buy_num" size="10" maxlength="10" value="" />
+  <span class="hot">最多：{?$dft_maxnum?}</span>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td width="20%">
+  &nbsp;
+  <input type="hidden" name="act" value="post" />{?$jieqi_token_input?}
+  </td>
+  <td>
+  <button type="submit" class="button" name="submit">提 交</button>
+  </td>
+</tr>
+</table>
+</form>

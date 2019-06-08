@@ -1,0 +1,32 @@
+<script src="http://pub.idqqimg.com/qqmobile/qqapi.js?_bid=152"></script>
+<script type="text/javascript">
+	//调用QQJS api 支付
+	function jsApiCall()
+	{
+		mqq.tenpay.pay(
+			{?$jsApiParameters?},
+			function(res){
+				//WeixinJSBridge.log(res.err_msg);
+				var jumpurl = '{?$jumpurl?}';
+				if(jumpurl == '') jumpurl = '{?$jieqi_url?}/userdetail.php';
+				if(res.resultCode == 0){
+					alert('支付成功，实际到账可能稍有延迟！');
+					if(jumpurl != '{?$jieqi_url?}/userdetail.php') Ajax.Request('{?$jieqi_url?}/userdetail.php');
+					window.location.href = jumpurl;
+				}else{
+					alert('对不起，支付失败！（' + res.retmsg + '）');
+					window.location.href = jumpurl;
+				}
+			}
+		);
+	}
+</script>
+<div style="margin:3em auto;">
+<div class="block">
+	<div class="blocktitle">QQ钱包支付</div>
+	<div class="blockcontent">
+		<div class="tc mt mb">您选择了购买：{?$subject?}（{?$money?}元）</div>
+		<div class="tc mt mb"><button type="button" class="button b_l b_hot" onclick="jsApiCall()">立即支付</button></div>
+	</div>
+</div>
+</div>

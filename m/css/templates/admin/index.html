@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{?$jieqi_pagetitle?}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="generator" content="jieqi.com" />
+<link rel="stylesheet" type="text/css" media="all" href="{?$jieqi_url?}/css/admin_frame.css" />
+<script type="text/javascript">
+var leftmenus = new Array('mu_system', 'mu_users', 'mu_tools', 'mu_database', 'mu_plguin');
+{?section name=i loop=$jieqimodules?}
+leftmenus['mod_{?$i['key']?}'] = 'mod_{?$i['key']?}';
+{?/section?}
+
+function showleftmenu(id) {
+  for(k in leftmenus) {
+    if(leftframe.document.getElementById(leftmenus[k])) {
+	  if(leftmenus[k] == id){
+	    leftframe.document.getElementById(leftmenus[k]).style.display = 'block';
+		leftframe.document.getElementById('sm' + leftmenus[k].substr(leftmenus[k].indexOf('_'))).style.display = 'block';
+	  }else{
+	    leftframe.document.getElementById(leftmenus[k]).style.display = 'none';
+	  }
+    }
+  }
+}
+
+function showmodmenu(){
+  for(k in leftmenus) {
+    if(leftframe.document.getElementById(leftmenus[k])) {
+	  if(leftmenus[k].substr(0,4) == 'mod_'){
+	    leftframe.document.getElementById(leftmenus[k]).style.display = 'block';
+		leftframe.document.getElementById('sm_' + leftmenus[k].substr(4)).style.display = 'none';
+	  }else{
+	    leftframe.document.getElementById(leftmenus[k]).style.display = 'none';
+	  }
+    }
+  }
+}
+
+function switchframe(){
+  var ls = document.getElementById('leftswitch');
+  var al = document.getElementById('adminleft');
+  if (ls.className == 'arrow_left'){
+    ls.className = 'arrow_right';
+    al.style.display = 'none';
+  }else{
+    ls.className = 'arrow_left';
+    al.style.display = '';
+  }
+}
+
+
+function adminmenuFix() {
+  var sfEls = document.getElementById("admin_menu").getElementsByTagName("li");
+  for (var i=0; i<sfEls.length; i++) {
+    sfEls[i].onmouseover=function() {
+      this.className+=(this.className.length>0? " ": "") + "sfhover";
+    }
+    sfEls[i].onMouseDown=function() {
+      this.className+=(this.className.length>0? " ": "") + "sfhover";
+    }
+    sfEls[i].onMouseUp=function() {
+      this.className+=(this.className.length>0? " ": "") + "sfhover";
+    }
+    sfEls[i].onmouseout=function() {
+      this.className=this.className.replace(new RegExp("( ?|^)sfhover\\b"), "");
+    }
+  }
+}
+window.onload=adminmenuFix;
+</script>
+</head>
+<body>
+<table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><td id="frametop">
+	<div id="admintop">
+		<div id="top_logo"><img src="{?$jieqi_url?}/images/admin/logo.gif" /></div>
+
+		<div id="top_nav">
+		<ul id="admin_menu">
+			<li><a href="#" onClick="showleftmenu('mu_system'); return false;">系统设置</a></li>
+			<li><a href="#" onClick="showleftmenu('mu_users'); return false;">用户管理</a></li>
+			<li><a href="#" onClick="showmodmenu();">模块管理<span class="arrow_down"></span></a>
+			<ul>
+				{?section name=i loop=$jieqimodules?}<li><a href="#" onClick="showleftmenu('mod_{?$i['key']?}'); return false;">{?$jieqimodules[i].caption?}</a></li>{?/section?}
+			</ul>
+			</li>
+			<li><a href="#" onClick="showleftmenu('mu_tools'); return false;">系统工具</a></li>
+			<li><a href="#" onClick="showleftmenu('mu_database'); return false;">数据维护</a></li>
+			<li><a href="#" onClick="return false;">帮助<span class="arrow_down"></span></a>
+			<ul>
+				<li><a href="http://www.jieqi.com/" target="_blank">官方网站</a></li>
+				<li><a href="{?$jieqi_url?}/admin/faq.php" target="mainframe">使用技巧</a></li>
+				<li><a href="{?$jieqi_url?}/admin/license.php" target="mainframe">授权信息</a></li>
+			</ul>
+			</li>
+		</ul>			
+		</div>
+
+		<div id="top_link">
+			<a href="http://www.jieqi.com" target="_blank"> 官方网站</a> | <a href="http://help.jieqi.com"  target="_blank">帮助中心</a> | <a href="{?$jieqi_url?}/admin/license.php" target="mainframe">授权信息</a>
+			<br />
+			<a href="{?$jieqi_url?}/">JIEQI CMS {?$jieqi_version?} {?$jieqi_vtype?}</a> - {?$username?} <a href="{?$jieqi_url?}/logout.php" target="_top">[退出]</a>
+		</div>
+
+		<div class="cb"></div>
+	</div>
+</td></tr>
+<tr valign="top"><td id="framemiddle">
+<table height="100%"  width="100%" cellspacing="0" cellpadding="0" border="0" id="adminframe">
+  <tr>
+	<td valign="top" id="adminleft" name="adminleft"><iframe frameborder="0" id="leftframe" name="leftframe" scrolling="auto" src="{?$jieqi_adminleft?}" marginwidth="0" marginheight="0"></iframe></td>
+	<td valign="middle" id="adminmiddle" name="adminmiddle" onClick="switchframe()"><span id="leftswitch" class="arrow_left"></span></td>
+	<td valign="top" id="adminright" name="adminright">
+    <iframe frameborder="0" id="mainframe" name="mainframe" scrolling="auto" src="{?$jieqi_adminmain?}" marginwidth="0" marginheight="0"></iframe>
+	</td>
+  </tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>

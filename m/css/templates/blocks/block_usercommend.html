@@ -1,0 +1,7 @@
+<ul class="ulrow">
+{?section name=i loop=$userrows?}
+<li>
+<img src="{?function jieqi_geturl:'system':'avatar':$userrows[i].uid:'i':$userrows[i].avatar?}" class="avatari" alt="Í·Ïñ"> <a href="{?function jieqi_geturl:'system':'user':$userrows[i].uid?}"><span style="line-height:16px;">{?$userrows[i].name?}</span></a>
+</li>
+{?/section?}
+</ul>

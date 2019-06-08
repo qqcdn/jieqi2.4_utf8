@@ -1,0 +1,45 @@
+{?set $jieqi_pagetitle = "我的好友-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "我的好友"?}
+{?set $jieqi_nofootlink = "1"?}
+
+<script type="text/javascript">
+//删除
+function act_delete(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onReturn: function(){
+			$_(o.parentNode.parentNode.parentNode).remove();
+		}
+	}
+	if(confirm('确实要删除该好友么？')) Ajax.Tip(url, param);
+	return false;
+}
+</script>
+
+<form id="frmaddfriends" name="frmaddfriends" method="get" action="{?$jieqi_url?}/addfriends.php">
+<div class="blockb">
+{?if $addfriends == 1?}
+<div class="blocktitle">用户名：<input type="text" class="text" size="15" name="username"><button type="button" class="button b_s" style="margin:0 5px;" name="btn_addfriends" id="btn_addfriends" onclick="Ajax.Tip('frmaddfriends', 3000);">加为好友</button><input type="hidden" name="jumpurl" value="{?$jieqi_thisurl|htmlspecialchars?}" /><input type="hidden" name="act" value="add" />{?$jieqi_token_input?}</div>
+{?/if?}
+<div class="blockcontent" id="jieqi_page_contents">
+	{?section name=i loop=$friendsrows?}
+	<div class="c_row cf">
+	<div class="row_cover">
+	<img class="avatar" src="{?function jieqi_geturl:'system':'avatar':$friendsrows[i].yourid:'m'?}" alt="{?$friendsrows[i].yourname?}"/>
+	</div>
+
+	<div class="row_text">
+	<h4><a href="{?function jieqi_geturl:'system':'user':$friendsrows[i].yourid:'info'?}">{?$friendsrows[i].yourname?}</a></h4>
+	<p class="nw mt">
+	<a class="btnlink" href="{?$jieqi_url?}/newmessage.php?receiver={?$friendsrows[i].yourname|urlencode?}">写新消息</a>
+	<a class="btnlink" id="act_delete_{?$friendsrows[i].yourid?}" href="javascript:;" onclick="act_delete('{?$jieqi_url?}/myfriends.php?id={?$friendsrows[i].yourid?}&act=delete{?$jieqi_token_url?}');">删除好友</a>
+	</p>
+	</div>
+	</a>
+	</div>
+	{?/section?}
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

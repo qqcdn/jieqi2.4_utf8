@@ -1,0 +1,14 @@
+{?set $jieqi_pagetitle = "{$actname}记录-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "{$actname}记录"?}
+
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+	<ul class="ulrow">
+	{?section name=i loop=$actlogrows?}
+	<li><a class="db cf" href="{?function jieqi_geturl:'article':'article':$actlogrows[i].articleid:'info'?}"><em>{?$actlogrows[i].actnum?}/{?$actlogrows[i].addtime|date:'m-d'?}</em>{?$actlogrows[i].articlename?}</a></li>
+	{?/section?}
+	</ul>
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

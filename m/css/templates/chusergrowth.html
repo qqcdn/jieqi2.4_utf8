@@ -1,0 +1,30 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "注册统计-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="推广分成" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_channelnav_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<form name="frmquery" method="post" action="{?$jieqi_url?}/chusergrowth.php">
+	<div class="textbox">
+		注册日期：
+		<input name="datestart" type="text" class="text" size="10" maxlength="10" value="{?$_request['datestart']?}">-<input name="dateend" type="text" class="text" size="10" maxlength="10" value="{?$_request['dateend']?}">
+		<button type="submit" name="btnsearch" class="button">搜索</button>
+		<p class="gray fss">注册日期支持两种写法：1、按日期统计使用8位数字，比如从 20160501 到 20160530；2、按月份统计用6为数字，比如从 201601 到 201612</p>
+	</div>
+</form>
+<table class="grid" width="100%" align="center">
+  <tr align="center" class="head">
+    <td width="20%">日期</td>
+    <td width="20%">新增用户数</td>
+	<td width="60%">柱形图</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$growthrows?}
+  <tr>
+    <td align="center">{?$growthrows[i].datevalue?}</td>
+    <td align="center">{?$growthrows[i].growthnum?}</td>
+	<td align="left"><div style="background:#66CC33; height:1em; width:{?$growthrows[i].growthpercent?}%;"></div></td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+

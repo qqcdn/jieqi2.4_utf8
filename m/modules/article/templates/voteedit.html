@@ -1,0 +1,53 @@
+{?set $jieqi_pagetitle = "编辑投票-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "编辑投票"?}
+
+<script type="text/javascript">
+function frmvoteedit_validate(){
+  if(document.frmvoteedit.title.value == ""){
+    alert("请输入标题");
+    document.frmvoteedit.title.focus();
+    return false;
+  }
+}
+</script>
+<form class="form" name="frmvoteedit" id="frmvoteedit" action="{?$jieqi_modules['article']['url']?}/voteedit.php?do=submit" method="post" onsubmit="return frmvoteedit_validate();">
+<fieldset>
+	<div class="frow">
+		<label class="col4 flabel">标题：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="title" id="title" maxlength="100" value="{?$votetitle?}" /
+		</div>
+	</div>
+	{?section name=i loop=$voterows?}
+	<div class="frow">
+		<label class="col4 flabel">选项{?$i['order']?}：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="item{?$i['order']?}" id="item{?$i['order']?}" maxlength="100" value="{?$voterows[i]?}" />
+		</div>
+	</div>
+	{?/section?}
+	<div class="frow">
+		<label class="col4 flabel">单选/多选：</label>
+		<div class="col8 last">
+			<label class="radio"><input type="radio" name="mulselect" value="0"{?if $mulselect == 0?} checked="checked"{?/if?} />单选</label>
+  			<label class="radio"><input type="radio" name="mulselect" value="1"{?if $mulselect == 1?} checked="checked"{?/if?} />多选</label>
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">是否发布：</label>
+		<div class="col8 last">
+			<label class="radio"><input type="radio" name="ispublish" value="1"{?if $ispublish == 1?} checked="checked"{?/if?} />发布</label>
+  			<label class="radio"><input type="radio" name="ispublish" value="0"{?if $ispublish == 0?} checked="checked"{?/if?} />不发布</label>
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">&nbsp;</label>
+		<div class="col8 last">
+			<button type="submit" class="button" name="submit">提 交</button>
+			<input type="hidden" name="act" value="update" />{?$jieqi_token_input?}
+  			<input type="hidden" name="id" value="{?$id?}" />
+  			<input type="hidden" name="aid" value="{?$aid?}" />
+		</div>
+	</div>
+</fieldset>
+</form>

@@ -1,0 +1,9 @@
+<ul class="cf">
+{?section name=i loop=$articlerows?}
+<li style="float:left; width:12.28%;margin:1%; text-align:center; overflow:hidden;">
+<a href="{?$articlerows[i].url_articleinfo?}" target="_blank"><img src="{?$articlerows[i].url_image?}" style="width:120px; height:150px;"></a>
+<br /><a class="note nw" href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a>
+<br /><span class="gray nw">{?$articlerows[i].author?}</span>
+</li>
+{?/section?}
+</ul>

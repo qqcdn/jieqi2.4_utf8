@@ -1,0 +1,24 @@
+{?set $jieqi_pagetitle = "{$articletitle}-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "{$articletitle}"?}
+{?set jieqi_page_rows = "15"?}
+
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+	{?section name=i loop=$articlerows?}
+	<div class="c_row cf">
+	<a class="db cf" href="{?$articlerows[i].url_articleinfo?}">
+	<div class="row_cover">
+	<img class="cover_m" src="{?$articlerows[i].url_simage?}" />
+	</div>
+
+	<div class="row_text">
+	<h4>{?$articlerows[i].articlename?}</h4>
+    <p class="gray">{?$articlerows[i].sort?} | {?$articlerows[i].author?}<br />{?$articlerows[i].intro|truncate:76:'..'?}</p>
+	</div>
+	</a>
+	</div>
+	{?/section?}
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

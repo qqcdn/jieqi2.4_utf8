@@ -1,0 +1,50 @@
+{?set $jieqi_pagetitle = "修改资料-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "修改资料"?}
+
+<script type="text/javascript">
+function jieqiFormValidate_useredit(){
+  if(document.useredit.email.value == ""){
+	alert("请输入Email");
+	document.useredit.email.focus();
+	return false;
+  }
+}
+</script>
+
+<form class="form" name="frmuseredit" id="frmuseredit" action="{?$jieqi_url?}/useredit.php?do=submit" method="post">
+	<fieldset>
+		<div class="frow">
+			<label class="col4 flabel">用户名：</label>
+			<div class="col8 last">
+			{?$username?}
+			</div>
+		</div>
+		<div class="frow">
+			<label class="col4 flabel">昵称：</label>
+			<div class="col8 last">
+			<input type="text" class="text" name="nickname" id="nickname" size="25" maxlength="30" style="width:160px" value="{?$nickname?}" />
+			</div>
+		</div>
+		<div class="frow">
+			<label class="col4 flabel">Email：</label>
+			<div class="col8 last">
+			{?if $verify['email'] > 0?}{?$email?}{?else?}<input type="text" class="text" name="email" id="email" size="25" maxlength="60" style="width:160px" value="{?$email?}" />{?/if?}
+			</div>
+		</div>
+		<div class="frow">
+			<label class="col4 flabel">性别：</label>
+			<div class="col8 last">
+			{?section name=i loop=$sex['items']?}
+			  <label class="radio"><input type="radio" name="sex" value="{?$i['key']?}"{?if $i['key'] == $sex_n?} checked="checked"{?/if?}  />{?$sex['items'][i]?}</label>
+			{?/section?}
+			</div>
+		</div>
+		<div class="frow">
+			<label class="col4 flabel">&nbsp;</label>
+			<div class="col8 last">
+			<button type="submit" class="button" name="submit">保存</button>
+			<input type="hidden" name="act" value="update" />{?$jieqi_token_input?}
+			</div>
+		</div>
+	</fieldset>
+</form>

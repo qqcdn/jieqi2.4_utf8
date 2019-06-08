@@ -1,0 +1,46 @@
+<form name="frmregister" id="frmregister" action="{?$form_action?}?do=submit" method="post">
+<table class="grid" width="80%" align="center" style="min-width:480px;">
+<caption>新用户注册</caption>
+<tr>
+  <td colspan="2" class="head">已有账号？ 请点击 <a href="{?$jieqi_url?}/login.php">登录</a></td>
+</tr>
+<tr>
+  <td class="tdl" width="20%"><span class="hot">*</span>用户名</td>
+  <td class="tdr" width="80%"><input type="text" class="text" name="username" id="username" size="25" maxlength="30" style="width:160px" value="" onBlur="Ajax.Update('{?$check_url?}?item=u&username='+this.value, {outid:'usermsg', tipid:'usermsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /> <span id="usermsg"></span></td>
+</tr>
+<tr>
+  <td class="tdl"><span class="hot">*</span>密码</td>
+  <td class="tdr"><input type="password" class="text" name="password" id="password" size="25" maxlength="20" style="width:160px" value="" onBlur="Ajax.Update('{?$check_url?}?item=p&password='+this.value, {outid:'passmsg', tipid:'passmsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /> <span id="passmsg"></span></td>
+</tr>
+<tr>
+  <td class="tdl"><span class="hot">*</span>确认密码</td>
+  <td class="tdr"><input type="password" class="text" name="repassword" id="repassword" size="25" maxlength="20" style="width:160px" value=""  onBlur="Ajax.Update('{?$check_url?}?item=r&password='+password.value+'&repassword='+this.value, {outid:'repassmsg', tipid:'repassmsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /> <span id="repassmsg"></span></td>
+</tr>
+<tr>
+  <td class="tdl"><span class="hot">*</span>Email</td>
+  <td class="tdr"><input type="text" class="text" name="email" id="email" size="25" maxlength="60" style="width:160px" value="" onBlur="Ajax.Update('{?$check_url?}?item=m&email='+this.value, {outid:'mailmsg', tipid:'mailmsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /> <span id="mailmsg"></span></td>
+</tr>
+<tr>
+  <td class="tdl">性别</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="sex" value="1" />男</label>
+  <label class="radio"><input type="radio" name="sex" value="2" />女</label>
+  <label class="radio"><input type="radio" name="sex" value="0" checked="checked" />保密</label>
+  </td>
+</tr>
+<tr>
+  <td class="tdl">QQ</td>
+  <td class="tdr"><input type="text" class="text" name="qq" id="qq" size="25" maxlength="15" style="width:160px" value="" /></td>
+</tr>
+{?if $show_checkcode == 1?}
+<tr>
+  <td class="tdl">请输入验证码</td>
+  <td class="tdr"><input type="text" class="text" size="8" maxlength="8" name="checkcode" onfocus="if($_('reg_imgccode').style.display == 'none'){$_('reg_imgccode').src = '{?$jieqi_url?}/checkcode.php';$_('reg_imgccode').style.display = '';}" title="点击显示验证码"><img id="reg_imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码"></td>
+</tr>
+{?/if?}
+<tr>
+  <td class="tdl">&nbsp;<input type="hidden" name="act" value="newuser" />{?$jieqi_token_input?}</td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提交</button></td>
+</tr>
+</table>
+</form>

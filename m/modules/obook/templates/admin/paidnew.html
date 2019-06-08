@@ -1,0 +1,77 @@
+<script type="text/javascript">
+function frmpaidnew_validate(){
+  if(document.frmpaidnew.payemoney.value == ""){
+    alert("请输入结算的{?$egoldname?}");
+    document.frmpaidnew.payemoney.focus();
+    return false;
+  }
+}
+</script>
+<br />
+<form name="frmpaidnew" id="frmpaidnew" action="paidnew.php?do=submit" method="post" onsubmit="return frmpaidnew_validate();" enctype="multipart/form-data">
+<table width="80%" class="grid" cellspacing="1" align="center">
+<caption>
+收入结算
+</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">电子书名：</td>
+  <td class="tdr"><a href="{?function jieqi_geturl:'article':'article':$articleid:'info'?}" target="_blank">{?$obookname?}</a> (作者：<a href="{?$jieqi_url?}/userinfo.php?id={?$authorid?}" target="_blank">{?$author?}</a>)</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">作者真实信息：</td>
+  <td class="tdr">
+  真实姓名：{?$personsvars['realname']?} <br />
+  性别：{?$personsvars['gender']?} <br />
+  电话：{?$personsvars['telephone']?} <br />
+  手机：{?$personsvars['mobilephone']?} <br />
+  收款银行：{?$personsvars['banktype']?}<br />
+  银行地区：{?$personsvars['bankname']?}<br />
+  收款账号：{?$personsvars['bankcard']?}<br />
+  收款人：{?$personsvars['bankuser']?}<br />
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">总收入：</td>
+  <td class="tdr">{?$sumemoney?}{?$egoldname?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">本书已结算：</td>
+  <td class="tdr">{?$paidemoney?} {?$egoldname?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">本书待结算：</td>
+  <td class="tdr">{?$remainemoney?} {?$egoldname?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">本次结算：</td>
+  <td class="tdr">
+  <input type="text" class="text" name="payemoney" id="payemoney" size="10" maxlength="10" value="" /> {?$egoldname?} <span class="hot">（必须是整数）</span>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">支付人民币：</td>
+  <td class="tdr">
+  <input type="text" class="text" name="paymoney" id="paymoney" size="10" maxlength="10" value="" /> 元 <span class="hot">（如 123.45）</span>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">结算类型：</td>
+  <td class="tdr">
+  {?section name=i loop=$paidtype['items']?}
+  <label class="radio"><input type="radio" name="paidtype" value="{?$i['key']?}" {?if $i['key'] == $paidtype['default']?}checked="checked" {?/if?}/>{?$paidtype['items'][i]?}</label> 
+  {?/section?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">
+  &nbsp;
+  <input type="hidden" name="act" value="post" />{?$jieqi_token_input?}
+  <input type="hidden" name="oid" value="{?$obookid?}" />
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提 交</button></td>
+</tr>
+</table>
+</form>

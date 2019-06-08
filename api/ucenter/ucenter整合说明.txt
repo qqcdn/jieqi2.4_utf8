@@ -1,0 +1,32 @@
+1、安装好JIEQI CMS（1.8及以上版本） 和 Ucenter （1.6及以上版本）
+   假设
+   JIEQI CMS 网址为 http://www.jieqi.com
+   Ucenter 网址为 http://www.ucenter.com
+
+2、JIEQI CMS中原来的 /include/funuser.php 做好备份，比如改名成 funuser_default.php
+   然后把该目录下 funuser_ucenter.php 改名成 funuser.php
+
+3、编辑JIEQI CMS中的 /api/ucenter/config.inc.php
+   如果使用数据连接，设置好相关参数
+   通信密钥可以自己随意设定，跟Ucenter后台设置要相同
+   UCenter 的 URL 地址必须设置正确
+
+   注意本目录下的 data 子目录要可写，是接口的缓存数据目录。
+
+4、进入Ucenter后台，“应用管理”点“添加新应用”
+   选择安装方式: 自定义安装
+   应用名称：填网站名，比如 JIEQI CMS
+   应用的 URL：填JIEQI CMS网址，如 http://www.jieqi.com
+   应用 IP: 一般可以留空，或设置成JIEQI CMS服务器ip
+   通信密钥: 自己设置一个密码
+   应用类型: 选其他
+   应用的物理路径: 留空
+   查看个人资料页面地址: /userinfo.php?id=%s
+   应用接口文件名称: uc.php
+   标签单条显示模板: 留空
+   标签模板标记说明: 留空
+   是否开启同步登录: 是
+   是否接受通知: 是
+
+   然后提交
+   这时候再点应用管理，如果提示通讯成功，就设置好了

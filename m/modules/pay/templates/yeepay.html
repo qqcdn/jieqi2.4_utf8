@@ -1,0 +1,43 @@
+<br /><br />
+<form name="frmpaypost" id="frmpaypost" method="post" action="{?$url_pay?}">
+  <table width="600" align="center" cellpadding="0" cellspacing="1" class="grid">
+  <caption>欢迎使用在线充值</caption>
+  <tr>
+    <td style="line-height:250%;">
+      您好，{?$buyname?}! <br />
+      您选择的交易类型为： <br />
+      <span class="hot"> * 充值{?$egold?}{?$egoldname?}，支付金额：{?$money?}元</span><br />
+      系统将自动跳转到下一步，如未跳转，请点击“进入下一步”。<br />
+    </td>
+  </tr>
+  <tr>
+    <td height="30" valign="middle">
+      <input type='hidden' name='p0_Cmd'  value='{?$messageType?}'>
+      <input type='hidden' name='p1_MerId'  value='{?$merchant_id?}'>
+      <input type="hidden" name='p2_Order'  value='{?$orderid?}'>
+      <input type='hidden' name='p3_Amt'  value='{?$amount?}'>
+      <input type='hidden' name='p4_Cur'  value='{?$cur?}'>
+      <input type='hidden' name='p5_Pid'    value='{?$productId?}'>
+      <input type='hidden' name='p6_Pcat'   value='{?$productCat?}'>
+      <input type='hidden' name='p7_Pdesc'  value='{?$productDesc?}'>
+      <input type='hidden' name='p8_Url'  value='{?$merchantCallbackURL?}'>
+      <input type='hidden' name='p9_SAF'  value='{?$addressFlag?}'>
+      <input type='hidden' name='pa_MP'  value='{?$sMctProperties?}'>
+      <input type='hidden' name='pd_FrpId'  value='{?$frpId?}'>
+      <input type='hidden' name='pr_NeedResponse'  value='{?$needResponse?}'>
+      <input type='hidden' name='hmac'  value='{?$mac?}'>
+	  <button type="submit" class="button" name="v_action"> 进入下一步 </button>
+    </td>
+  </tr>
+</table>
+</form>
+<script type="text/javascript">
+function autopaypost(){
+	document.getElementById('frmpaypost').submit();
+}
+if (window.attachEvent){
+	window.attachEvent('onload',autopaypost);
+}else{
+	window.addEventListener('load',autopaypost,false);
+} 
+</script>

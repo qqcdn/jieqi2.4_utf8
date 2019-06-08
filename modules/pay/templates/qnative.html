@@ -1,0 +1,14 @@
+<div style="margin:1em auto;">
+<div class="block">
+	<div class="blocktitle">QQ扫码支付</div>
+	<div class="blockcontent">
+		<div class="tc mt mb">您选择了购买{?$subject?}（{?$money?}元）</div>
+		<div class="tc mt mb"><img alt="QQ扫码支付" src="{?$jieqi_modules['pay']['url']?}/qrcode.php?data={?$url_qrcode|urlencode?}" style="width:200px;height:200px;"/></div>
+		<div class="tc mt mb">请使用QQ扫一扫完成支付</div>
+		<div class="tc mt mb">
+		<a class="btnlink" href="{?$jieqi_url?}/userdetail.php">支付完成，查看我帐户</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+		<a class="btnlink" href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=wxnativepay">返回上页，继续充值</a>
+		</div>
+	</div>
+</div>
+</div>

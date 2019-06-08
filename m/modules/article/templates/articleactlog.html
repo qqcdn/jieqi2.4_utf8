@@ -1,0 +1,18 @@
+{?set $jieqi_pagetitle = "{$actname}记录-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "{$actname}记录"?}
+
+<div class="blockb">
+	<div class="blocktitle">《{?$articlename?}》{?if $actname != ''?}{?$actname?}{?else?}互动{?/if?}记录</div>
+	<div class="blockhead">合计次数：{?$actlogsum['count']?}，合计{?$egoldname?}：{?$actlogsum['actnum']?}</div>
+	<div class="blockcontent" id="jieqi_page_contents">
+		{?section name=i loop=$actlogrows?}
+		<div class="c_row cf">
+			<h4><i class="fr fss">{?$actlogrows[i].addtime|date:'Y-m-d H:i:s'?}</i><a href="{?function jieqi_geturl:'system':'user':$actlogrows[i].uid?}">{?$actlogrows[i].uname?}</a></h4>
+			<p class="gray" style="line-height:2;">
+				动作：{?$actlogrows[i].actname?}，数量：{?$actlogrows[i].actnum?}
+			</p>
+		</div>
+		{?/section?}
+	</div>
+</div>
+<div class="pages">{?$url_jumppage?}</div>

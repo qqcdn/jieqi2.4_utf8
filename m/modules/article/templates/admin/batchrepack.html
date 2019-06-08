@@ -1,0 +1,36 @@
+<form name="batchrepack" id="batchrepack" action="{?$url_batchrepack?}" target="_blank" method="post" onsubmit="return confirm('确实要开始重新生成么？');">
+<table class="grid" width="100%" align="center">
+<caption>小说批量生成</caption>
+<tr>
+  <td class="tdl" width="25%">限制条件：</td>
+  <td class="tdr" width="75%">
+  <label class="radio"><input type="radio" name="act" value="packwithid" checked="checked"> 小说ID从</label> <input type="text" class="text" name="fromid" id="fromid" size="10" maxlength="15" value="{?$minaid?}" /> 到 <input type="text" class="text" name="toid" id="toid" size="10" maxlength="15" value="{?$maxaid?}" /> <span class="hot">当前数据库小说ID为：{?$minaid?} - {?$maxaid?}</span>
+  <hr />
+  <label class="radio"><input type="radio" name="act" value="packwithtime"> 更新时间从</label> <input type="text" class="text" name="starttime" id="starttime" size="20" maxlength="20" value="" /> 到 <input type="text" class="text" name="stoptime" id="stoptime" size="20" maxlength="20" value="" /> <span class="hot">时间格式举例：2005-01-23 23:06:30</span>
+  </td>
+</tr>
+<tr>
+  <td class="tdl">分类：</td>
+  <td class="tdr">
+  {?section name=i loop=$sortrows?}
+  <label class="checkbox"><input type="checkbox" name="sortid[]" value="{?$i['key']?}" />{?$sortrows[i].caption?}</label>&nbsp;&nbsp; 
+  {?/section?}
+  </td>
+</tr>
+<tr>
+  <td class="tdl">生成选项：</td>
+  <td class="tdr">
+<label class="checkbox"><input type="checkbox" name="packflag[]" value="makeopf" />生成OPF(小说目录结构文件)</label>
+<label class="checkbox"><input type="checkbox" name="packflag[]" value="makeindex" />生成目录页HTML</label>
+<label class="checkbox"><input type="checkbox" name="packflag[]" value="makechapter" />生成章节页HTML</label>
+<label class="checkbox"><input type="checkbox" name="packflag[]" value="maketxtjs" />生成章节内容JS</label>
+<label class="checkbox"><input type="checkbox" name="packflag[]" value="makefull" />生成HTML全文阅读</label>
+<label class="checkbox"><input type="checkbox" name="packflag[]" value="maketxtfull" />生成TXT全文阅读</label>
+</td>
+</tr>
+<tr>
+  <td class="tdl">&nbsp;{?$jieqi_token_input?}</td>
+  <td class="tdr"><button type="submit" class="button" name="submit">开始生成</button></td>
+</tr>
+</table>
+</form>

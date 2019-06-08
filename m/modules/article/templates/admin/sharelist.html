@@ -1,0 +1,40 @@
+{?set jieqi_page_rows = "100"?}
+<div class="textbox">
+网站导航：
+{?section name=i loop=$jieqishares?}
+  {?if $i['order'] > 1?} | {?/if?}
+  {?if $i['key'] == $_request['ssid']?}
+  <span class="hot">{?$jieqishares[i]['caption']?}</span>
+  {?else?}
+  <a href="{?$jieqi_modules['article']['url']?}/admin/sharelist.php?ssid={?$i['key']?}">{?$jieqishares[i]['caption']?}</a>
+  {?/if?}
+  {?/section?}
+</div>
+<form name="frmadd" method="post" action="{?$jieqi_modules['article']['url']?}/admin/sharelist.php">
+<table class="grid" width="100%" align="center">
+  <caption>把小说共享给“{?$sharesite['caption']?}”</caption>
+  <tr>
+    <td>
+	<span class="hot">请在下面输入小说名，多个小说名用英文空格分隔</span>&nbsp;&nbsp;&nbsp;&nbsp;[<a href="?action=clean">清理已删除的共享小说</a>]{?if $_request['action'] == 'clean'?}&nbsp;&nbsp;&nbsp;&nbsp;<span class="hot">成功清理 {?$cleannum?} 本小说！</span>{?/if?}<br />
+	<textarea class="textarea" name="anames" style="width:100%;height:50px;"></textarea><br />
+	<input type="hidden" name="ssid" value="{?$_request['ssid']?}" />
+	<input type="hidden" name="act" value="add" />{?$jieqi_token_input?}
+	<button type="submit" name="btnsearch" class="button">以上小说设为共享</button> {?if $addnum > 0?}<span class="hot">成功共享{?$addnum?}本小说</span>{?/if?}
+	</td>
+  </tr>
+</table>
+</form>
+
+<table class="grid" width="100%" align="center">
+  <caption>“{?$sharesite['caption']?}”的已共享小说</caption>
+  <tr>
+    <td>
+	<ul class="ulrow" id="jieqi_page_contents">
+{?section name=i loop=$sharerows?}
+	<li style="float:left;width:24%;"><a href="{?function jieqi_geturl:'article':'article':$sharerows[i].articleid:'info'?}" target="_blank">{?$sharerows[i].articlename?}</a>[<a class="hot" href="{?$jieqi_modules['article']['url']?}/admin/sharelist.php?shareid={?$sharerows[i].shareid?}&ssid={?$_request['ssid']?}&page={?$_request['page']?}&act=delete{?$jieqi_token_url?}" title="取消本书共享，不会删除小说内容">删</a>]</li>
+{?/section?}
+    </ul>
+	</td>
+  </tr>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

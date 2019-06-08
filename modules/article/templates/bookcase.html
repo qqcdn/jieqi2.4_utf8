@@ -1,0 +1,93 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "我的书架-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="会员工具" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_userbox_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<script type="text/javascript">
+function check_confirm(){
+	var checkform = document.getElementById('checkform');
+	var checknum = 0;
+	for (var i=0; i < checkform.elements.length; i++){
+	 if (checkform.elements[i].name == 'checkid[]' && checkform.elements[i].checked == true) checknum++; 
+	}
+	if(checknum == 0){
+		alert('请先选择要操作的书目！');
+		return false;
+	}
+	var newclassid = document.getElementById('newclassid');
+	if(newclassid.value == -1){
+		if(confirm('确实要将选中书目移出书架么？')) return true;
+		else return false;
+	}else{
+		return true;
+	}
+}
+//删除
+function act_delete(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onReturn: function(){
+			$_(o.parentNode.parentNode).remove();
+		}
+	}
+	if(confirm('确实要将本书移出书架么？')) Ajax.Tip(url, param);
+	return false;
+}
+</script>
+<form action="{?$jieqi_modules['article']['url']?}/bookcase.php" method="post" name="checkform" id="checkform" onsubmit="return check_confirm();">
+<table class="grid" width="100%" align="center">
+  <caption>
+  您的书架可收藏 {?$maxbookcase?} 本，已收藏 {?$nowbookcase?} 本，本组有 {?$classbookcase?} 本。
+  {?if $maxmarkclass > 0?}
+  &nbsp;&nbsp;&nbsp;&nbsp;选择分组
+  <select name="classlist" onchange="javascript:document.location='bookcase.php?classid='+this.value;">
+    <option value="0"{?if $classid == 0?} selected="selected"{?/if?}>默认书架</option>
+	{?section name=i loop=$markclassrows?}
+    <option value="{?$markclassrows[i].classid?}"{?if $classid == $markclassrows[i].classid?} selected="selected"{?/if?}>{?$markclassrows[i].caption?}</option>
+	{?/section?}
+  </select>
+  {?/if?}
+  </caption>
+  <tr align="center">
+    <th width="5%"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></th>
+    <th width="21%">小说名称</th>
+    <th width="30%">最新章节</th>
+    <th width="30%">书签</th>
+    <th width="7%">更新</th>
+    <th width="7%">操作</th>
+  </tr>
+{?section name=i loop=$bookcaserows?}
+  <tr>
+    <td align="center">
+	<input type="checkbox" id="checkid[]" name="checkid[]" value="{?$bookcaserows[i].caseid?}">    </td>
+    <td>{?if $bookcaserows[i].hasnew == 1?}<span class="hot">新</span>{?/if?}<a href="{?$bookcaserows[i].url_index?}" target="_blank">{?$bookcaserows[i].articlename?}</a></td>
+    <td>
+	{?if $bookcaserows[i].viptime > $bookcaserows[i].freetime?}
+	<a href="{?$jieqi_modules['article']['url']?}/readbookcase.php?bid={?$bookcaserows[i].caseid?}&aid={?$bookcaserows[i].articleid?}&cid={?$bookcaserows[i].vipchapterid?}" target="_blank">{?$bookcaserows[i].vipchapter?}</a><em class="hot">vip</em>
+	{?else?}
+	<a href="{?$jieqi_modules['article']['url']?}/readbookcase.php?bid={?$bookcaserows[i].caseid?}&aid={?$bookcaserows[i].articleid?}&cid={?$bookcaserows[i].lastchapterid?}" target="_blank">{?$bookcaserows[i].lastchapter?}</a>
+	{?/if?}
+	</td>
+    <td><a href="{?$jieqi_modules['article']['url']?}/readbookcase.php?bid={?$bookcaserows[i].caseid?}&aid={?$bookcaserows[i].articleid?}&cid={?$bookcaserows[i].chapterid?}" target="_blank">{?$bookcaserows[i].articlemark?}</a></td>
+    <td align="center">{?$bookcaserows[i].lastupdate|date:"m-d"?}</td>
+    <td align="center"><a id="act_delete_{?$bookcaserows[i].caseid?}" href="javascript:;" onclick="act_delete('{?$jieqi_modules['article']['url']?}/bookcase.php?bid={?$bookcaserows[i].caseid?}&act=delete{?$jieqi_token_url?}');">移除</a></td>
+{?/section?}
+  </tr>
+  <tr>
+    <td colspan="6" align="center" class="foot">选中项目
+	<select name="newclassid" id="newclassid">
+	<option value="-1" selected="selected">移出书架</option>
+	{?if $maxmarkclass > 0?}<option value="0">移到默认书架</option>{?/if?}
+	{?section name=i loop=$markclassrows?}
+    <option value="{?$markclassrows[i].classid?}">移到{?$markclassrows[i].caption?}</option>
+	{?/section?}
+    </select> 
+    <button type="submit" name="btnsubmit" class="button"> 确认 </button>
+	<input type="hidden" name="clsssid" value="{?$classid?}" />
+	<input type="hidden" name="act" value="move">{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>
+

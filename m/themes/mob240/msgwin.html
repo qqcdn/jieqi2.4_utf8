@@ -1,0 +1,11 @@
+{?set $jieqi_pagetitle = "{$title}-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "{$title}"?}
+
+<div style="text-align:center; padding:4em 0;">
+    <div class="block">
+      <div class="blockcontent fsl pd tc error">
+		<p>{?$content?}</p>
+		{?if $debuginfo != ''?}<p>{?$debuginfo?}</p>{?/if?}
+	  </div>
+	</div>
+</div>

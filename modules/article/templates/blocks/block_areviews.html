@@ -1,0 +1,35 @@
+{?if $reviewrows|count > 0?}
+<div class="cf bb">
+<ul class="ultab fl">
+<li><a href="javascript:;" class="selected">&nbsp;&nbsp;最新书评&nbsp;&nbsp;</a></li>
+</ul>
+<span class="fr">
+<a href="{?function jieqi_geturl:'article':'reviews':1:$reviewaid:'good'?}" target="_blank">精华书评</a> |
+<a href="{?function jieqi_geturl:'article':'reviews':1:$reviewaid:''?}" target="_blank">全部书评</a>
+</span>
+</div>
+{?section name=i loop=$reviewrows?}
+	<div class="c_row cf">
+		<div style="float: left; width: 100px; text-align: center;">
+		{?if $reviewrows[i].posterid > 0?}
+		<a href="{?function jieqi_geturl:'system':'user':$reviewrows[i].posterid?}" target="_blank"><img class="avatars" src="{?function jieqi_geturl:'system':'avatar':$reviewrows[i].posterid:'s':2?}" onerror="this.src='{?$jieqi_url?}/images/noavatars.jpg';this.onerror=null;" /><p{?if $reviewrows[i].posterid == $authorid?} class="hot"{?/if?}>{?$reviewrows[i].poster?}</p></a>
+		{?else?}
+		<img class="avatars" src="{?$jieqi_url?}/images/noavatars.jpg" />
+		<p class="gray">游客</p>
+		{?/if?}
+		<a href="{?function jieqi_geturl:'system':'user':$reviewrows[i].posterid?}" target="_blank">
+		</a>
+		</div>
+		<div style="margin-left: 100px;">
+			<div class="c_subject">{?if $reviewrows[i].istop == 1?}<span class="pop">[顶]</span>{?/if?}{?if $reviewrows[i].isgood == 1?}<span class="pop">[精]</span>{?/if?}<a class="pop" href="{?function jieqi_geturl:'article':'reviewshow':1:$reviewrows[i].topicid?}" target="_blank">{?$reviewrows[i].title|str_replace:"<br />":" "|truncate:80:'..'?}</a></div>
+			<div class="c_description">{?$reviewrows[i].content|truncate:320:'..'?}</div>
+			<div class="c_tag">
+				<span class="fr"><a href="{?function jieqi_geturl:'article':'reviewshow':1:$reviewrows[i].topicid?}#postnew" target="_blank">[我要回复]</a></span>
+				<span class="c_label">时间：</span><span class="c_value">{?$reviewrows[i].replytime|date:Y-m-d H:i:s?}</span>
+				<span class="c_label">点击：</span><span class="c_value">{?$reviewrows[i].views?}</span>
+				<span class="c_label">回复：</span><span class="c_value">{?$reviewrows[i].replies?}</span>
+			</div>
+		</div>
+	</div>
+{?/section?}
+{?/if?}

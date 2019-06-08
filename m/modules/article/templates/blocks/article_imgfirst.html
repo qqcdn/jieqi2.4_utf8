@@ -1,0 +1,12 @@
+{?section name=i loop=$articlerows?}
+	{?if $i['order'] < 2?}
+	<a href="{?$articlerows[i].url_articleinfo?}" target="_blank"><img src="{?$articlerows[i].url_image?}" /></a>
+    <strong><a href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename|truncate:18:'..'?}</a></strong>
+    <p>{?$articlerows[i].intro|truncate:70:'..'?}<a class="hot" href="{?$articlerows[i].url_articleindex?}" target="_blank">[阅读]</a></p>
+    <div class="cb"></div>
+	{?else?}
+		{?if $i['order'] == 2?}<ul>{?/if?}
+		<li><span class="gray">▌</span><a href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename|truncate:20:'..'?}</a></li>
+		{?if $i['order'] == $i['count']?}</ul>{?/if?}
+	{?/if?}
+{?/section?}

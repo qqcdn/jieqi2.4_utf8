@@ -1,0 +1,20 @@
+{?set $jieqi_pagetitle = "章节订阅记录-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "章节订阅记录"?}
+{?set jieqi_page_rows = "20"?}
+
+<div class="blockb">
+	<div class="blockcontent" id="jieqi_page_contents">
+		{?section name=i loop=$osalerows?}
+		<div class="c_row cf">
+			<h4><a href="{?function jieqi_geturl:'article':'article':$osalerows[i].articleid:'info'?}">{?$osalerows[i].obookname?}</a></h4>
+			<p class="gray" style="line-height:2;">
+				<a href="{?$obook_static_url?}/reader.php?oid={?$osalerows[i].obookid?}&cid={?$osalerows[i].ochapterid?}"$osalerows>{?$osalerows[i].chaptername?}</a>
+			</p>
+			<p>
+				时间：{?$osalerows[i].buytime|date:'Y-m-d H:i:s'?}，价格：{?$osalerows[i].saleprice?}<br />订阅者：<a href="{?function jieqi_geturl:'system':'user':$osalerows[i].accountid?}"$osalerows>{?$osalerows[i].account?}</a>
+			</p>
+		</div>
+		{?/section?}
+	</div>
+</div>
+<div class="pages">{?$url_jumppage?}</div>

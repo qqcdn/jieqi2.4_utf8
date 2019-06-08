@@ -1,0 +1,13 @@
+# 本规则用于IIS下的urlrewrite规则
+[ISAPI_Rewrite]
+RewriteRule /book/([0-9]+)\.html$                 /modules/article/articleinfo.php\?id=$1
+RewriteRule /sort/([0-9]+)/([0-9]+)\.html$        /modules/article/articlelist.php\?sortid=$1&page=$2
+RewriteRule /fullsort/([0-9]+)/([0-9]+)\.html$    /modules/article/articlelist.php\?fullflag=1&sortid=$1&page=$2
+RewriteRule /initial/([01A-Z])/([0-9]+)\.html$    /modules/article/articlelist.php\?initial=$1&page=$2
+RewriteRule /top/([a-z]+)/([0-9]+)\.html$         /modules/article/toplist.php\?order=$1&page=$2
+RewriteRule /fulltop/([a-z]+)/([0-9]+)\.html$     /modules/article/toplist.php\?fullflag=1&order=$1&page=$2
+RewriteRule /([a-z]+)_([0-9]+)_([0-9]+)_([0-9]+)_([01A-Z])_([0-9]+)_([0-9]+)_([0-9]+)\.html   /modules/article/articlefilter.php?order=$1&sortid=$2&size=$3&update=$4&initial=$5&isfull=$6&isvip=$7&page=$8
+RewriteRule /author/([0-9]+)\.html$                 /modules/article/authorpage.php\?id=$1
+
+# RewriteRule /html/[0-9]+/([0-9]+)/index\.html$     /modules/article/reader.php\?aid=$1
+# RewriteRule /html/[0-9]+/([0-9]+)/([0-9]+).html$   /modules/article/reader.php\?aid=$1&cid=$2

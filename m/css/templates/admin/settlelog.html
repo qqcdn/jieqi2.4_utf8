@@ -1,0 +1,32 @@
+<form name="frmsearch" method="get" action="{?$jieqi_url?}/admin/settlelog.php?do=submit">
+<table width="100%" align="center" cellpadding="0" cellspacing="1" class="grid">
+    <tr>
+        <td>用户名：
+            <input name="keyword" type="text" id="keyword" class="text" size="15" maxlength="50"> 
+			&nbsp;&nbsp;
+            <button type="submit" name="btnsearch" class="button">搜 索</button>
+			&nbsp; <a href="{?$jieqi_url?}/admin/settlelog.php">显示全部</a>
+        </td>
+    </tr>
+</table>
+</form>
+<table width="100%" cellpadding="0" cellspacing="1" class="grid">
+  <caption>用户提现记录</caption>
+  <tr align="center">
+    <td width="20%" class="head">用户名</td>
+    <td width="20%" class="head">提现时间</td>
+    <td width="10%" class="head">提现金额</td>
+	<td width="50%" class="head">备注</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$settlerows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'system':'user':$settlerows[i].userid:'info'?}" target="_blank">{?$settlerows[i].username?}</a></td>
+    <td align="center">{?$settlerows[i].logtime|date:Y-m-d H:i?}</td>
+    <td align="center">{?$settlerows[i].payamount|fen2yuan?}元</td>
+    <td align="center">{?$settlerows[i].payinfo|str_replace:'<br />':' '?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

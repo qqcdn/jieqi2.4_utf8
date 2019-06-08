@@ -1,0 +1,25 @@
+{?set $jieqi_pagetitle = "投票管理-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "投票管理"?}
+
+<div class="block">
+	<div class="blocktitle"><a href="{?$url_articleinfo?}">{?$articlename?}</a> <a class="btnlink" href="{?$jieqi_modules['article']['url']?}/votenew.php?aid={?$articleid?}">新增投票</a></div>
+	<div class="blockcontent" id="jieqi_page_contents">
+		{?section name=i loop=$voterows?}
+		<div class="c_row cf">
+			<h4><a href="{?$jieqi_modules['article']['url']?}/voteresult.php?id={?$voterows[i].voteid?}&aid={?$articleid?}">{?$voterows[i].title?}</a></h4>
+			<p class="gray" style="line-height:2;">
+				开始：{?if $voterows[i].starttime > 0?}{?$voterows[i].starttime|date:Y-m-d?}{?/if?}，结束：{?if $voterows[i].endtime > 0 && $voterows[i].ispublish == 0?}{?$voterows[i].endtime|date:Y-m-d?}{?/if?}，状态：{?if $voterows[i].ispublish == 0?}未发布{?else?}<span class="hot">发布中</span>{?/if?}
+			</p>
+			<p>
+				<a class="btnlink" href="{?$jieqi_modules['article']['url']?}/voteedit.php?id={?$voterows[i].voteid?}&aid={?$articleid?}">编辑</a>
+				&nbsp; <a class="btnlink" id="act_delete_{?$voterows[i].voteid?}" href="javascript:;" onclick="if(confirm('确实要删除本投票么？')) Ajax.Tip('{?$jieqi_modules['article']['url']?}/votearticle.php?vid={?$voterows[i].voteid?}&id={?$articleid?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除</a>
+				{?if $voterows[i].ispublish == 0?}
+				&nbsp; <a class="btnlink" id="act_publish_{?$voterows[i].voteid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/votearticle.php?vid={?$voterows[i].voteid?}&id={?$articleid?}&act=publish{?$jieqi_token_url?}', {method: 'POST'});">发布</a>
+				{?else?}
+				&nbsp; <a class="btnlink" id="act_cancel_{?$voterows[i].voteid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/votearticle.php?vid={?$voterows[i].voteid?}&id={?$articleid?}&act=cancel{?$jieqi_token_url?}', {method: 'POST'});">取消</a>
+				{?/if?}
+			</p>
+		</div>
+		{?/section?}
+	</div>
+</div>

@@ -1,0 +1,25 @@
+<table class="grid" width="100%" align="center">
+<caption>《{?$obookname?}》章节订阅统计</caption>
+  <tr align="center">
+    <th width="30%">章节名称</th>
+    <th width="13%">单价</th>
+    <th width="13%">销售量</th>
+    <th width="21%">总销售额</th>
+    <th width="13%">状态</th>
+    <th width="10%">详细记录</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$ochapterrows?}
+  <tr>
+    <td><a href="{?$ochapterrows[i].url_chapter?}" target="_blank">{?$ochapterrows[i].chaptername?}</a></td>
+    <td>{?$ochapterrows[i].saleprice?}</td>
+    <td align="center">{?$ochapterrows[i].allsale?}</td>
+    <td align="center">{?$ochapterrows[i].sumemoney?}</td>
+    <td align="center">{?$ochapterrows[i].display?}</td>
+    <td align="center"><a href="{?$obook_dynamic_url?}/admin/chapterbuylog.php?cid={?$ochapterrows[i].ochapterid?}&oid={?$obookid?}">详细记录</a></td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+

@@ -1,0 +1,27 @@
+<div class="cf">
+	<div class="slidetitle">
+	<ul id="tab_slide">
+		{?section name=i loop=$articlerows?}
+		<li{?if $i['order'] == $i['count']?} class="last"{?/if?}><a href="javascript:void(0)" onmouseover="selecttab(this);clearInterval(int_tab_slide);" onmouseout="slide_tab_slide();"{?if $i['order'] == 1?} class="selected"{?/if?}><img src="{?$articlerows[i].url_limage?}" /></a></li>
+		{?/section?}
+	</ul>
+	</div>
+	<div class="slidecontent">
+		{?section name=i loop=$articlerows?}
+		<div{?if $i['order'] > 1?} style="display:none;"{?/if?}>
+		<a href="{?$articlerows[i].url_articleinfo?}" target="_blank">
+		<img src="{?$articlerows[i].url_limage?}" />
+		<span>{?$articlerows[i].articlename?}</span><br />
+		<p>{?$articlerows[i].intro|truncate:96:'..'?}</p>
+		</a>
+		</div>
+		{?/section?}
+	</div>
+	<script type="text/javascript">
+		var int_tab_slide;
+		function slide_tab_slide(){
+			int_tab_slide = setInterval(function(){nexttab("tab_slide")}, 5000);
+		}
+		addEvent(window, "load", slide_tab_slide);
+	</script>
+</div>

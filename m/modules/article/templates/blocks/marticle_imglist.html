@@ -1,0 +1,10 @@
+<div class="row">
+{?section name=i loop=$articlerows?}
+	<div class="tc mbs col4{?if $i['order'] % 3 == 0?} last{?/if?}">
+		<a class="db" href="{?$articlerows[i].url_articleinfo?}"><img class="cover_s" src="{?$articlerows[i].url_image?}">
+		<p class="nw"><span class="nw">{?$articlerows[i].articlename?}</span><br /></p>
+		<p class="nw lhs fss">{?$articlerows[i].author?}</p>
+		</a>
+	</div>
+{?/section?}
+</div>

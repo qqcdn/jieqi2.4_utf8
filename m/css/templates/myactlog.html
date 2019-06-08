@@ -1,0 +1,25 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+<table width="100%" cellpadding="0" cellspacing="1" class="grid">
+  <tr align="center">
+    <td colspan="7" class="title">我给用户{?if $actname != ''?}{?$actname?}{?else?}互动{?/if?}记录</td>
+  </tr>
+  <tr align="center">
+    <td width="40%" class="head">目标用户</td> 
+    <td width="20%" class="head">动作时间</td>
+    <td width="20%" class="head">动作名称</td>
+    <td width="20%" class="head">数量</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$actlogrows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'system':'user':$actlogrows[i].tid?}" target="_blank">{?$actlogrows[i].tname?}</a></td>
+    <td align="center">{?$actlogrows[i].addtime|date:'Y-m-d H:i:s'?}</td>
+    <td align="center">{?$actlogrows[i].actname?}</td>
+    <td align="center">{?$actlogrows[i].actnum?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+

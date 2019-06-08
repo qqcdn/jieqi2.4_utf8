@@ -1,0 +1,64 @@
+# 小说伪静态规则例子，实际路径参数可根据需要调整
+##################################################
+# 1、Apache规则写法
+##################################################
+RewriteEngine on
+RewriteBase /
+
+RewriteRule ^book/([0-9]+)\.html$  modules/article/articleinfo.php\?id=$1
+RewriteRule ^sort([0-9]+)/([0-9]+)\.html$  modules/article/articlelist.php\?sortid=$1&page=$2
+RewriteRule ^fsort([0-9]+)/([0-9]+)\.html$  modules/article/articlelist.php\?fullflag=1&sortid=$1&page=$2
+RewriteRule ^initial([01A-Z])/([0-9]+)\.html$  modules/article/articlelist.php\?initial=$1&page=$2
+RewriteRule ^top([a-z]+)/([0-9]+)\.html$  modules/article/toplist.php\?order=$1&page=$2
+RewriteRule ^ftop([a-z]+)/([0-9]+)\.html$  modules/article/toplist.php\?fullflag=1&order=$1&page=$2
+RewriteRule ^([a-z]+)_([0-9]+)_([0-9]+)_([0-9]+)_([01A-Z])_([0-9]+)_([0-9]+)_([0-9]+)\.html  modules/article/articlefilter.php?order=$1&sortid=$2&size=$3&update=$4&initial=$5&isfull=$6&isvip=$7&page=$8
+RewriteRule ^author/([0-9]+)\.html$  modules/article/authorpage.php\?id=$1
+
+# RewriteRule ^read/([0-9]+)/index\.html$     modules/article/reader.php\?aid=$1
+# RewriteRule ^read/([0-9]+)/([0-9]+).html$   modules/article/reader.php\?aid=$1&cid=$2
+
+##################################################
+# 2、Nginx规则写法
+##################################################
+
+rewrite ^/book/([0-9]+)\.html$  /modules/article/articleinfo.php?id=$1  last;
+rewrite ^/sort([0-9]+)/([0-9]+)\.html$  /modules/article/articlelist.php?sortid=$1&page=$2  last;
+rewrite ^/fsort([0-9]+)/([0-9]+)\.html$  /modules/article/articlelist.php?fullflag=1&sortid=$1&page=$2  last;
+rewrite ^/initial([01A-Z])/([0-9]+)\.html$  /modules/article/articlelist.php?initial=$1&page=$2  last;
+rewrite ^/top([a-z]+)/([0-9]+)\.html$  /modules/article/toplist.php?order=$1&page=$2  last;
+rewrite ^/ftop([a-z]+)/([0-9]+)\.html$  /modules/article/toplist.php?fullflag=1&order=$1&page=$2  last;
+rewrite ^/([a-z]+)_([0-9]+)_([0-9]+)_([0-9]+)_([01A-Z])_([0-9]+)_([0-9]+)_([0-9]+)\.html  /modules/article/articlefilter.php?order=$1&sortid=$2&size=$3&update=$4&initial=$5&isfull=$6&isvip=$7&page=$8  last;
+rewrite ^/author/([0-9]+)\.html$  /modules/article/authorpage.php?id=$1  last;
+
+# rewrite ^/read/([0-9]+)/index\.html$     /modules/article/reader.php?aid=$1  last;
+# rewrite ^/read/([0-9]+)/([0-9]+).html$   /modules/article/reader.php?aid=$1&cid=$2  last;
+
+##################################################
+# 3、IIS6规则写法
+##################################################
+RewriteRule /book/([0-9]+)\.html$  /modules/article/articleinfo.php\?id=$1
+RewriteRule /sort([0-9]+)/([0-9]+)\.html$  /modules/article/articlelist.php\?sortid=$1&page=$2
+RewriteRule /fsort([0-9]+)/([0-9]+)\.html$  /modules/article/articlelist.php\?fullflag=1&sortid=$1&page=$2
+RewriteRule /initial([01A-Z])/([0-9]+)\.html$  /modules/article/articlelist.php\?initial=$1&page=$2
+RewriteRule /top([a-z]+)/([0-9]+)\.html$  /modules/article/toplist.php\?order=$1&page=$2
+RewriteRule /ftop([a-z]+)/([0-9]+)\.html$  /modules/article/toplist.php\?fullflag=1&order=$1&page=$2
+RewriteRule /([a-z]+)_([0-9]+)_([0-9]+)_([0-9]+)_([01A-Z])_([0-9]+)_([0-9]+)_([0-9]+)\.html  /modules/article/articlefilter.php?order=$1&sortid=$2&size=$3&update=$4&initial=$5&isfull=$6&isvip=$7&page=$8
+RewriteRule /author/([0-9]+)\.html$  /modules/article/authorpage.php\?id=$1
+
+# RewriteRule /read/([0-9]+)/index\.html$     /modules/article/reader.php\?aid=$1
+# RewriteRule /read/([0-9]+)/([0-9]+).html$   /modules/article/reader.php\?aid=$1&cid=$2
+
+##################################################
+# 4、IIS7规则写法
+##################################################
+RewriteRule ^book/([0-9]+)\.html$  /modules/article/articleinfo.php\?id={R:1}
+RewriteRule ^sort([0-9]+)/([0-9]+)\.html$  /modules/article/articlelist.php\?sortid={R:1}&page={R:2}
+RewriteRule ^fsort([0-9]+)/([0-9]+)\.html$  /modules/article/articlelist.php\?fullflag=1&sortid={R:1}&page={R:2}
+RewriteRule ^initial([01A-Z])/([0-9]+)\.html$  /modules/article/articlelist.php\?initial={R:1}&page={R:2}
+RewriteRule ^top([a-z]+)/([0-9]+)\.html$  /modules/article/toplist.php\?order={R:1}&page={R:2}
+RewriteRule ^ftop([a-z]+)/([0-9]+)\.html$  /modules/article/toplist.php\?fullflag=1&order={R:1}&page={R:2}
+RewriteRule ^([a-z]+)_([0-9]+)_([0-9]+)_([0-9]+)_([01A-Z])_([0-9]+)_([0-9]+)_([0-9]+)\.html  /modules/article/articlefilter.php?order={R:1}&sortid={R:2}&size={R:3}&update={R:4}&initial={R:5}&isfull={R:6}&isvip={R:7}&page={R:8}
+RewriteRule ^author/([0-9]+)\.html$  /modules/article/authorpage.php\?id={R:1}
+
+# RewriteRule ^read/([0-9]+)/index\.html$     /modules/article/reader.php\?aid={R:1}
+# RewriteRule ^read/([0-9]+)/([0-9]+).html$   /modules/article/reader.php\?aid={R:1}&cid={R:2}

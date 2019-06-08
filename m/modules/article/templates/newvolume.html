@@ -1,0 +1,44 @@
+{?set $jieqi_pagetitle = "增加分卷-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "增加分卷"?}
+<script type="text/javascript">
+function frmnewvolume_validate(){
+  if(document.frmnewvolume.chaptername.value == ""){
+    alert("请输入新增分卷");
+    document.frmnewvolume.chaptername.focus();
+    return false;
+  }
+}
+</script>
+<form class="form" name="frmnewvolume" id="frmnewvolume" action="{?$jieqi_modules['article']['url']?}/newvolume.php?do=submit" method="post" onsubmit="return frmnewvolume_validate();">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<fieldset>
+	<div class="frow">
+		<label class="col4 flabel">小说名称：</label>
+		<div class="col8 last">
+			<a href="{?$jieqi_modules['article']['url']?}/articlemanage.php?id={?$articleid?}">{?$articlename?}</a>
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">现有分卷：</label>
+		<div class="col8 last">
+			{?section name=i loop=$volumerows?}
+  			{?$volumerows[i].chaptername?}<br />
+  			{?/section?}
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">新增分卷：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="chaptername" id="chaptername" maxlength="50" value="" />
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">&nbsp;</label>
+		<div class="col8 last">
+			<button type="submit" class="button" name="submit">提 交</button>
+			<input type="hidden" name="act" value="newvolume" />{?$jieqi_token_input?}
+  			<input type="hidden" name="aid" value="{?$articleid?}" />
+		</div>
+	</div>
+</fieldset>
+</form>

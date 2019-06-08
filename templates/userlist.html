@@ -1,0 +1,57 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "memberblocks"?}
+{?set jieqi_page_rows = "100"?}
+<style type="text/css">
+<!--
+.userlist {
+	padding: 0px;
+	margin: 0px;
+}
+.userlist li{
+	 list-style:none;
+	 line-height:200%;
+	 border-bottom:1px solid #a3bee8;
+	 width: 25%;
+	 float: left;
+}
+-->
+</style>
+<table width="100%"  border="0" cellspacing="2" cellpadding="0">
+  <tr align="center" valign="middle">
+    <td><a href="{?$url_initial?}1">[0]</a></td>
+    <td><a href="{?$url_initial?}A">[A]</a></td>
+    <td><a href="{?$url_initial?}B">[B]</a></td>
+    <td><a href="{?$url_initial?}C">[C]</a></td>
+    <td><a href="{?$url_initial?}D">[D]</a></td>
+    <td><a href="{?$url_initial?}E">[E]</a></td>
+    <td><a href="{?$url_initial?}F">[F]</a></td>
+    <td><a href="{?$url_initial?}G">[G]</a></td>
+    <td><a href="{?$url_initial?}H">[H]</a></td>
+    <td><a href="{?$url_initial?}I">[I]</a></td>
+    <td><a href="{?$url_initial?}J">[J]</a></td>
+    <td><a href="{?$url_initial?}K">[K]</a></td>
+    <td><a href="{?$url_initial?}L">[L]</a></td>
+    <td><a href="{?$url_initial?}M">[M]</a></td>
+    <td><a href="{?$url_initial?}N">[N]</a></td>
+    <td><a href="{?$url_initial?}O">[O]</a></td>
+    <td><a href="{?$url_initial?}P">[P]</a></td>
+    <td><a href="{?$url_initial?}Q">[Q]</a></td>
+    <td><a href="{?$url_initial?}R">[R]</a></td>
+    <td><a href="{?$url_initial?}S">[S]</a></td>
+    <td><a href="{?$url_initial?}T">[T]</a></td>
+    <td><a href="{?$url_initial?}U">[U]</a></td>
+    <td><a href="{?$url_initial?}V">[V]</a></td>
+    <td><a href="{?$url_initial?}W">[W]</a></td>
+    <td><a href="{?$url_initial?}X">[X]</a></td>
+    <td><a href="{?$url_initial?}Y">[Y]</a></td>
+    <td><a href="{?$url_initial?}Z">[Z]</a></td>
+    <td><a href="{?$url_initial?}~">[#]</a></td>
+  </tr>
+</table>
+<ul class="userlist" id="jieqi_page_contents">
+{?section name=i loop=$userrows?}
+<li><a href="{?function jieqi_geturl:'system':'user':$userrows[i].uid?}" title="{?$userrows[i].group?}">{?$userrows[i].name?}</a></li>
+{?/section?}
+</ul>
+<div class="cb"></div>
+<div class="pages">{?$url_jumppage?}</div>

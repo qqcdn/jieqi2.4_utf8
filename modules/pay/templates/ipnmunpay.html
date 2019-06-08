@@ -1,0 +1,23 @@
+{?set $jieqi_pagetitle = "银联充值-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "银联充值"?}
+
+<div class="blockb">
+<div class="blockcontent">
+	<form name="frmalipay" method="post" action="{?$jieqi_modules['pay']['url']?}/ipnwap.php">
+	<div class="checkgroup cf">
+		{?section name=i loop=$payset['paylimit']?}
+		<label class="radio"><input type="radio" name="egold" value="{?$i['key']?}" {?if $payset['paydefault'] == $i['key']?} checked="checked"{?/if?}><span> {?$i['key']?}&nbsp;&nbsp;{?$egoldname?}（{?$payset['paylimit'][i]?}元）</span></label>
+		{?/section?}
+	</div>
+	<button type="submit" name="Submit" class="button">进入下一步</button>
+    <input type="hidden" name="act" value="pay" />{?$jieqi_token_input?}
+	<input type="hidden" name="jumpurl" value="{?$jumpurl?}" />
+    <input type="hidden" name="payChannelType" value="11" />
+	</form>
+</div>
+</div>
+
+<div class="textbox">
+<strong>说明：</strong><br />
+银联充值，兑换比例：<span class="hot">1</span>元=<span class="hot">100</span>{?$egoldname?}<br />
+</div>

@@ -1,0 +1,47 @@
+<form name="frmsearch" method="get" action="{?$jieqi_modules['article']['url']?}/admin/actlog.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td>
+		动作类型：<select class="select"  size="1" name="act">
+		<option value=""{?if $_request['act'] == ''?} selected="selected"{?/if?}>全部</option>
+		{?section name=i loop=$actionrows?}
+		{?if $actionrows[i].islog > 0?}<option value="{?$i['key']?}"{?if $_request['act'] == $i['key']?} selected="selected"{?/if?}>{?$actionrows[i].acttitle?}</option>{?/if?}
+		{?/section?}
+		</select>
+		用户名： <input name="uname" type="text" class="text" size="15" value="{?$_request['uname']?}">
+		小说名： <input name="aname" type="text" class="text" size="15" value="{?$_request['aname']?}">
+		动作日期：<input name="datestart" type="text" class="text" size="10" maxlength="10" value="{?$_request['datestart']?}">-<input name="dateend" type="text" class="text" size="10" maxlength="10" value="{?$_request['dateend']?}">
+        <button type="submit" name="btnsearch" class="button">搜 索</button>      
+		日期格式：2012-05-06
+        </td>
+    </tr>
+	<tr>
+		<td>
+		总记录数：{?$actlogstat['cot']?}， 总数量：{?$actlogstat['sumactnum']?}
+		</td>
+	</tr>
+</table>
+</form>
+<table width="100%" cellpadding="0" cellspacing="1" class="grid">
+  <caption>作品{?if $actname != ''?}{?$actname?}{?else?}互动{?/if?}记录</caption>
+  <tr align="center">
+    <td width="20%" class="head">用户名</td> 
+    <td width="30%" class="head">小说名称</td> 
+    <td width="20%" class="head">动作时间</td>
+    <td width="15%" class="head">动作名称</td>
+    <td width="15%" class="head">数量</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$actlogrows?}
+  <tr>
+	<td align="center"><a href="{?function jieqi_geturl:'system':'user':$actlogrows[i].uid?}" target="_blank">{?$actlogrows[i].uname?}</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'article':$actlogrows[i].articleid:'info'?}" target="_blank">{?$actlogrows[i].articlename?}</a></td>
+    <td align="center">{?$actlogrows[i].addtime|date:'Y-m-d H:i:s'?}</td>
+    <td align="center">{?$actlogrows[i].actname?}</td>
+    <td align="center">{?$actlogrows[i].actnum?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+

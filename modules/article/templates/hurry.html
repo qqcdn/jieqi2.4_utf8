@@ -1,0 +1,78 @@
+<script type="text/javascript">
+function frmhurry_validate(){
+  if(document.frmhurry.payegold.value == ""){
+    alert("请输入支付{?$egoldname?}");
+    document.frmhurry.payegold.focus();
+    return false;
+  }
+
+  if(parseInt(document.frmhurry.payegold.value) < 20){
+    alert("催更至少支付{?$egoldname?}20以上");
+    document.frmhurry.payegold.focus();
+    return false;
+  }
+
+  if(document.frmhurry.overtime.value == ""){
+    alert("请输入更新时间");
+    document.frmhurry.overtime.focus();
+    return false;
+  }
+  if(document.frmhurry.minwords.value == ""){
+    alert("请输入更新字数");
+    document.frmhurry.minwords.focus();
+    return false;
+  }
+}
+</script>
+<br />
+<form name="frmhurry" id="frmhurry" action="{?$jieqi_modules['article']['url']?}/hurry.php?do=submit" method="post" onsubmit="return frmhurry_validate();" enctype="multipart/form-data">
+<table width="80%" class="grid" cellspacing="1" align="center">
+<caption>催促更新</caption>
+<tr valign="middle" align="left">
+  <td width="20%">小说名</td>
+  <td><a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">{?$articlename?}</a></td>
+</tr>
+<tr valign="middle" align="left">
+  <td>我的{?$egoldname?}</td>
+  <td>{?$useregold?} {?$egoldname?}  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td>支付{?$egoldname?}</td>
+  <td>
+  <input type="text" class="text" name="payegold" id="payegold" size="10" maxlength="10" value="" /> <span class="hot">至少 20 以上</span>  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td>要求更新时间</td>
+  <td>
+  <input type="text" class="text" name="overyear" id="overyear" size="4" maxlength="4" value="{?$overyear?}" />年<input type="text" class="text" name="overmonth" id="overmonth" size="2" maxlength="2" value="{?$overmonth?}" />月<input type="text" class="text" name="overday" id="overday" size="2" maxlength="2" value="" />日<input type="text" class="text" name="overhour" id="overhour" size="2" maxlength="2" value="" />时<input type="text" class="text" name="overminute" id="overminute" size="2" maxlength="2" value="" />分 之前  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td>要求更新字数</td>
+  <td>
+  <label class="radio"><input type="radio" name="minwords" value="1000" checked="checked" />1000字以上</label>
+	<label class="radio"><input type="radio" name="minwords" value="3000" />3000字以上</label>
+	<label class="radio"><input type="radio" name="minwords" value="6000" />6000字以上</label>
+	<label class="radio"><input type="radio" name="minwords" value="9000" />9000字以上</label>
+	<label class="radio"><input type="radio" name="minwords" value="12000" />12000字以上</label>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td>说明</td>
+  <td>本功能是指用赠送{?$egoldname?}方式催促作者更新，如果作者在您设定的时间内更新了您要求的字数，则{?$egoldname?}赠送给作者，否则{?$egoldname?}退回。</td>
+</tr>
+<tr valign="middle" align="left">
+  <td>
+  &nbsp;
+  <input type="hidden" name="act" value="post" />{?$jieqi_token_input?}
+  <input type="hidden" name="id" value="{?$articleid?}" />  </td>
+  <td>
+  {?if $ajax_request > 0?}
+  <button type="button" name="Submit" class="button" style="cursor:pointer;" onclick="Ajax.Request('frmhurry',{onLoading:function(){Form.disable('frmhurry');},onComplete:function(){alert(this.response.replace(/<br[^<>]*>/g,'\n'));Form.enable('frmhurry');closeDialog();
+}});">提 交</button>
+  {?else?}
+  <button type="submit" class="button" name="submit">提 交</button>
+  {?/if?}
+  </td>
+</tr>
+</table>
+</form>

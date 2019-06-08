@@ -1,0 +1,78 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "用户联系方式-{$jieqi_sitename}"?}
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>查看联系方式</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">说明：</td>
+  <td class="tdr"><span class="hot">以下是您的真实联系方式，用于网站管理员跟您联系及收入结算，不会对外公开！</span>
+  {?if $personsvars['denyedit'] != 0?}<br /><span class="hot">您的信息已被锁定，禁止修改！如果确实需要修改，请联系管理员处理。</span>{?/if?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">用户名：</td>
+  <td class="tdr">{?$jieqi_useruname?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">昵称（笔名）：</td>
+  <td class="tdr">{?$jieqi_username?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">真实姓名：</td>
+  <td class="tdr">{?$personsvars['realname']?}</td>
+</tr>
+<tr valign="middle" align="left">
+<td class="tdl">性别：</td>
+<td class="tdr">{?$personsvars['gender']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">电话：</td>
+  <td class="tdr">{?$personsvars['telephone']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">手机：</td>
+  <td class="tdr">{?$personsvars['mobilephone']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">证件类型：</td>
+  <td class="tdr">{?if $personsvars['idcardtype'] == ''?}身份证{?else?}{?$personsvars['idcardtype']?}{?/if?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">证件号码：</td>
+  <td class="tdr">{?$personsvars['idcard']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">联系地址：</td>
+  <td class="tdr">{?$personsvars['address']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">邮编：</td>
+  <td class="tdr">{?$personsvars['zipcode']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">收款银行：</td>
+  <td class="tdr">{?$personsvars['banktype']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">银行所在地：</td>
+  <td class="tdr">{?$personsvars['bankname']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">卡号：</td>
+  <td class="tdr">{?$personsvars['bankcard']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">持卡人姓名：</td>
+  <td class="tdr">{?$personsvars['bankuser']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">补充信息：</td>
+  <td class="tdr">{?$personsvars['mynote']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="foot" colspan="2">
+  {?if $personsvars['denyedit'] == 0?}<a class="btnlink" href="{?$jieqi_url?}/personedit.php">点击修改联系方式</a>{?else?}<span class="hot">您的信息已被锁定，禁止修改！如果确实需要修改，请联系管理员处理。</span>{?/if?}
+  {?if $jieqi_group == 3 && $jieqi_modules['article']['publish'] > 0?}&nbsp;&nbsp;<a class="btnlink" href="{?$jieqi_modules['article']['url']?}/applywriter.php">申请成为作者</a>{?/if?}
+  </td>
+</tr>
+</table>

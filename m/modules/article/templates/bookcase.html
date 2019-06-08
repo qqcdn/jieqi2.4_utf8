@@ -1,0 +1,65 @@
+{?set $jieqi_pagetitle = "我的书架-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "我的书架"?}
+
+<ul class="tabb tab3 cf mb">
+	<li><a href="{?$jieqi_modules['article']['url']?}/recentread.php">最近阅读</a></li>
+	<li><a href="javascript:void(0);" class="selected">我的书架</a></li>
+	<li><a href="{?$jieqi_modules['obook']['url']?}/buylist.php">我的订阅</a></li>
+</ul>
+
+{?if $bookcaserows|count == 0?}
+<div class="blockc mt">{?block bid="0" blockname="作品搜索" module="article" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="marticle_search.html" contenttype="4" custom="1" publish="3" hasvars="0"?}</div>
+<div style="text-align:center; padding-bottom:4em;">
+  <div class="block">
+    <div class="blockcontent fsl pd tc error">
+		您的书架空空如也，<br />
+		快去找喜欢的书放入书架！
+	  </div>
+	</div>
+</div>
+{?else?}
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/json2.js"></script>
+<script type="text/javascript" src="{?$jieqi_modules['article']['themeurl']?}/scripts/readchapter.js"></script>
+<script type="text/javascript">
+//删除
+function act_delete(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onReturn: function(){
+			$_(o.parentNode.parentNode.parentNode).remove();
+		}
+	}
+	if(confirm('确实要将本书移出书架么？')) Ajax.Tip(url, param);
+	return false;
+}
+</script>
+
+<form action="{?$jieqi_modules['article']['url']?}/bookcase.php" method="post" name="checkform" id="checkform" onsubmit="return check_confirm();">
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+	{?section name=i loop=$bookcaserows?}
+	<div class="c_row cf">
+	
+	<div class="row_cover">
+	<a class="db cf" href="{?$bookcaserows[i].url_articleinfo?}">
+	<img class="cover_m" src="{?function jieqi_geturl:'article':'cover':$bookcaserows[i].articleid:'s':$bookcaserows[i].imgflag?}" />
+	</a>
+	</div>
+
+	<div class="row_text">
+	<h4><a href="{?$bookcaserows[i].url_index?}">{?$bookcaserows[i].articlename?}</a>{?if $bookcaserows[i].hasnew == 1?}<span class="btnlink b_s b_ico b_hot">新</span>{?/if?}</h4>
+    <p class="gray" style="line-height:2">
+	最新：{?if $bookcaserows[i].viptime > $bookcaserows[i].freetime?}<a href="{?$jieqi_modules['article']['url']?}/readbookcase.php?bid={?$bookcaserows[i].caseid?}&aid={?$bookcaserows[i].articleid?}&cid={?$bookcaserows[i].vipchapterid?}">{?$bookcaserows[i].vipchapter?}</a><em class="hot">vip</em>
+	{?else?}<a href="{?$jieqi_modules['article']['url']?}/readbookcase.php?bid={?$bookcaserows[i].caseid?}&aid={?$bookcaserows[i].articleid?}&cid={?$bookcaserows[i].lastchapterid?}">{?$bookcaserows[i].lastchapter?}</a>
+	{?/if?}
+	</p>
+	<p class="mt"><a class="btnlink b_hot" href="javascript:read_bookcase({?$bookcaserows[i].articleid?}, {?$bookcaserows[i].chapterid?}, {?$bookcaserows[i].caseid?});">继续阅读</a> &nbsp; <a class="btnlink b_gray" id="act_delete_{?$bookcaserows[i].caseid?}" href="javascript:;" onclick="act_delete('{?$jieqi_modules['article']['url']?}/bookcase.php?bid={?$bookcaserows[i].caseid?}&act=delete{?$jieqi_token_url?}');">移出书架</a></p>
+	</div>
+
+	</div>
+	{?/section?}
+</div>
+</div>
+</form>
+{?/if?}

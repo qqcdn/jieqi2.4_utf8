@@ -1,0 +1,32 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "推广说明-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="推广分成" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_channelnav_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<div class="textbox">
+	<div class="c_content">
+	<h3>1. 推广简介 </h3>
+		<p>将本站网页链接地址加上您的专有推广参数发表到其他网络平台，如果有用户通过该链接访问本站并注册成会员，此会员即为您的下线会员。</p>
+		<p>当您的下线会员在本站充值，您将获得对应的分成收入。</p>
+	<h3>2. 分成规则 </h3>
+		<ul>
+		<li>2.1 您的分成比例为下线会员充值金额的{?$mychrate?}%。</li>
+		<li>2.2 {?if $channeldlimit > 0?}您的下线会员注册后{?$channeldlimit?}天内每次充值您都可以获得分成，超过则不计分成。{?else?}您可以永久获取下线会员每次充值的分成。{?/if?}</li> 
+		<li>2.3 {?if $settlemin > 0?}您可以将分成收入兑换成{?$egoldname?}在本站消费，如果收入余额大于{?$settlemin?}元也可以向管理员申请提现。{?else?}您可以将充值收入兑换成{?$egoldname?}在本站消费，目前不支持直接提现。{?/if?}</li>
+		</ul>
+	<h3>3. 推广链接 </h3>
+		<ul>
+		<li>3.1 您的专有推广参数为：fromuid={?$uid?}，常用推广链接如下：</li>
+		<li>3.2 如果推荐本站首页，则推广链接为：<a href="{?$jieqi_local_url?}/index.php?fromuid={?$uid?}" target="_blank">{?$jieqi_local_url?}/index.php?fromuid={?$uid?}</a></li> 
+		<li>3.3 如果要推荐一本书，首先需要获取作品的数字ID（一般就是对应作品信息也对应网址里面的数字）。比如作品ID=1，对应推广链接为：<a href="{?$jieqi_local_url?}/modules/article/articleinfo.php?fromuid={?$uid?}&id=1" target="_blank">{?$jieqi_local_url?}/modules/article/articleinfo.php?fromuid={?$uid?}&id=1</a></li>
+		</ul>
+	<h3>4. 推广收入 </h3>
+	<p>
+	您当前的推广收入为：{?$esilver|fen2yuan?}元{?if $esilver > 0 && $exchangerate > 0?} &nbsp; [<a href="{?$jieqi_modules['pay']['url']?}/exchange.php">兑换{?$egoldname?}</a>]{?/if?}
+	{?if $settlemin > 0 && $esilver > $settlemin|yuan2fen?}
+	&nbsp; [<a href="{?$jieqi_url?}/newmessage.php?tosys=1&title=分成收入申请提现&content=我的分成收入已达{?$esilver|fen2yuan?}元，现申请提现！">申请提现</a>]
+	<p class="mt hot fss">注意：如果要申请提现，请向设置好自己的联系方式。</p>
+	{?/if?}
+	</p>
+	</div>
+</div>

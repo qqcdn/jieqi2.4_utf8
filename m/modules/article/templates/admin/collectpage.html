@@ -1,0 +1,20 @@
+<table class="grid" width="100%" align="center">
+<caption>{?$sitename?}页面批量采集规则配置</caption>
+  <tr align="center">
+    <th width="40%">采集规则名称</th>
+    <th width="30%">最多采集页数</th>
+    <th width="30%">操作</th>
+  </tr>
+  {?section name=i loop=$collectrows?}
+  <tr>
+    <td align="center">{?$collectrows[i].title?}</td>
+    <td align="center">{?$collectrows[i].maxpagenum?}</td>
+    <td align="center">
+	<a href="{?$article_static_url?}/admin/collectpedit.php?config={?$config?}&cid={?$i['key']?}">编辑</a> | 
+	<a id="act_del_{?$i['key']?}" href="javascript:;" onclick="if(confirm('确实要删除该采集规则么？')) Ajax.Tip('{?$article_static_url?}/admin/collectpage.php?config={?$config?}&cid={?$i['key']?}&act=del{?$jieqi_token_url?}', {method: 'POST'});">删除</a>
+	</td>
+  </tr>
+  {?/section?}
+</table>
+<br />
+{?$addnewtable?}

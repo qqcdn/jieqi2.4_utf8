@@ -1,0 +1,69 @@
+{?set jieqi_page_style = "2"?}
+{?set jieqi_page_rows = "20"?}
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width" />
+<meta name="keywords" content="{?$articlename?} {?$author?} {?$sort?} {?$jieqi_sitename?}" />
+<meta name="description" content="{?$intro|truncate:500:'..'?}" />
+<meta name="author" content="{?$meta_author?}" />
+<meta name="copyright" content="{?$meta_copyright?}" />
+<meta name="generator" content="jieqi.com" />
+<title>{?$articlename?}-{?$author?}-{?$sort?}-{?$jieqi_sitename?}</title>
+<link rel="stylesheet" href="{?$jieqi_themeurl?}style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="{?$jieqi_modules['article']['themeurl']?}/css/page.css" type="text/css" media="all" />
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/common.js"></script>
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/theme.js"></script>
+<script type="text/javascript">
+var ReadParams = {
+	url_previous: '{?$url_previous?}',
+    url_next: '{?$url_next?}',
+    url_index: '{?$url_index?}',
+    url_articleinfo: '{?$url_articleinfo?}',
+    url_image: '{?$url_image?}',
+    url_home: '{?$jieqi_url?}/',
+    articleid: '{?$articleid?}',
+    articlename: '{?$articlename?}',
+    authorid: '{?$authorid?}',
+    author: '{?$author?}',
+    chapterid: '0',
+    chaptername: '',
+    userid: '{?$jieqi_userid?}',
+    egoldname: '{?$egoldname?}'
+}
+</script>
+</head>
+<body>
+<div class="pagetitle cf"><a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}"><i class="iconfont fl">&#xee69;</i></a><div class="fr">{?if $index_order == 'desc'?}<a class="btnlink b_s b_note" href="{?function jieqi_geturl:'article':'article':$articleid:'index':$articlecode:1:'asc'?}">正序&nbsp;</a>{?else?}<a class="btnlink b_s b_note" href="{?function jieqi_geturl:'article':'article':$articleid:'index':$articlecode:1:'desc'?}">逆序&nbsp;</a>{?/if?}</div>作品目录</div>
+
+<div class="main">
+	<ul class="tabb tab3 cf mb">
+		<li><a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">信息</a></li>
+		<li><a href="javascript:void(0);" class="selected">目录</a></li>
+		<li><a href="{?$jieqi_modules['article']['url']?}/reviews.php?aid={?$articleid?}">书评</a></li>
+	</ul>
+
+<div class="atitle">{?$articlename?} <span class="ainfo"><a href="{?function jieqi_geturl:'article':'author':$authorid:$author?}">{?$author?}</a> 着</span></div>
+
+
+
+<dl class="index" id="jieqi_page_contents">
+{?section name=i loop=$chapterrows?}
+	{?if $chapterrows[i].chaptertype == 0?}
+		<dd>
+		{?if $chapterrows[i].isvip > 0?}
+		<a class="db" href="{?$chapterrows[i].url_chapter?}" title="{?$chapterrows[i].lastupdate|date:'Y-m-d H:i'?}更新，共{?$chapterrows[i].words?}字，价格：{?$chapterrows[i].saleprice?}"{?if $chapterrows[i].display != 0?} class="gray"{?/if?}><em>VIP</em>{?$chapterrows[i].chaptername?}</a>
+		{?else?}
+		<a class="db" href="{?$chapterrows[i].url_chapter?}" title="{?$chapterrows[i].lastupdate|date:'Y-m-d H:i'?}更新，共{?$chapterrows[i].words?}字"{?if $chapterrows[i].display != 0?} class="gray"{?/if?}>{?$chapterrows[i].chaptername?}</a>
+		{?/if?}
+		</dd>
+	{?/if?}
+{?/section?}
+</dl>
+
+<div class="pages">{?$url_jumppage?}</div>
+
+</div>
+
+</body>
+</html>

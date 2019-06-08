@@ -1,0 +1,67 @@
+<script type="text/javascript">
+//删除
+function act_delete(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onReturn: function(){
+			$_(o.parentNode.parentNode).remove();
+		}
+	}
+	if(confirm('确实要删除该记录么？')) Ajax.Tip(url, param);
+	return false;
+}
+</script>
+<form name="frmreportlist" method="post" action="{?$jieqi_url?}/admin/reportlist.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td align="right">关键字：
+            <input name="keyword" type="text" class="text" id="keyword" size="20" maxlength="50">
+			<label class="radio"><input type="radio" name="keytype" value="reportname" checked="checked" />提交人</label>
+			<label class="radio"><input type="radio" name="keytype" value="authname" />处理人</label>
+			<label class="radio"><input type="radio" name="keytype" value="reporttitle" />标题</label>
+            <button type="submit" name="Submit" class="button">搜 索</button>&nbsp;&nbsp;<a href="{?$jieqi_url?}/admin/reportlist.php">显示全部</a>&nbsp;&nbsp;</td>
+    </tr>
+</table>
+</form>
+<br />
+<form action="{?$jieqi_url?}/admin/reportlist.php" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>
+用户提交信息列表
+</caption>
+  <tr>
+    <th width="5%"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></th>
+    <th width="13%">提交人</th>
+    <th width="15%">内容类型</th>
+    <th width="40%">标题</th>
+    <th width="10%">日期</th>
+	<th width="5%">状态</th>
+    <th width="12%">操作</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$reportrows?}
+  <tr>
+    <td align="center" valign="top"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$reportrows[i].reportid?}"></td>
+    <td valign="top"><a href="{?function jieqi_geturl:'system':'user':$reportrows[i].reportuid?}" target="_blank">{?$reportrows[i].reportname?}</a></td>
+    <td valign="top">{?$reportrows[i].typename?}</td>
+    <td valign="top"><a href="{?$jieqi_url?}/admin/reportdetail.php?id={?$reportrows[i].reportid?}">{?$reportrows[i].reporttitle?}</a>
+	</td>
+    <td valign="top" align="center">{?$reportrows[i].reporttime|date:"Y-m-d"?}</td>
+	<td valign="top" align="center">{?if $reportrows[i].authflag == 0?}<span class="hot">未阅</span>{?else?}已阅{?/if?}</td>
+    <td valign="top" align="center"><a id="act_delete_{?$reportrows[i].reportid?}" href="javascript:;" onclick="act_delete('{?$jieqi_url?}/admin/reportlist.php?checkid[]={?$reportrows[i].reportid?}&act=delete{?$jieqi_token_url?}');">删除</a></td>
+  </tr>
+{?/section?}
+  </tbody>
+  <tr>
+    <td colspan="7" class="foot">
+	<input type="button" name="allcheck" value="全部选中" class="button" onclick="for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = true; }">&nbsp;&nbsp;
+	<input type="button" name="nocheck" value="全部取消" class="button" onclick="for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = false; }">&nbsp;&nbsp;
+	<button type="button" name="delcheck" class="button" onclick="if(confirm('确实要删除选中记录么？')) this.form.submit();">删除选中记录</button>&nbsp;&nbsp;
+	<input name="act" type="hidden" value="delete">{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>
+

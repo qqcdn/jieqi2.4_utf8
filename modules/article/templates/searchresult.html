@@ -1,0 +1,34 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "guideblocks"?}
+{?set $jieqi_pagetitle = "搜索关键词“{$searchkey}”-{$jieqi_sitename}"?}
+{?set jieqi_page_rows = "20"?}
+
+<div class="c_nav">搜索关键词“<b class="hot">{?$searchkey?}</b>”，共有<b class="hot"> {?$allresults?} </b>条结果</div>
+<div id="jieqi_page_contents">
+{?section name=i loop=$articlerows?}
+<div class="c_row">
+	<div class="fl">
+		<a href="{?$articlerows[i].url_articleinfo?}" target="_blank"><img src="{?$articlerows[i].url_image?}" style="width:80px;height:100px;margin:5px 15px 5px 0px;" /></a>
+	</div>
+	<div>
+		<div><span class="c_subject"><a href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename_hl?}</a></span> / <a href="{?$articlerows[i].url_articleindex?}" target="_blank">目录</a></div>
+		<div class="c_tag">
+			<span class="c_label">作者：</span><span class="c_value">{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author_hl?}{?else?}<a href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author_hl?}</a>{?/if?}</span>
+			<span class="c_label">类别：</span><span class="c_value">{?$articlerows[i].sort?}</span>
+			<span class="c_label">字数：</span><span class="c_value">{?$articlerows[i].words?}</span>
+			<span class="c_label">状态：</span><span class="c_value">{?$articlerows[i].fullflag?}</span>
+			<span class="c_label">关键字：</span><span class="c_value">{?$articlerows[i].keywords_hl?}</span>
+		</div>
+		<div class="c_description">{?$articlerows[i].intro|truncate:200:'..'?}</div>
+		<div class="c_tag">
+			<span class="c_label">最新章节：</span><span class="c_value">{?if $articlerows[i].vipchapterid > 0?}<a href="{?$articlerows[i].url_vipchapter?}" target="_blank">{?$articlerows[i].vipvolume?} {?$articlerows[i].vipchapter?}</a><span class="hot">vip</span>{?else?}<a href="{?$articlerows[i].url_lastchapter?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a>{?/if?}</span>
+			<span class="c_label">更新：</span><span class="c_value">{?$articlerows[i].lastupdate|date:'Y-m-d'?}</span>
+		</div>
+		
+	</div>
+	<div class="cb"></div>
+</div>
+{?/section?}
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

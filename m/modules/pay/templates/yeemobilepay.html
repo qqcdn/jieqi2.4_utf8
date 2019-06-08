@@ -1,0 +1,111 @@
+{?set jieqi_blocks_module = "pay"?}
+{?set jieqi_blocks_config = "payblocks"?}
+{?set $jieqi_pagetitle = "手机充值卡充值-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="充值导航" module="pay" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_paylist_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+
+<script type="text/javascript">
+//检查选中项
+function selectRadioValue(radioName) {
+    var radioObj = document.getElementsByName(radioName);
+    var radioValue = "";
+    for (var i = 0; i < radioObj.length; i++) {
+        if (radioObj[i].checked) {
+            radioValue = radioObj[i].value;
+            break;
+        }
+    }
+    return radioValue;
+}
+//卡类可选项
+function showPaySelect() {
+    var payselect = document.getElementById('payselect');
+    var paytypes = [['MOBILE', '移动卡'], ['UNICOM', '联通卡'], ['TELECOM', '电信卡']];
+
+	var html = '';
+    html += '<ul>';
+    for (var i = 0; i < paytypes.length; i++) {
+        html += '<li style="line-height:250%;float:left;width:25%;overflow:hidden;"><label class="radio"><input type="radio" name="cardtype" value="' + paytypes[i][0] + '" onchange="showSubPaySelect();" onClick="this.blur();"';
+		if(i == 0) html += ' checked="checked"';
+		html += '> ' + paytypes[i][1] + '</label></li>';
+    }
+    html += '</ul>';
+	payselect.innerHTML = html;
+}
+//输出一行金额选项html
+function htmlSubPaySelect(subpaytypes) {
+    var egoldrate = 85;
+    var html = '';
+    html += '<ul>';
+    for (var i = 0; i < subpaytypes.length; i++) {
+        var egold = subpaytypes[i] * egoldrate;
+        html += '<li style="line-height:250%;float:left;width:50%;"><label class="radio"><input type="radio" name="egold" value="' + egold + '"';
+		if(i == 0) html += ' checked="checked"';
+		html += '> ' + egold + '{?$egoldname?}（' + subpaytypes[i] + '元）</label></li>';
+    }
+    html += '</ul>';
+    return html;
+}
+//切换可选项
+function showSubPaySelect() {
+    var subpayselect = document.getElementById('subpayselect');
+    var selectvalue = selectRadioValue('cardtype');
+
+    var subpaytypes = {'MOBILE':[20, 30, 50, 100, 300, 500], 'UNICOM':[20, 30, 50, 100, 300, 500], 'TELECOM':[20, 30, 50, 100, 300, 500]};
+
+    if(typeof subpaytypes[selectvalue] != 'undefined') subpayselect.innerHTML = htmlSubPaySelect(subpaytypes[selectvalue]);
+}
+
+if (window.attachEvent) {
+    window.attachEvent('onload', function(){showPaySelect();showSubPaySelect();});
+} else {
+    window.addEventListener('load', function(){showPaySelect();showSubPaySelect();}, false);
+}
+
+function frmpay_validate(){
+	showMask();
+	displayDialog(document.getElementById('paydialog').innerHTML);
+}
+</script>
+
+<div id="paydialog" style="display:none;">
+<div>
+	<div style="padding:20px;font-size:120%;">
+	提交成功，卡类充值较慢，请您稍等1分钟后查看账户余额变化！
+	</div>
+	<div style="text-align:center;padding:20px">
+		<a class="btnlink" href="{?$jieqi_url?}/userdetail.php">查看我帐户</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+		<a class="btnlink" href="javascript:;" onclick="closeDialog();">本页继续充值</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+	</div>
+</div>
+</div>
+
+<form name="frmpay" method="post" action="{?$jieqi_modules['pay']['url']?}/yeecard.php" target="_blank" onsubmit="return frmpay_validate();">
+<table class="grid" width="100%" align="center">
+<!--   <caption>手机充值卡充值</caption> -->
+  <tr>
+    <td style="font-size:14px;line-height:200%;padding:20px;">
+	<div id="payselect"></div>
+	</td>
+  </tr>
+  <tr>
+    <td style="font-size:14px;line-height:200%;padding:20px;">
+	<div id="subpayselect"></div>
+	</td>
+  </tr>
+  <tr>
+    <td style="font-size:14px;line-height:200%;padding:20px;">
+	<button type="submit" name="Submit" class="button">进入下一步</button>
+    <input type="hidden" name="act" value="pay" />{?$jieqi_token_input?}
+    <input type="hidden" name="jumpurl" value="{?$jumpurl?}" />
+	<input type="hidden" name="type" value="yeemobile" />
+	</td>
+  </tr>
+</table>
+</form>
+<div class="textbox">
+<strong>说明：</strong><br />
+1、手机充值卡充值，兑换比例：<span class="hot">1</span>元=<span class="hot">85</span>{?$egoldname?}<br />
+2、卡类充值较慢，请您稍等1分钟后查看账户余额变化。<br />
+3、本接口支持多种手机充值卡充值，请务必选择正确的充值卡类型以及对应的金额。<br />
+</div>

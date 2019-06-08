@@ -1,0 +1,50 @@
+<form name="frmsearch" method="get" action="{?$article_dynamic_url?}/admin/reviews.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+      <td>
+	  <span class="fr">[<a href="{?$article_dynamic_url?}/admin/reviews.php?type=all">全部书评</a>] &nbsp;&nbsp; [<a href="{?$article_dynamic_url?}/admin/reviews.php?type=good">精华书评</a>]&nbsp;</span>
+        关键字：
+      <input name="keyword" type="text" id="keyword" class="text" value="{?$_request['keyword']?}"> 
+			<label class="radio"><input type="radio" name="keytype" value="0"{?if $_request['keytype'] == 0?} checked="checked"{?/if?}>小说名称</label> 
+      <label class="radio"><input type="radio" name="keytype" value="1"{?if $_request['keytype'] == 1?} checked="checked"{?/if?}>发表人</label> &nbsp;&nbsp;
+			<label class="radio"><input type="radio" name="keytype" value="2"{?if $_request['keytype'] == 2?} checked="checked"{?/if?}>主题</label>&nbsp;&nbsp;
+      <button type="submit" name="btnsearch" class="button">搜 索</button>
+	  </td>
+    </tr>
+</table>
+</form>
+
+<form name="frmsearch" method="post" action="{?$article_dynamic_url?}/admin/reviews.php?display={?$display?}">
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+  	<td width="5%" class="title">&nbsp;</th>
+    <td width="35%" class="title">主题</td>
+    <td width="16%" class="title">书名</td>
+    <td width="11%" class="title">点击/回复</td>
+    <td width="11%" class="title">发表人</td>
+    <td width="16%" class="title">发表时间</td>
+	  <td width="6%" class="title">操作</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$reviewrows?}
+  <tr>
+  	<td align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$reviewrows[i].topicid?}"></td>
+    <td>{?if $reviewrows[i].istop == 1?}<span class="hot">[顶]</span>{?/if?}{?if $reviewrows[i].isgood == 1?}<span class="hot">[精]</span>{?/if?}<a href="{?$jieqi_modules['article']['url']?}/reviewshow.php?tid={?$reviewrows[i].topicid?}" target="_blank">{?$reviewrows[i].title?}</a></td>
+    <td><a href="{?function jieqi_geturl:'article':'article':$reviewrows[i].ownerid:'info'?}" target="_blank">{?$reviewrows[i].articlename?}</a>{?if $reviewrows[i].targetid > 0?}&emsp;<a href="{?function jieqi_geturl:'article':'chapter':$reviewrows[i].targetid:$reviewrows[i].ownerid:$reviewrows[i].targetflag::$reviewrows[i].ownercode?}" target="_blank">{?$reviewrows[i].targetname?}</a>{?/if?}</td>
+    <td align="center">{?$reviewrows[i].views?}/{?$reviewrows[i].replies?}</td>
+    <td><a href="{?function jieqi_geturl:'system':'user':$reviewrows[i].posterid?}" target="_blank">{?$reviewrows[i].poster?}</a></td>
+    <td align="center">{?$reviewrows[i].posttime|date:"Y-m-d H:i:s"?}</td>
+	<td align="center"><a id="act_delete_{?$reviewrows[i].topicid?}" href="javascript:;" onclick="if(confirm('确实要删除该书评么？')) Ajax.Tip('{?$jieqi_modules['article']['url']?}/admin/reviews.php?display={?$display?}&tid={?$reviewrows[i].topicid?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除</a></td>
+  </tr>
+  {?/section?}
+  </tbody>
+   <tr>
+    <td align="center"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></td>
+    <td colspan="6">
+	<button type="submit" name="Submit" class="button">批量删除</button>
+	<input name="act" type="hidden" value="delete">{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,28 @@
+{?set $jieqi_pagetitle = "头像设置-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "头像设置"?}
+{?set $jieqi_urlback = "userdetail.php"?}
+
+<form name="setavatar" id="setavatar" action="{?$jieqi_url?}/setavatar.php?do=submit" method="post" enctype="multipart/form-data">
+<div class="block mt">
+  <div class="blockcontent">
+
+  <div class="c_row cf">
+  <div class="row_cover">
+  <img src="{?$url_avatar?}?{?$jieqi_time?}" class="avatar bdc" alt="头像">
+  </div>
+
+  <div class="row_text">
+	<h4>{?$name?}{?if $isvip > 0?} <span class="iconfont fsl hot">&#xee6f;</span>{?/if?}</h4>
+	<p><input type="file" accept="image/*" class="text" style="width:165px;" name="avatarimage" id="avatarimage" /></p>
+	<p class="mt"><button type="submit" class="button" name="submit">上传头像</button></p>
+  </div>
+  </div>
+
+  <ul class="ulrow mts">
+  <li class="hot">头像图片格式为 {?$need_imagetype?} ，文件大小不能超过 {?$max_imagesize?}K</li>
+  </ul>
+  <input type="hidden" name="act" value="upload" />{?$jieqi_token_input?}
+  </div>
+</div>
+
+</form>

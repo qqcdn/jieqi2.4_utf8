@@ -1,0 +1,27 @@
+{?set $jieqi_pagetitle = "选择充值金额-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "选择充值金额"?}
+
+<div class="blockb">
+	<div class="blocktitle" id="paytname">&nbsp;{?if $jieqi_browser == 'weixin'?}微信支付{?else?}支付宝充值{?/if?}</div>
+<div class="blockcontent">
+	<form name="frmdftpay" id="frmdftpay" method="post" action="{?$jieqi_modules['pay']['url']?}/{?if $jieqi_browser == 'weixin'?}wxjsapi.php{?else?}aliwap.php{?/if?}">
+	<div class="checkgroup cf">
+	  <label class="radio"><input type="radio" name="egold" value="1000" checked="checked"><span> 1000&nbsp;&nbsp;{?$egoldname?}（10元）</span></label>
+	  <label class="radio"><input type="radio" name="egold" value="2000"><span> 2000&nbsp;&nbsp;{?$egoldname?}（20元）</span></label>
+	  <label class="radio"><input type="radio" name="egold" value="5000"><span> 5000&nbsp;&nbsp;{?$egoldname?}（50元）</span></label>
+	  <label class="radio"><input type="radio" name="egold" value="10000"><span> 10000&nbsp;{?$egoldname?}（100元）</span></label>
+	  <label class="radio"><input type="radio" name="egold" value="20000"><span> 20000&nbsp;{?$egoldname?}（200元）</span></label>
+	  <label class="radio"><input type="radio" name="egold" value="50000"><span> 50000&nbsp;{?$egoldname?}（500元）</span></label>
+	</div>
+	<button type="submit" name="Submit" class="button">进入下一步</button>
+    <input type="hidden" name="act" value="pay" />{?$jieqi_token_input?}
+	<input type="hidden" name="jumpurl" value="{?$jumpurl?}" />
+	</form>
+</div>
+</div>
+
+<div class="textbox">
+<strong>说明：</strong><br />
+充值兑换比例：<span class="hot">1</span>元=<span class="hot">100</span>{?$egoldname?}<br />
+
+</div>

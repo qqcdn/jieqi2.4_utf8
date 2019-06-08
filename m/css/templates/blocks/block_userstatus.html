@@ -1,0 +1,58 @@
+{?if $jieqi_userid == 0?}
+<div style="padding-left:10px;">
+<form name="frmlogin" method="post" action="{?$jieqi_user_url?}/login.php">
+<ul class="ulrow">
+<li>用户名：<input type="text" class="text" size="10" maxlength="30" style="width:80px" name="username" onKeyPress="javascript: if (event.keyCode==32) return false;" ></li>
+<li>密　码：<input type="password" class="text" size="10" maxlength="30" style="width:80px" name="password"></li>
+{?if $show_checkcode == 1?}
+<li><div>验证码：<input type="text" class="text" style="width:6em;" name="checkcode" id="checkcode" onfocus="if(this.form.imgccode.style.display == 'none'){this.form.imgccode.src = '{?$jieqi_url?}/checkcode.php?rand={?$jieqi_time?}';this.form.imgccode.style.display = '';}" title="点击显示验证码"><img name="imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码"></div></li>
+{?/if?}
+<li>有效期：<select name="usecookie" class="select">
+              <option value="0">浏览器进程</option>
+              <option value="86400">保存一天</option>
+			  <option value="2592000">保存一月</option>
+			  <option value="315360000">保存一年</option>
+            </select></li>
+<li><button type="submit" class="button" name="submit">登录</button>
+<input type="hidden" name="act" value="login">
+<input type="hidden" name="jumpreferer" value="1"></li>
+<li><a href="{?$jieqi_user_url?}/register.php">新用户注册</a> &nbsp;&nbsp;<a href="{?$jieqi_url?}/getpass.php">忘记密码？</a></li>
+</ul>
+</form>
+</div>
+{?else?}
+<div class="cf">
+<div class="cf" style="padding-left:10px;">
+	<div class="fl" style="margin-right:10px;"> 
+	<img src="{?function jieqi_geturl:'system':'avatar':$jieqi_userid:'s':$jieqi_avatar?}" class="avatars" alt="{?$jieqi_username?}">
+	</div>
+	<div class="fl">
+	<ul class="ulrow">
+	<li><strong>{?$jieqi_username?}</strong></li>
+	{?if $jieqi_modules['badge']['publish'] > 0?}
+    {?if $jieqi_group_imageurl != ""?}<li><img src="{?$jieqi_group_imageurl?}" border="0" title="{?$jieqi_groupname?}"></li>{?/if?}
+    {?if $jieqi_honor_imageurl != ""?}<li><img src="{?$jieqi_honor_imageurl?}" border="0" title="{?$jieqi_honor?}"></li>{?/if?}
+    {?if $jieqi_badgerows|count > 0?}<li>{?/if?}
+    {?section name=i loop=$jieqi_badgerows?}
+	<img src="{?$jieqi_badgerows[i].imageurl?}" border="0" alt="{?$jieqi_badgerows[i].caption?}">
+    {?/section?}
+    {?if $jieqi_badgerows|count > 0?}</li>{?/if?}
+	{?else?}
+    <li>{?$jieqi_groupname?}</li>
+    <li>{?$jieqi_honor?}</li>
+	{?/if?}
+	</ul>
+	</div>
+</div>
+<ul class="ulcenter">
+  <li style="width:50%;float:left;"><a href="{?$jieqi_url?}/userdetail.php" class="userinfo">个人中心</a></li>
+  <li style="width:50%;float:left;"><a href="{?$jieqi_url?}/message.php?box=inbox" class="message">短 消 息</a></li>
+  <li style="width:50%;float:left;"><a href="{?$jieqi_url?}/myfriends.php" class="friend">我的好友</a></li>
+  <li style="width:50%;float:left;"><a href="{?$jieqi_url?}/ptopics.php?oid=self"  class="parlor">会 客 室</a></li>
+  <li style="width:50%;float:left;"><a href="{?$jieqi_modules['article']['url']?}/bookcase.php" class="bookcase">我的书架</a></li>
+  {?if $jieqi_modules['obook']['publish']==1?}<li style="width:50%;float:left;"><a href="{?$jieqi_modules['obook']['url']?}/buylist.php" class="buylog">订阅记录</a></li>{?/if?}
+  {?if $jieqi_modules['pay']['publish']==1?}<li style="width:50%;float:left;"><a href="{?$jieqi_modules['pay']['url']?}/buyegold.php" class="buyegold">帐户充值</a></li>{?/if?}
+  <li style="width:50%;float:left;"><a href="{?$jieqi_user_url?}/logout.php" class="logout">退出登录</a></li>
+</ul>
+</div>
+{?/if?}

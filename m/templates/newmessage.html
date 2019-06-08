@@ -1,0 +1,56 @@
+{?set $jieqi_pagetitle = "写新消息-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "写新消息"?}
+
+<script type="text/javascript">
+function frmnewmessage_validate(){
+  if(typeof(document.frmnewmessage.receiver) != "undefined"){
+    if(document.frmnewmessage.receiver.value == "" ){
+      alert("请输入收件人");
+	  document.frmnewmessage.receiver.focus();
+	  return false;
+    }
+  }
+  if(document.frmnewmessage.title.value == ""){
+    alert("请输入标题");
+	window.document.frmnewmessage.title.focus();
+	return false;
+  }
+}
+</script>
+<form class="form" name="frmnewmessage" id="frmnewmessage" action="{?$jieqi_url?}/newmessage.php?do=submit" method="post" onsubmit="return frmnewmessage_validate();">
+<fieldset>
+	<div class="frow">
+		<label class="col4 flabel">收件人：</label>
+		<div class="col8 last">
+			{?if $tosys > 0?}网站管理员<input type="hidden" name="tosys" value="{?$tosys?}" />{?else?}<input type="text" class="text" name="receiver" value="{?$receiver?}" />{?/if?}
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">标题：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="title" value="{?$title?}" />
+		</div>
+	</div>
+	<div class="frow">
+		<div class="row">
+		<label class="col4 flabel">内容：</label>
+		<div class="col8 last">&nbsp;</div>
+		</div>
+		<div class="row"><textarea class="textarea" name="content" rows="6">{?$content?}</textarea></div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">&nbsp;</label>
+		<div class="col8 last">
+			{?if $ajax_request > 0?}
+      		<button type="button" name="submit" class="button" style="cursor:pointer;" onclick="Ajax.Request('frmnewmessage',{onLoading:function(){Form.disable('frmnewmessage');},onComplete:function(){alert(this.response.replace(/<br[^<>]*>/g,'\n'));Form.enable('frmnewmessage');closeDialog();
+}});">发 送</button>
+      		{?else?}
+      		<button type="submit" class="button" name="submit">发 送</button>
+      		{?/if?}
+			<input type="hidden" name="act" value="add" />
+			{?$jieqi_token_input?}
+		</div>
+	</div>
+</fieldset>
+
+</form>

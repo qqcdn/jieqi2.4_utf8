@@ -1,0 +1,19 @@
+{?set $jieqi_pagetitle = "标签列表-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "标签列表"?}
+{?set jieqi_page_rows = "20"?}
+
+<div class="blockb">
+	<div class="blockcontent" id="jieqi_page_contents">
+		{?section name=i loop=$tagrows?}?}
+		<div class="c_row cf">
+			<h4><i class="fr fss">{?$tagrows[i].addtime|date:'Y-m-d'?}</i><a href="{?function jieqi_geturl:'article':'tagarticle':1:$tagrows[i].tagname_n?}">{?$tagrows[i].tagname?}</a></h4>
+			<p class="gray" style="line-height:2;">
+				小说数：{?$tagrows[i].linknum?}，总点击：{?$tagrows[i].allvisit?}
+				<br />周点击：{?$tagrows[i].weekvisit?}，月点击：{?$tagrows[i].monthvisit?}
+			</p>
+		</div>
+		{?/section?}
+	</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

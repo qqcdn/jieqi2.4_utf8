@@ -1,0 +1,27 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "{$actname}记录-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="会员工具" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_userbox_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<table width="100%" class="grid">
+  <caption>
+  作品{?if $actname != ''?}{?$actname?}{?else?}互动{?/if?}记录
+  </caption>
+  <tr align="center">
+    <td width="40%" class="head">小说名称</td> 
+    <td width="20%" class="head">动作时间</td>
+    <td width="20%" class="head">动作名称</td>
+    <td width="20%" class="head">数量</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$actlogrows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'article':'article':$actlogrows[i].articleid:'info'?}" target="_blank">{?$actlogrows[i].articlename?}</a></td>
+    <td align="center">{?$actlogrows[i].addtime|date:'Y-m-d H:i:s'?}</td>
+    <td align="center">{?$actlogrows[i].actname?}</td>
+    <td align="center">{?$actlogrows[i].actnum?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,5 @@
+<ul class="ultop">
+{?section name=i loop=$osalerows?}
+  <li><span class="fr">{?$osalerows[i].buytime|date:'m-d H:i'?}</span><a href="{?function jieqi_geturl:'system':'user':$osalerows[i].accountid?}" target="_blank">{?$osalerows[i].account|truncate:20:'..'?}</a> 订阅了 <a href="{?function jieqi_geturl:'article':'article':$osalerows[i].articleid:'info'?}" target="_blank">{?$osalerows[i].obookname|truncate:20:'..'?}</a></li>
+{?/section?}
+</ul>

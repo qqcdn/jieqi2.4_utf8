@@ -1,0 +1,56 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="keywords" content="{?$articlename?} {?$chaptername?} {?$author?} {?$sort?} {?$jieqi_sitename?}" />
+<meta name="description" content="{?if $summary|isset == true?}{?$summary|truncate:500:'..'?}{?else?}{?$intro|truncate:500:'..'?}{?/if?}" />
+<meta name="author" content="{?$meta_author?}" />
+<meta name="copyright" content="{?$meta_copyright?}" />
+<meta name="generator" content="jieqi.com" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{?$articlename?}-{?$chaptername?}-{?$author?}-{?$sort?}-{?$jieqi_sitename?}</title>
+<link rel="stylesheet" href="{?$jieqi_themeurl?}style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="{?$jieqi_modules['article']['url']?}/css/page.css" type="text/css" media="all"  />
+<!--[if lt IE 9]><script type="text/javascript" src="{?$jieqi_url?}/scripts/html5.js"></script><![endif]-->
+<!--[if lt IE 9]><script type="text/javascript" src="{?$jieqi_url?}/scripts/css3-mediaqueries.js"></script><![endif]--> 
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/common.js"></script>
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/theme.js"></script>
+<script type="text/javascript">
+var ReadParams = {
+	url_previous: '{?$url_previous?}',
+	url_next: '{?$url_next?}',
+	url_index: '{?$url_index?}',
+	url_articleinfo: '{?$url_articleinfo?}',
+	url_image: '{?$url_image?}',
+	url_home: '{?$jieqi_url?}/',
+	articleid: '{?$articleid|intval?}',
+	articlename: '{?$articlename?}',
+	authorid: '{?$authorid|intval?}',
+	author: '{?$author?}',
+	chapterid: '{?$chapterid|intval?}',
+	chaptername: '{?$chaptername?}',
+	chapterisvip: '{?$chapterisvip?}',
+	userid: '{?$jieqi_userid|intval?}',
+	egoldname: '{?$egoldname?}'
+}
+
+function jumpPage() {
+  if(document.activeElement && ['INPUT', 'TEXTAREA', 'BUTTON'].indexOf(document.activeElement.tagName) == -1){
+	var event = getEvent();
+    if (event.keyCode == 37) window.location.href = ReadParams.url_previous;
+    if (event.keyCode == 39) window.location.href = ReadParams.url_next;
+    if (event.keyCode == 13) window.location.href = ReadParams.url_index;
+  }
+}
+document.onkeydown=jumpPage;
+</script>
+</head>
+<body>
+<div class="top cf">
+	<div class="main">
+	<script type="text/javascript" src="{?$jieqi_url?}/scripts/toplink.js"></script>
+	</div>
+</div>
+{?$jieqi_contents?}
+
+</body>
+</html>

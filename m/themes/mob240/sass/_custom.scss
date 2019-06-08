@@ -1,0 +1,147 @@
+//自定义内容
+
+.slidetitle {
+  width: 58px;
+  margin: 8px 8px 0 0;
+  float: right;
+  display: inline;
+  li {
+    margin-bottom: 11px;
+    &.last {
+      margin: 0;
+    }
+    a {
+      img {
+        vertical-align: bottom;
+        width: 56px;
+        height: 70px;
+        border: 1px solid #ccc;
+        opacity: 0.7;
+        font-size: 0;
+      }
+      &.selected img {
+        border: 1px solid #f60;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.slidecontent {
+  width: 242px;
+  height: 404px;
+  overflow: hidden;
+  margin: 8px 0 8px 8px;
+  float: left;
+  display: inline;
+  background: #f6f6f6;
+  img {
+    width: 240px;
+    height: 300px;
+    border: 1px solid #ccc;
+  }
+  span {
+    font-size: 114.3%;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 0.3em;
+  }
+  p {
+    padding: 0 0.3em;
+  }
+}
+
+.blockc {
+  .bh {
+    width: 46%;
+    float: left;
+    padding: 2%;
+  }
+  .bt {
+    padding: 5px;
+    margin-bottom: 10px;
+    background: #f0f0f0;
+  }
+  .bc {
+    img {
+      width: 80px;
+      height: 100px;
+      margin: 0 10px 10px 0;
+      float: left;
+      padding: 2px;
+      -webkit-box-shadow: 0 0 5px #aaa;
+      box-shadow: 0 0 5px #aaa;
+    }
+    p {
+      font-size: 85.7%;
+    }
+  }
+}
+
+/* index */
+.topsearch{
+  background: #ffffff;
+  height: 36px;
+  line-height: 36px;
+}
+
+.topsearch .ts_input{
+  float:left;
+  width:78%;
+  height:36px;
+  margin-left:1%;
+  background: #ffffff;
+}
+.topsearch .ts_key{
+  width:100%;
+  vertical-align:middle;
+  font-size: 114.3%;
+  border:0;
+  margin: 0;
+  padding:0;
+}
+.topsearch .ts_post{
+  float:right;
+  width:20%;
+  height:36px;
+  text-align:center;
+  vertical-align: middle;
+  border-left: 0;
+  color: #ffffff;
+  background: #ffaa00;
+  text-decoration: none;
+}
+.topsearch .ts_submit{
+  display: block;
+  width:100%;
+  height:100%;
+  font-size: 114.3%;
+  cursor: pointer;
+  border: 0;
+  color: #ffffff;
+  background: transparent;
+  text-align:center;
+  vertical-align: middle;
+}
+
+.gotop{
+  width:1.4em;
+  height:1.4em;
+  font-size:1.5em;
+  line-height:1.4em;
+  text-align:center;
+  border-radius:3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  position:fixed;
+  right:0.5em;
+  bottom:1em;
+  background:#f18000;
+  color:#ffffff;
+  padding:0;
+  cursor:pointer;
+  display:none;
+  filter: alpha(opacity=70);
+  opacity: 0.7;
+}

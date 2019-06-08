@@ -1,0 +1,5 @@
+<ul class="ulrow">
+{?section name=i loop=$newsrows?}
+<li><a class="db" href="{?function jieqi_geturl:'news':'info':$newsrows[i].topicid?}"><i class="iconfont fr">&#xee6a;</i>{?$newsrows[i].title|truncate:38:'..'?}</a></li>
+{?/section?}
+</ul>

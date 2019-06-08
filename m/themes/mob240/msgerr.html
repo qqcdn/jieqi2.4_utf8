@@ -1,0 +1,12 @@
+{?set $jieqi_pagetitle = "出现错误！-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "出现错误！"?}
+
+<div style="text-align:center; padding:4em 0;">
+	<div class="block">
+		<div class="blockcontent fsl pd tc error">
+			<p>{?$errorinfo?}</p>
+			{?if $debuginfo != ''?}<p>{?$debuginfo?}</p>{?/if?}
+			{?if $ispost > 0?}<br /><p class="mt mb"><a class="btnlink" href="javascript:history.back(1)">返回上一步</a></p>{?/if?}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,6 @@
+<ul class="ultop">
+{?section name=i loop=$userrows?}
+<li><a href="{?function jieqi_geturl:'system':'user':$userrows[i].uid?}">{?$userrows[i].uname?}</a></li>
+{?/section?}
+</ul>
+<div class="more"><a href="{?$jieqi_url?}/topuser.php?sort={?$sort?}" target="_blank">¸ü¶à...</a></div>

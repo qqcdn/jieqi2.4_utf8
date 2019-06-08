@@ -1,0 +1,5 @@
+<ul class="ulitem">
+{?section name=i loop=$sortrows?}
+<li><a href="{?function jieqi_geturl:'news':'newslist':1:$sortrows[i].sortid?}">{?$sortrows[i].sortname?}</a></li>
+{?/section?}
+</ul>

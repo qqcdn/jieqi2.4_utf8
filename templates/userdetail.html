@@ -1,0 +1,131 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "用户资料-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="用户设置" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_userset_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<table class="grid" width="100%" align="center">
+<caption>用户资料</caption>
+  <tr align="left">
+    <td width="20%"  class="tdl">用户ID：</td>
+    <td width="40%" class="tdr">{?$uid?}</td>
+    <td width="40%" rowspan="9" class="tdr" align="center">
+	<img src="{?function jieqi_geturl:'system':'avatar':$uid:'l':$avatar?}{?if $refresh > 0?}?{?$jieqi_time?}{?/if?}" class="avatar" alt="头像"><br />
+	{?if $jieqi_modules['badge']['publish'] > 0?}
+	<br />
+    {?if $url_group != ""?}<img src="{?$url_group?}" border="0" title="{?$jieqi_groupname?}"><br />{?/if?}
+	{?if $url_honor != ""?}<img src="{?$url_honor?}" border="0" title="{?$jieqi_honor?}"><br />{?/if?}
+    {?section name=i loop=$badgerows?}<img src="{?$badgerows[i].imageurl?}" border="0" title="{?$badgerows[i].caption?}">{?/section?}
+    {?/if?}
+	</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">用户名：</td>
+    <td class="tdr">{?$uname?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">昵称：</td>
+    <td class="tdr">{?$name?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">等级：</td>
+    <td class="tdr">{?$group?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">头衔：</td>
+    <td class="tdr">{?$honor?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">性别：</td>
+    <td class="tdr">{?$sex?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">Email：</td>
+    <td class="tdr">
+      {?if $email != ''?}
+        <a href="mailto:{?$email?}">{?$email?}</a>
+        {?if $verify['email'] > 0?}<span class="hot">&nbsp;&nbsp;已验证</span> <a href="{?$jieqi_url?}/emailverify.php?sendemail=1&cancel=1">[发解绑邮件]</a>{?elseif $sendemail > 0?}&nbsp;&nbsp;<span class="hot">验证邮件已发送！</span><a href="{?$email_link?}" target="_blank">[查看]</a>{?else?}<span class="hot">&nbsp;&nbsp;未验证</span> <a href="{?$jieqi_url?}/emailverify.php?sendemail=1">[发验证邮件]</a>{?/if?}
+      {?/if?}
+    </td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">QQ：</td>
+    <td class="tdr">{?$qq?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">网站：</td>
+    <td class="tdr"><a href="{?$url?}" target="_blank">{?$url?}</a></td>
+  </tr>
+  <tr>
+    <td colspan="3" class="foot">积分相关</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">注册日期：</td>
+    <td colspan="2" class="tdr">{?$regdate|date:'Y-m-d'?}</td>
+  </tr>
+  <!--
+  <tr align="left">
+    <td class="tdl">贡献值：</td>
+    <td colspan="2" class="tdr">{?$credit?}</td>
+  </tr>
+  -->
+  <tr align="left">
+    <td class="tdl">经验值：</td>
+    <td colspan="2" class="tdr">{?$experience?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">现有积分：</td>
+    <td colspan="2" class="tdr">{?$score?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">最多好友数：</td>
+    <td colspan="2" class="tdr">{?$right['system']['maxfriends']|intval?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">信箱最多消息数：</td>
+    <td colspan="2" class="tdr">{?$right['system']['maxmessages']|intval?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">书架最大收藏量：</td>
+    <td colspan="2" class="tdr">{?$right['article']['maxbookmarks']|intval?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">每天允许推荐次数：</td>
+    <td colspan="2" class="tdr">{?$right['article']['dayvotes']|intval?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">每天允许评分次数：</td>
+    <td colspan="2" class="tdr">{?$right['article']['dayrates']|intval?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">现有月票数：</td>
+    <td colspan="2" class="tdr">{?$setting['gift']['vipvote']|intval?}</td>
+  </tr>
+  <tr>
+    <td colspan="3" class="foot">VIP信息</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">VIP类型：</td>
+    <td colspan="2" class="tdr">{?if $isvip <= 0?}非vip会员{?else?}VIP会员{?/if?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">{?$egoldname?}：</td>
+    <td colspan="2" class="tdr">{?$egold?} &nbsp; [<a href="{?$jieqi_modules['pay']['url']?}/buyegold.php">充值</a>]</td>
+  </tr>
+  {?if $channelerate > 0 || $esilver?}
+  <tr align="left">
+    <td class="tdl">分成收入：</td>
+    <td colspan="2" class="tdr">{?$esilver|fen2yuan?}元{?if $esilver > 0 && $exchangerate > 0?} &nbsp; [<a href="{?$jieqi_modules['pay']['url']?}/exchange.php">兑换{?$egoldname?}</a>]{?/if?}{?if $settlemin > 0 && $esilver > $settlemin|yuan2fen?} &nbsp; [<a href="{?$jieqi_url?}/newmessage.php?tosys=1&title=分成收入申请提现&content=我的分成收入已达{?$esilver|fen2yuan?}元，现申请提现！">申请提现</a>]{?/if?}</td>
+  </tr>
+  {?/if?}
+  <tr>
+    <td colspan="3" class="foot">其他信息</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">用户签名：</td>
+    <td colspan="2" class="tdr">{?$sign?}</td>
+  </tr>
+  <tr align="left">
+    <td class="tdl">个人简介：</td>
+    <td colspan="2" class="tdr">{?$intro?}</td>
+  </tr>
+</table>

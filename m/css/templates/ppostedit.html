@@ -1,0 +1,36 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "defaultblocks"?}
+<script type="text/javascript">
+function frmppostedit_validate(){
+}
+</script>
+
+<div class="c_head"><a href="{?$jieqi_url?}/ptopicshow.php?tid={?$topicid?}">主题：{?$subject?}</a></div>
+<form name="frmppostedit" id="frmppostedit" action="ppostedit.php?do=submit" method="post" onsubmit="return frmppostedit_validate();" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>编辑贴子</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">标题：</td>
+  <td class="tdr"><input type="text" class="text" name="ptitle" id="ptitle" size="60" maxlength="60" value="{?$ptitle?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">内容：</td>
+  <td class="tdr">
+  <textarea class="textarea" name="pcontent" id="pcontent" rows="10" cols="60">{?$pcontent?}</textarea>
+  <script type="text/javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("pcontent");});</script>
+  </td>
+</tr>
+{?if $postcheckcode > 0?}
+<tr valign="middle" align="left">
+  <td class="tdl">验证码：</td>
+  <td class="tdr"><input type="text" class="text" style="width:6em;" name="checkcode" id="checkcode" onfocus="if(this.form.imgccode.style.display == 'none'){this.form.imgccode.src = '{?$jieqi_url?}/checkcode.php?rand={?$jieqi_time?}';this.form.imgccode.style.display = '';}" title="点击显示验证码"><img name="imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码"></td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">&nbsp;<input type="hidden" name="pid" value="{?$pid?}" />
+  <input type="hidden" name="act" value="update" />{?$jieqi_token_input?}
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提 交</button></td>
+</tr>
+</table>
+</form>

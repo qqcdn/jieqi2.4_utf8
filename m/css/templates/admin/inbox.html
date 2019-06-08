@@ -1,0 +1,36 @@
+<form action="{?$url_action?}" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>{?$boxname?}</caption>
+  <tr>
+    <th width="5%"><input type="checkbox" name="checkall" value="checkall" onclick="for(var i=0;i<this.form.elements.length;i++){ if(this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></th>
+    <th width="20%">{?$usertitle?}</th>
+    <th width="45%">标题</th>
+    <th width="20%">日期</th>
+    <th width="10%">状态</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$messagerows?}
+  <tr>
+    <td align="center"><input type="checkbox" name="id[]" value="{?$messagerows[i].messageid?}"></td>
+    <td>{?if $messagerows[i].fromid > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagerows[i].fromid?}" target="_blank">{?$messagerows[i].fromname?}</a>{?else?}<span class="hot">网站管理员</span>{?/if?}</td>
+    <td><a href="{?$jieqi_url?}/admin/messagedetail.php?id={?$messagerows[i].messageid?}">{?$messagerows[i].title?}</a></td>
+    <td>{?$messagerows[i].postdate|date:"Y-m-d"?}</td>
+    <td>{?if $messagerows[i].isread == 0?}<span class="hot">未读</span>{?else?}已读{?/if?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+  <tr>
+    <td colspan="5" class="foot">
+		<input type="button" name="selectall" value="全部选中" class="button" onclick="for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = true; }" />&nbsp;&nbsp;
+		<input type="button" name="cancelall" value="全部取消" class="button" onclick="for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = false; }" />&nbsp;&nbsp;
+		<button type="button" name="act_remove" class="button" onclick="if(confirm('确实要删除选中消息么？')){this.form.act.value='delete'; this.form.submit();}">批量删除</button>&nbsp;&nbsp;
+        <button type="button" name="act_read" class="button" id="act_read" onclick="this.form.act.value='read';this.form.submit();">设为已读</button>
+        <!-- &nbsp;&nbsp;<button type="button" name="act_clear" class="button" id="act_clear" onclick="if(confirm('确实要清空全部消息么？')) Ajax.Tip('{?$jieqi_url?}/admin/message.php?box={?$box?}&act=clear{?$jieqi_token_url?}', {method: 'POST'});">全部清空</button> -->
+        <input type="hidden" name="act" id="act" value="delete">
+        {?$jieqi_token_input?}
+    </td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>
+

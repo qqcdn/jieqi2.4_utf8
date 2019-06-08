@@ -1,0 +1,53 @@
+<script type="text/javascript">
+function frmtip_validate(){
+  if(document.frmtip.payegold.value == ""){
+    alert("请输入打赏{?$egoldname?}");
+    document.frmtip.payegold.focus();
+    return false;
+  }
+
+  if(parseInt(document.frmtip.payegold.value) < 20){
+    alert("至少打赏{?$egoldname?}20以上");
+    document.frmtip.payegold.focus();
+    return false;
+  }
+}
+</script>
+<br />
+<form name="frmtip" id="frmtip" action="{?$jieqi_modules['article']['url']?}/tip.php?do=submit" method="post" onsubmit="return frmtip_validate();" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>打赏作品</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="30%">小说名</td>
+  <td class="tdr"><a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">{?$articlename?}</a></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">我的{?$egoldname?}</td>
+  <td class="tdr">{?$useregold?} {?$egoldname?}  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">打赏{?$egoldname?}</td>
+  <td class="tdr">
+  <input type="text" class="text" name="payegold" id="payegold" size="10" maxlength="10" value="" /> <span class="hot">至少 20 以上</span>  
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">说明</td>
+  <td class="tdr">本功能是指用{?$egoldname?}打赏给您喜欢的作品的作者，感谢您做作者的鼓励和支持！</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">
+  &nbsp;
+  <input type="hidden" name="act" value="post" />{?$jieqi_token_input?}
+  <input type="hidden" name="id" value="{?$articleid?}" />  </td>
+  <td class="tdr">
+  {?if $ajax_request > 0?}
+  <button type="button" name="Submit" class="button" style="cursor:pointer;" onclick="Ajax.Request('frmtip',{onLoading:function(){Form.disable('frmtip');},onComplete:function(){alert(this.response.replace(/<br[^<>]*>/g,'\n'));Form.enable('frmtip');closeDialog();
+}});">提 交</button>
+  {?else?}
+  <button type="submit" class="button" name="submit">提 交</button>
+  {?/if?}
+  </td>
+</tr>
+</table>
+</form>

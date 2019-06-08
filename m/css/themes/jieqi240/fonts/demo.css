@@ -1,0 +1,366 @@
+*{margin: 0;padding: 0;list-style: none;}
+/*
+KISSY CSS Reset
+阎炲枣搴烽敍?. reset 闀勫嫮娲伴曦鍕瑝閺励垱绔婚梽銈嗙セ鐟椤煔娅掗曦鍕帛镨并幸鐗卞蹇ョ礉鏉╂瑶绮庨弰顖炲劥閸掑枣浼愭担婧库偓鍌涚闂勩倕鎷伴柌宀栫枂閺励垳鎻ｇ€靛棔绗夐崣顖氩瀻闀勫嫨钪?2. reset 闀勫嫮娲伴曦鍕瑝閺励垵顔€姒涙颛婚暀宄扮汉閸︺剑澧嶉摼澶嬬セ鐟椤煔娅掓稉瀣╃闀婅揪绱濋挜灞炬Ц閸戝繐镄妯款吇闀椤嘲绾洪摼澶婂讲阏宠弃鐢弶銉ф畱闂傤噣顣介妴?3. reset 阈剧喐婀滈幓镒返娑撯偓婵傛娅橀槂鍌炩偓姘辨暏闀勫嫬镡€绾偓闀椤嘲绾洪妴澶囩稻濞屸剥婀侀槇璺鸿剨阌涘本甯归捇镒姷阉诡喖鍙挎担鎸炴付濮瑰偊绱濈憗浣稿閸滃奔鎱ㄩ弨鐟版倵閸愬喘濞囬凄銊ｂ偓?阎楃澹婇敍?. 阒冨倸绨叉稉颛熸瀮阌?. 閸╄桨绨摼钪弬棰佸瘜濞翠焦绁荤憴鍩氭珤閵?缂佸瓨濮㈤敍姘卞竴娴?lifesinger@gmail.com>, 濮濓絾鐑?ragecarrier@gmail.com>
+ */
+
+/** 濞揿懘娅庨崘锻樆鏉堢绐?**/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 缂佹挻鐎岗骞傜 */
+dl, dt, dd, ul, ol, li, /* list elements 閸掓銆冮岗骞傜 */
+pre, /* text formatting elements 閺傚洦婀伴暀镦庣汉閸忓箓绀?*/
+form, fieldset, legend, button, input, textarea, /* form elements 鐞涖刿宕熼岗骞傜 */
+th, td /* table elements 鐞涖剑鐗搁岗骞傜 */ {
+  margin: 0;
+  padding: 0;
+}
+
+/** 镨佸墽鐤嗘妯款吇鐎涙ぞ缍?**/
+body,
+button, input, select, textarea /* for ie */ {
+  font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+address, cite, dfn, em, var { font-style: normal; } /* 鐏忓棙鏋╂担鎾村煓濮?*/
+code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* 缂佺喍绔寸粤澶婎啍鐎涙ぞ缍?*/
+small { font-size: 12px; } /* 鐏忓繋绨?12px 闀勫嫪鑵戦弬锲х发闂呴箖妲勭拠浼欑礉镨?small 濮濓絽鐖堕岽?*/
+
+/** 闁插矕鐤嗛崚妤勩€冮岗骞傜 **/
+ul, ol { list-style: none; }
+
+/** 闁插矕鐤嗛弬锲ㄦ拱闀欑厧绾洪岗骞傜 **/
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+
+/** 闁插矕鐤嗙悰銊ュ礋閸忓箓绀?**/
+legend { color: #000; } /* for ie6 */
+fieldset, img { border: 0; } /* img 阉碱叀婧呴敍姘差唨阒堢偓甯撮柌宀€娈?img 闀炵姾绔熷?*/
+button, input, select, textarea { font-size: 100%; } /* 娴ｅ灏缂戠悰銊ュ礋閸忓箓绀岄崷?ie 娑揿鍏樼紒褎鍦圭€涙ぞ缍嬫径褍镄?*/
+/* 濞夘炼缁唎ptgroup 闀炵姵纭堕晸鑸殿劀 */
+
+/** 闁插矕鐤嗙悰銊︾壐閸忓箓绀?**/
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* 濞揿懘娅庡ù顔煎З */
+.ks-clear:after, .clear:after {
+  content: '\20';
+  display: block;
+  height: 0;
+  clear: both;
+}
+.ks-clear, .clear {
+  *zoom: 1;
+}
+
+.main {
+  padding: 30px 100px;
+width: 960px;
+margin: 0 auto;
+}
+.main h1{font-size:36px; color:#333; text-align:left;margin-bottom:30px; border-bottom: 1px solid #eee;}
+
+.helps{margin-top:40px;}
+.helps pre{
+  padding:20px;
+  margin:10px 0;
+  border:solid 1px #e7e1cd;
+  background-color: #fffdef;
+  overflow: auto;
+}
+
+.icon_lists{
+  width: 100% !important;
+
+}
+
+.icon_lists li{
+  float:left;
+  width: 100px;
+  height:180px;
+  text-align: center;
+  list-style: none !important;
+}
+.icon_lists .icon{
+  font-size: 42px;
+  line-height: 100px;
+  margin: 10px 0;
+  color:#333;
+  -webkit-transition: font-size 0.25s ease-out 0s;
+  -moz-transition: font-size 0.25s ease-out 0s;
+  transition: font-size 0.25s ease-out 0s;
+
+}
+.icon_lists .icon:hover{
+  font-size: 100px;
+}
+
+
+
+.markdown {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.highlight {
+  line-height: 1.5;
+}
+
+.markdown img {
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+.markdown h1 {
+  color: #404040;
+  font-weight: 500;
+  line-height: 40px;
+  margin-bottom: 24px;
+}
+
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  color: #404040;
+  margin: 1.6em 0 0.6em 0;
+  font-weight: 500;
+  clear: both;
+}
+
+.markdown h1 {
+  font-size: 28px;
+}
+
+.markdown h2 {
+  font-size: 22px;
+}
+
+.markdown h3 {
+  font-size: 16px;
+}
+
+.markdown h4 {
+  font-size: 14px;
+}
+
+.markdown h5 {
+  font-size: 12px;
+}
+
+.markdown h6 {
+  font-size: 12px;
+}
+
+.markdown hr {
+  height: 1px;
+  border: 0;
+  background: #e9e9e9;
+  margin: 16px 0;
+  clear: both;
+}
+
+.markdown p,
+.markdown pre {
+  margin: 1em 0;
+}
+
+.markdown > p,
+.markdown > blockquote,
+.markdown > .highlight,
+.markdown > ol,
+.markdown > ul {
+  width: 80%;
+}
+
+.markdown ul > li {
+  list-style: circle;
+}
+
+.markdown > ul li,
+.markdown blockquote ul > li {
+  margin-left: 20px;
+  padding-left: 4px;
+}
+
+.markdown > ul li p,
+.markdown > ol li p {
+  margin: 0.6em 0;
+}
+
+.markdown ol > li {
+  list-style: decimal;
+}
+
+.markdown > ol li,
+.markdown blockquote ol > li {
+  margin-left: 20px;
+  padding-left: 4px;
+}
+
+.markdown code {
+  margin: 0 3px;
+  padding: 0 5px;
+  background: #eee;
+  border-radius: 3px;
+}
+
+.markdown pre {
+  border-radius: 6px;
+  background: #f7f7f7;
+  padding: 20px;
+}
+
+.markdown pre code {
+  border: none;
+  background: #f7f7f7;
+  margin: 0;
+}
+
+.markdown strong,
+.markdown b {
+  font-weight: 600;
+}
+
+.markdown > table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  empty-cells: show;
+  border: 1px solid #e9e9e9;
+  width: 95%;
+  margin-bottom: 24px;
+}
+
+.markdown > table th {
+  white-space: nowrap;
+  color: #333;
+  font-weight: 600;
+
+}
+
+.markdown > table th,
+.markdown > table td {
+  border: 1px solid #e9e9e9;
+  padding: 8px 16px;
+  text-align: left;
+}
+
+.markdown > table th {
+  background: #F7F7F7;
+}
+
+.markdown blockquote {
+  font-size: 90%;
+  color: #999;
+  border-left: 4px solid #e9e9e9;
+  padding-left: 0.8em;
+  margin: 1em 0;
+  font-style: italic;
+}
+
+.markdown blockquote p {
+  margin: 0;
+}
+
+.markdown .anchor {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  margin-left: 8px;
+}
+
+.markdown .waiting {
+  color: #ccc;
+}
+
+.markdown h1:hover .anchor,
+.markdown h2:hover .anchor,
+.markdown h3:hover .anchor,
+.markdown h4:hover .anchor,
+.markdown h5:hover .anchor,
+.markdown h6:hover .anchor {
+  opacity: 1;
+  display: inline-block;
+}
+
+.markdown > br,
+.markdown > p > br {
+  clear: both;
+}
+
+
+.hljs {
+  display: block;
+  background: white;
+  padding: 0.5em;
+  color: #333333;
+  overflow-x: auto;
+}
+
+.hljs-comment,
+.hljs-meta {
+  color: #969896;
+}
+
+.hljs-string,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-strong,
+.hljs-emphasis,
+.hljs-quote {
+  color: #df5000;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-type {
+  color: #a71d5d;
+}
+
+.hljs-literal,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attribute {
+  color: #0086b3;
+}
+
+.hljs-section,
+.hljs-name {
+  color: #63a35c;
+}
+
+.hljs-tag {
+  color: #333333;
+}
+
+.hljs-title,
+.hljs-attr,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #795da3;
+}
+
+.hljs-addition {
+  color: #55a532;
+  background-color: #eaffea;
+}
+
+.hljs-deletion {
+  color: #bd2c00;
+  background-color: #ffecec;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+pre{
+  background: #fff;
+}
+
+
+
+
+

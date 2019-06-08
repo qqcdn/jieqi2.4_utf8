@@ -1,0 +1,16 @@
+{?set $jieqi_pagetitle = "订阅记录-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "订阅记录"?}
+
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+{?section name=i loop=$obuyinforows?}
+	<div class="c_row cf">
+	<a class="db cf" href="{?$obook_static_url?}/reader.php?oid={?$obuyinforows[i].obookid?}&cid={?$obuyinforows[i].ochapterid?}">{?$obuyinforows[i].obookname?} - {?$obuyinforows[i].chaptername?}</a>
+    
+	</div>
+{?/section?}
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>
+

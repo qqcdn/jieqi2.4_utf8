@@ -1,0 +1,40 @@
+{?set $jieqi_pagetitle = "管理小说-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "管理小说"?}
+{?set jieqi_page_rows = "20"?}
+
+<ul class="ultab">
+	<li><a href="{?$jieqi_modules['article']['url']?}/masterpage.php"{?if $_request['display'] == 'all' || $_request['display'] == ''?} class="selected"{?/if?}>全部小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/masterpage.php?display=author"{?if $_request['display'] == 'author'?} class="selected"{?/if?}>原创小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/masterpage.php?display=poster"{?if $_request['display'] == 'poster'?} class="selected"{?/if?}>转载小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/masterpage.php?display=agent"{?if $_request['display'] == 'agent'?} class="selected"{?/if?}>代管小说</a></li>
+</ul>
+
+<div class="blockb">
+	<div class="blockcontent" id="jieqi_page_contents">
+		{?section name=i loop=$articlerows?}
+		<div class="c_row cf">
+			<h4><i class="fr fss">{?$articlerows[i].lastupdate|date:'Y-m-d'?}</i><a href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename?}</a></h4>
+			<p class="gray" style="line-height:2;">
+				{?if $articlerows[i].vipchapterid > 0?}
+				<a href="{?$articlerows[i].url_articleindex?}">{?$articlerows[i].vipvolume?} {?$articlerows[i].vipchapter?}</a> <em class="hot">vip</em>
+				{?else?}
+				<a href="{?$articlerows[i].url_articleindex?}">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a>
+				{?/if?}
+			</p>
+			<p>
+				<a class="btnlink" href="{?$article_static_url?}/articlemanage.php?id={?$articlerows[i].articleid?}">管理</a>
+				&nbsp; <a class="btnlink" href="{?$article_static_url?}/articleedit.php?id={?$articlerows[i].articleid?}">编辑</a>
+				{?if $articlerows[i].sourceid == 0?}
+				&nbsp; <a class="btnlink" href="{?$article_static_url?}/newchapter.php?aid={?$articlerows[i].articleid?}">更新</a>
+				{?if $articlerows[i].issign_n == 0?}
+				&nbsp; <a class="btnlink" href="{?$jieqi_url?}/newmessage.php?tosys=1&title=《{?$articlerows[i].articlename?}》申请VIP签约&content=《{?$articlerows[i].articlename?}》（ID：{?$articlerows[i].articleid?}）申请VIP签约" class="hot" title="申请VIP签约">签约</a>
+				{?/if?}
+				{?/if?}
+			</p>
+		</div>
+		{?/section?}
+	</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>
+

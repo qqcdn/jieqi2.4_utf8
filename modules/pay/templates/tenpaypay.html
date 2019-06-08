@@ -1,0 +1,52 @@
+{?set jieqi_blocks_module = "pay"?}
+{?set jieqi_blocks_config = "payblocks"?}
+{?set $jieqi_pagetitle = "财付通充值-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="充值导航" module="pay" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_paylist_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+
+<script type="text/javascript">
+function frmpay_validate(){
+	showMask();
+	displayDialog(document.getElementById('paydialog').innerHTML);
+}
+</script>
+
+<div id="paydialog" style="display:none;">
+<div>
+	<div style="padding:20px;font-size:120%;">
+	提交成功，请在新页面完成充值步骤！
+	</div>
+	<div style="text-align:center;padding:20px">
+		<a class="btnlink" href="{?$jieqi_url?}/userdetail.php">查看我帐户</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+		<a class="btnlink" href="javascript:;" onclick="closeDialog();">本页继续充值</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+	</div>
+</div>
+</div>
+
+<form name="frmbank" method="post" action="{?$jieqi_modules['pay']['url']?}/tenpay.php" target="_blank" onsubmit="return frmpay_validate();">
+    <table class="grid" width="100%" align="center">
+<!--         <caption>财付通充值</caption> -->
+        <tr>
+            <td style="font-size:14px;line-height:200%;padding:20px;">
+                <strong>请选择您要的充值金额：</strong><br />
+                <div style="width:100%;clear:both;margin-bottom:10px;">
+                    <ul>
+                        {?section name=i loop=$payset['paylimit']?}
+                        <li style="line-height:250%;float:left;width:50%;"><label class="radio"><input type="radio" name="egold" value="{?$i['key']?}"{?if $payset['paydefault'] == $i['key']?} checked="checked"{?/if?}> {?$i['key']?} {?$egoldname?}（{?$payset['paylimit'][i]?}元）</label></li>
+                        {?/section?}
+                        {?if $payset['paycustom']['open'] > 0?}<li style="line-height:250%;"><label class="radio"><input type="radio" name="egold" id="egold0" value="0"{?if $payset['paydefault'] == 0?} checked="checked"{?/if?}> <input type="text" class="text" name="money" size="8" value="" onfocus="document.getElementById('egold0').checked = 'checked';" /> 元{?if $payset['paycustom']['min'] > 0?}（最少 {?$payset['paycustom']['min']?} 元）{?/if?}</label></li>{?/if?}
+                    </ul>
+                    <div class="cb"></div>
+                </div>
+                <button type="submit" name="Submit" class="button">进入下一步</button>
+                <input type="hidden" name="act" value="pay" />{?$jieqi_token_input?}
+                <input type="hidden" name="jumpurl" value="{?$jumpurl?}" />
+            </td>
+        </tr>
+    </table>
+</form>
+<div class="textbox">
+    <strong>说明：</strong><br />
+	1、财付通充值，兑换比例：<span class="hot">1</span>元=<span class="hot">100</span>{?$egoldname?}<br />
+	2、本接口除了支持财付通帐户余额支付，还可以在下一步选择网上银行支付。<br />
+</div>

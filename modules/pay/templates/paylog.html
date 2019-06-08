@@ -1,0 +1,27 @@
+{?set jieqi_blocks_module = "pay"?}
+{?set jieqi_blocks_config = "payblocks"?}
+{?set $jieqi_pagetitle = "充值记录-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="会员工具" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_userbox_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<table class="grid" width="100%" align="center">
+  <caption>充值记录 [<a href="{?$jieqi_modules['pay']['url']?}/paylog.php">全部记录</a> | <a href="{?$jieqi_modules['pay']['url']?}/paylog.php?status=finish">充值成功</a> | <a href="{?$jieqi_modules['pay']['url']?}/paylog.php?status=cancel">充值失败</a>]</caption>
+  <tr align="center" valign="middle">
+    <th width="20%">序号</th>
+    <th width="20%">交易时间</th>
+    <th width="20%">购买项目</th>
+    <th width="20%">支付方式</th>
+    <th width="20%">交易状态</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$paylogrows?}
+  <tr valign="middle">
+    <td align="center">{?$paylogrows[i].payid?}</td>
+    <td align="center">{?$paylogrows[i].buytime|date:'Y-m-d H:i:s'?}</td>
+    <td align="center">{?if $paylogrows[i].actname == ''?}{?$paylogrows[i].egold?}{?$egoldname?}{?else?}{?$paylogrows[i].actname?}{?/if?}</td>
+    <td align="center">{?$paylogrows[i].paytype?}</td>
+    <td align="center">{?$paylogrows[i].payflag?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,12 @@
+<div class="msgbox">
+	<div class="block">
+		<div class="blocktitle">出现错误！</div>
+		<div class="blockcontent">
+			<div style="padding:10px;text-align:left;">
+				错误原因：{?$errorinfo?}
+				{?if $debuginfo != ''?}<br/>{?$debuginfo?}{?/if?}
+				{?if $ispost > 0?}<br />请 <a href="javascript:history.back(1)">返 回</a> 并修正{?/if?}
+			</div>
+		</div>
+	</div>
+</div>

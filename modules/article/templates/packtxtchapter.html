@@ -1,0 +1,24 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "guideblocks"?}
+
+<table class="grid" width="100%" align="center">
+<caption>
+《<a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">{?$articlename?}</a>》TXT单章节下载
+</caption>
+  <tr align="center">
+    <th width="10%">序号</th>
+	<th width="40%">章节名</th>
+	<th width="10%">字数</th>
+    <th width="15%">时间</th>
+    <th width="15%">下载</th>
+  </tr>
+  {?section name=i loop=$packrows?}
+  <tr>
+    <td align="center">{?$i['order']?}</td>
+    <td>{?$packrows[i].volumename?} {?$packrows[i].chaptername?}{?if $packrows[i].isvip > 0?}<em class="iconfont hot">&#xee8b;</em>{?/if?}</td>
+	<td align="center">{?$packrows[i].words?}</td>
+    <td align="center">{?$packrows[i].postdate|date:"Y-m-d"?}</td>
+    <td align="center">{?if $packrows[i].isvip > 0?}<a href="{?function jieqi_geturl:'article':'chapter':$packrows[i].chapterid:$articleid:$packrows[i].isvip:$articlecode?}" rel="nofollow">在线阅读</a>{?else?}<a href="{?$article_static_url?}/packdown.php?type=txt&id={?$articleid?}&cid={?$packrows[i].chapterid?}" rel="nofollow">下载本章</a>{?/if?}</td>
+  </tr>
+  {?/section?}
+</table>

@@ -1,0 +1,17 @@
+{?set $jieqi_pagetitle = "充值记录-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "充值记录"?}
+
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+	<ul class="ulrow">
+	{?section name=i loop=$paylogrows?}
+	<li>
+	<div><em>{?$paylogrows[i].payflag?}</em>{?$paylogrows[i].buytime|date:'m-d H:i'?}购买{?if $paylogrows[i].actname == ''?}{?$paylogrows[i].egold?}{?$egoldname?}{?else?}{?$paylogrows[i].actname?}{?/if?}</div>
+	<div class="gray"><em>{?$paylogrows[i].paytype?}</em>流水号：{?$paylogrows[i].payid?}</div>
+	</li>
+	{?/section?}
+	</ul>
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

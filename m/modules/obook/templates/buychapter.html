@@ -1,0 +1,39 @@
+{?set $jieqi_pagetitle = "订阅VIP章节-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "订阅VIP章节"?}
+
+<form name="frmbuychapter" method="post" action="{?$url_buychapter?}">
+ <table class="grid" width="100%" align="center">
+	<tr>
+	  <td width="34%" align="right">章节名称：</td>
+	  <td width="66%">《{?$obookname?} - {?$chaptername?}》</td>
+    </tr>
+	<tr>
+	  <td align="right">价&nbsp;&nbsp;&nbsp; 格：</td>
+	  <td>{?$saleprice?}{?$egoldname?}</td>
+    </tr>
+	<tr>
+	  <td align="right">购买用户：</td>
+	  <td>{?$username?}</td>
+    </tr>
+	<tr>
+	  <td align="right">现有余额：</td>
+	  <td>{?$useregold?}{?$egoldname?}</td>
+    </tr>
+	<tr>
+	  <td align="right">订阅选项：</td>
+	  <td><input type="checkbox" name="autobuy" value="1" checked="checked"> <span title="选择自动订阅，则本书所有VIP章节在点击阅读时自动购买，不需要每次购买后再阅读。">自动订阅本书其它VIP章节</span></td>
+    </tr>
+	<tr align="center">
+	  <td colspan="2">
+	  <input type="hidden" name="act" value="buy">{?$jieqi_token_input?}
+      <input type="hidden" name="cid" value="{?$cid?}">
+	  <button type="submit" class="button" name="submit">确定购买并阅读</button>
+	  </td>
+    </tr>
+	<tr align="center">
+	  <td colspan="2" class="foot">
+	  <a href="{?function jieqi_geturl:'article':'article':$articleid:'index':$articlecode?}">返回目录</a> | <a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">返回书页</a> | <a href="{?$url_buyegold?}">帐户充值</a>
+	  </td> 
+    </tr>
+  </table>
+</form><br /><br />

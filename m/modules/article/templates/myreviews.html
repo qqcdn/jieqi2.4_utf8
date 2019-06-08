@@ -1,0 +1,19 @@
+{?set $jieqi_pagetitle = "我的书评-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "我的书评"?}
+{?set jieqi_page_rows = "15"?}
+{?set $jieqi_nofootlink = "1"?}
+
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+	<ul class="ullist">
+	{?section name=i loop=$ptopicrows?}
+	<li>
+	<div>{?if $ptopicrows[i].display_n == 1?}<span class="hot">[待审]</span>{?/if?}{?if $ptopicrows[i].istop == 1?}<span class="hot">[顶]</span>{?/if?}{?if $ptopicrows[i].isgood == 1?}<span class="hot">[精]</span>{?/if?}<a href="{?$jieqi_modules['article']['url']?}/reviewshow.php?tid={?$ptopicrows[i].topicid?}"{?if $ptopicrows[i].display_n == 1?} class="note"{?/if?}>{?$ptopicrows[i].title?}</a></div>
+	<div class="gray"><em>{?$ptopicrows[i].posttime|date:"m-d H:i"?}</em><a href="{?function jieqi_geturl:'article':'article':$ptopicrows[i].ownerid:'info'?}">《{?$ptopicrows[i].articlename?}》</a></div>
+	</li>
+	{?/section?}
+	</ul>
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

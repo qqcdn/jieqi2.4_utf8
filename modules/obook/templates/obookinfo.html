@@ -1,0 +1,52 @@
+{?set jieqi_blocks_module = "obook"?}
+{?set jieqi_blocks_config = "guideblocks"?}
+<table width="100%"  border="0" cellspacing="8">
+	<tr align="center">
+		<td colspan="4" align="center" valign="middle">
+            <span style="font-size:16px; font-weight:bold; line-height:150%;">{?$obookname?}</span>
+		</td>
+	</tr>
+	<tr>
+        <td width="25%">类别：{?$sort?}</td>
+        <td width="25%">作者：{?if $authorid > 0?}<a href="{?function jieqi_geturl:'system':'user':$authorid?}" target="_blank">{?$author?}</a>{?else?}{?$author?}{?/if?}</td>
+        <td width="25%">字数：{?$words?}</td>
+		<td width="25%">更新：{?$lastupdate|date:'Y-m-d'?}</td>
+	</tr>
+	<tr>
+        <td colspan="4">最新章节：<a href="{?$url_lastchapter?}">{?$lastchapter?}</a></td>
+	</tr>
+	<tr>
+		<td width="25%"><a class="btnlink" href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">详细信息</a></td>
+		<td width="25%"><a class="btnlink" href="{?function jieqi_geturl:'article':'article':$articleid:'index':$articlecode?}">作品目录</a></td>
+		<td width="25%"><a class="btnlink" id="a_addbookcase" href="javascript:;" onclick="if({?$jieqi_userid?}) Ajax.Tip('{?$url_bookcase?}', {method: 'POST'}); else openDialog('{?$jieqi_user_url?}/login.php?jumpurl={?$jieqi_thisurl|urlencode?}&ajax_gets=jieqi_contents', false);">加入书架</a></td>
+		<td width="25%"><a class="btnlink" href="{?$url_manage?}">管理本书</a></td>
+	</tr>
+</table>
+
+<form action="{?$url_buyobook?}" method="post" name="frmbuy" onsubmit="return checkbuy(this);">
+      <div style="text-align:center;padding:5px;">
+	  
+      </div>
+	  <input name="oid" type="hidden" value="{?$obookid?}" />
+	  <table class="grid" width="100%" align="center">
+      <caption>
+	  VIP章节目录
+	  </caption>
+        <tr align="center">
+          <th width="45%">章节名称</th>
+          <th width="15%">发布时间</th>
+          <th width="15%">字数</th>
+          <th width="15%">价格</th>
+		  <th width="10%">订阅</th>
+        </tr>
+        {?section name=i loop=$ochapterrows?}
+        <tr>
+          <td><a href="{?$ochapterrows[i].url_chapter?}" target="_blank">{?$ochapterrows[i].chaptername?}</a></td>
+          <td align="center">{?$ochapterrows[i].postdate|date:'Y-m-d'?}</td>
+          <td align="center">{?$ochapterrows[i].words?}</td>
+          <td align="center">{?$ochapterrows[i].saleprice?}</td>
+		  <td align="center"><a href="{?$ochapterrows[i].url_chapter?}" target="_blank">订阅</a></td>
+        </tr>
+        {?/section?}
+      </table>
+</form>

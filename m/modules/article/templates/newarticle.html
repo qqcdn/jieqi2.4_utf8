@@ -1,0 +1,167 @@
+{?set $jieqi_pagetitle = "发表新作-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "发表新作"?}
+<script type="text/javascript">
+function frmnewarticle_validate(){
+  if(document.frmnewarticle.sortid.value == "0"){
+    alert("请输入类别");
+    document.frmnewarticle.sortid.focus();
+    return false;
+  }
+  if(document.frmnewarticle.articlename.value == ""){
+    alert("请输入小说名称");
+    document.frmnewarticle.articlename.focus();
+    return false;
+  }
+}
+</script>
+<form class="form" name="frmnewarticle" id="frmnewarticle" action="{?$url_newarticle?}" method="post" onsubmit="return frmnewarticle_validate();" enctype="multipart/form-data">
+<fieldset>
+	<div class="frow">
+		<label class="col4 flabel">类别：</label>
+		<div class="col8 last">
+			<select class="select" size="1" onchange="showtypes(this)" name="sortid" id="sortid">
+  <option value="0">请选择类别</option>
+  {?section name=i loop=$sortrows?}
+  <option value="{?$i['key']?}">{?$sortrows[i].caption?}</option>
+  {?/section?}
+  </select>
+  <span id="typeselect" name="typeselect"></span>
+  <script type="text/javascript">
+  function showtypes(obj){
+    var typeselect=document.getElementById('typeselect');
+    typeselect.innerHTML='';
+    {?section name=i loop=$sortrows?}
+	  {?if $sortrows[i].types != ''?}
+	  if(obj.options[obj.selectedIndex].value == {?$i['key']?}) typeselect.innerHTML='<select class="select" size="1" name="typeid" id="typeid">{?section name=j loop=$sortrows[i].types?}<option value="{?$j['key']?}">{?$sortrows[i]['types'][j]?}</option>{?/section?}</select>';
+	  {?/if?}
+    {?/section?}
+  }
+  </script>
+		</div>
+	</div>
+
+	<div class="frow">
+		<label class="col4 flabel">小说名称：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="articlename" id="articlename" maxlength="50" value="" onBlur="Ajax.Update('{?$jieqi_modules['article']['url']?}/articlecheck.php?articlename='+this.value, {outid:'anamemsg', tipid:'anamemsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /><br /><span id="anamemsg"></span>
+		</div>
+	</div>
+
+	<div class="frow">
+		<label class="col4 flabel">副标题：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="backupname" id="backupname" maxlength="100" value="" /><br /><span class="hot">一句话简介</span>
+		</div>
+	</div>
+
+	<div class="frow">
+		<label class="col4 flabel">标签：</label>
+		<div class="col8 last">
+			<div class="dropdown" style="width:100%;">
+  <div><input type="text" class="text" name="keywords" id="tagwords" maxlength="100" value=""{?if $taglimit > 0?} readonly="readonly"{?/if?} />{?if $tagnum == 0?} <span class="hot">多个标签用英文空格分隔</span>{?/if?}</div>
+  {?if $tagnum > 0?}
+  <div class="dropbox" style="width:100%;padding:5px 10px;">
+    <ul class="ultag">
+	{?section name=i loop=$tagwords?}
+	<li onclick="selecttag('tagwords', this);">{?$tagwords[i].name?}</li>
+	{?/section?}
+    </ul>
+  </div>
+  {?/if?}
+  </div>
+		</div>
+	</div>
+{?if $allowtrans > 0?}
+	<div class="frow">
+		<label class="col4 flabel">作者：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="author" id="author" maxlength="30" value="" /><br /><span class="hot">发表自己作品请留空</span>
+		</div>
+	</div>
+
+	<div class="frow">
+		<label class="col4 flabel">作者授权：</label>
+		<div class="col8 last">
+			{?section name=i loop=$authorflag['items']?}
+  <label class="radio"><input type="radio" name="authorflag" value="{?$i['key']?}" {?if $i['key'] == $authorflag['default']?}checked="checked" {?/if?}/>{?$authorflag['items'][i]?}</label>
+  {?/section?}
+		</div>
+	</div>
+{?/if?}
+	<div class="frow">
+		<label class="col4 flabel">授权级别：</label>
+		<div class="col8 last">
+			{?section name=i loop=$permission['items']?}
+  <label class="radio"><input type="radio" name="permission" value="{?$i['key']?}" {?if $i['key'] == $permission['default']?}checked="checked" {?/if?}/>{?$permission['items'][i]?}</label>
+  {?/section?}
+		</div>
+	</div>
+
+	<div class="frow">
+		<label class="col4 flabel">首发状态：</label>
+		<div class="col8 last">
+			{?section name=i loop=$firstflag['items']?}
+  <label class="radio"><input type="radio" name="firstflag" value="{?$i['key']?}" {?if $i['key'] == $firstflag['default']?}checked="checked" {?/if?}/>{?$firstflag['items'][i]?}</label>
+  {?/section?}
+		</div>
+	</div>
+{?if $ismanager > 0?}
+	<div class="frow">
+		<label class="col4 flabel">责任编辑：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="agent" id="agent" maxlength="30" value="" /><br /><span class="hot">可以留空或指定本站会员名</span>
+		</div>
+	</div>
+	{?if $customsites|count > 0?}
+	<div class="frow">
+		<label class="col4 flabel">来源网站：</label>
+		<div class="col8 last">
+			<select class="select" size="1" name="siteid">
+  <option value="0" selected="selected">本站原创</option>
+  {?section name=i loop=$customsites?}
+  <option value="{?$i['key']?}">{?$customsites[i].name?}</option>
+  {?/section?}
+  </select>
+		</div>
+	</div>
+	{?/if?}
+{?/if?}
+	<div class="frow">
+		<div class="row">
+		<label class="col4 flabel">内容简介：</label>
+		<div class="col8 last">&nbsp;</div>
+		</div>
+		<div class="row"><textarea class="textarea" name="intro" id="intro" rows="6" ></textarea></div>
+	</div>
+	<div class="frow">
+		<div class="row">
+		<label class="col4 flabel">本书公告：</label>
+		<div class="col8 last">&nbsp;</div>
+		</div>
+		<div class="row"><textarea class="textarea" name="notice" id="notice" rows="6"></textarea></div>
+	</div>
+
+	<div class="frow">
+		<label class="col4 flabel">封面小图：</label>
+		<div class="col8 last">
+			<input type="file" class="text" name="articlespic" id="articlespic" /><br /><span class="hot">图片格式：{?$imagetype?}</span>
+		</div>
+	</div>
+
+	<div class="frow">
+		<label class="col4 flabel">封面大图：</label>
+		<div class="col8 last">
+			<input type="file" class="text" name="articlelpic" id="articlelpic" /><br /><span class="hot">图片格式：{?$imagetype?}</span>
+		</div>
+	</div>
+
+	<div class="frow">
+		<label class="col4 flabel">&nbsp;</label>
+		<div class="col8 last">
+			<button type="submit" class="button" name="submit">提 交</button>
+			<input type="hidden" name="act" value="newarticle" />{?$jieqi_token_input?}
+		</div>
+	</div>
+
+</fieldset>
+</form>

@@ -1,0 +1,20 @@
+{?set $jieqi_pagetitle = "详细新闻-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "详细新闻"?}
+
+<div class="c_main">
+<div class="c_title">{?$news['title']?}</div>
+
+<div class="c_head">
+  <span class="c_label">新闻来源：</span><span class="c_value">{?if $news['surl'] == ''?}{?$news['source']?}{?else?}<a href="{?$news['surl']?}">{?$news['source']?}</a>{?/if?}</span>
+  <span class="c_label">发表时间：</span><span class="c_value">{?$news['addtime']|date:'Y-m-d H:i:s'?}</span>
+  <span class="c_label">发表人：</span><span class="c_value"><a href="{?function jieqi_geturl:'system':'user':$news['posterid']?}">{?$news['poster']?}</a></span>
+</div>
+
+<div class="c_content" id="c_content">
+  {?$news['contents']?}
+</div>
+
+<div class="c_foot">
+  
+</div>
+</div>

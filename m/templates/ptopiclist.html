@@ -1,0 +1,35 @@
+{?set jieqi_page_rows = "30"?}
+<form name="frmsearch" method="get" action="{?$jieqi_url?}/ptopiclist.php">
+<div class="cf">
+	<div class="fl">
+	关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50"> 
+            <label class="radio"><input type="radio" name="keytype" value="0" checked="checked">会客室主人</label> 
+            <label class="radio"><input type="radio" name="keytype" value="1">发表人</label> &nbsp;&nbsp;
+       <button type="submit" name="btnsearch" class="button">搜 索</button>
+	</div>
+	<div class="fr">[<a href="{?$jieqi_url?}/ptopiclist.php?type=all">全部主题</a>]&nbsp;&nbsp;[<a href="{?$jieqi_url?}/ptopiclist.php?type=good">精华主题</a>]</div>
+</div>
+</form>
+<br />
+<table class="grid" width="100%" align="center">
+  <tr class="head">
+    <td width="50%">主题</td>
+    <td width="10%">会客室主人</td>
+    <td width="12%">回复/查看</td>
+    <td width="10%">发表人</td>
+    <td width="18%">发表时间</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$ptopicrows?}
+  <tr>
+    <td>{?if $ptopicrows[i].istop == 1?}<span class="hot">[顶]</span>{?/if?}{?if $ptopicrows[i].isgood == 1?}<span class="hot">[精]</span>{?/if?}<a href="{?$jieqi_url?}/ptopicshow.php?tid={?$ptopicrows[i].topicid?}">{?$ptopicrows[i].title?}</a></td>
+    <td><a href="{?$jieqi_url?}/ptopics.php?oid={?$ptopicrows[i].ownerid?}" target="_blank">{?$ptopicrows[i].ownername?}</a></td>
+    <td align="center">{?$ptopicrows[i].replies?}/{?$ptopicrows[i].views?}</td>
+    <td><a href="{?function jieqi_geturl:'system':'user':$ptopicrows[i].posterid?}" target="_blank">{?$ptopicrows[i].poster?}</a></td>
+    <td align="center">{?$ptopicrows[i].posttime|date:"Y-m-d H:i:s"?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,25 @@
+<table class="grid" width="100%" align="center">
+<caption>{?$usertitle?}</caption>
+  <tr align="center">
+    <th width="16%">用户名</th>
+    <th width="16%">等级</th>
+    <th width="16%">注册日期</th>
+    <th width="16%">最后登陆</th>
+    <th width="16%">本月积分</th>
+    <th width="20%">总积分</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$userrows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'system':'user':$userrows[i].uid?}" target="_blank">{?$userrows[i].uname?}</a></td>
+    <td align="center">{?$userrows[i].group?}</td>
+    <td align="center">{?$userrows[i].regdate|date:'Y-m-d'?}</td>
+    <td align="center"><span>{?$userrows[i].lastlogin|date:'Y-m-d H:i'?}</span></td>
+    <td align="center">{?$userrows[i].monthscore?}</td>
+    <td align="center">{?$userrows[i].score?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+
+<div class="pages">{?$url_jumppage?}</div>

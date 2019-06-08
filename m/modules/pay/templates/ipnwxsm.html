@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset={?$jieqi_charset?}" />
+<title>{?$title?}</title>
+<link rel="stylesheet" type="text/css" media="all" href="{?$jieqi_themeurl?}style.css" />
+<script language="javascript" type="text/javascript" src="{?$jieqi_url?}/scripts/common.js"></script>
+</head>
+<body>
+<div style="text-align:center; width:50%; margin:2em auto;">
+    <div class="block">
+      <div class="blocktitle">欢迎使用微信扫码充值</div>
+      <div class="blockcontent">
+	    <div style="padding:10px; text-align:left;">
+		您好，{?$buyname?}! <br />
+		您选择的交易类型为： <br />
+		<span class="hot"> * 充值{?$egold?}{?$egoldname?}，支付金额：{?$money?}元</span><br />
+		<div style="text-align:center;">
+		<p>请用微信扫一扫，扫描以下二维码完成充值。</p>
+		<img src="{?$qrdata?}" style="width:300px;height:300px;margin:20px auto;" />
+		<p>如果已经充值完成，请点击 <a class="btnlink" href="{?$jieqi_url?}/userdetail.php">查看我的账户</a></p>
+		</div>
+		</div>
+	  </div>
+	  <div class="blocknote"><a href="javascript:history.back(1)">返回继续充值</a> | <a href="{?$jieqi_url?}/">返回网站首页</a></div>
+	</div>
+</div>
+
+</body>
+</html>

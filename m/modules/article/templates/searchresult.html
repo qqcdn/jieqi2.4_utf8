@@ -1,0 +1,27 @@
+{?set $jieqi_pagetitle = "搜索关键词“{$searchkey}”-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "搜索结果"?}
+{?set jieqi_page_rows = "20"?}
+
+
+<div class="blockb">
+<div class="blocktitle">搜索“<b class="hot">{?$searchkey?}</b>”有<b class="hot"> {?$allresults?} </b>条记录</div>
+<div class="blockcontent" id="jieqi_page_contents">
+	{?section name=i loop=$articlerows?}
+	<div class="c_row cf">
+	<a class="db cf" href="{?$articlerows[i].url_articleinfo?}">
+	<div class="row_cover">
+	<img class="cover_m" src="{?$articlerows[i].url_simage?}" />
+	</div>
+
+	<div class="row_text">
+	<h4>{?$articlerows[i].articlename_hl?}</h4>
+    <p class="gray">{?$articlerows[i].author_hl?} | {?$articlerows[i].keywords_hl?}
+	<br />{?$articlerows[i].intro|truncate:76:'..'?}</p>
+	</div>
+	</a>
+	</div>
+	{?/section?}
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

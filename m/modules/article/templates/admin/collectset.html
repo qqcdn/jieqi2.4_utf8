@@ -1,0 +1,38 @@
+<table class="grid" width="100%" align="center">
+    <caption>配置说明</caption>
+    <tr>
+        <td>
+		<ul>
+		<li>采集网站列表的配置文件为：configs/article/collectsite.php</li>
+		<li>某个网站的采集规则配置文件为：configs/article/site_网站英文标识.php</li>
+		<li>网站英文标识不可以重复</li>
+		</ul>
+		</td>
+    </tr>
+</table>
+
+<br />
+
+<table class="grid" width="100%" align="center">
+  <caption>采集规则配置 | <a href="{?$article_static_url?}/admin/collectnew.php">添加新的采集规则</a></caption>
+  <tr align="center">
+    <th width="40%">网站名称</th>
+    <th width="20%">网站英文标识</th>
+    <th width="20%">单篇采集规则</th>
+    <th width="20%">批量采集规则</th>
+  </tr>
+  {?section name=i loop=$siterows?}
+  <tr>
+    <td align="center"><a href="{?$siterows[i].url?}" target="_blank">{?$siterows[i].name?}</a></td>
+    <td align="center">{?$siterows[i].config?}</td>
+    <td align="center">
+	<a href="{?$article_static_url?}/admin/collectedit.php?config={?$siterows[i].config?}">编辑</a> | 
+	<a id="act_del_{?$i['key']?}" href="javascript:;" onclick="if(confirm('确实要删除该采集规则么？')) Ajax.Tip('{?$article_static_url?}/admin/collectset.php?config={?$siterows[i].config?}&act=del{?$jieqi_token_url?}', {method: 'POST'});">删除</a>
+	</td>
+    <td align="center"><a href="{?$article_static_url?}/admin/collectpage.php?config={?$siterows[i].config?}">进入管理</a></td>
+  </tr>
+  {?/section?}
+  <tr>
+    <td colspan="4" align="right"><a href="{?$article_static_url?}/admin/collectnew.php">添加新的采集规则</a>&nbsp;</td>
+  </tr>
+</table>

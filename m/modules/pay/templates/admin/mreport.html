@@ -1,0 +1,77 @@
+{?set jieqi_page_rows = "50"?}
+<table class="grid" width="100%" align="center">
+	<tr>
+	<td>
+	  <form name="frmmake" method="post" action="{?$jieqi_modules['pay']['url']?}/admin/mreport.php">
+		选择年月：
+	  <select name="ryear">
+	  {?section name=i loop=$ryearrows?}
+	  <option value="{?$ryearrows[i]?}"{?if $ryearrows[i] == $dyear?} selected="selected"{?/if?}>{?$ryearrows[i]?}年</option>
+	  {?/section?}
+	  </select>
+	  <select name="rmonth">
+	  {?section name=i loop=$rmonthrows?}
+	  <option value="{?$rmonthrows[i]?}"{?if $rmonthrows[i] == $dmonth?} selected="selected"{?/if?}>{?$rmonthrows[i]?}月</option>
+	  {?/section?}
+	  </select>
+	  <input type="hidden" name="act" value="make" />{?$jieqi_token_input?}
+	  <button type="submit" name="btnsearch" class="button">生成月报表</button>
+	  <span class="hot">注意：只能生成本月之前的报表，如果数据较多请耐心等待！</span>
+	  </form>
+	</td>
+	</tr>
+    <tr>
+      <td>
+	  <form name="frmsearch" method="get" action="{?$jieqi_modules['pay']['url']?}/admin/mreport.php">
+	  支付方式：<select class="select"  size="1" name="paytype">
+		<option value=""{?if $_request['paytype'] == ''?} selected="selected"{?/if?}>不限</option>
+		{?section name=i loop=$paytyperows?}
+		<option value="{?$paytyperows[i].paytype?}"{?if $_request['paytype'] == $paytyperows[i].paytype?} selected="selected"{?/if?}>{?$paytyperows[i].shortname?}</option>
+		{?/section?}
+		</select>
+	  &nbsp; 月份：从 <input name="startmonth" type="text" class="text" size="10" maxlength="10" value="{?$_request['startmonth']?}"> 到 <input name="endmonth" type="text" class="text" size="10" maxlength="10" value="{?$_request['endmonth']?}">
+	  结果：
+	  <select class="select" size="1" name="format">
+		  <option value=""{?if $_request['format'] == ''?} selected="selected"{?/if?}>直接显示</option>
+		  <option value="exceltxt"{?if $_request['format'] == 'exceltxt'?} selected="selected"{?/if?}>EXCEL文本</option>
+		  <option value="excel5"{?if $_request['format'] == 'excel5'?} selected="selected"{?/if?}>EXCEL5</option>
+		  <option value="excel2007"{?if $_request['format'] == 'excel2007'?} selected="selected"{?/if?}>EXCEL2007</option>
+	  </select>
+	  &nbsp; <button type="submit" name="Submit" class="button">搜  索</button>
+	  月份格式：201205
+	  </form>
+	  </td>
+    </tr>
+	<tr>
+		<td>
+		总记录数：{?$mreportstat['cot']?}， 总金额：{?$mreportstat['summoney']|fen2yuan?}， 总{?$egoldname?}：{?$mreportstat['sumegold']|intval?}
+		</td>
+	</tr>
+</table>
+
+
+
+<table class="grid" width="100%" align="center">
+<caption>
+充值统计月报表
+</caption>
+  <tr align="center">
+    <th width="20%">统计月份</th>
+    <th width="20%">支付方式</th>
+    <th width="20%">充值次数</th>
+	<th width="20%">总金额</th>
+	<th width="20%">总{?$egoldname?}</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$mreportrows?}
+  <tr>
+    <td align="center">{?$mreportrows[i].reportmonth?}</td>
+    <td>{?$mreportrows[i].paytype?}</td>
+    <td align="center">{?$mreportrows[i].paycount?}</td>
+    <td align="center">{?$mreportrows[i].summoney|fen2yuan?}</td>
+    <td align="center">{?$mreportrows[i].sumegold?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

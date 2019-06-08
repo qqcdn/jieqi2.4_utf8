@@ -1,0 +1,48 @@
+<form name="frmsearch" method="get" action="{?$url_chapter?}">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td>关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50"> 
+            <label class="radio"><input type="radio" name="keytype" value="0" checked="checked">小说名称</label>
+			      <label class="radio"><input type="radio" name="keytype" value="1">发表者</label> &nbsp;&nbsp;
+            <button type="submit" name="btnsearch" class="button">搜 索</button>
+            &nbsp;&nbsp;&nbsp; <a href="{?$url_chapter?}">显示全部章节</a></td>
+    </tr>
+</table>
+</form>
+<br />
+<form action="{?$url_article?}" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>{?$articletitle?}</caption>
+  <tr align="center">
+    <th width="5%"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></th>
+    <th width="18%">小说名称</th>
+    <th width="28%">章节名称</th>
+    <th width="11%">发表者</th>
+    <th width="11%">字数</th>
+    <th width="17%">更新</th>
+    <th width="10%">类型</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$chapterrows?}
+  <tr>
+    <td align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$chapterrows[i].chapterid?}"></td>
+    <td><a href="{?function jieqi_geturl:'article':'article':$chapterrows[i].articleid:'info'?}" target="_blank">{?$chapterrows[i].articlename?}</a></td>
+    <td>{?if $chapterrows[i].chaptertype == 0?}<a href="{?function jieqi_geturl:'article':'chapter':$chapterrows[i].chapterid:$chapterrows[i].articleid:$chapterrows[i].isvip_n?}" target="_blank">{?$chapterrows[i].chaptername?}</a>{?else?}<strong>{?$chapterrows[i].chaptername?}</strong>{?/if?}{?if $chapterrows[i].isvip_n > 0?}<span class="hot">vip</span>{?/if?}</td>
+    <td><a href="{?function jieqi_geturl:'system':'user':$chapterrows[i].posterid?}" target="_blank">{?$chapterrows[i].poster?}</a></td>
+    <td align="center">{?$chapterrows[i].words?}</td>
+    <td align="center">{?$chapterrows[i].lastupdate|date:'Y-m-d H:i:s'?}</td>
+    <td align="center">{?if $chapterrows[i].chaptertype > 0?}分卷{?else?}章节{?/if?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+</form>
+<table width="100%"  border="0" cellspacing="2" cellpadding="3">
+  <tr>
+    <td width="12%" align="right"><!--<button type="submit" name="Submit" class="button">批量删除</button>
+                <input name="batchdel" type="hidden" value="1">--></td>
+    <td width="88%" align="right">{?$url_jumppage?}</td>
+  </tr>
+</table>
+

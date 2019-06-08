@@ -1,0 +1,74 @@
+{?if $option == 4?}{?$s?}{?/if?}
+{?if $option == 3?}
+<br />
+<br />
+<table class="grid" align="center" width="50%">
+<caption>数据库备份</caption>
+  <tr><td><br />{?$backup_info?}<br /><br /></td></tr>
+  <tr><td align="center"><a href="javascript:history.go(-1);">返回上页</a></td></tr>
+</table>
+{?/if?}
+<table class="grid" width="100%">
+  {?if $option == 1?}  
+  <caption>提示</caption>
+  <tr><td>
+  <ul>
+  <li>数据备份功能根据您的选择的数据表备份成文件，导出的数据文件可用“数据库恢复”功能或 phpMyAdmin 导入，默认备份文件保存在/files/system/dbbackup目录。</li>
+  <li>全部备份均不包含模板文件和附件文件。模板、附件的备份只需通过 FTP 等下载 ./templates, ./files 目录即可，本系统不提供单独备份。</li>
+  <li>数据备份选项中的设置，仅供高级用户的特殊用途使用，当您尚未对数据库做全面细致的了解之前，请使用默认参数备份，否则将导致备份数据错误等严重问题。</li>
+  <li>十六进制方式可以保证备份数据的完整性，但是备份文件会占用更多的空间。</li>
+  {?else if $option == 2?}
+  <caption>提示</caption>
+  <tr><td>
+  <ul>
+  <li>本功能在恢复备份数据的同时，将全部覆盖原有数据，请确定恢复前已将网站关闭，恢复全部完成后可以将网站重新开放。</li>
+  <li>数据恢复功能只能恢复由当前版本程序导出的数据文件，其他软件导出格式可能无法识别。</li>
+  <li>您可以手动输入备份SQL的文件名进行数据恢复，多卷文件只需输入某一分卷文件名，所有分卷数据文件会由系统自动导入。</li>
+  <li>系统可自动识别形似080811_OPSVstMx-1.sql 或 080811_OPSVstMx-1 或 080811_OPSVstMx的文件名。</li>
+  {?/if?}
+  </ul>
+  </td></tr>
+</table>
+<br />
+{?$dbmanage_form?}
+<br />
+{?if $option == 2?}
+<form name="frmdbmanage" method="post" action="{?$jieqi_url?}/admin/dbmanage.php?do=submit">
+<table class="grid" width="100%">
+<caption>数据备份纪录</caption>
+  <tr align="center">
+    <td width="5%">选择</td>
+    <td width="5%">序号</td>
+    <td width="20%">文件名称</td>
+	<td width="17%">备份时间</td>
+    <td width="10%">版本</td>
+	<td width="10%">大小</td>
+	<td width="10%">类型</td>
+	<td width="5%">方式</td>
+	<td width="5%">卷号</td>
+	<td width="13%">操作</td>
+  </tr>
+{?section name=i loop=$log_list?}
+  <tr align="center">
+    <td>{?$log_list[i].checkbox?}</td>
+	<td>{?$log_list[i].id?}</td>
+    <td><a href="{?$log_list[i].downloadurl?}">{?$log_list[i].name?}</a></td>
+	<td>{?$log_list[i].time?}</td>
+    <td>{?$log_list[i].version?}</td>
+    <td>{?$log_list[i].size?}</td>
+	<td>{?$log_list[i].type?}</td>
+	<td>{?$log_list[i].mode?}</td>
+    <td>{?$log_list[i].volume?}</td>
+	<td>{?if $log_list[i].importurl != ''?}<a id="act_recover_{?$log_list[i].id?}" href="javascript:;" onclick="if(confirm('确实要恢复该批数据吗？\n\n该操作会导致当前全部或部分数据丢失！恢复前请先做好数据备份工作！')) Ajax.Tip('{?$log_list[i].importurl?}{?$jieqi_token_url?}', {method: 'POST'});">恢复</a>{?/if?}</td>
+  </tr>
+{?/section?}
+  
+</table>
+<br />
+<input type="checkbox" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }">全选&nbsp;&nbsp;&nbsp;&nbsp;
+<button type="button" name="delcheck" class="button" onclick="if(confirm('确实要删除选中记录么？')) this.form.submit();">删除选中记录</button>
+<input type="hidden" name="act" value="delete">{?$jieqi_token_input?}
+</form>
+{?/if?}
+<br />
+<br />

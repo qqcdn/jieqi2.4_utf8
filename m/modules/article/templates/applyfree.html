@@ -1,0 +1,35 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<script type="text/javascript">
+function frmapplyfree_validate(){
+  if(document.frmapplyfree.freedays.value == ""){
+    alert("请输入免费天数");
+    document.frmapplyfree.freedays.focus();
+    return false;
+  }
+}
+</script>
+<form name="frmapplyfree" id="frmapplyfree" action="{?$jieqi_modules['article']['url']?}/applyfree.php?do=submit" method="post" onsubmit="return frmapplyfree_validate();">
+<table width="80%" class="grid" cellspacing="1" align="center">
+<caption>申请限时免费</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">小说名称：</td>
+  <td class="tdr"><a href="{?$jieqi_modules['article']['url']?}/articlemanage.php?id={?$articleid?}">{?$articlename?}</a></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">开始免费日期：</td>
+  <td class="tdr"><input type="text" class="text" style="width:3em;" name="fsyear" id="fsyear" maxlength="4" value="{?$fstime|date:'Y'?}" />年<input type="text" class="text" style="width:2em;" name="fsmonth" id="fsmonth" maxlength="2" value="{?$fstime|date:'m'?}" />月<input type="text" class="text" style="width:2em;" name="fsday" id="fsday" maxlength="2" value="{?$fstime|date:'d'?}" />日</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">免费天数：</td>
+  <td class="tdr"><input type="text" class="text" name="freedays" size="4" maxlength="2" value="" />天 {?if $maxfreedays > 0 ?}<span class="hot">最多{?$maxfreedays?}天</span>{?/if?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;
+  <input type="hidden" name="act" value="apply" />{?$jieqi_token_input?}
+  <input type="hidden" name="aid" value="{?$aid?}" />
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提 交</button></td>
+</tr>
+</table>
+</form>

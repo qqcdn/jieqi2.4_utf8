@@ -1,0 +1,55 @@
+{?set $jieqi_pagetitle = "申请成为作者-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "申请成为作者"?}
+
+<script type="text/javascript">
+function formcheck(){
+  if(document.getElementById('applytext').value == "") {
+    alert('请输入申请小说样章！');
+	document.getElementById('applytext').focus();
+    return false;
+  }
+}
+//统计输入字数
+function show_inputwords(txt){
+	txt = $_(txt);
+	var words = (arguments.length > 1) ? $_(arguments[1]) : $_(txt.id + '_words');
+	words.innerHTML = txt.value.replace(/[\x00-\x08\x0e-\x1f\x21-\xff]+/gi, 'w').replace(/\s/g, '').length;
+}
+//显示默认字数
+addEvent(window, 'load', function(){show_inputwords('applytext');});
+</script>
+<form class="form" action="{?$jieqi_modules['article']['url']?}/applywriter.php" method="post" onsubmit="return formcheck();">
+<fieldset>
+	<div class="frow">
+		<p>
+		<strong>一、作者申请条例：</strong><br />
+		&nbsp;&nbsp;&nbsp; 1、发表小说必须为原创作品。<br />
+		&nbsp;&nbsp;&nbsp; 2、有比较稳定的写作时间和写作速度。<br />
+		&nbsp;&nbsp;&nbsp; 3、小说内容不得含有色情、政治及其他违规内容。<br />
+		</p>
+		<p>
+		<strong>二、申请要求：</strong><br />
+		&nbsp;&nbsp;&nbsp; 1、请先完善您的真实联系信息，如未设置，<a class="hot" href="{?$jieqi_url?}/persondetail.php">&gt;&gt;点击进入</a>。<br />
+		&nbsp;&nbsp;&nbsp; 2、申请原创作者必须提交不少于5000字的原创小说样章，由斑竹审核通过才能发表小说。<br /><br />
+		</p>
+	</div>
+	<div class="frow">
+		<div class="row">
+		<label class="col4 flabel">小说样章：</label>
+		<div class="col8 last">
+			已输入 <span class="hot" id="applytext_words">0</span> 字
+		</div>
+		</div>
+		<div class="row">
+		<textarea class="textarea" name="applytext" id="applytext" rows="15" onkeyup="show_inputwords(this);" oninput="show_inputwords(this);" onpropertychange="show_inputwords(this);"></textarea>
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">&nbsp;</label>
+		<div class="col8 last">
+			<input name="act" type="hidden" value="applywriter" />{?$jieqi_token_input?}
+			<button type="submit" name="submit" id="submit" class="button"> 同意并申请 </button>
+		</div>
+	</div>
+</fieldset>
+</form>

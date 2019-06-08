@@ -1,0 +1,37 @@
+<form name="frmsearch" method="get" action="{?$jieqi_url?}/admin/userlog.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td>关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50"> 
+            <label class="radio"><input type="radio" name="keytype" value="0" checked="checked">操作人员</label>
+            <label class="radio"><input type="radio" name="keytype" value="1">操作对象</label> &nbsp;&nbsp;
+            <button type="submit" name="btnsearch" class="button">搜 索</button>         
+        </td>
+    </tr>
+</table>
+</form>
+<br />
+<table class="grid" width="100%" align="center">
+<caption>用户操作记录</caption>
+  <tr align="center" valign="middle">
+    <th width="12%">日期</th>
+    <th width="12%">时间</th>
+    <th width="14%">操作用户</th>
+    <th width="14%">操作对象</th>
+    <th width="20%">操作原因</th>
+    <th width="28%">操作描述</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$logrows?}
+  <tr valign="middle">
+    <td align="center">{?$logrows[i].logtime|date:'Y-m-d'?}</td>
+    <td align="center">{?$logrows[i].logtime|date:'H:i:s'?}</td>
+    <td align="center"><a href="{?function jieqi_geturl:'system':'user':$logrows[i].fromid?}" target="_blank">{?$logrows[i].fromname?}</a></td>
+    <td align="center"><a href="{?function jieqi_geturl:'system':'user':$logrows[i].toid?}" target="_blank">{?$logrows[i].toname?}</a></td>
+    <td align="left">{?$logrows[i].reason?}</td>
+    <td align="left">{?$logrows[i].chginfo?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

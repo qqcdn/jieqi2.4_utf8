@@ -1,0 +1,47 @@
+<div style="width:100%;padding-top:3px;padding-bottom:3px;">
+<div class="fl"><a href="{?$jieqi_modules['forum']['url']?}/index.php">论坛首页</a></div>
+<div class="fr">{?$url_jumppage?}</div>
+</div>
+
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <th width="50%" class="title">主题</th>
+    <th width="12%" class="title">发表人</th>
+    <th width="13%" class="title">回复/查看</th>
+    <th width="25%" class="title">最后发表</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$topicrows?}
+  <tr>
+    <td width="50%" valign="middle">
+	{?if $topicrows[i].istop > 0?}
+	<span class="iconfont note">&#xee53;</span>
+	{?elseif $topicrows[i].islock > 0?}
+	<span class="iconfont">&#xee29;</span>
+	{?elseif $topicrows[i].isgood > 0?}
+	<span class="iconfont hot">&#xee54;</span>
+	{?else?}
+  <span class="iconfont primary">&#xee59;</span>
+	{?/if?}
+	<span class="iconfont gray">&#xee4b;</span>
+	<a href="{?function jieqi_geturl:'forum':showtopic:$topicrows[i].topicid:1:$page?}">{?$topicrows[i].title?}</a>&nbsp;</td>
+    <td width="12%" align="center" valign="middle">{?if $topicrows[i].posterid > 0?}<a href="{?function jieqi_geturl:'system':'user':$topicrows[i].posterid?}" target="_blank">{?$topicrows[i].poster?}</a>{?else?}<i>游客</i>{?/if?}
+	</td>
+    <td width="13%" align="center" valign="middle">{?$topicrows[i].replies?}/{?$topicrows[i].views?}</td>
+    <td width="25%" valign="middle">
+	{?if $topicrows[i].replytime > 0?}
+	{?if $topicrows[i].replierid > 0?}
+	{?$topicrows[i].replytime|date:"m-d H:i"?} <a href="{?function jieqi_geturl:'system':'user':$topicrows[i].replierid?}" target="_blank">{?$topicrows[i].replier?}</a> 发表
+	{?else?}
+	{?$topicrows[i].replytime|date:"m-d H:i"?} <i>游客</i> 发表
+	{?/if?}
+	{?/if?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+
+<div style="width:100%;padding-top:3px;padding-bottom:3px;">
+<div class="fl"><a href="{?$jieqi_modules['forum']['url']?}/index.php">论坛首页</a></div>
+<div class="fr">{?$url_jumppage?}</div>
+</div>

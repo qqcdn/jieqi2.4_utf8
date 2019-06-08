@@ -1,0 +1,5 @@
+<ul class="ulitem">
+{?section name=i loop=$articlerows?}
+  <li><span class="fr"><a href="{?$article_static_url?}/newchapter.php?aid={?$articlerows[i].articleid?}">更新</a></span><a href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename|truncate:22:'..'?}</a></li>
+{?/section?}
+</ul>

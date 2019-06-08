@@ -1,0 +1,6 @@
+<a href="{?$url_more?}" class="moretop"><i class="iconfont">&#xee6a;</i></a>
+<ul class="ulnum">
+{?section name=i loop=$articlerows?}
+  <li><a class="db cf" href="{?$articlerows[i].url_articleinfo?}"><em>{?$articlerows[i].visitnum?}</em> {?if $i['order'] < 4?}<b>{?$i['order']?}</b>{?else?}<i>{?$i['order']?}</i>{?/if?}{?$articlerows[i].articlename?}</a></li>
+{?/section?}
+</ul>

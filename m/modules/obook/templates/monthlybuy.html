@@ -1,0 +1,36 @@
+<br /><br />
+<form name="frmlogin" method="post" action="{?$jieqi_modules['obook']['url']?}/monthlybuy.php">
+<table style="width:60%; min-width:480px;" class="grid" align="center">
+<caption>购买VIP包月会员</caption>
+  <tr>
+    <td width="30%" align="right" valign="middle">我的账号：</td>
+    <td width="70%">{?$jieqi_username?}</td>
+  </tr>
+  <tr>
+    <td align="right" valign="middle">包月状态：</td>
+    <td>{?if $overtime == 0?}尚未包月{?else?}{?$overtime|date:'Y-m-d'?} 到期{?/if?}</td>
+  </tr>
+  <tr>
+    <td align="right" valign="middle">当前余额：</td>
+    <td>{?$useregold?} {?$egoldname?} &nbsp;&nbsp; <a href="{?$jieqi_modules['pay']['url']?}/buyegold.php">[充值]</a></td>
+  </tr>
+  <tr>
+    <td align="right" valign="middle">包月选项：</td>
+    <td>
+	<ul class="ulrow">
+	{?section name=i loop=$jieqimonthly['options']?}
+	<li><label class="radio"><input type="radio" name="buytype" value="{?$i['key']?}" {?if $buytype == $i['key']?} checked="checked"{?/if?}/>{?$i['key']?}个月 ({?$jieqimonthly['options'][i]?}{?$egoldname?})</label></li>
+	{?/section?}
+	</ul>
+	</td>
+  </tr>
+  <tr>
+    <td align="right" valign="middle">说明：</td>
+    <td>VIP包月有效期内可以阅读本站所有VIP作品。</td>
+  </tr>
+  <tr>
+    <td><input type="hidden" name="act" value="buy">{?$jieqi_token_input?}</td>
+    <td><button type="submit" class="button" name="submit">确认购买</button></td>
+  </tr>
+</table>
+</form><br /><br />

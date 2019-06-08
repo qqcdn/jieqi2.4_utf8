@@ -1,0 +1,59 @@
+{?set $jieqi_pagetitle = "我的订阅-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "我的订阅"?}
+
+<ul class="tabb tab3 cf mb">
+	<li><a href="{?$jieqi_modules['article']['url']?}/recentread.php">最近阅读</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/bookcase.php">我的书架</a></li>
+	<li><a href="javascript:void(0);" class="selected">我的订阅</a></li>
+</ul>
+
+<script type="text/javascript">
+//自动订阅
+function act_autobuy(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onFinish: ''
+	}
+	if(o.getAttribute('switch') == '0'){
+		url = url.replace('act=unsetautobuy', 'act=setautobuy');
+		param.onFinish = function(res){
+			if(res.match('成功')){
+				o.setAttribute('switch', '1');
+				o.innerHTML = '取消自动订阅';
+			}
+		}
+	}else{
+		url = url.replace('act=setautobuy', 'act=unsetautobuy');
+		param.onFinish = function(res){
+			if(res.match('成功')){
+				o.setAttribute('switch', '0');
+				o.innerHTML = '设为自动订阅';
+			}
+		}
+	}
+	Ajax.Tip(url, param);
+	return false;
+}
+</script>
+
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+{?section name=i loop=$obuyrows?}
+	<div class="c_row cf">
+	<a class="db cf" href="{?function jieqi_geturl:'article':'article':$obuyrows[i].articleid:'index'?}"><span class="fr">{?$obuyrows[i].chapternum?}/{?$obuyrows[i].chapters?}</span>{?$obuyrows[i].obookname?}</a>
+    <div style="margin:0.3em 0;">
+	<a class="btnlink b_s f_s" href="{?$obook_dynamic_url?}/buylog.php?oid={?$obuyrows[i].obookid?}">订阅记录</a>
+	{?if $obuyrows[i].autobuy > 0?}
+	&nbsp; <a class="btnlink b_s f_s" id="act_unsetautobuy_{?$obuyrows[i].obuyid?}" href="javascript:;" onclick="act_autobuy('{?$obook_dynamic_url?}/buylist.php?obuyid={?$obuyrows[i].obuyid?}&page={?$jieqi_page_nowpage?}&act=unsetautobuy{?$jieqi_token_url?}');" switch="1" title="自动订阅表示点击一个未订阅VIP章节阅读时，系统不提示购买，自动订阅并显示阅读页面">取消自动订阅</a>
+	{?else?}
+	&nbsp; <a class="btnlink b_s f_s" id="act_setautobuy_{?$obuyrows[i].obuyid?}" href="javascript:;" onclick="act_autobuy('{?$obook_dynamic_url?}/buylist.php?obuyid={?$obuyrows[i].obuyid?}&page={?$jieqi_page_nowpage?}&act=setautobuy{?$jieqi_token_url?}');" switch="0" title="自动订阅表示点击一个未订阅VIP章节阅读时，系统不提示购买，自动订阅并显示阅读页面">设为自动订阅</a>
+	{?/if?}
+	</div>
+	</div>
+{?/section?}
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>
+

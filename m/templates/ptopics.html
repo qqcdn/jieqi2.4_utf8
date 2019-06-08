@@ -1,0 +1,67 @@
+{?set $jieqi_pagetitle = "会客室留言-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "会客室留言"?}
+{?set jieqi_page_rows = "15"?}
+{?set $jieqi_nofootlink = "1"?}
+
+{?if $newpost > 0?}
+<div class="textbox hot" id="postresult">{?$postresult?}</div>
+<script type="text/javascript">
+setTimeout(function(){$_('postresult').hide()}, 3000);
+</script>
+{?/if?}
+
+<div class="blockb">
+<div class="blocktitle"><a href="{?function jieqi_geturl:'system':'user':$ownerid:'info'?}">{?$ownername?}</a> 的会客室</div>
+<div class="blockcontent" id="jieqi_page_contents">
+	<ul class="ullist">
+	{?section name=i loop=$ptopicrows?}
+	<li>
+	<div>{?if $ptopicrows[i].istop == 1?}<span class="hot">[顶]</span>{?/if?}{?if $ptopicrows[i].isgood == 1?}<span class="hot">[精]</span>{?/if?}<a href="{?$jieqi_url?}/ptopicshow.php?tid={?$ptopicrows[i].topicid?}">{?$ptopicrows[i].title|truncate:'54':'..'?}</a></div>
+	<div class="gray"><em>{?$ptopicrows[i].posttime|date:"m-d H:i"?}</em>{?$ptopicrows[i].poster?}</div>
+	</li>
+	{?/section?}
+	</ul>
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>
+
+<a name="postnew"></a>
+{?if $enablepost == 1?}
+<script type="text/javascript">
+function frmpost_validate(){
+  if(document.frmpost.pcontent.value == ""){
+	alert("请输入内容");
+	document.frmpost.pcontent.focus();
+	return false;
+  }
+}
+</script>
+<form name="frmpost" id="frmpost" action="{?$jieqi_url?}/ptopics.php?oid={?$oid?}&do=submit" method="post" onsubmit="return frmpost_validate();" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>发表主题</caption>
+<tr valign="middle" align="left">
+  <td>标题：<input type="text" class="text" name="ptitle" id="ptitle" size="25" maxlength="60" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td><textarea class="textarea" name="pcontent" id="pcontent"></textarea>
+  </td>
+</tr>
+{?if $postcheckcode > 0?}
+<tr valign="middle" align="left">
+  <td>验证码：<input type="text" class="text" style="width:6em;" name="checkcode" id="checkcode" onfocus="if(this.form.imgccode.style.display == 'none'){this.form.imgccode.src = '{?$jieqi_url?}/checkcode.php?rand={?$jieqi_time?}';this.form.imgccode.style.display = '';}" title="点击显示验证码"><img name="imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码"></td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td><button type="submit" class="button" name="btnpost">提 交</button><input type="hidden" name="act" value="newpost" />{?$jieqi_token_input?}</td>
+</tr>
+</table>
+</form>
+{?else?}
+<table class="grid" width="100%" align="center">
+  <caption>发表主题</caption>
+  <tr>
+	<td align="center"><br />您不能发表主题，如果尚未登录，请先点击 <a class="hot fwb" href="{?$jieqi_user_url?}/login.php">登录</a><br /><br /></td>
+  </tr>
+</table>
+{?/if?}

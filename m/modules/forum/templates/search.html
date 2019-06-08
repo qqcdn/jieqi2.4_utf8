@@ -1,0 +1,42 @@
+{?set $jieqi_pagetitle = "论坛搜索-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "论坛搜索"?}
+
+<form class="form cf" name="frmsearch" id="frmsearch" action="{?$jieqi_modules['forum']['url']?}/search.php" method="post">
+    <fieldset>
+    <div class="frow">
+      <label class="col4 flabel">关键字：</label>
+      <div class="col8 last">
+			<input type="text" class="text" name="searchkey" size="20" value="" />
+			</div>
+    </div>
+
+    <div class="frow">
+      <label class="col4 flabel">搜索字段：</label>
+      <div class="col8 last">
+			<label class="radio"><input type="radio" name="searchtype" value="0" checked="checked" />帖子主题</label>
+			<label class="radio"><input type="radio" name="searchtype" value="1" />帖子作者</label>
+			</div>
+    </div>
+
+    <div class="frow">
+      <label class="col4 flabel">搜索范围：</label>
+      <div class="col8 last">
+			<select class="select"  size="1" name="searcharea">
+				<option value="0|0">--整个论坛--</option>
+			{?section name=i loop=$forumselect?}
+				<option value="{?$forumselect[i].value?}">{?$forumselect[i].title?}</option>
+			{?/section?}
+			</select>
+			</div>
+    </div>
+
+    <div class="frow">
+      <label class="col4 flabel">&nbsp;</label>
+			<div class="col8 last">
+      <button type="submit" class="button" name="submit">搜 索</button>
+			<input type="hidden" name="act" value="search" />
+			{?$jieqi_token_input?}
+			</div>
+    </div>
+    </fieldset>
+</form>

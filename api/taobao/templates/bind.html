@@ -1,0 +1,103 @@
+<div style="width:100%; padding:10px 0px;">
+
+<div class="jieqiNote" style="margin:10px auto; width:60%; padding:20px;">
+    来自{?$apititle?}的<strong class="hot">{?$api_nickname?}</strong>：<br />您可以选择直接进入网站，或者绑定本站会员账号。<br />
+    <div style="margin:10px auto; text-align:center;"><a href="{?$jieqi_user_url?}/api/{?$apiname?}/bind.php?act=bindauto" class="btnlink">不要绑定，直接去看书！</a></div>
+</div>
+
+<div id="tabbind" style="margin:10px auto; width:60%;">
+     <div class="tablist">
+         <ul>
+             <li><a href="javascript:void(0)" onclick="selecttab(this)" class="selected">注册新账号并绑定</a></li>
+             <li><a href="javascript:void(0)" onclick="selecttab(this)">已有账号？直接绑定</a></li>
+         </ul>
+     </div>
+     <div class="tabcontent">
+         <div class="tabvalue">
+
+             <form class="form cf" name="frmbindnew" id="frmbindnew" action="{?$jieqi_user_url?}/api/{?$apiname?}/bind.php?do=submit" method="post">
+                 <fieldset>
+
+                     <div class="frow">
+                         <label class="col4 flabel"><span class="hot">*</span>用户名：</label>
+                         <div class="col8 last">
+                             <input type="text" class="text" name="username" id="username" size="25" maxlength="30" style="width:160px" value="{?$api_nickname?}" onBlur="Ajax.Update('{?$check_url?}?item=u&username='+this.value, {outid:'usermsg', tipid:'usermsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /> <span id="usermsg"></span>
+                         </div>
+                     </div>
+
+                     <div class="frow">
+                         <label class="col4 flabel"><span class="hot">*</span>密码：</label>
+                         <div class="col8 last">
+                             <input type="password" class="text" name="password" id="password" size="25" style="width:160px" value="" onBlur="Ajax.Update('{?$check_url?}?item=p&password='+this.value, {outid:'passmsg', tipid:'passmsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /> <span id="passmsg"></span>
+                         </div>
+                     </div>
+
+                     <div class="frow">
+                         <label class="col4 flabel"><span class="hot">*</span>确认密码：</label>
+                         <div class="col8 last">
+                             <input type="password" class="text" name="repassword" id="repassword" size="25" style="width:160px" value=""  onBlur="Ajax.Update('{?$check_url?}?item=r&password='+password.value+'&repassword='+this.value, {outid:'repassmsg', tipid:'repassmsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /> <span id="repassmsg"></span>
+                         </div>
+                     </div>
+
+                     <div class="frow">
+                         <label class="col4 flabel"><span class="hot">*</span>Email：</label>
+                         <div class="col8 last">
+                             <input type="text" class="text" name="email" id="email" size="25" maxlength="60" style="width:160px" value="" onBlur="Ajax.Update('{?$check_url?}?item=m&email='+this.value, {outid:'mailmsg', tipid:'mailmsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /> <span id="mailmsg"></span>
+                         </div>
+                     </div>
+
+                     <div class="frow">
+                         <label class="col4 flabel">&nbsp;</label>
+                         <div class="col8 last">
+                             <button type="submit" class="button" name="submit">确认绑定</button>
+                             <input type="hidden" name="act" value="bindnew" />
+                             {?$jieqi_token_input?}
+                         </div>
+                     </div>
+                 </fieldset>
+             </form>
+         </div>
+         <div class="tabvalue" style="display:none">
+
+             <form class="form cf" name="frmbindold" id="frmbindold" method="post" action="{?$jieqi_user_url?}/api/{?$apiname?}/bind.php?do=submit">
+                 <fieldset>
+                     <div class="frow">
+                         <label class="col4 flabel">用户名：</label>
+                         <div class="col8 last">
+                             <input type="text" class="text" size="20" maxlength="30" style="width:120px" name="username" onKeyPress="javascript: if (event.keyCode == 32 || event.which == 32) return false;">
+                         </div>
+                     </div>
+
+                     <div class="frow">
+                         <label class="col4 flabel">密　码：</label>
+                         <div class="col8 last">
+                             <input type="password" class="text" size="20" maxlength="30" style="width:120px" name="password">
+                         </div>
+                     </div>
+
+                     <div class="frow">
+                         <label class="col4 flabel">&nbsp;</label>
+                         <div class="col8 last">
+                             <label class="checkbox"><input type="checkbox" name="usecookie" value="1" />下次自动登陆</label>
+                         </div>
+                     </div>
+
+                     <div class="frow">
+                         <label class="col4 flabel">&nbsp;</label>
+                         <div class="col8 last">
+                             <button type="submit" class="button" name="submit">确认绑定</button>
+                             <input type="hidden" name="act" value="bindold" />
+                         </div>
+                     </div>
+
+                 </fieldset>
+             </form>
+
+         </div>
+     </div>
+</div>
+</div>
+
+<div class="jieqiNote" style="margin:10px auto; width:60%; padding:20px;">
+    <strong class="hot">说明：</strong>如果选择绑定本站会员账号，以后可以选择{?$apititle?}账号登陆，也可以使用本站账号密码登陆。不绑定则只能使用{?$apititle?}账号登陆。
+</div>

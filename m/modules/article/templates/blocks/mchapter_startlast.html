@@ -1,0 +1,24 @@
+<div class="cf">
+	<ul class="tabb tab2">
+		<li><a href="javascript:void(0)" onclick="selecttab(this)" class="selected">开始章节</a></li>
+		<li><a href="javascript:void(0)" onclick="selecttab(this)">最新章节</a></li>
+	</ul>
+</div>
+<div class="mts">
+	<div>
+		<ul class="ullist">
+		{?section name=i loop=$chapterstart?}
+		<li><a href="{?$chapterstart[i].url_chapter?}">{?$chapterstart[i].volumename?} {?$chapterstart[i].chaptername?}</a>{?if $chapterstart[i].isvip_n > 0?}<i class="hot">vip</i>{?/if?}</li>
+		{?/section?}
+		</ul>
+		<a href="{?$url_start?}" class="more">显示全部章节<i class="iconfont">&#xee6a;</i></a>
+	</div>
+	<div style="display:none;">
+		<ul class="ullist">
+		{?section name=i loop=$chapterlast?}
+		<li><a href="{?$chapterlast[i].url_chapter?}">{?$chapterlast[i].volumename?} {?$chapterlast[i].chaptername?}</a>{?if $chapterlast[i].isvip_n > 0?}<i class="hot">vip</i>{?/if?}</li>
+		{?/section?}
+		</ul>
+		<a href="{?$url_last?}" class="more">显示全部章节<i class="iconfont">&#xee6a;</i></a>
+	</div>
+</div>

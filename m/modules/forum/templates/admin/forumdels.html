@@ -1,0 +1,54 @@
+<form name="frmsearch" method="get" action="{?$url_forum?}">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td>关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="15" maxlength="50"> 
+            <label class="radio"><input type="radio" name="keytype" value="0" checked="checked">帖子名称</label>
+            <label class="radio"><input type="radio" name="keytype" value="1">帖子作者</label> 
+		        <label class="radio"><input type="radio" name="keytype" value="2">帖子发表日期</label>
+            <button type="submit" name="btnsearch" class="button">搜 索</button>
+			&nbsp;&nbsp;&nbsp;<a href="{?$jieqi_modules['forum']['url']?}/admin/forumdels.php">全部帖子</a>
+            &nbsp;&nbsp;<small style="color:red;font-size:12px;">注意</small>：帖子发表日期格式：2009-09-15
+        </td>
+		<td></td>
+    </tr>
+</table>
+</form>
+<br />
+<form name="frmsearch" method="get" action="{?$url_forum?}">
+<table class="grid" width="100%" align="center">
+<caption>{?$forumtitle?}</caption>
+  <tr align="center">
+    <th width="5%"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = form.checkall.checked; }"></th>
+    <th width="42%">帖子名称</th>
+    <th width="15%">帖子作者</th>
+    <th width="10%">浏览次数</th>
+	<th width="10%">回复次数</th>
+    <th width="18%">发表时间</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$forumrows?}
+  <tr>
+    <td align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$forumrows[i].topicid?}"></td>
+    <td align="left"><a href="{?function jieqi_geturl:'forum':showtopic:$forumrows[i].topicid:1:$page?}" 
+	target="_blank">{?$forumrows[i].title?}</a></td>
+	<td align="left"><a href="{?function jieqi_geturl:'system':'user':$forumrows[i].posterid?}" target="_blank">{?$forumrows[i].poster?} </a></td>
+    <td align="center">{?$forumrows[i].views?}</td>
+	<td align="center">{?$forumrows[i].replies?}</td>
+    <td align="center">{?$forumrows[i].posttime|date:'Y-m-d H:i:s'?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+  <tr>
+    <td colspan="6" align="left">
+		<input type="button" name="allcheck" value="全部选中" class="button" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].type == 'checkbox') this.form.elements[i].checked = true; }" />
+		<input type="button" name="nocheck" value="全部取消" class="button" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].type == 'checkbox') this.form.elements[i].checked = false; }" />
+		<button type="submit" name="delcheck" class="button" onclick="if(confirm('确实要删除选中记录么？')){ this.form.act.value='1';this.form.submit();}else{return false;}">批量删除选中记录</button>
+		<input name="keywordurl" type="hidden" id="keywordurl" value="{?$keywordurl?}">
+		<input name="keytypeurl" type="hidden" id="keytypeurl" value="{?$keytypeurl?}">
+		<input name="act" type="hidden" id="act" value="0" />
+	</td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

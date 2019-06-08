@@ -1,0 +1,44 @@
+<br>
+<table class="grid" width="80%" align="center">
+  <caption>生成伪静态/静态页面</caption>
+<form name="form1" method="post" action="{?$article_dynamic_url?}/admin/createfake.php" target="_blank">
+  <tr>
+    <td width="29%" align="right">文件格式：</td>
+    <td width="71%">
+      <label class="radio"><input type="radio" name="filetype" value="fake" checked="checked" />伪静态</label> &nbsp;&nbsp;
+      <label class="radio"><input type="radio" name="filetype" value="static" />静态</label>
+    </td>
+  </tr>
+  <tr>
+    <td width="29%" align="right">起始序号：</td>
+    <td width="71%"><input name="startid" type="text" id="startid" size="10" maxlength="11" class="text"> 
+    <span class="hot">起始和终止序号都留空的话，系统自动从当前数据库的最小需要生成到最大序号。</span></td>
+  </tr>
+  <tr>
+    <td align="right">终止序号：</td>
+    <td><input name="stopid" type="text" id="stopid" size="10" maxlength="11" class="text"></td>
+  </tr>
+  <tr>
+    <td align="right">生成的页面类别：</td>
+    <td>
+	<label class="radio"><input type="radio" name="act" value="makeinfo" checked="checked"> 小说信息页面（每篇小说一个文件，按序号生成）</label><br>
+	<label class="radio"><input type="radio" name="act" value="makesort"> 小说分类列表（每页一个文件，按页码生成）</label><br>
+	<label class="radio"><input type="radio" name="act" value="makeinitial"> 小说按字母分类页面（每页一个文件，按页面生成）</label><br>
+	<label class="radio"><input type="radio" name="act" value="maketoplist"> 排行榜页面（每页一个文件，按页面生成）</label><br>
+	</td>
+  </tr>
+  <tr>
+    <td colspan="2">提示：起始序号最小为1，终止序号应该比实际最大序号设置更大一些，这样即使增加新小说也不会出现文件找不到。</td>
+    </tr>
+  <tr>
+    <td align="right">&nbsp;{?$jieqi_token_input?}</td>
+    <td><button type="submit" name="make1" class="button">开始生成</button></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="right" class="foot">&nbsp;</td>
+  </tr>
+  </form>
+</table>
+
+<br>
+<br>

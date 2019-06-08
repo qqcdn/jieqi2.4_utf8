@@ -1,0 +1,308 @@
+// 变量文件
+
+// 颜色
+$color-dark: #333 !default; //默认深色调
+$color-light: #f5f5f5 !default; //默认浅色调
+$color-bg: #fff !default; //默认网页背景色
+
+$gray-dark: #373a3c !default; //深灰
+$gray: #55595c !default; //灰色
+$gray-light: #999 !default; //亮灰
+$gray-lighter: #eceeef !default; //加亮灰
+
+$brand-primary: #0275d8 !default; //主颜色
+$brand-secondary: #3bb4f2 !default; //次颜色
+$brand-success: #5cb85c !default; //成功色
+$brand-info: #5bc0de !default; //信息
+$brand-warning: #f0ad4e !default; //警告
+$brand-danger: #d9534f !default; //危险
+
+// 选项
+$enable-rounded: true !default; //是否圆角
+$enable-shadows: true !default; //是否阴影
+$enable-gradients: false !default; //是否渐变色
+$enable-transitions: false !default; //是否过渡动画
+
+// 间隙
+$spacer: 0.6em !default; //内容块间隙
+$spacer-x: $spacer !default; //横向间隙
+$spacer-y: $spacer !default; //纵向间隙
+$border-width: 1px !default; //边框宽度
+$border-color: #ddd !default; //边框颜色
+$border-shadow: 0 6px 12px #d3d3d3 !default; //边框阴影
+$border-color-dark: #999 !default; //边框深色
+$border-color-light: #e8e8e8 !default; //边框浅色
+
+// Body
+$body-bg: $color-bg !default; //网页背景色
+$body-color: $gray-dark !default;  //网页前景色
+$body-word-wrap: break-word !default; //边界换行
+$body-word-break: break-all !default;  //单词换行
+$body-use-behavior: true !default; //是否使用behavior
+$body-behavior: url("/css/csshover3.htc") !default; //behavior路径
+
+// 链接
+$link-color: #333 !default; //链接颜色
+$link-hover-color: #ff6600 !default; //链接激活颜色
+$link-hover-decoration: underline !default; //链接激活后是否显示下划线
+
+// 字体
+$font-family-base: "Microsoft YaHei", SimSun, Verdana, Arial, sans-serif !default; //默认字体
+$font-size-base: 14px !default; //标准字体大小
+$font-size-xl: 1.5em !default; //超大字体
+$font-size-lg: 1.25em !default; //大号字体
+$font-size-sm: .85em !default; //小号字体
+$font-size-xs: .75em !default; //超小字体
+
+$font-size-h1: $font-size-xl !default; //h1字体大小
+$font-size-h2: $font-size-lg !default; //h2字体大小
+$font-size-h3: 1em !default; //h3字体大小
+$font-size-h4: 1em !default; //h4字体大小
+$font-size-h5: $font-size-sm !default; //h5字体大小
+$font-size-h6: $font-size-xs !default; //h6字体大小
+
+$headings-margin-bottom: ($spacer / 2) !default; //hx底部间隙
+$headings-font-family: inherit !default; //hx字体样式
+$headings-font-weight: 500 !default; //hx字体粗细
+$headings-line-height: 1.1 !default; //hx行高
+$headings-color: inherit !default; //hx字体颜色
+
+$line-height: 1.6 !default; //默认内容行高
+$line-height-list: 1.6 !default; //默认列表行号
+$list-style: none !default; //列表样式
+$list-padding: 0.2em !default; //列表行间距
+
+$border-radius: 4px !default; //默认圆角
+$border-radius-xl: 9px !default; //特大圆角
+$border-radius-lg: 6px !default; //大号圆角
+$border-radius-sm: 3px !default; //小号圆角
+
+$component-active-color: #fff !default; //组件激活前景色
+$component-active-bg: $brand-primary !default; //组件激活背景色
+
+$hr-border-color: $border-color !default; //分割线颜色
+$hr-border-width: $border-width; //分割线宽度
+
+// 表格
+$table-cell-padding: .6em !default; //表格内间隙
+$table-sm-cell-padding: .3em !default; //表格内间隙小
+
+$table-bg: transparent !default; //表格背景色
+$table-bg-accent: #f9f9f9 !default; //表格强调背景色
+$table-bg-hover: #f5f5f5 !default; //表格选中背景色
+$table-bg-active: $table-bg-hover !default; //表格激活背景色
+$table-bg-odd: $table-bg !default; //表格奇数行背景色
+$table-bg-even: #f5f5f5 !default; //表格偶数行背景色
+$table-bg-topic: #f5f5f5 !default; //表格标题背景色
+$table-bg-foot: #f5f5f5 !default; //表格尾行背景色
+
+$table-border-color: $gray-lighter !default; //表格边框颜色
+
+$caption-line-height: 2.5 !default; //表头行高
+$caption-font-weight: bold !default; //表头字体粗细
+$caption-font-size: 1.25em !default; //表头字体大小
+$caption-font-bg: inherit !default; //表头背景色
+$caption-font-color: inherit !default; //表头前景色
+
+// 文本内容
+// 标签
+$label-default-bg:            $gray-light !default; //默认背景色
+$label-primary-bg:            $brand-primary !default; //主要背景色
+$label-success-bg:            $brand-success !default; //成功背景色
+$label-info-bg:               $brand-info !default;  //信息背景色
+$label-warning-bg:            $brand-warning !default; //警告背景色
+$label-danger-bg:             $brand-danger !default; //危险背景色
+
+$label-color:                 #fff !default; //默认前景色
+$label-link-hover-color:      #fff !default; //激活前景色
+
+// tab
+$tab-bg: #f5f5f5 !default; //标签背景色
+$tab-color: $body-color !default; //标签前景色
+$tab-selected-bg: $body-bg !default; //标签选中背景色
+$tab-selected-color: $brand-warning !default; //标签选中前景色
+$tab-line-height: 2.5 !default; //标签行高
+$tab-height: 2.5em !default; //标签高度
+
+// 布局
+$main-max-width: 1000px !default; //主内容最大宽度
+$row-columns:               12 !default; //默认几列布局
+$row-columns-sm:            9 !default; //小屏幕几列布局
+$row-column-margin:         1% !default; // 每列间距
+$row-width:                  1024px !default; //全列宽度
+$row-width-sm:               640px !default; //少列宽度
+
+// 顶部条
+$top-line-height: 2.4 !default; //顶部条行高
+$top-bg: #f6f6f6 !default; //顶部条背景色
+$top-color: #333 !default; //顶部条前景色
+
+// 页头
+$logo-height: 32px !default; //logo高度
+$header-bg: #333 !default; //页头背景色
+$header-color: #fff !default; //页头前景色
+$header-padding: .3em !default; //页头内间隙
+
+// 顶部导航
+$pagetitle-bg: #333 !default; //顶部导航背景色
+$pagetitle-color: #fff !default; //顶部导航前景色
+$pagetitle-padding: 0 0.6em !default; //顶部导航内间隙
+$pagetitle-margin: 0 0 $spacer 0 !default; //顶部导航外间隙
+$pagetitle-line-height: 2.5 !default; //顶部导航行高
+$pagetitle-font-size: $font-size-xl !default; //顶部导航字体大小
+
+// 主导航
+$mainnav-height: 2.2em !default; //主导航高度
+$mainnav-float: none !default; //主导航浮动
+$mainnav-bg: #f5f5f5 !default; //主导航背景色
+$mainnav-color: #666 !default; //主导航前景色
+$mainnav-bgs: #999 !default; //主导航选中背景色
+$mainnav-colors: #fff !default; //主导航选中前景色
+$mainnav-margin: 0 0 $spacer 0 !default; //主导航外间隙
+$mainnav-item-padding: 0 .75em !default; //主导航内间隙
+$mainnav-line-height: 2 !default; //主导航行高
+$mainnav-font-size: $font-size-lg !default; //主导航字体大小
+$mainnav-border: 0 !default; //主导航边框
+$mainnav-border-top: 0 !default; //主导航上边框
+$mainnav-border-bottom: $border-width solid $border-color !default; //主导航下边框
+$mainnav-border-radius: 0 !default; //主导航圆角
+$mainnav-box-shadow: none !default; //主导航阴影
+
+// 子导航
+$subnav-float: none !default; //子导航浮动
+$subnav-bg: #fff !default; //子导航背景色
+$subnav-color: #333 !default; //子导航前景色
+$subnav-margin: 0 !default; //子导航外间隙
+$subnav-item-padding: 0 .4em !default; //子导航内间隙
+$subnav-line-height: 2.4 !default; //子导航行高
+$subnav-font-size: $font-size-lg !default; //子导航字体大小
+$subnav-border: 0 !default; //子导航边框
+$subnav-border-top: 0 !default; //子导航上边框
+$subnav-border-bottom: $border-width solid $border-color !default; //子导航下边框
+$subnav-border-radius: 0 !default; //子导航圆角
+$subnav-box-shadow: none !default; //子导航阴影
+
+// 主体内容
+$mainbody-bg: #fff !default; //主体背景色
+$mainbody-padding: 12px 8px !default; //主体内间隙
+$mainbody-margin: 10px 0 20px 0 !default; //主体外间隙
+$mainbody-border: $border-width solid $border-color !default; //主体边框
+$mainbody-border-radius: 0 !default; //主体圆角
+$mainbody-box-shadow: $border-shadow !default; //主体阴影
+
+// 页脚
+$footer-bg: #333 !default; //页脚背景色
+$footer-color: #fafafa !default; //页脚前景色
+$footer-padding: 2em 0 !default; //页脚内间隙
+$footer-line-height: 2 !default; //页脚行高
+
+// 区块
+$block-bg: #fff !default; //区块背景色
+$block-color: $body-color !default; //区块前景色
+$block-padding: 0 !default; //区块内间隙
+$block-margin: 0 $spacer $spacer $spacer !default; //区块外间隙
+$block-border: $border-width solid $border-color !default; //区块边框
+$block-border-radius: 0 !default; //区块圆角
+$block-box-shadow: none !default; //区块阴影
+
+$blocktitle-bg: #fff !default; //区块标题背景色
+$blocktitle-color: #333 !default; //区块标题前景色
+$blocktitle-border: 0 !default; //区块标题边框
+$blocktitle-height: 2.5em !default; //区块标题高度
+$blocktitle-line-height: 2.5em !default; //区块标题行高
+$blocktitle-border-bottom: 2px solid $brand-warning; //区块标题下边框
+
+$blockcontent-padding: 0 !default; //区块内容内间隙
+$blockcontent-margin: .5em !default; //区块内容外间隙
+
+$blockhead-bg: transparent !default; //区块头背景色
+$blockhead-color: $body-color !default; //区块头前景色
+$blockhead-padding: .3em !default; //区块头内间隙
+$blockhead-margin: 0 !default; //区块头外间隙
+$blockhead-border-split: $border-width solid $border-color; //区块标题上边框
+
+$blocknote-bg: $gray-lighter !default; //区块底背景色
+$blocknote-color: $body-color !default; //区块底前景色
+$blocknote-padding: 0 !default; //区块底内间隙
+$blocknote-margin: .3em !default; //区块底外间隙
+$blocknote-border-split: $border-width solid $border-color; //区块标题上边框
+
+// 按钮
+$button-padding: .45em .6em !default; //按钮内间隙
+$button-padding-lg: .4em .7em !default; //按钮内间隙大
+$button-padding-sm: .2em .4em !default; //按钮内间隙小
+$button-margin: 0 .2em !default; //按钮外间隙
+$button-line-height: 1.4 !default; //按钮行高
+$button-font-weight: normal !default; //按钮字体粗细
+$button-color: #fff !default;  //按钮前景色
+$button-bg: #95a5a6 !default; //按钮背景色
+$button-border-color: transparent !default; //按钮边框色
+$button-border: 0 !default; //按钮边框
+$button-border-radius: $border-radius-sm !default; //按钮圆角
+$button-box-shadow: none !default; //按钮阴影
+
+// 表单
+$input-border: $border-width solid $border-color !default; //主体边框
+$input-border-radius: $border-radius-sm !default; //主体圆角
+$input-box-shadow: inset 1px 1px 2px #e2e2e2 !default; //主体阴影
+
+$input-border-focus: $border-width solid $gray !default; //主体边框
+$input-border-radius-focus: $border-radius-sm !default; //主体圆角
+$input-box-shadow-focus: inset 0 1px 1px #d7d7d7, 0 0 8px #999 !default; //主体阴影
+
+$input-bg: #fff !default;  //输入框背景色
+$input-bg-disabled: $gray-lighter !default;  //输入框禁止状态背景色
+$input-color: $gray !default;  //输入框前景色
+$input-color-placeholder: #999 !default; //输入框提示文字颜色
+
+$input-padding: .3em .5em !default; //输入框内间隙
+$input-padding-sm: .15em .3em !default; //输入框内间隙小
+$input-padding-lg: .5em .8em !default; //输入框内间隙大
+
+
+
+// 下拉框
+$gropico-color: #666 !default; //下拉箭头颜色
+$gropico-width: 4px !default; //下拉箭头宽度
+
+$droplist-font-size: $font-size-base !default; //下拉框字体大小
+$droplist-font-weight: normal !default; //下拉框字体粗细
+$droplist-line-height: 2 !default; //下拉框行高
+$droplist-border: $border-width solid $border-color !default; //下拉框边框
+$droplist-border-radius: 0 !default; //下拉框圆角
+$droplist-box-shadow: $border-shadow !default; //下拉框阴影
+$droplist-min-width: 100px !default; //下拉框最小宽度
+$droplist-bg: $color-bg !default; //下拉框背景色
+$droplist-color: $link-color !default; //下拉框前景色
+$droplist-bg-focus: $color-light !default; //下拉框选中背景色
+$droplist-color-focus: $link-color !default; //下拉框选中前景色
+
+$dropdown-bg-focus: $droplist-bg !default; //下拉标签激活背景色
+$dropdown-border: $border-width solid $border-color !default; //下拉框边框
+
+
+$dropnav-bg: transparent !default; //导航项背景色
+$dropnav-color: $color-bg !default; //导航项前景色
+$dropnav-bg-focus: $gray-lighter !default; //导航项选中背景色
+$dropnav-color-focus: $color-dark !default; //导航项选中前景色
+$dropnav-border: 0 !default; //导航项边框
+$dropnav-border-radius: 0 !default; //导航项圆角
+$dropnav-box-shadow: none !default; //导航项阴影
+$dropnav-border-focus: 0 !default; //导航项选中边框
+$dropnav-border-radius-focus: $border-radius-sm !default; //导航项选中圆角
+$dropnav-box-shadow-focus: none !default; //导航项选中阴影
+
+$dropmenu-line-height: 2 !default; //下拉菜单行高
+$dropmenu-border: $border-width solid $border-color !default; //下拉菜单边框
+$dropmenu-border-radius: $border-radius-sm !default; //下拉菜单圆角
+$dropmenu-box-shadow: $border-shadow !default; //下拉菜单阴影
+$dropmenu-min-width: 120px !default; //下拉菜单最小宽度
+$dropmenu-bg: $color-bg !default; //下拉菜单背景色
+$dropmenu-color: $link-color !default; //下拉菜单前景色
+$dropmenu-bg-focus: $color-light !default; //下拉菜单选中背景色
+$dropmenu-color-focus: $link-color !default; //下拉菜单选中前景色
+
+$zindex-navbar: 500 !default;
+$zindex-dropdown: 600 !default;
+$zindex-tooltip: 700 !default;
+$zindex-popover: 800 !default;

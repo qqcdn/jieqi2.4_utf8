@@ -1,0 +1,98 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set jieqi_page_rows = "10"?}
+
+{?if $newpost > 0?}
+<div class="textbox hot" id="postresult">{?$postresult?}</div>
+<script type="text/javascript">
+setTimeout(function(){$_('postresult').hide()}, 3000);
+</script>
+{?/if?}
+<div class="cf">
+	<div class="fl"><a href="{?$jieqi_url?}/ptopics.php?oid={?$ownerid?}">{?$ownername?} 的会客室</a> 主题回复</div>
+	<div class="fr">[<a href="{?$jieqi_url?}/ptopics.php?oid={?$ownerid?}&type=all">全部主题</a>]&nbsp;&nbsp;[<a href="{?$jieqi_url?}/ptopics.php?oid={?$ownerid?}&type=good">精华主题</a>]{?if $enablepost == 1?}&nbsp;&nbsp;[<a href="#postnew">发表回复</a>]{?/if?}</div>
+</div>
+
+<table class="grid" width="100%">
+<caption>主题：{?$title?}</caption>
+<tbody id="jieqi_page_contents">
+{?section name=i loop=$ppostrows?}
+    <tr>
+        <td class="tdl" width="25%" valign="top">
+		<div style="padding:10px;">
+		{?if $ppostrows[i].userid > 0?}
+			<img src="{?function jieqi_geturl:'system':'avatar':$ppostrows[i].userid:'l':$ppostrows[i].avatar?}" class="avatar" alt="头像"><br />
+			<strong><a href="{?function jieqi_geturl:'system':'user':$ppostrows[i].userid?}" target="_blank">{?$ppostrows[i].username?}</a></strong><br />
+  			{?if $jieqi_modules['badge']['publish'] > 0?}
+  				{?if $ppostrows[i].groupurl != ""?}<img src="{?$ppostrows[i].groupurl?}" border="0" title="{?$ppostrows[i].groupname?}"><br />{?/if?}
+				{?if $ppostrows[i].honorurl != ""?}<img src="{?$ppostrows[i].honorurl?}" border="0" title="{?$ppostrows[i].honor?}"><br />{?/if?}
+  				{?section name=j loop=$ppostrows[$i['key']]['badgerows']?}
+				<img src="{?$ppostrows[$i['key']]['badgerows'][$j['key']]['imageurl']?}" border="0" title="{?$ppostrows[$i['key']]['badgerows'][$j['key']]['caption']?}">
+				{?/section?}
+				{?if $ppostrows[$i['key']]['badgerows']|count > 0?}<br />{?/if?}
+			{?else?}
+				{?$ppostrows[i].groupname?}<br />
+				{?$ppostrows[i].honor?}<br />
+  			{?/if?}
+			加入日期：{?$ppostrows[i].regdate|date:"Y-m-d"?}<br />
+			经　　验：{?$ppostrows[i].experience?}<br />
+			积　　分：{?$ppostrows[i].score?}<br /><br />
+			<a href="javascript:;" onclick="openDialog('{?$jieqi_url?}/newmessage.php?receiver={?$ppostrows[i].useruname|urlencode?}&ajax_gets=jieqi_contents', false);">发送消息</a> | <a id="addfriends{?$i['order']?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_url?}/addfriends.php?id={?$ppostrows[i].userid?}&act=add{?$jieqi_token_url?}', {method: 'POST'});">加为好友</a><br />
+			<a href="{?function jieqi_geturl:'system':'user':$ppostrows[i].userid?}" target="_blank">查看资料</a> | <a href="{?$jieqi_url?}/ptopics.php?oid={?$ppostrows[i].userid?}" target="_blank">会 客 室</a>
+		{?else?}
+			<strong>游客</strong><br /><br /><br /><br /><br />
+		{?/if?}
+		</div>
+		</td>
+        <td class="tdr" width="75%" valign="top">
+		<div class="cf">
+		<div class="fl"><strong>{?$ppostrows[i].subject?}</strong></div>
+		<div class="fr nw">{?$ppostrows[i].posttime|date:"Y-m-d H:i:s"?}{?if $jieqi_userid == $ppostrows[i].posterid?} | <a href="{?$jieqi_url?}/ppostedit.php?pid={?$ppostrows[i].postid?}">编辑</a>{?/if?}{?if $jieqi_userid == $ppostrows[i].posterid || $jieqi_userid == $ownerid || $ismaster == 1?} | {?if $ppostrows[i].istopic == 1?}<a id="act_delt_{?$topicid?}" href="javascript:;" onclick="if(confirm('确实要删除该主题么？')) Ajax.Tip('{?$jieqi_url?}/ptopics.php?oid={?$ownerid?}&tid={?$topicid?}&act=del{?$jieqi_token_url?}', {method: 'POST'});">删除</a>{?else?}<a id="act_delp_{?$ppostrows[i].postid?}" href="javascript:;" onclick="if(confirm('确实要删除该回复么？')) Ajax.Tip('{?$jieqi_url?}/ptopicshow.php?oid={?$ownerid?}&tid={?$topicid?}&pid={?$ppostrows[i].postid?}&act=del{?$jieqi_token_url?}', {method: 'POST'});">删除</a>{?/if?}{?/if?} | <a href="#pid{?$ppostrows[i].postid?}" name="pid{?$ppostrows[i].postid?}">{?$ppostrows[i].order?}#</a>{?if $ppostrows[i].display == 1?} <span class="warning">待审</span>{?/if?}&nbsp;</div>
+		</div>
+		<hr />
+		<div>{?$ppostrows[i].posttext?}</div>
+		</td>
+    </tr>
+{?/section?}
+</tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+
+<a name="postnew"></a>
+{?if $enablepost == 1?}
+<script type="text/javascript">
+function frmpost_validate(){
+  if(document.frmpost.pcontent.value == ""){
+    alert("请输入内容");
+    document.frmpost.pcontent.focus();
+    return false;
+  }
+}
+</script>
+<form name="frmpost" id="frmpost" action="{?$jieqi_url?}/ptopicshow.php?tid={?$topicid?}&do=submit" method="post" onsubmit="return frmpost_validate();" enctype="multipart/form-data">
+<table class="grid" width="100%">
+<caption>发表回复</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">内容：</td>
+  <td class="tdr" width="75%"><textarea class="textarea" name="pcontent" id="pcontent" rows="12" cols="60"></textarea><script type="text/javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("pcontent");});</script></td>
+</tr>
+{?if $postcheckcode > 0?}
+<tr valign="middle" align="left">
+  <td class="tdl">验证码：</td>
+  <td class="tdr"><input type="text" class="text" style="width:6em;" name="checkcode" id="checkcode" onfocus="if(this.form.imgccode.style.display == 'none'){this.form.imgccode.src = '{?$jieqi_url?}/checkcode.php?rand={?$jieqi_time?}';this.form.imgccode.style.display = '';}" title="点击显示验证码"><img name="imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码"></td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;<input type="hidden" name="act" value="newpost" />{?$jieqi_token_input?}</td>
+  <td class="tdr"><button type="submit" class="button" name="btnpost">提 交</button></td>
+</tr>
+</table>
+</form>
+{?else?}
+<table class="grid" width="100%" align="center">
+  <caption>发表回复</caption>
+  <tr>
+    <td align="center"><br />您不能发表回复，如果尚未登录，请先点击 <a class="hot" href="{?$jieqi_user_url?}/login.php" onclick="openDialog('{?$jieqi_user_url?}/login.php?ajax_gets=jieqi_contents', false);stopEvent();">登录</a><br /><br /></td>
+  </tr>
+</table>
+{?/if?}

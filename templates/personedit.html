@@ -1,0 +1,113 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "设置联系方式-{$jieqi_sitename}"?}
+<script type="text/javascript">
+function frmpersonedit_validate(){
+  if(document.frmpersonedit.p_realname.value == ""){
+    alert("请输入真实姓名");
+    document.frmpersonedit.p_realname.focus();
+    return false;
+  }
+  if(document.frmpersonedit.p_telephone.value == "" && document.frmpersonedit.p_mobilephone.value == ""){
+    alert("电话/手机 至少填一项");
+    document.frmpersonedit.p_mobilephone.focus();
+    return false;
+  } 
+  if(document.frmpersonedit.p_idcard.value == ""){
+    alert("请输入证件号码");
+    document.frmpersonedit.p_idcard.focus();
+    return false;
+  }
+  if(document.frmpersonedit.p_address.value == ""){
+    alert("请输入联系地址");
+    document.frmpersonedit.p_address.focus();
+    return false;
+  }
+}
+</script>
+<form name="frmpersonedit" id="frmpersonedit" action="{?$jieqi_url?}/personedit.php?do=submit" method="post" onsubmit="return frmpersonedit_validate();" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>设置联系方式</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">说明：</td>
+  <td class="tdr"><span class="hot">请填写真实信息，否则申请作者可能无法收到签约协议。</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">用户名：</td>
+  <td class="tdr">{?$jieqi_useruname?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">昵称（笔名）：</td>
+  <td class="tdr">{?$jieqi_username?} <span class="hot">（默认为用户名，如需修改请 <a href="{?$jieqi_url?}/useredit.php?nextstep={?$nextstep?}">点击这里</a>）</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">真实姓名：</td>
+  <td class="tdr"><input type="text" class="text" name="p_realname" size="25" maxlength="100" value="{?$personsvars['realname']?}" /> <span class="hot">必填</span></td>
+</tr>
+<tr valign="middle" align="left">
+<td class="tdl">性别：</td>
+<td class="tdr">
+<label class="radio"><input type="radio" name="p_gender" value="1"{?if $personsvars['gender_n'] == 1?} checked="checked"{?/if?}  />男</label>
+<label class="radio"><input type="radio" name="p_gender" value="2"{?if $personsvars['gender_n'] == 2?} checked="checked"{?/if?} />女</label>
+<label class="radio"><input type="radio" name="p_gender" value="0"{?if $personsvars['gender_n'] == 0?} checked="checked"{?/if?}  />保密</label>
+</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">电话：</td>
+  <td class="tdr"><input type="text" class="text" name="p_telephone" size="25" maxlength="100" value="{?$personsvars['telephone']?}" /> <span class="hot">电话/手机 至少填一项</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">手机：</td>
+  <td class="tdr"><input type="text" class="text" name="p_mobilephone" size="25" maxlength="100" value="{?$personsvars['mobilephone']?}" /> <span class="hot">电话/手机 至少填一项</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">证件类型：</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="p_idcardtype" value="身份证"{?if $personsvars['idcardtype'] == '' || $personsvars['idcardtype'] == '身份证'?} checked="checked"{?/if?}  />身份证</label>
+  <label class="radio"><input type="radio" name="p_idcardtype" value="护照"{?if $personsvars['idcardtype'] == '护照'?} checked="checked"{?/if?} />护照</label>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">证件号码：</td>
+  <td class="tdr"><input type="text" class="text" name="p_idcard" size="25" maxlength="100" value="{?$personsvars['idcard']?}" /> <span class="hot">必填</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">联系地址：</td>
+  <td class="tdr"><input type="text" class="text" name="p_address" size="50" maxlength="250" value="{?$personsvars['address']?}" /> <span class="hot">必填</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">邮编：</td>
+  <td class="tdr"><input type="text" class="text" name="p_zipcode" size="25" maxlength="100" value="{?$personsvars['zipcode']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">收款银行：</td>
+  <td class="tdr">
+  <input type="text" class="text" name="p_banktype" size="25" maxlength="100" value="{?$personsvars['banktype']?}" /> <span class="hot">填写 银行名称/支付宝/邮局汇款</span>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">银行所在地：</td>
+  <td class="tdr"><input type="text" class="text" name="p_bankname" size="25" maxlength="100" value="{?$personsvars['bankname']?}" /> <span class="hot">填写开户行的 省/市/区</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">卡号：</td>
+  <td class="tdr"><input type="text" class="text" name="p_bankcard" size="25" maxlength="100" value="{?$personsvars['bankcard']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">持卡人姓名：</td>
+  <td class="tdr"><input type="text" class="text" name="p_bankuser" size="25" maxlength="100" value="{?$personsvars['bankuser']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">补充信息：</td>
+  <td class="tdr">
+  <textarea class="textarea" name="p_mynote" rows="5" cols="50">{?$personsvars['mynote']?}</textarea>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;<input type="hidden" name="act" value="update" /><input type="hidden" name="nextstep" value="{?$nextstep?}" />{?$jieqi_token_input?}</td>
+  <td class="tdr">
+  <button type="submit" class="button" name="submit">保 存</button>
+  </td>
+</tr>
+</table>
+</form>

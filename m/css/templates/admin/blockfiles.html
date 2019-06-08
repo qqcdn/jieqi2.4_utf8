@@ -1,0 +1,17 @@
+<table  class="grid" width="100%" align="center">
+  <caption>区块配置文件管理</caption>
+  <tr>
+    <td align="center" width="20%">配置文件标题</td>
+    <td align="center" width="20%">所属模块</td>
+	<td align="center" width="40%">配置文件路径及名称</td>
+    <td align="center" width="20%">操作</td>
+  </tr>
+{?section name=i loop=$blockfiles?}
+  <tr>
+    <td align="center">{?$blockfiles[i].caption?}</td>
+    <td align="center">{?$blockfiles[i].modname?}</td>
+	<td>/configs{?if $blockfiles[i].module != 'system'?}/{?$blockfiles[i].module?}{?/if?}/{?$blockfiles[i].filename?}.php</td>
+    <td align="center"><a href="{?$jieqi_url?}/admin/blockfiles.php?act=blocks&module={?$blockfiles[i].module|urlencode?}&filename={?$blockfiles[i].filename|urlencode?}">管理区块参数</a></td>
+  </tr>
+{?/section?}
+</table>

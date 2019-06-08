@@ -1,0 +1,5 @@
+<ul class="ultop">
+{?section name=i loop=$articlerows?}
+  <li><span class="fr">{?$articlerows[i].lastupdate|date:'m-d'?}</span><a href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a></li>
+{?/section?}
+</ul>

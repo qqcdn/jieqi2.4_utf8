@@ -1,0 +1,123 @@
+<div class="main">
+	<div class="block">
+		<div class="blocktitle">排行榜</div>
+		<div class="blockcontent">
+			<ul class="ulnav cf">
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'allvisit'?}">总点击榜</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'monthvisit'?}">月点击榜</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'weekvisit'?}">周点击榜</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'allvote'?}">总推荐榜</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'monthvote'?}">月推荐榜</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'weekvote'?}">周推荐榜</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'goodnum'?}">总收藏榜</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'words'?}">总字数榜 </a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'postdate'?}">最新入库</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'lastupdate'?}">最近更新</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'allflower'?}">总鲜花榜</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'monthflower'?}">月鲜花榜</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'weekflower'?}">周鲜花榜</a></li>
+				<li style="width:14%;float:left;"><a href="{?function jieqi_geturl:'article':'toplist':'allvipvote'?}">总月票榜</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="main row">
+	<div class="col3">
+		<div class="block">
+			<div class="blocktitle"><em>点击榜</em>
+				<ul>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this);" class="selected">周</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this);">月</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this);">总</a></li>
+				</ul>
+			</div>
+			<div class="blockcontent">
+				<div>{?block bid="0" blockname="周点击榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="weekvisit,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+				<div style="display:none;">{?block bid="0" blockname="月点击榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="monthvisit,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+				<div style="display:none;">{?block bid="0" blockname="总点击榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="allvisit,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col3">
+		<div class="block">
+			<div class="blocktitle"><em>推荐榜</em>
+				<ul>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)" class="selected">周</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">月</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">总</a></li>
+				</ul>
+			</div>
+			<div class="blockcontent">
+				<div>{?block bid="0" blockname="周推荐榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="weekvote,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+				<div style="display:none;">{?block bid="0" blockname="月推荐榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="monthvote,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+				<div style="display:none;">{?block bid="0" blockname="总推荐榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="allvote,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+			</div>
+		</div>
+	</div>	
+				
+	<div class="col3">
+		<div class="block">
+			<div class="blocktitle"><em>鲜花榜</em>
+				<ul>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)" class="selected">周</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">月</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">总</a></li>
+				</ul>
+			</div>
+			<div class="blockcontent">
+				<div>{?block bid="0" blockname="周鲜花榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="weekflower,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+				<div style="display:none;">{?block bid="0" blockname="月鲜花榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="monthflower,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+				<div style="display:none;">{?block bid="0" blockname="总鲜花榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="allflower,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col3 last">
+		<div class="block">
+			<div class="blocktitle"><em>月票榜</em>
+				<ul>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)" class="selected">周</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">月</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">总</a></li>
+				</ul>
+			</div>
+			<div class="blockcontent">
+				<div>{?block bid="0" blockname="周月票榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="weekvipvote,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+				<div style="display:none;">{?block bid="0" blockname="月月票榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="monthvipvote,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+				<div style="display:none;">{?block bid="0" blockname="总月票榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="allvipvote,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="main row">
+	<div class="col3">
+		<div class="block">
+			<div class="blocktitle">收藏榜</div>
+			<div class="blockcontent">{?block bid="0" blockname="收藏榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="goodnum,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+		</div>
+	</div>
+
+	<div class="col3">
+		<div class="block">
+			<div class="blocktitle">字数榜</div>
+			<div class="blockcontent">{?block bid="0" blockname="字数榜" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="size,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+		</div>
+	</div>
+
+	<div class="col3">
+		<div class="block">
+			<div class="blocktitle">最新入库</div>
+			<div class="blockcontent">{?block bid="0" blockname="最新入库" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="postdate,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+		</div>
+	</div>
+
+	<div class="col3 last">
+		<div class="block">
+			<div class="blocktitle">最近更新</div>
+			<div class="blockcontent">{?block bid="0" blockname="最近更新" module="article" filename="block_articlelist" classname="BlockArticleArticlelist" side="-1" title="" vars="lastupdate,10,0,0,0,0" template="block_numlist.html" contenttype="4" custom="0" publish="3" hasvars="1"?}</div>
+		</div>
+	</div>
+</div>

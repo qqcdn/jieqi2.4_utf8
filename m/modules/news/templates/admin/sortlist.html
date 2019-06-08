@@ -1,0 +1,26 @@
+<form action="{?$jieqi_modules['news']['url']?}/admin/sortlist.php" method="post" name="sortform" id="sortform">
+<table class="grid" width="100%" align="center">
+<caption>分类管理 | <a href="javascript:;" onclick="openDialog('sortadd.php?ajax_gets=jieqi_contents', false);">增加分类</a></caption>
+  <tr align="center">
+    <th width="6%">排序</th>
+    <th width="6%">ID</th>
+    <th width="62%">类别名称</th>
+    <th width="26%">管理操作</th>
+  </tr>
+  {?section name=i loop=$sortrows?}
+  <tr>
+    <td align="center"><input name="sortorder[{?$sortrows[i].sortid?}]" type="text" class="text" size="3" value="{?$sortrows[i].sortorder?}"></td>
+    <td align="center">{?$sortrows[i].sortid?}</td>
+    <td>{?$sortrows[i].layer|str_repeat:'&nbsp;&nbsp;'?}├{?$sortrows[i].sortname?}</td>
+    <td align="center"><a href="javascript:;" onclick="openDialog('sortadd.php?parentid={?$sortrows[i].sortid?}&ajax_gets=jieqi_contents', false);">添加子栏目</a> | <a href="javascript:;" onclick="openDialog('sortedit.php?sortid={?$sortrows[i].sortid?}&ajax_gets=jieqi_contents', false);">修改</a> | <a id="act_del_{?$sortrows[i].sortid?}" href="javascript:;" onclick="if(confirm('确实要删除本分类及所有对应子分类么？')) Ajax.Tip('{?$jieqi_modules['news']['url']?}/admin/sortlist.php?id={?$sortrows[i].sortid?}&act=del{?$jieqi_token_url?}', {method: 'POST'});">删除</a></td>
+  </tr>
+  {?/section?}
+  <tr>
+    <td colspan="4" align="left">
+	<button type="submit" name="btnsort" class="button">分类排序</button> &nbsp; 
+	<button type="button" name="btnadd" class="button" onclick="openDialog('{?$jieqi_modules['news']['url']?}/admin/sortadd.php?ajax_gets=jieqi_contents', false);">增加分类</button>
+	<input name="act" type="hidden" value="order">{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>

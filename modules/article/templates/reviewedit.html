@@ -1,0 +1,28 @@
+<form name="frmreview" method="post" action="{?$article_dynamic_url?}/reviewedit.php">
+<table class="grid" width="100%" align="center">
+  <caption>编辑书评</caption>
+  <tr>
+    <td class="tdl" width="25%">标题：</td>
+    <td class="tdr"><input type="text" class="text" name="ptitle" id="ptitle" size="60" maxlength="60" value="{?$subject?}" /></td>
+  </tr>
+  <tr>
+    <td class="tdl">内容：</td>
+    <td class="tdr"><textarea class="textarea" name="pcontent" id="pcontent" cols="60" rows="12">{?$posttext?}</textarea>
+    <script type="text/javascript">loadJs("{?$jieqi_url?}/scripts/ubbeditor_{?$jieqi_charset?}.js", function(){UBBEditor.Create("pcontent");});</script>
+    </td>
+  </tr>
+{?if $postcheckcode > 0?}
+<tr>
+  <td class="tdl">验证码：</td>
+  <td class="tdr"><input type="text" class="text" style="width:6em;" name="checkcode" id="checkcode" onfocus="if(this.form.imgccode.style.display == 'none'){this.form.imgccode.src = '{?$jieqi_url?}/checkcode.php?rand={?$jieqi_time?}';this.form.imgccode.style.display = '';}" title="点击显示验证码"><img name="imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码"></td>
+</tr>
+{?/if?}
+  <tr>
+    <td class="tdl">&nbsp;
+	<input type="hidden" name="yid" id="yid" value="{?$postid?}" />
+	<input type="hidden" name="act" value="update" />{?$jieqi_token_input?}
+	</td>
+    <td class="tdr"><button type="submit" name="Submit" class="button"> 保存书评 </button></td>
+  </tr>
+</table>
+</form>

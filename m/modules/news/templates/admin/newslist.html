@@ -1,0 +1,71 @@
+<form name="frmsearch" method="get" action="{?$jieqi_modules['news']['url']?}/admin/newslist.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td>关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="15" maxlength="50"> 
+            <label class="radio"><input type="radio" name="keytype" value="0" checked="checked">新闻标题</label>
+            <label class="radio"><input type="radio" name="keytype" value="1">发表者</label> 
+            <button type="submit" name="btnsearch" class="button">搜 索</button>
+            &nbsp;&nbsp;<a href="{?$jieqi_modules['news']['url']?}/admin/newslist.php">显示全部</a> | <a href="{?$jieqi_modules['news']['url']?}/admin/newslist.php?display=ready">待审新闻</a> | <a href="{?$jieqi_modules['news']['url']?}/admin/newslist.php?display=show">已审新闻</a>    
+        </td>
+    </tr>
+</table>
+</form>
+<br />
+<form action="{?$jieqi_modules['news']['url']?}/admin/newslist.php" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>新闻列表</caption>
+ <tr>
+    <th colspan="7">选择分类：<span name="sortsel" id="sortsel">&nbsp;</span><input type="hidden" name="news_sortid" id="news_sortid" value="" />
+	<script type="text/javascript" src="{?$jieqi_url?}/scripts/sortmenu.js"></script>
+	<script type="text/javascript">
+	  var sortary = new Array(
+	  {?section name=i loop=$sortrows?}[{?$sortrows[i].sortid?}, "{?$sortrows[i].sortname|addslashes?}", {?$sortrows[i].parentid?}]{?if $i['order'] < $i['count']?},{?/if?}{?/section?}
+	  );
+	  var sort=new sortMenu("news_sortid", "sortsel", sortary, 1, "--请选择--");
+	  sort.init(0);
+    </script> <button type="button" name="allcheck" class="button" onclick="document.location='newslist.php?sortid='+document.getElementById('news_sortid').value;"> 显 示 </button></td>
+  </tr>
+  <tr align="center">
+    <th width="5%" >选择</td>
+    <th width="8%" >ID</td>
+	<th width="40%">新闻标题</td>
+	<th width="10%">所属栏目</td>
+	<th width="10%">加入日期</td>
+	<th width="7%" >状态</td>
+    <th width="20%">操作</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+ {?section name=i loop=$newsrows?}
+  <tr>
+    <td  align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$newsrows[i].topicid?}" /></td>
+    <td align="center">{?$newsrows[i].topicid?}</td>
+	<td  align="left"  ><a href="{?function jieqi_geturl:'news':'info':$newsrows[i].topicid?}" target="_blank">{?$newsrows[i].title?}</a></td>
+	<td align="center">{?$newsrows[i].sortname?}</td>
+	<td  align="center">{?$newsrows[i].addtime|date:'Y-m-d'?}</td>
+	<td align="center">{?$newsrows[i].display_s?}</td>
+    <td  align="center">
+		<a href="{?$jieqi_modules['news']['url']?}/admin/newsedit.php?id={?$newsrows[i].topicid?}">编辑</a>|
+		<a id="act_del_{?$newsrows[i].topicid?}" href="javascript:;" onclick="if(confirm('确实要删除该记录么？')) Ajax.Tip('{?$jieqi_modules['news']['url']?}/admin/newslist.php?id={?$newsrows[i].topicid?}&act=del{?$jieqi_token_url?}', {method: 'POST'});">删除</a>|
+		{?if $newsrows[i].display > 0?}
+		<a id="act_show_{?$newsrows[i].topicid?}" href="javascript:;" onclick="if(confirm('确实要删除该记录么？')) Ajax.Tip('{?$jieqi_modules['news']['url']?}/admin/newslist.php?id={?$newsrows[i].topicid?}&act=show{?$jieqi_token_url?}', {method: 'POST'});">审核</a>
+		{?else?}
+		<a id="act_ready_{?$newsrows[i].topicid?}" href="javascript:;" onclick="if(confirm('确实要删除该记录么？')) Ajax.Tip('{?$jieqi_modules['news']['url']?}/admin/newslist.php?id={?$newsrows[i].topicid?}&act=ready{?$jieqi_token_url?}', {method: 'POST'});">隐藏</a>
+		{?/if?}
+		
+	</td>
+  </tr>
+  {?/section?}
+  </tbody>
+  <tr>
+    <td align="center"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></td>
+    <td colspan="6" align="left">
+		<button type="submit" name="delcheck" class="button" onclick="if(confirm('确实要删除选中记录么？')){ this.form.act.value='del';this.form.submit();}else{return false;}">删除选中记录</button>&nbsp;
+		<button type="submit" name="auditcheck" class="button" onclick="if(confirm('确实要进行该操作吗？')){this.form.act.value='show';this.form.submit();}else{return false;}">审核选中记录</button>&nbsp;
+		<button type="submit" name="abortcheck" class="button" onclick="if(confirm('确实要进行该操作吗？')){this.form.act.value='ready';this.form.submit();}else{return false;}">取消审核选中记录</button>
+		<input type="hidden" name="act" value="" />{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

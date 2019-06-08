@@ -1,0 +1,4 @@
+<?php
+$jieqiTasks['article'] = array();
+
+?>

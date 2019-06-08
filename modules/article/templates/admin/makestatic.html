@@ -1,0 +1,66 @@
+<br>
+<table class="grid" width="95%" align="center">
+  <caption>生成静态页面</caption>
+  <tr>
+    <td align="right">网站首页你：</td>
+    <td><a href="{?$jieqi_url?}/indexs.php?refresh=1" target="_blank">点击重新生成静态首页</a></td>
+  </tr>
+  <tr>
+  <form name="form1" method="post" action="{?$article_static_url?}/admin/createstatic.php?action=makeinfo" target="_blank">
+    <td width="22%" align="right">小说信息页面：</td>
+    <td width="78%">生成序号从
+      <input name="infostart" type="text" id="infostart" size="8" maxlength="11" class="text">
+      到
+      <input name="infostop" type="text" id="infostop" size="8" maxlength="11" class="text">
+      的小说页面 
+      <button type="submit" name="make1" class="button">开始生成</button>
+    </td>
+  </form>
+  </tr>
+  <tr>
+  <form name="form2" method="post" action="{?$article_static_url?}/admin/createstatic.php?action=makereview" target="_blank">
+    <td align="right">书评js</td>
+    <td>生成序号从
+      <input name="reviewstart" type="text" id="reviewstart" size="8" maxlength="11" class="text">
+      到
+      <input name="reviewstop" type="text" id="reviewstop" size="8" maxlength="11" class="text">
+      的小说页面 
+      <button type="submit" name="make2" class="button">开始生成</button></td>
+  </form>
+  </tr>
+  <tr>
+  <form name="form3" method="post" action="{?$article_static_url?}/admin/createstatic.php?action=maketoplist" target="_blank">
+    <td align="right">排行榜页面：</td>
+    <td>最大页数
+    <input name="maxtoppage" type="text" id="maxtoppage" size="5" maxlength="11" class="text">
+    （留空或者设为0表示全部生成）
+    <button type="submit" name="make3" class="button">开始生成</button>
+    </td>
+  </form>
+  </tr>
+  <tr>
+  <form name="form4" method="post" action="{?$article_static_url?}/admin/createstatic.php?action=makesort" target="_blank">
+    <td align="right">小说分类列表：</td>
+    <td>最大页数
+    <input name="maxsortpage" type="text" id="maxsortpage" size="5" maxlength="11" class="text">
+    （留空或者设为0表示全部生成）
+    <button type="submit" name="make4" class="button">开始生成</button></td>
+  </form>
+  </tr>
+  <tr>
+  <form name="form5" method="post" action="{?$article_static_url?}/admin/createstatic.php?action=makeinitial" target="_blank">
+    <td align="right">首按字母分类页面：</td>
+    <td>最大页数
+    <input name="maxinitialpage" type="text" id="maxinitialpage" size="5" maxlength="11" class="text">
+    （留空或者设为0表示全部生成）
+    <button type="submit" name="make5" class="button">开始生成</button></td>
+   </form>
+  </tr>
+   <tr>
+    <td colspan="2" align="right" class="foot">&nbsp;</td>
+  </tr>
+  
+</table>
+
+<br>
+<br>

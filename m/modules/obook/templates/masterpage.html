@@ -1,0 +1,23 @@
+{?set $jieqi_pagetitle = "收入管理-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "收入管理"?}
+{?set jieqi_page_rows = "20"?}
+
+<div class="blockb">
+	<div class="blockcontent" id="jieqi_page_contents">
+		{?section name=i loop=$obookrows?}
+		<div class="c_row cf">
+			<h4><a href="{?function jieqi_geturl:'article':'article':$obookrows[i].articleid:'info'?}">{?$obookrows[i].obookname?}</a></h4>
+			<p class="gray" style="line-height:2;">
+				订阅：{?$obookrows[i].sumegold?}，打赏：{?$obookrows[i].sumtip?}，合计：{?$obookrows[i].sumemoney?}
+			</p>
+			<p>
+				<a class="btnlink" href="{?$obook_dynamic_url?}/chapterstat.php?oid={?$obookrows[i].obookid?}">订阅记录</a>
+				&nbsp; <a class="btnlink" href="{?$jieqi_modules['article']['url']?}/articleactlog.php?id={?$obookrows[i].articleid?}&act=tip">打赏记录</a>
+				&nbsp; <a class="btnlink" href="{?$obook_dynamic_url?}/mreport.php?obookid={?$obookrows[i].obookid?}">销售月报</a>
+			</p>
+		</div>
+		{?/section?}
+	</div>
+</div>
+<div class="pages">{?$url_jumppage?}</div>
+

@@ -1,0 +1,5 @@
+<ul class="ulnav">
+  <li><i class="iconfont">&#xee3d;</i><a href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=alipaypay&p=alipay{?if $jumpurl|isset == true?}&jumpurl={?$jumpurl|urlencode?}{?/if?}"{?if $_request['t']|isset && $_request['t'] == 'alipaypay'?} class="selected"{?/if?}>支付宝</a></li>
+  <li><i class="iconfont">&#xee3d;</i><a href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=wxnativepay&p=wxnative{?if $jumpurl|isset == true?}&jumpurl={?$jumpurl|urlencode?}{?/if?}"{?if $_request['t']|isset && $_request['t'] == 'wxnativepay'?} class="selected"{?/if?}>微信钱包</a></li>
+  <li><i class="iconfont">&#xee3d;</i><a href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=yeepaypay&p=yeepay{?if $jumpurl|isset == true?}&jumpurl={?$jumpurl|urlencode?}{?/if?}"{?if $_request['t']|isset && $_request['t'] == 'yeepaypay'?} class="selected"{?/if?}>网上银行</a></li>
+</ul>

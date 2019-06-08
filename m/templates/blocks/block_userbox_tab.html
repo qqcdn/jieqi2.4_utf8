@@ -1,0 +1,9 @@
+<ul class="ultab">
+{?if $jieqi_modules['article']['publish'] > 0?}<li><a href="{?$jieqi_modules['article']['url']?}/bookcase.php"{?if $jieqi_thisfile|basename == 'bookcase.php'?} class="selected"{?/if?}><i class="iconfont">&#xee43;</i>我的书架</a></li>{?/if?}
+{?if $jieqi_modules['article']['publish'] > 0?}<li><a href="{?$jieqi_modules['article']['url']?}/myreviews.php"{?if $jieqi_thisfile|basename == 'myreviews.php'?} class="selected"{?/if?}><i class="iconfont">&#xee4c;</i>我的书评</a></li>{?/if?}
+{?if $jieqi_modules['obook']['publish'] > 0?}<li><a href="{?$jieqi_modules['obook']['url']?}/buylist.php"{?if $jieqi_thisfile|basename == 'buylist.php'?} class="selected"{?/if?}><i class="iconfont">&#xee45;</i>我的订阅</a></li>{?/if?}
+{?if $jieqi_modules['article']['publish'] > 0?}<li><a href="{?$jieqi_modules['article']['url']?}/myactlog.php?act=tip"{?if $jieqi_thisfile|basename == 'myactlog.php' && $_request['act'] == 'tip'?} class="selected"{?/if?}><i class="iconfont">&#xee3f;</i>打赏记录</a></li>{?/if?}
+{?if $jieqi_modules['pay']['publish'] > 0?}<li><a href="{?$jieqi_modules['pay']['url']?}/paylog.php"{?if $jieqi_thisfile|basename == 'paylog.php'?} class="selected"{?/if?}><i class="iconfont">&#xee41;</i>充值记录</a></li>{?/if?}
+<li><a href="{?$jieqi_url?}/myfriends.php"{?if $jieqi_thisfile|basename == 'myfriends.php'?} class="selected"{?/if?}><i class="iconfont">&#xee23;</i>我的好友</a></li>
+<li><a href="{?$jieqi_url?}/myptopics.php"{?if $jieqi_thisfile|basename == 'myptopics.php'?} class="selected"{?/if?}><i class="iconfont">&#xee3a;</i>我的留言</a></li>
+</ul>

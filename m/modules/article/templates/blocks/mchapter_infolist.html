@@ -1,0 +1,6 @@
+<ul class="ullist">
+	{?section name=i loop=$chapterrows?}
+	<li><a href="{?$chapterrows[i].url_chapter?}">{?$chapterrows[i].volumename?} {?$chapterrows[i].chaptername?}</a>{?if $chapterrows[i].isvip_n > 0?}<i class="hot">vip</i>{?/if?}</li>
+	{?/section?}
+</ul>
+<a href="{?$url_more?}" class="more">显示全部章节<i class="iconfont">&#xee6a;</i></a>

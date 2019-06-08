@@ -1,0 +1,186 @@
+// ÎÄ±¾
+
+.ultop li, .ullist li, .ulnav li, .ulnum li, .ultwo li, .ulhover li {
+  line-height: $line-height-list;
+  @include text-hidden;
+}
+
+.ultop em, .ullist em, .ulnav em, .ulnum em, .ulhover em {
+  float: right;
+  font-style: normal;
+  font-size: $font-size-sm;
+  color: $gray;
+  @include text-truncate;
+}
+
+.ultop li {
+  border-bottom: 1px dotted $gray-lighter;
+}
+
+.ulnav {
+  font-size: $font-size-lg;
+  li {
+    @include text-truncate;
+    i {
+      font-style: normal;
+      color: $brand-warning;
+      margin-right: 0.3em;
+    }
+  }
+}
+
+.ultab {
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  li {
+    float: left;
+    list-style: none;
+    margin-right: 0.2em;
+    a {
+      display: block;
+      float: left;
+      height: 29px;
+      line-height: 29px;
+      padding: 0 0.6em;
+      font-weight: normal;
+      background: $tab-bg;
+      color: $tab-color;
+      text-decoration: none;
+      border: 1px solid $border-color;
+      border-bottom: none;
+      &.selected {
+        font-weight: bold;
+        background: $tab-selected-bg;
+        color: $tab-selected-color;
+        text-decoration: none;
+        border-top: 2px solid $brand-warning;
+        position: relative;
+        margin-bottom: -1px;
+      }
+    }
+  }
+}
+
+.ulnum li {
+  b, i {
+    background: #ff9900;
+    color: #fff;
+    display: inline-block;
+    width: 1.6em;
+    height: 1.6em;
+    line-height: 1.6em;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 85.7%;
+    text-align: center;
+    margin-right: 0.5em;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+  }
+}
+
+.ulhover li {
+  b, i {
+    background: $brand-warning;
+    color: $color-bg;
+    display: inline-block;
+    width: 1.6em;
+    height: 1.6em;
+    line-height: 1.6em;
+    font-style: normal;
+    font-weight: normal;
+    font-size: $font-size-sm;
+    text-align: center;
+    margin-right: 0.5em;
+    @include border-radius($border-radius);
+  }
+}
+
+.ulnum li i {
+  background: $color-light;
+  color: $color-dark;
+}
+
+.ulhover li {
+  i {
+    background: $color-light;
+    color: $color-dark;
+  }
+  &.selected span {
+    font-style: normal;
+  }
+  div {
+    position: relative;
+    display: none;
+    b, i {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+  &.selected {
+    span {
+      display: none;
+    }
+    div {
+      display: block;
+    }
+  }
+  img {
+    width: 27%;
+    float: left;
+  }
+  p {
+    width: 68%;
+    margin-left: 5%;
+    line-height: 1.8;
+    float: left;
+    overflow: hidden;
+  }
+}
+
+.ultwo li {
+  width: 49.9%;
+  padding: 0;
+  margin: 0;
+  float: left;
+  overflow: hidden;
+}
+
+.ulcenter li {
+  text-align: center;
+  font-size: $font-size-lg;
+}
+
+.ultag {
+  li {
+    float: left;
+    display: inline-block;
+    margin: 0.5em 1em 0.5em 0;
+    border: 1px solid $border-color;
+    background: $color-light;
+    padding: 0 0.3em;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+  .taguse {
+    border: 1px solid $brand-info;
+    background: $color-light;
+  }
+}
+
+.libleft {
+  float: left;
+  width: 70%;
+  overflow: hidden;
+}
+
+.libright {
+  float: right;
+  width: 30%;
+  overflow: hidden;
+  color: $brand-primary;
+  text-align: right;
+}

@@ -1,0 +1,39 @@
+{?set jieqi_page_template = "themer.html"?}
+{?set $jieqi_pagetitle = "{$articlename}-{$chaptername}-{$author}-{$sort}-{$jieqi_sitename}"?}
+{?set $meta_keywords = "{$articlename} {$chaptername} {$author} {$sort} {$jieqi_sitename}"?}
+{?set $jieqi_articleread = "1"?}
+
+<div class="main">
+<div class="mainbody" id="apage">
+<div class="headlink cf">
+<div class="linkleft"><a href="{?$jieqi_main_url?}/">{?$jieqi_sitename?}</a>-&gt;<a href="{?$jieqi_modules['article']['url']?}/">书库首页</a>-&gt;<a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">{?$articlename?}</a></div>
+
+<div class="linkright"><a href="{?$url_previous?}">上一章</a> | <a href="{?$url_index?}">返回书目</a> | <a href="{?$url_next?}">下一章</a> | <a id="a_addbookcase" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/addbookcase.php?bid={?$articleid?}&cid={?$chapterid?}', {method: 'POST'});">加入书签</a> | <a id="a_uservote"  href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/uservote.php?id={?$articleid?}', {method: 'POST'});">推荐本书</a> | <a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">返回书页</a></div>
+</div>
+
+<div class="fullbar"><script type="text/javascript" src="{?$jieqi_modules['article']['url']?}/scripts/pagetop.js"></script></div>
+
+<div class="atitle">{?$chaptername?}</div>
+
+<div class="ainfo">作者：<a href="{?function jieqi_geturl:'article':'author':$authorid:$author?}" target="_blank">{?$author?}</a> &nbsp;&nbsp;&nbsp;&nbsp; 更新：{?$chaptertime|date:'Y-m-d H:i'?} &nbsp;&nbsp;&nbsp;&nbsp; 字数：{?$chapterwords?}</div>
+
+<div id="acontent" class="acontent">
+	{?$jieqi_content?}
+{?if $picrows|count > 0 && $chapterdisplay != 1?}
+	{?section name=i loop=$picrows?}
+	{?if $picrows[i].class == 'file'?}
+	<strong>file:</strong><a href="{?$picrows[i].url?}">{?$picrows[i].url?}</a>({?$picrows[i].size?})<br /><br />
+	{?else?}
+	<div class="divimage"><img id="obookimage{?$i['order']?}" src="{?$picrows[i].url?}" class="imagecontent"></div>
+	{?/if?}
+	{?/section?}
+{?/if?}
+</div>
+
+<div class="footlink"><a href="{?$url_previous?}" title="{?$previous_chaptername?}">上一章</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{?$url_index?}">返回目录</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{?$url_next?}" title="{?$next_chaptername?}">下一章</a></div>
+
+<div class="fullbar"><script type="text/javascript" src="{?$jieqi_modules['article']['url']?}/scripts/pagebottom.js"></script></div>
+</div>
+</div>
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/json2.js"></script>
+<script type="text/javascript" src="{?$jieqi_modules['article']['url']?}/scripts/readlog.js"></script>

@@ -1,0 +1,11 @@
+<a class="moretop" href="{?function jieqi_geturl:'article':'reviews':1:$reviewaid:''?}">显示更多<i class="iconfont">&#xee6a;</i></a>
+<ul class="ullist">
+{?section name=i loop=$reviewrows?}
+	<li>
+	<a class="db cf" href="{?function jieqi_geturl:'article':'reviewshow':1:$reviewrows[i].topicid?}">
+	<em>{?$reviewrows[i].posttime|date:Y-m-d H:i:s?}</em><b>{?if $reviewrows[i].posterid > 0?}{?$reviewrows[i].poster?}{?else?}游客{?/if?}：</b>
+	<p>{?if $reviewrows[i].istop == 1?}<span class="pop">[顶]</span>{?/if?}{?if $reviewrows[i].isgood == 1?}<span class="pop">[精]</span>{?/if?}{?$reviewrows[i].posttext|truncate:320:'..'?}</p>
+	</a>
+	</li>
+{?/section?}
+</ul>

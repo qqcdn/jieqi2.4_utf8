@@ -1,0 +1,38 @@
+<form action="managemodules.php" method="post">
+  <table class="grid" width="98%" align="center">
+    <caption>
+      模块配置管理
+    </caption>
+    <tr>
+      <td width="15%" height="29" align="center">模块名称</td>
+      <td width="18%" align="center">相对路径</td>
+      <td width="45%" align="center">URL地址</td>
+      <td width="14%" align="center">模板</td>
+      <td width="8%" align="center">是否显示</td>
+    </tr>
+    {?section name=i loop=$jieqiModules?}
+  <tr>
+    <td align="center"><input name="jieqiModules[{?$i.key?}][caption]" type="text" id="jieqiModules[{?$i.key?}][caption]" value="{?$jieqiModules[i].caption?}" size="12" maxlength="8">
+        <input type="hidden" name="jieqiModules[{?$i.key?}][path]" id="jieqiModules[{?$i.key?}][path]" value="{?$jieqiModules[i].path?}"></td>
+    <td>{?$jieqiModules[i].dir?}
+      <input name="jieqiModules[{?$i.key?}][dir]" type="hidden" id="jieqiModules[{?$i.key?}][dir]" value="{?$jieqiModules[i].dir?}" size="40" readonly></td>
+    <td align="center"><input name="jieqiModules[{?$i.key?}][url]" type="text" value="{?$jieqiModules[i].url?}" size="50">
+    </td>
+    <td align="center"><select name="jieqiModules[{?$i.key?}][theme]">
+	  {?section name=a loop=$themes?}
+      <option value="{?$themes[a]?}" {?if $themes[a]==$jieqiModules[i].theme?}selected{?/if?}>{?$themes[a]?}</option>
+	   {?/section?}
+      
+    </select></td>
+    <td align="center"><select name="jieqiModules[{?$i.key?}][publish]">
+      <option value="1" {?if $jieqiModules[i].publish==1?}selected{?/if?}>是</option>
+      <option value="0" {?if $jieqiModules[i].publish==0?}selected{?/if?}>否</option>
+    </select>
+    </td>
+  </tr>
+    {?/section?}
+  <tr>
+    <td colspan="6" align="center"><button type="submit" class="button" name="dosubmit" id="dosubmit">确定</button></td>
+  </tr>
+  </table>
+</form>

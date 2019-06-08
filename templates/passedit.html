@@ -1,0 +1,91 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "修改密码-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="用户设置" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_userset_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+{?if $emptypass != 1?}
+<script type="text/javascript">
+    function frmpassedit_validate() {
+        if (document.frmpassedit.oldpass.value == "") {
+            alert("请输入原密码！");
+            document.frmpassedit.oldpass.focus();
+            return false;
+        }
+        if (document.frmpassedit.newpass.value == "") {
+            alert("请输入新密码！");
+            document.frmpassedit.newpass.focus();
+            return false;
+        }
+        if (document.frmpassedit.repass.value != document.frmpassedit.newpass.value) {
+            alert("两次新密码输入不同，请重新输入！");
+            document.frmpassedit.repass.focus();
+            return false;
+        }
+    }
+</script>
+<form name="frmpassedit" id="frmpassedit" action="{?$url_passedit?}" method="post" onsubmit="return frmpassedit_validate();">
+    <table width="100%" class="grid" cellspacing="1" align="center">
+        <caption>修改密码</caption>
+        <tr valign="middle" align="left">
+            <td class="tdl" width="25%">用户名：</td>
+            <td class="tdr" width="75%">{?$jieqi_username?}</td>
+        </tr>
+        <tr valign="middle" align="left">
+            <td class="tdl">原密码：</td>
+            <td class="tdr"><input type="password" class="text" name="oldpass" size="25" value=""/></td>
+        </tr>
+        <tr valign="middle" align="left">
+            <td class="tdl">新密码：</td>
+            <td class="tdr"><input type="password" class="text" name="newpass" size="25" value=""/></td>
+        </tr>
+        <tr valign="middle" align="left">
+            <td class="tdl">重复新密码：</td>
+            <td class="tdr"><input type="password" class="text" name="repass" size="25" value=""/></td>
+        </tr>
+        <tr valign="middle" align="left">
+            <td class="tdl">&nbsp;<input type="hidden" name="act" value="update"/>{?$jieqi_token_input?}</td>
+            <td class="tdr">
+                <button type="submit" class="button" name="submit">保 存</button>
+            </td>
+        </tr>
+    </table>
+</form>
+{?else?}
+<script type="text/javascript">
+    function frmpassedit_validate() {
+        if (document.frmpassedit.newpass.value == "") {
+            alert("请输入密码！");
+            document.frmpassedit.newpass.focus();
+            return false;
+        }
+        if (document.frmpassedit.repass.value != document.frmpassedit.newpass.value) {
+            alert("两次密码输入不同，请重新输入！");
+            document.frmpassedit.repass.focus();
+            return false;
+        }
+    }
+</script>
+<form name="frmpassedit" id="frmpassedit" action="{?$url_passedit?}" method="post" onsubmit="return frmpassedit_validate();">
+    <table width="100%" class="grid" cellspacing="1" align="center">
+        <caption>设置本站密码</caption>
+        <tr valign="middle" align="left">
+            <td class="tdl" width="25%">用户名：</td>
+            <td class="tdr" width="75%">{?$jieqi_username?}</td>
+        </tr>
+        <tr valign="middle" align="left">
+            <td class="tdl">密码：</td>
+            <td class="tdr"><input type="password" class="text" name="newpass" size="25" value=""/></td>
+        </tr>
+        <tr valign="middle" align="left">
+            <td class="tdl">重复密码：</td>
+            <td class="tdr"><input type="password" class="text" name="repass" size="25" value=""/></td>
+        </tr>
+        <tr valign="middle" align="left">
+            <td class="tdl">&nbsp;<input type="hidden" name="act" value="update"/>{?$jieqi_token_input?}</td>
+            <td class="tdr">
+                <button type="submit" class="button" name="submit">保 存</button>
+            </td>
+        </tr>
+    </table>
+</form>
+{?/if?}

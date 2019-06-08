@@ -1,0 +1,44 @@
+{?set $jieqi_pagetitle = "账号绑定-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "账号绑定"?}
+
+<script type="text/javascript">
+  //解除绑定
+  function act_unbind(url){
+	var o = getTarget();
+	var param = {
+	  method: 'POST',
+	}
+	if(confirm('确实要解除账号绑定么？')) Ajax.Tip(url, param);
+	return false;
+  }
+</script>
+<table class="grid" width="100%" align="center">
+  <tr align="left">
+	<td class="tdl" width="30%">本站账号：</td>
+	<td class="tdr" width="70%">{?$uname?}{?if $pass == ''?}<br /><span class="hot">您尚未设置本站密码</span><br /><a class="btnlink" href="{?$jieqi_url?}/passedit.php">马上去设置</a>{?/if?}</td>
+  </tr>
+  {?if $name != $uname?}
+  <tr align="left">
+	<td class="tdl">本站昵称：</td>
+	<td class="tdr">{?$name?}</td>
+  </tr>
+  {?/if?}
+  {?section name=i loop=$userapirows?}
+  {?if $userapirows[i].publish > 0?}
+  <tr align="left">
+	<td class="tdl">{?$userapirows[i].apititle?}账号：</td>
+	<td class="tdr">
+	  {?if $userapirows[i].isbind > 0?}
+	  <span class="hot">已经绑定</span>{?if $pass != '' || $bindcount > 1?} &nbsp;&nbsp; <a class="btnlink" id="act_unbind_{?$userapirows[i].apiname?}" href="javascript:;" onclick="act_unbind('{?$jieqi_url?}/userbind.php?apiname={?$userapirows[i].apiname?}&act=unbind{?$jieqi_token_url?}');">解除绑定</a>{?/if?}
+	  {?else?}
+	  尚未绑定 &nbsp;&nbsp; <a class="btnlink" href="{?$jieqi_url?}/api/{?$userapirows[i].apiname?}/login.php">马上去绑定</a>
+	  {?/if?}
+	</td>
+  </tr>
+  {?/if?}
+  {?/section?}
+  <tr align="left">
+	<td class="tdl">说明：</td>
+	<td class="tdr">把本站账号和您在其他平台的账号绑定后，您可以使用这些平台来验证并登陆本站。</td>
+  </tr>
+</table>

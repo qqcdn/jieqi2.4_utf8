@@ -1,0 +1,15 @@
+<table class="grid" align="center" width="100%">
+  <caption>{?$owner?} 的友情链接列表</caption>
+  <tr>
+    <td width="25%" class="head">链接</td>
+    <td width="55%" class="head">说明</td>
+    <td width="20%" class="head">加入时间</td>
+  </tr>
+  {?section name=i loop=$linkrows?}
+  <tr>
+    <td align="center" valign="middle"><a href="{?$linkrows[i].ulurl?}" target="_blank" title="{?$linkrows[i].ulurl?}">{? $linkrows[i].ultitle?}</a></td>
+    <td align="center" valign="middle">{?$linkrows[i].ulinfo?}</td>
+    <td align="center" valign="middle">{? $linkrows[i].addtime|date:"Y-m-d"?}</td>
+  </tr>
+  {?/section?}
+</table>

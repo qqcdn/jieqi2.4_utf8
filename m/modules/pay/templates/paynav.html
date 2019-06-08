@@ -1,0 +1,16 @@
+{?set $jieqi_pagetitle = "支付方式-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "支付方式"?}
+
+<div class="block">
+	<div class="blockcontent">
+	<ul class="ulnav">
+		{?if $jieqi_browser == 'weixin'?}
+		<li><a class="db cf" href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=wxjsapipay&p=wxjsapi&jumpurl={?$jumpurl|urlencode?}"><em class="iconfont fr">&#xee6a;</em><img class="navico" src="{?$jieqi_modules['pay']['url']?}/images/nav_weixin.png" />微信</a></li>
+		{?else?}
+		<li><a class="db cf" href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=aliwappay&p=aliwap&jumpurl={?$jumpurl|urlencode?}"><em class="iconfont fr">&#xee6a;</em><img class="navico" src="{?$jieqi_modules['pay']['url']?}/images/nav_alipay.png" />支付宝</a></li>
+		{?/if?}
+		<li><a class="db cf" href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=qnativepay&p=qnative&jumpurl={?$jumpurl|urlencode?}"><em class="iconfont fr">&#xee6a;</em><img class="navico" src="{?$jieqi_modules['pay']['url']?}/images/nav_qq.png" />手机QQ</a></li>
+		<li><a class="db cf" href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=99billpay&p=99bill&jumpurl={?$jumpurl|urlencode?}"><em class="iconfont fr">&#xee6a;</em><img class="navico" src="{?$jieqi_modules['pay']['url']?}/images/nav_unionpay.png" />银行卡</a></li>
+	</ul>
+	</div>
+</div>

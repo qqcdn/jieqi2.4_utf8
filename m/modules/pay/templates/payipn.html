@@ -1,0 +1,13 @@
+{?set $jieqi_pagetitle = "支付方式-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "支付方式"?}
+
+<div class="block">
+	<div class="blockcontent">
+	<ul class="ulnav">
+		<li><a class="db cf" href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=ipnmwxpay&p=ipn&jumpurl={?$jumpurl|urlencode?}"><em class="iconfont fr">&#xee6a;</em><img src="{?$jieqi_modules['pay']['url']?}/images/nav_weixin.png" />微信</a></li>
+		<li><a class="db cf" href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=ipnmsqpay&p=ipn&jumpurl={?$jumpurl|urlencode?}"><em class="iconfont fr">&#xee6a;</em><img src="{?$jieqi_modules['pay']['url']?}/images/nav_qq.png" />手机QQ</a></li>
+		<li><a class="db cf" href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=ipnmalipay&p=ipn&jumpurl={?$jumpurl|urlencode?}"><em class="iconfont fr">&#xee6a;</em><img src="{?$jieqi_modules['pay']['url']?}/images/nav_alipay.png" />支付宝</a></li>
+		<li><a class="db cf" href="{?$jieqi_modules['pay']['url']?}/buyegold.php?t=ipnmunpay&p=ipn&jumpurl={?$jumpurl|urlencode?}"><em class="iconfont fr">&#xee6a;</em><img src="{?$jieqi_modules['pay']['url']?}/images/nav_unionpay.png" />银联</a></li>
+	</ul>
+	</div>
+</div>

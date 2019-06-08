@@ -1,0 +1,31 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<form action="" method="post" name="checkform" id="checkform">
+<ul class="ultab">
+	<li><a href="{?$jieqi_modules['article']['url']?}/draft.php"{?if $_request['type'] == 0?} class="selected"{?/if?}>全部草稿</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/draft.php?type=1"{?if $_request['type'] == 1?} class="selected"{?/if?}>私人草稿</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/draft.php?type=2"{?if $_request['type'] == 2?} class="selected"{?/if?}>定时章节</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/draft.php?type=3"{?if $_request['type'] == 3?} class="selected"{?/if?}>待审章节</a></li>
+</ul>
+<table class="grid" width="100%" align="center">
+  <tr class="head">
+    <th width="20%" class="head">小说名称</th>
+    <th width="35%" class="head">章节标题</th>
+	<th width="13%" class="head">定时发表</th>
+	<th width="12%" class="head">草稿类型</th>
+    <th width="20%" class="head">操作</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$draftrows?}
+  <tr valign="middle">
+    <td><a href="{?$article_static_url?}/articlemanage.php?id={?$draftrows[i].articleid?}">{?$draftrows[i].articlename?}</a></td>
+    <td><a href="{?$article_static_url?}/draftedit.php?id={?$draftrows[i].draftid?}">{?$draftrows[i].chaptername?}</a></td>
+	<td align="center">{?if $draftrows[i].pubdate > 0?}{?$draftrows[i].pubdate|date:m-d H:i?}{?else?}----------{?/if?}</td>
+	<td align="center">{?if $draftrows[i].isvip_n == 1?}电子书{?else?}公众小说{?/if?}</td>
+    <td align="center"><a href="{?$article_static_url?}/draftedit.php?id={?$draftrows[i].draftid?}">编辑</a> <a href="javascript:if(confirm('确实要删除该章节么？')) document.location='{?$draftrows[i].url_delete?}';">删除</a>{?if $draftrows[i].display_n == 0?} <a href="{?if $draftrows[i].isvip_n == 1?}{?$article_static_url?}/newchapter.php?aid={?$draftrows[i].articleid?}&draftid={?$draftrows[i].draftid?}{?else?}{?$article_static_url?}/newchapter.php?aid={?$draftrows[i].articleid?}&draftid={?$draftrows[i].draftid?}{?/if?}">发表</a>{?/if?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

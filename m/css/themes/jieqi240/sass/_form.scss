@@ -1,0 +1,72 @@
+// 表单
+
+.form {
+  border: $border-width solid $border-color;
+  margin-bottom: $spacer;
+  padding: 0.6em;
+  overflow: hidden;
+  background: $body-bg;
+  @include border-radius($border-radius-lg);
+  fieldset {
+    margin: 0;
+    padding: 0.3em 0;
+    border: 0;
+  }
+  legend {
+    display: block;
+    width: 100%;
+    border-bottom: $border-width solid $border-color;
+    margin-bottom: 0.2em;
+    text-align: center;
+    color: $brand-warning;
+    font-weight: bold;
+    font-size: $font-size-lg;
+    line-height: 2;
+  }
+  .flabel {
+    text-align: right;
+    vertical-align: middle;
+  }
+  .frow {
+    margin: 0.6em 0;
+  }
+}
+
+.textarea, .text, .file {
+  @include box-border($input-border, $input-border-radius, $input-box-shadow);
+}
+
+.textarea:focus, .text:focus, .file:focus {
+  outline: 0;
+  @include box-border($input-border-focus, $input-border-radius-focus, $input-box-shadow-focus);
+}
+
+.textarea, .text, .file {
+  &::-moz-placeholder, &:-ms-input-placeholder, &::-webkit-input-placeholder {
+    color: $input-color-placeholder;
+  }
+}
+
+.text {
+  padding: $input-padding;
+}
+
+.t_s {
+  padding: $input-padding-sm;
+}
+
+.t_l {
+  padding: $input-padding-lg;
+}
+
+.filediv {
+  margin-top: 0.3em;
+}
+
+.select {
+  padding: 0.3em;
+}
+
+.checkbox, .radio {
+  cursor: pointer;
+}

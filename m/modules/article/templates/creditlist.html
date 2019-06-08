@@ -1,0 +1,24 @@
+{?set jieqi_page_rows = "50"?}
+{?set $jieqi_contenttitle = "粉丝排行"?}
+<table class="grid" width="100%" align="center">
+<caption>
+<a class="db" href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">《{?$articlename?}》粉丝榜</a>
+</caption>
+  <tr align="center">
+    <th width="15%">排名</th>
+    <th width="40%">粉丝名</th>
+    <th width="20%">粉丝值</th>
+	<th width="25%">等级</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$creditrows?}
+  <tr>
+    <td align="center">{?$creditrows[i].order?}</td>
+    <td><a href="{?function jieqi_geturl:'system':'user':$creditrows[i].uid?}">{?$creditrows[i].uname?}</a></td>
+    <td align="center">{?$creditrows[i].point?}</td>
+	<td align="center">{?$creditrows[i].rank?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,23 @@
+{?set jieqi_blocks_module = "news"?}
+{?set jieqi_blocks_config = "infoblocks"?}
+
+
+<div class="c_nav"><a href="{?$jieqi_modules['news']['url']?}/">新闻中心</a>{?section name=i loop=$sortroutes?} &gt; <a href="{?function jieqi_geturl:'news':'newslist':1:$sortroutes[i].sortid?}">{?$sortroutes[i].sortname?}</a>{?/section?}</div>
+
+<div class="c_main">
+<div class="c_title">{?$news['title']?}</div>
+
+<div class="c_head">
+  <span class="c_label">新闻来源：</span><span class="c_value">{?if $news['surl'] == ''?}{?$news['source']?}{?else?}<a href="{?$news['surl']?}" target="_blank">{?$news['source']?}</a>{?/if?}</span>
+  <span class="c_label">发表时间：</span><span class="c_value">{?$news['addtime']|date:'Y-m-d H:i:s'?}</span>
+  <span class="c_label">发表人：</span><span class="c_value"><a href="{?function jieqi_geturl:'system':'user':$news['posterid']?}" target="_blank">{?$news['poster']?}</a></span>
+</div>
+
+<div class="c_content">
+  {?$news['contents']?}
+</div>
+
+<div class="c_foot">
+  
+</div>
+</div>

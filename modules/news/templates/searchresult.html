@@ -1,0 +1,19 @@
+{?set jieqi_blocks_module = "news"?}
+{?set jieqi_blocks_config = "listblocks"?}
+
+<div class="c_nav"><a href="{?$jieqi_modules['news']['url']?}/">新闻中心</a> &gt; 搜索结果</div>
+
+<div class="blockm" id="jieqi_page_contents">
+{?section name=i loop=$newsrows?}
+<div class="c_row">
+	<div class="c_subject"><a href="{?function jieqi_geturl:'news':'info':$newsrows[i].topicid?}" target="_blank">{?$newsrows[i].title?}</a></div>
+	<div class="c_tag">
+		<span class="c_label">新闻来源：</span><span class="c_value">{?$newsrows[i].source?}</span>
+		<span class="c_label">发表时间：</span><span class="c_value">{?$newsrows[i].addtime|date:'Y-m-d H:i:s'?}</span>
+	</div>
+	<div class="c_description">{?$newsrows[i].summary|truncate:250:'..'?} [<a href="{?function jieqi_geturl:'news':'info':$newsrows[i].topicid?}" target="_blank" class="hot">阅读全文</a>]</div>
+</div>
+{?/section?}
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

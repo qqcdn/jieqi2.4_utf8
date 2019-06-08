@@ -1,0 +1,28 @@
+<form name="articlesearch" method="post" action="{?$jieqi_modules['article']['url']?}/search.php">
+ <table class="grid" width="60%" style="min-width:480px;">
+   <caption>小说搜索</caption>
+    <tr align="center">
+      <td style="padding:1em;"><table width="100%" class="hide">
+        <tr>
+          <td width="30%" align="right" valign="middle">条　件：</td>
+          <td width="70%">
+		  <select name="searchtype" id="searchtype" class="select">
+		  <option value="all" selected="selected">综合</option>
+		  <option value="articlename">小说名称</option>
+		  <option value="author">小说作者</option>
+		  <option value="keywords">关键字</option>
+		  </select>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" valign="middle">关键字：</td>
+          <td><input name="searchkey" type="text" class="text" id="searchkey" size="20" maxlength="50"></td>
+        </tr>
+        <tr>
+		  <td><input type="hidden" name="act" value="search">{?$jieqi_token_input?}</td>
+          <td><button type="submit" class="button" name="submit">&nbsp;搜&nbsp;&nbsp;索&nbsp;</button></td>
+          </tr>
+      </table></td>
+    </tr>
+  </table>
+</form>

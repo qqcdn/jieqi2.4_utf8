@@ -1,0 +1,5 @@
+<ul class="cf">
+	{?section name=i loop=$chapterrows?}
+	<li style="width:49.9%;float:left;"><a href="{?$chapterrows[i].url_chapter?}" target="_blank">{?$chapterrows[i].chaptername?}</a>{?if $chapterrows[i].isvip_n > 0?}<i class="hot">vip</i>{?/if?}</li>
+	{?/section?}
+</ul>

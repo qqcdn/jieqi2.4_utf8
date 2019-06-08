@@ -1,0 +1,22 @@
+{?set $jieqi_pagetitle = "新闻搜索-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "新闻搜索"?}
+
+<form class="form cf" name="frmsearch" id="frmsearch" action="{?$jieqi_modules['news']['url']?}/search.php" method="post">
+    <fieldset>
+    <div class="frow">
+      <label class="col4 flabel">关键字：</label>
+      <div class="col8 last">
+      <input type="text" class="text" name="keyword" size="20" value="" />
+      </div>
+    </div>
+
+    <div class="frow">
+      <label class="col4 flabel">&nbsp;</label>
+      <div class="col8 last">
+      <button type="submit" class="button" name="submit">搜 索</button>
+      <input type="hidden" name="act" value="search" />
+      {?$jieqi_token_input?}
+      </div>
+    </div>
+    </fieldset>
+</form>

@@ -1,0 +1,26 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "memberblocks"?}
+{?set jieqi_page_rows = "30"?}
+<table class="grid" width="100%" align="center">
+<caption>{?$usertitle?}</caption>
+  <tr align="center">
+    <th width="20%">用户名</th>
+    <th width="20%">注册日期</th>
+    <th width="20%">等级</th>
+    <th width="20%">经验值</th>
+    <th width="20%">积分</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$userrows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'system':'user':$userrows[i].uid?}" target="_blank">{?$userrows[i].uname?}</a></td>
+    <td align="center">{?$userrows[i].regdate|date:'Y-m-d'?}</td>
+    <td>{?$userrows[i].group?}</td>
+    <td align="center">{?$userrows[i].experience?}</td>
+    <td align="center">{?$userrows[i].score?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+
+<div class="pages">{?$url_jumppage?}</div>

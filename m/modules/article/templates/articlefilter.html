@@ -1,0 +1,112 @@
+{?set $jieqi_pagetitle = "小说书库-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "小说书库"?}
+{?set jieqi_page_rows = "30"?}
+
+<div class="block">
+    <div class="dropbutton">
+        <p onclick="document.getElementById('dropbox').style.display = (document.getElementById('dropbox').style.display != 'block') ? 'block':'none';">筛选条件<b class="dropico"></b></p>
+        <div class="dropbox" id="dropbox">
+            <div class="c_row cf">
+                <div><strong>作品分类：</strong></div>
+                {?section name=i loop=$sortidrows?}
+                {?if $sortidrows[i]['selected'] > 0?}
+                <a href="{?$sortidrows[i]['url']?}" class="hot"><strong>{?$sortidrows[i]['name']?}</strong></a>&nbsp;
+                {?else?}
+                <a href="{?$sortidrows[i]['url']?}">{?$sortidrows[i]['name']?}</a>&nbsp;
+                {?/if?}
+                {?/section?}
+                {?if $typeidrows|count > 0?}
+                <div class="textbox">
+                    {?section name=i loop=$typeidrows?}
+                    {?if $typeidrows[i]['selected'] > 0?}
+                    <a href="{?$typeidrows[i]['url']?}" class="hot"><strong>{?$typeidrows[i]['name']?}</strong></a>&nbsp;
+                    {?else?}
+                    <a href="{?$typeidrows[i]['url']?}">{?$typeidrows[i]['name']?}</a>&nbsp;
+                    {?/if?}
+                    {?/section?}
+                </div>
+                {?/if?}
+            </div>
+
+            <div class="c_row cf">
+                <div><strong>作品字数：</strong></div>
+                {?section name=i loop=$wordsrows?}
+                {?if $wordsrows[i]['selected'] > 0?}
+                <a href="{?$wordsrows[i]['url']?}" class="hot"><strong>{?$wordsrows[i]['name']?}</strong></a>&nbsp;
+                {?else?}
+                <a href="{?$wordsrows[i]['url']?}">{?$wordsrows[i]['name']?}</a>&nbsp;
+                {?/if?}
+                {?/section?}
+            </div>
+
+            <div class="c_row cf">
+                <div><strong>排序方式：</strong></div>
+                {?section name=i loop=$orderrows?}
+                {?if $orderrows[i]['selected'] > 0?}
+                <a href="{?$orderrows[i]['url']?}" class="hot"><strong>{?$orderrows[i]['name']?}</strong></a>&nbsp;
+                {?else?}
+                <a href="{?$orderrows[i]['url']?}">{?$orderrows[i]['name']?}</a>&nbsp;
+                {?/if?}
+                {?/section?}
+            </div>
+
+            <div class="c_row cf">
+                <div><strong>更新时间：</strong></div>
+                {?section name=i loop=$updaterows?}
+                {?if $updaterows[i]['selected'] > 0?}
+                <a href="{?$updaterows[i]['url']?}" class="hot"><strong>{?$updaterows[i]['name']?}</strong></a>&nbsp;
+                {?else?}
+                <a href="{?$updaterows[i]['url']?}">{?$updaterows[i]['name']?}</a>&nbsp;
+                {?/if?}
+                {?/section?}
+            </div>
+
+            <div class="c_row cf">
+                <div><strong>写作进度：</strong></div>
+                {?section name=i loop=$isfullrows?}
+                {?if $isfullrows[i]['selected'] > 0?}
+                <a href="{?$isfullrows[i]['url']?}" class="hot"><strong>{?$isfullrows[i]['name']?}</strong></a>&nbsp;
+                {?else?}
+                <a href="{?$isfullrows[i]['url']?}">{?$isfullrows[i]['name']?}</a>&nbsp;
+                {?/if?}
+                {?/section?}
+            </div>
+
+            <div class="c_row cf">
+                <div><strong>VIP状态：</strong></div>
+                {?section name=i loop=$isviprows?}
+                {?if $isviprows[i]['selected'] > 0?}
+                <a href="{?$isviprows[i]['url']?}" class="hot"><strong>{?$isviprows[i]['name']?}</strong></a>&nbsp;
+                {?else?}
+                <a href="{?$isviprows[i]['url']?}">{?$isviprows[i]['name']?}</a>&nbsp;
+                {?/if?}
+                {?/section?}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="grid" width="100%" align="center">
+    <tr align="center">
+        <th width="15%">分类</th>
+        <th width="50%">书名/作者</th>
+        <th width="20%">{?if $orderfield == 'lastupdate'?}字数{?else?}{?$ordername?}{?/if?}</th>
+        <th width="15%">状态</th>
+    </tr>
+    <tbody id="jieqi_page_contents">
+    {?section name=i loop=$articlerows?}
+    <tr>
+        <td align="center">{?$articlerows[i].sort|truncate:4:''?}</td>
+        <td>
+            <a class="db nw" href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename?}<span class="gray fss">/{?$articlerows[i].author?}</span></a>
+        </td>
+        <td align="center">{?if $orderfield ==
+            'lastupdate'?}{?$articlerows[i].words?}{?else?}{?$articlerows[i].ordervalue?}{?/if?}
+        </td>
+        <td align="center">{?$articlerows[i].fullflag?}</td>
+    </tr>
+    {?/section?}
+    </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

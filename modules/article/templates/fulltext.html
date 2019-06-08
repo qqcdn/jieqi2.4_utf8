@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{?$articlename?}-{?$sort?}-{?$jieqi_sitename?}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="keywords" content="{?$meta_keywords?}" />
+<meta name="description" content="{?$meta_description?}" />
+<meta name="author" content="{?$meta_author?}" />
+<meta name="copyright" content="{?$meta_copyright?}" />
+<meta name="generator" content="jieqi.com" />
+<link rel="stylesheet" href="{?$static_url?}/css/page.css" type="text/css" media="all"  />
+</head>
+<body bgcolor="#e7f4fe">
+
+<div class="ad"><script type="text/javascript" src="{?$static_url?}/scripts/fulltop.js"></script></div>
+
+<div class="headlink">
+<div class="linkleft"><a href="{?$jieqi_main_url?}/">{?$jieqi_sitename?}</a>-&gt;<a href="{?$url_bookroom?}">书库首页</a>-&gt;<a href="{?$url_articleinfo?}">{?$articlename?}</a></div>
+
+<div class="linkright"><a href="{?$dynamic_url?}/addbookcase.php?bid={?$articleid?}" target="_blank">加入书架</a> | <a href="{?$dynamic_url?}/uservote.php?id={?$articleid?}" target="_blank">推荐本书</a> | <a href="{?$url_articleinfo?}">返回书页</a></div>
+</div>
+
+<div class="title">{?$book_title?}</div>
+
+<div class="info">作者：{?$author?}</div>
+
+<div class="index">
+{?section name=i loop=$chapterrows?}
+	{?if $chapterrows[i].chaptertype > 0?}
+		{?if $i['order'] > 1?}</ul>{?/if?}
+		<div class="volume">{?$chapterrows[i].chaptername?}</div>
+		{?if $i['order'] < $i['count']?}<ul class="chapters">{?/if?}
+	{?else?}
+		{?if $i['order'] == 1?}<ul class="chapters">{?/if?}
+		<li class="chapter"><a href="{?$chapterrows[i].url_chapter?}" title="{?$chapterrows[i].lastupdate|date:'Y-m-d H:i'?}更新，共{?$chapterrows[i].words?}字">{?$chapterrows[i].chaptername?}</a></li>
+		{?if $i['order'] == $i['count']?}</ul>{?/if?}
+	{?/if?}
+{?/section?}
+</div>
+
+{?section name=i loop=$chapters?}
+<div class="chapterblock">
+	<div class="chaptertitle">{?$chapters[i].title?}</div>
+	<div class="chaptercontent">{?$chapters[i].content?}</div>
+</div>
+{?/section?}
+
+<div class="ad"><script type="text/javascript" src="{?$static_url?}/scripts/fullbottom.js"></script></div>
+
+<div class="copyright">
+作品本身仅代表作者本人的观点，与本站立场无关。如因而由此导致任何法律问题或后果，本站均不负任何责任。<br />
+网站版权所有：{?$jieqi_sitename?}
+</div>
+
+</body>
+</html>

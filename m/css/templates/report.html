@@ -1,0 +1,47 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+<div id="tabreport" style="padding:10px;">
+ <div class="tablist">
+     <ul>
+	     {?section name=i loop=$rsortrows?}
+         <li><a href="javascript:void(0)" onClick="selecttab(this)"{?if $i['index'] == 0?} class="selected"{?/if?}>{?$rsortrows[i].caption?}</a></li>
+		 {?/section?}
+    </ul>
+  </div>
+  <div class="tabcontent">
+     {?section name=i loop=$rsortrows?}
+     <div class="tabvalue"{?if $i['index'] > 0?} style="display:none"{?/if?}>
+	 <form name="frmreport" action="{?$jieqi_url?}/report.php?do=submit" method="post">
+	<table class="hide" width="100%" align="center">
+      <tr valign="middle" align="left">
+        <td class="tdl" width="25%">类型：<span class="hot">(必填)</span></td>
+        <td class="tdr">
+		{?section name=j loop=$i['value']['types']?}
+		<label class="radio"><input type="radio" name="reporttype" id="reporttype" value="{?$j['key']?}" />{?$j['value']?}</label> 
+		{?/section?}
+		<label class="radio"><input name="reporttype" type="radio" id="reporttype" value="0" checked="checked" />其他</label>
+	    </td>
+            </tr>
+            <tr valign="middle" align="left">
+              <td class="tdl" width="25%">标题：<span class="hot">(必填)</span></td>
+              <td class="tdr"><input type="text" class="text" name="reporttitle" id="reporttitle" size="60" maxlength="250" value="" /></td>
+            </tr>
+            <tr valign="middle" align="left">
+              <td class="tdl" width="25%">内容：<span class="hot">(必填)</span>
+			  </td>
+              <td class="tdr"><textarea class="textarea" name="reporttext" id="reporttext" rows="12" cols="60"></textarea></td>
+            </tr>   
+            <tr valign="middle" align="left">
+              <td class="tdl" width="25%">&nbsp;</td>
+              <td class="tdr">
+			  <button type="submit" class="button" name="submit1" id="submit1"> 提 交 </button>
+			  <input type="hidden" name="act" id="act" value="post" />{?$jieqi_token_input?}
+			  <input type="hidden" name="reportsort" id="reportsort" value="{?$i['key']?}" />
+			  </td>
+            </tr>
+          </table>
+	 </form>
+	 </div>
+	 {?/section?}
+  </div>
+</div>

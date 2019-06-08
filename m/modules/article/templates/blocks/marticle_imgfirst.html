@@ -1,0 +1,21 @@
+<a href="{?$url_more?}" class="moretop"><i class="iconfont">&#xee6a;</i></a>
+{?section name=i loop=$articlerows?}
+{?if $i['order'] < 2?}
+<div class="c_row cf">
+<a class="db cf" href="{?$articlerows[i].url_articleinfo?}">
+	<div class="row_cover">
+	<img class="cover_i" src="{?$articlerows[i].url_simage?}" />
+	</div>
+
+	<div class="row_text">
+	<h4>{?$articlerows[i].articlename?}</h4>
+    <p class="gray fss">{?$articlerows[i].sort?} | {?$articlerows[i].author?}<br />{?$articlerows[i].intro|truncate:80:'..'?}</p>
+	</div>
+</a>
+</div>
+{?else?}
+{?if $i['order'] == 2?}<ul class="ullist">{?/if?}
+	<li><a class="db" href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename?}</a></li>
+{?if $i['order'] == $i['count']?}</ul>{?/if?}
+{?/if?}
+{?/section?}

@@ -1,0 +1,85 @@
+<script type="text/javascript">
+function jieqiFormValidate_usermanage(){
+  if(document.usermanage.groupid.value == ""){
+    alert("请输入等级");
+    document.usermanage.groupid.focus();
+    return false;
+  }
+}
+</script>
+<form name="usermanage" id="usermanage" action="{?$jieqi_url?}/admin/usermanage.php?do=submit" method="post" onsubmit="return jieqiFormValidate_usermanage();">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>用户管理</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">用户名：</td>
+  <td class="tdr" width="75%">{?$username?} ({?$nickname?})</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">密码：</td>
+  <td class="tdr"><input type="password" class="text" name="pass" size="25" value="" /> <span class="hot">（不修改密码请留空）</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">确认密码：<span class="hot">(必填)</span></td>
+  <td class="tdr"><input type="password" class="text" name="repass" size="25" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">等级：</td>
+  <td class="tdr">
+  <select class="select"  size="1" name="groupid">
+  {?section name=i loop=$grouprows?}
+  <option value="{?$i['key']?}"{?if $i['key'] == $uservals['groupid']?} selected="selected"{?/if?}>{?$grouprows[i]?}</option>
+  {?/section?}
+  </select>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">经验值：</td>
+  <td class="tdr"><input type="text" class="text" name="experience" size="25" value="{?$uservals['experience']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">积分：</td>
+  <td class="tdr"><input type="text" class="text" name="score" size="25" value="{?$uservals['score']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">月票：</td>
+  <td class="tdr"><input type="text" class="text" name="vipvote" size="25" value="{?$uservals['setting']['gift']['vipvote']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">鲜花：</td>
+  <td class="tdr"><input type="text" class="text" name="flower" size="25" value="{?$uservals['setting']['gift']['flower']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">鸡蛋：</td>
+  <td class="tdr"><input type="text" class="text" name="egg" size="25" value="{?$uservals['setting']['gift']['egg']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">VIP类型：</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="isvip" value="0"{?if $uservals['isvip'] == 0?} checked="checked"{?/if?} />非VIP会员</label>
+  <label class="radio"><input type="radio" name="isvip" value="1"{?if $uservals['isvip'] > 0?} checked="checked"{?/if?} />VIP会员</label>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">{?$egoldname?}：</td>
+  <td class="tdr">{?$uservals['egold']?}{?if $jieqi_modules['pay']['publish'] > 0?} &nbsp; [<a href="{?$jieqi_modules['pay']['url']?}/admin/changeegold.php?uid={?$uservals['uid']?}">手工充值</a>]{?/if?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">删除用户：</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="deluser" value="0" checked="checked" />否</label>
+  <label class="radio"><input type="radio" name="deluser" value="1" />是</label>
+</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">修改理由：</td>
+  <td class="tdr"><textarea class="textarea" name="reason" rows="6" cols="60"></textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;
+  <input type="hidden" name="act" value="update" />{?$jieqi_token_input?}
+  <input type="hidden" name="id" id="id" value="{?$uservals['uid']?}" />
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">保存修改</button></td>
+</tr>
+</table>
+</form>

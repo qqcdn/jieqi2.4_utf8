@@ -1,0 +1,5 @@
+<ul class="ultop">
+{?section name=i loop=$sqlrows?}
+  <li><a href="{?function jieqi_geturl:'article':'article':$sqlrows[i].articleid:'info'?}" target="_blank">{?$sqlrows[i].articlename?}</a>({?$sqlrows[i].lastupdate|date:'m-d'?})</li>
+{?/section?}
+</ul>

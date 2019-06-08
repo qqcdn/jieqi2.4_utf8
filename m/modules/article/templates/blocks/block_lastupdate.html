@@ -1,0 +1,6 @@
+<ul class="ulmul" style="width:100%">
+{?section name=i loop=$articlerows?}
+<li class="fl lm" style="width:70%;">[{?$articlerows[i].sort?}] 《<a class="pop" href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a>》 {?if $articlerows[i].vipchapterid > 0?}<a href="{?$articlerows[i].url_vipchapter?}" target="_blank">{?$articlerows[i].vipvolume?} {?$articlerows[i].vipchapter?}</a><span class="hot">vip</span>{?else?}<a href="{?$articlerows[i].url_lastchapter?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a>{?/if?}</li><li class="fr tr" style="width:30%;"><a class="note" href="{?$articlerows[i].url_authorpage?}" target="_blank">{?$articlerows[i].author|truncate:10:''?}</a> ({?$articlerows[i].lastupdate|date:'m-d'?})</li>
+{?/section?}
+</ul>
+<div class="more"><a href="{?$url_more?}">更多...</a></div> 

@@ -1,0 +1,18 @@
+{?set $jieqi_pagetitle = "新闻中心-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "新闻中心"?}
+{?set jieqi_page_rows = "20"?}
+
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+	{?section name=i loop=$newsrows?}
+	<div class="c_row cf">
+	<a class="db cf" href="{?function jieqi_geturl:'news':'info':$newsrows[i].topicid?}">
+		<h4>{?$newsrows[i].title?}</h4>
+    <p class="gray">{?$newsrows[i].summary|truncate:100:'..'?} -- {?$newsrows[i].addtime|date:'Y-m-d H:i'?}</p>
+	</a>
+	</div>
+	{?/section?}
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

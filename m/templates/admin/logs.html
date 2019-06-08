@@ -1,0 +1,33 @@
+<form name="frmsearch" method="get" action="{?$jieqi_url?}/admin/logs.php?logtype={?$logtype?}&loglevel={?$loglevel?}">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td align="right">关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50">
+            <label class="radio"><input type="radio" name="keytype" value="0" checked="checked">操作人员</label>
+            <label class="radio"><input type="radio" name="keytype" value="1">操作对象</label> &nbsp;&nbsp;
+            <button type="submit" name="btnsearch" class="button">搜 索</button>      </td>
+    </tr>
+</table>
+</form>
+<table class="grid" width="100%" align="center">
+<caption><a href="logs.php">全部日志</a>{?section name=i loop=$logsort?} <a href="logs.php?logtype={?$i['key']?}">{?$logsort[i].caption?}</a>{?/section?}</caption>
+  <tr align="center" valign="middle">
+    <th width="16%">时间</th>
+    <th width="15%">用户</th>
+	<th width="14%">IP</th>
+    <th width="30%">动作</th>
+    <th width="25%">URL</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$logrows?}
+  <tr valign="middle">
+    <td align="center">{?$logrows[i].logtime|date:'Y-m-d H:i:s'?}</td>
+    <td><a href="{?function jieqi_geturl:'system':'user':$logrows[i].userid:'info'?}" target="_blank" title="{?$logrows[i].userip?}">{?$logrows[i].username?}</a></td>
+	<td align="center">{?$logrows[i].userip?}</td>
+    <td><span title="{?$logrows[i].logdata?}">{?$logrows[i].logtitle?}</span></td>
+    <td>{?if $logrows[i].logurl != ''?}<a href="{?$logrows[i].logurl?}" target="_blank">{?$logrows[i].logurl|basename?}</a>{?/if?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

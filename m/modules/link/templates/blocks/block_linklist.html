@@ -1,0 +1,16 @@
+<ul class="ulmul">
+{?section name=i loop=$linkrows?}
+  <li style="width:10%;float:left;text-align:center;">
+  {?if $linkrows[i].logo != ''?}
+  <a href="{?$linkrows[i].url?}" target="_blank"><img alt="{?$linkrows[i].name?}" width="88" height="31" src="{?$linkrows[i].logo?}" /></a>
+  {?else?}
+  <a href="{?$linkrows[i].url?}" target="_blank"{?if $linkrows[i].namecolor != ''?}  style="color:{?$linkrows[i].namecolor?}"{?/if?}>{?$linkrows[i].name?}</a>
+  {?/if?}
+  </li>
+{?/section?}
+{?if $linkrows|count > 10?}
+<li style="width:10%;float:left;text-align:center;">
+  <a class="gary" href="{?$url_more?}" target="_blank">更多...</a>
+</li>
+{?/if?}
+</ul>

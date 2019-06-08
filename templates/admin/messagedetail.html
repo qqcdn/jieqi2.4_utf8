@@ -1,0 +1,81 @@
+<table class="grid" width="100%" align="center">
+<caption>标题：{?$messagevals['title']?}</caption>
+  <tr>
+    <td width="20%" class="tdl">发送人：</td>
+    <td width="80%" class="tdr">{?if $messagevals['fromid'] > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagevals['fromid']?}" target="_blank">{?$messagevals['fromname']?}</a> [<a href="{?$jieqi_url?}/admin/usermanage.php?id={?$messagevals['fromid']?}">管理用户</a>]{?else?}<span class="hot">网站管理员</span>{?/if?}</td>
+  </tr>
+  <tr>
+    <td class="tdl">接收人：</td>
+    <td class="tdr">{?if $messagevals['toid'] > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagevals['toid']?}" target="_blank">{?$messagevals['toname']?}</a> [<a href="{?$jieqi_url?}/admin/usermanage.php?id={?$messagevals['toid']?}">管理用户</a>]{?else?}<span class="hot">网站管理员</span>{?/if?}</td>
+  </tr>
+  <tr>
+    <td class="tdl">时&nbsp; 间：</td>
+    <td class="tdr">{?$messagevals['postdate']|date:'Y-m-d H:i:s'?}</td>
+  </tr>
+  <tr>
+    <td class="tdl">内&nbsp; 容：</td>
+    <td class="tdr">
+	<div id="msgcontent">{?$messagevals['content']?}</div>
+	<script type="text/javascript">
+	function fpost(a, p) {  
+		var f = document.createElement('form');
+		f.method = 'post';
+		f.target = '_blank';
+		f.action = a;
+		for(var k in p){
+			var i = document.createElement('input');
+			i.setAttribute('name', k);
+			i.setAttribute('value', p[k]);
+			f.appendChild(i);
+		}  
+		document.body.appendChild(f);  
+		f.submit();  
+		document.body.removeChild(f);  
+	}
+	document.getElementById('msgcontent').innerHTML = document.getElementById('msgcontent').innerHTML.replace(/（ID：(\d+)）/g, '<a href="/modules/article/articleedit.php?id=$1" target="_blank">$&</a>').replace(/《(.+)》/g, function(){return '<a href="javascript:;" onclick="fpost(\'/modules/article/search.php\', {\'searchtype\':1, \'searchkey\':\''+arguments[1]+'\'});">'+arguments[0]+'</a>';});
+	</script>
+	</td>
+  </tr>
+  <tr>
+    <td colspan="2" class="foot">{?if $messagevals['fromid'] > 0?}<a href="{?$jieqi_url?}/admin/newmessage.php?reid={?$messagevals['messageid']?}">回复消息</a>&nbsp;&nbsp;&nbsp;&nbsp;{?/if?}<a href="{?$jieqi_url?}/admin/newmessage.php?fwid={?$messagevals['messageid']?}">转发消息</a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="act_delete" href="javascript:;" onclick="if(confirm('确实要删除该消息么？')) Ajax.Tip('{?$jieqi_url?}/admin/message.php?box={?$box?}&id={?$messagevals['messageid']?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除消息</a>&nbsp;&nbsp;&nbsp;&nbsp;{?if $box == 'outbox'?}<a href="{?$jieqi_url?}/admin/message.php?box=outbox">返回发件箱</a>{?else?}<a href="{?$jieqi_url?}/admin/message.php?box=inbox">返回收件箱</a>{?/if?}</td>
+  </tr>
+</table>
+{?if $messagevals['fromid'] > 0?}
+<script type="text/javascript">
+  function frmnewmessage_validate(){
+    if ( document.frmnewmessage.title.value == "" ){
+      alert( "请输入标题" );
+      document.frmnewmessage.title.focus();
+      return false;
+    }
+  }
+</script>
+<br />
+<form name="frmnewmessage" action="{?$jieqi_url?}/admin/newmessage.php?do=submit" method="post" onsubmit="return frmnewmessage_validate();">
+<table class="grid" width="100%" align="center">
+  <caption>快速回复</caption>
+  <tr valign="middle" align="left">
+    <td class="tdl" width="25%">收件人：</td>
+    <td class="tdr" width="75%">
+	{?if $messagevals['fromid'] > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagevals['fromid']?}" target="_blank">{?$messagevals['fromname']?}</a><input type="hidden" name="receiver" size="30" value="{?$messagevals['fromname']?}" />{?else?}<span class="hot">网站管理员</span><input type="hidden" name="tosys" id="tosys" value="1" />{?/if?}
+	</td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="tdl">标题：</td>
+    <td class="tdr"><input type="text" class="text" name="title" size="30" value="Re:{?$messagevals['title']?}" /></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="tdl">内容：</td>
+    <td class="tdr"><textarea class="textarea" name="content" rows="8" cols="60"></textarea></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="tdl">&nbsp;</td>
+    <td class="tdr">
+	<button type="submit" class="button" name="submit">回复消息</button>
+	<input type="hidden" name="act" value="add" />
+	{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>
+{?/if?}

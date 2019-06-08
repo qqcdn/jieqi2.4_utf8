@@ -1,0 +1,91 @@
+<form name="useredit" id="useredit" action="{?$jieqi_url?}/admin/personmanage.php?do=submit" method="post">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>修改用户联系方式 | <a href="{?$jieqi_url?}/admin/personinfo.php?id={?$_request['id']?}">查看联系方式</a></caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">用户名：</td>
+  <td class="tdr">{?$uservals['uname']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">昵称：</td>
+  <td class="tdr">{?$uservals['name']?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">真实姓名：</td>
+  <td class="tdr"><input type="text" class="text" name="p_realname" size="25" maxlength="100" value="{?$personsvars['realname']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+<td class="tdl" width="25%">性别：</td>
+<td class="tdr">
+<label class="radio"><input type="radio" name="p_gender" value="1"{?if $personsvars['gender_n'] == 1?} checked="checked"{?/if?}  />男</label>
+<label class="radio"><input type="radio" name="p_gender" value="2"{?if $personsvars['gender_n'] == 2?} checked="checked"{?/if?} />女</label>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">电话：</td>
+  <td class="tdr"><input type="text" class="text" name="p_telephone" size="25" maxlength="100" value="{?$personsvars['telephone']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">手机：</td>
+  <td class="tdr"><input type="text" class="text" name="p_mobilephone" size="25" maxlength="100" value="{?$personsvars['mobilephone']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">证件类型：</td>
+  <td class="tdr"><input type="text" class="text" name="p_idcardtype" size="25" maxlength="100" value="{?if $personsvars['idcardtype'] == ''?}身份证{?else?}{?$personsvars['idcardtype']?}{?/if?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">证件号码：</td>
+  <td class="tdr"><input type="text" class="text" name="p_idcard" size="25" maxlength="100" value="{?$personsvars['idcard']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">收款银行：</td>
+  <td class="tdr">
+  <input type="text" class="text" name="p_banktype" size="25" maxlength="100" value="{?$personsvars['banktype']?}" /> <span class="hot">填写 银行名称/支付宝/邮局汇款</span>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">银行所在地：</td>
+  <td class="tdr"><input type="text" class="text" name="p_bankname" size="25" maxlength="100" value="{?$personsvars['bankname']?}" /> <span class="hot">填写开户行的 省/市/区</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">卡号：</td>
+  <td class="tdr"><input type="text" class="text" name="p_bankcard" size="25" maxlength="100" value="{?$personsvars['bankcard']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">持卡人姓名：</td>
+  <td class="tdr"><input type="text" class="text" name="p_bankuser" size="25" maxlength="100" value="{?$personsvars['bankuser']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">联系地址：</td>
+  <td class="tdr"><input type="text" class="text" name="p_address" size="25" maxlength="250" value="{?$personsvars['address']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">邮编：</td>
+  <td class="tdr"><input type="text" class="text" name="p_zipcode" size="25" maxlength="100" value="{?$personsvars['zipcode']?}" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">补充信息：</td>
+  <td class="tdr">
+  <textarea class="textarea" name="p_mynote" rows="5" cols="50">{?$personsvars['mynote']?}</textarea>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">管理员备注：</td>
+  <td class="tdr">
+  <textarea class="textarea" name="p_ownermark" rows="5" cols="50">{?$personsvars['ownermark']?}</textarea>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+<td class="tdl" width="25%">是否锁定资料：</td>
+<td class="tdr">
+<label class="radio"><input type="radio" name="p_denyedit" value="0"{?if $personsvars['denyedit'] != 1?} checked="checked"{?/if?}  />否</label>
+<label class="radio"><input type="radio" name="p_denyedit" value="1"{?if $personsvars['denyedit'] == 1?} checked="checked"{?/if?} />是</label>
+ <span class="hot">锁定资料后只允许管理员修改，会员自己不可修改</span>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">&nbsp;
+  <input type="hidden" name="id" value="{?$_request['id']?}" />
+  <input type="hidden" name="act" value="update" />{?$jieqi_token_input?}
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">保 存</button> <a href="{?$jieqi_url?}/admin/personinfo.php?id={?$_request['id']?}">&gt;&gt;查看联系方式</a></td>
+</tr>
+</table>
+</form>

@@ -1,0 +1,95 @@
+{?set $jieqi_pagetitle = "会员信息-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "会员信息"?}
+
+<table class="grid" align="center">
+  <tr align="left">
+	<td width="25%" class="tdl">用户ID：</td>
+	<td width="75%" class="tdr">{?$uid?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">用户名：</td>
+	<td class="tdr">{?$uname?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">昵称：</td>
+	<td class="tdr">{?$name?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">等级：</td>
+	<td class="tdr">{?$group?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">头衔：</td>
+	<td class="tdr">{?$honor?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">性别：</td>
+	<td class="tdr">{?$sex?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">网站/微博：</td>
+	<td class="tdr"><a href="{?$url?}">{?$url?}</a></td>
+  </tr>
+  {?if $ismaster == 1?}
+  <tr align="left">
+	<td class="tdl">Email：</td>
+	<td colspan="2" class="tdr"><a href="mailto:{?$email?}">{?$email?}</a></td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">QQ：</td>
+	<td colspan="2" class="tdr">{?$qq?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">MSN：</td>
+	<td colspan="2" class="tdr"><a href="mailto:{?$msn?}">{?$msn?}</a></td>
+  </tr>
+  {?/if?}
+  <tr>
+	<th colspan="3">积分相关</th>
+  </tr>
+  <tr align="left">
+	<td class="tdl">注册日期：</td>
+	<td colspan="2" class="tdr">{?$regdate|date:'Y-m-d'?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">贡献值：</td>
+	<td colspan="2" class="tdr">{?$credit?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">经验值：</td>
+	<td colspan="2" class="tdr">{?$experience?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">现有积分：</td>
+	<td colspan="2" class="tdr">{?$score?}</td>
+  </tr>
+  {?if $ismaster == 1?}
+  <tr>
+	<th colspan="3">VIP信息</th>
+  </tr>
+  <tr align="left">
+	<td class="tdl">VIP类型：</td>
+	<td colspan="2" class="tdr">{?if $isvip <= 0?}非vip会员{?else?}VIP会员{?/if?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">{?$egoldname?}</td>
+	<td colspan="2" class="tdr">{?$egold?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">最后登录：</td>
+	<td colspan="2" class="tdr">{?$lastlogin|date:'Y-m-d H:i'?} (IP：{?if $setting['lastip'] != ''?}{?$setting['lastip']?}{?else?}{?$setting['regip']?}{?/if?})</td>
+  </tr>
+  {?/if?}
+  <tr>
+	<th colspan="3">其他信息</th>
+  </tr>
+  <tr align="left">
+	<td class="tdl">用户签名：</td>
+	<td colspan="2" class="tdr">{?$sign?}</td>
+  </tr>
+  <tr align="left">
+	<td class="tdl">个人简介：</td>
+	<td colspan="2" class="tdr">{?$intro?}</td>
+  </tr>
+</table>
+<br />

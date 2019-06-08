@@ -1,0 +1,34 @@
+<form name="frmsearch" method="get" action="{?$jieqi_modules['article']['url']?}/admin/articlelog.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td>关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50"> 
+            <label class="radio"><input type="radio" name="keytype" value="0" checked="checked">操作人员</label>
+            <label class="radio"><input type="radio" name="keytype" value="1">小说名称</label> &nbsp;&nbsp;
+            <button type="submit" name="btnsearch" class="button">搜 索</button>         
+        </td>
+    </tr>
+</table>
+</form>
+<br />
+<table class="grid" width="100%" align="center">
+<caption>小说删除记录</caption>
+  <tr align="center" valign="middle">
+    <th width="20%">日期</th>
+    <th width="20%">时间</th>
+    <th width="30%">操作用户</th>
+    <th width="30%">小说名称</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$logrows?}
+  <tr valign="middle">
+    <td align="center">{?$logrows[i].logtime|date:'Y-m-d'?}</td>
+    <td align="center">{?$logrows[i].logtime|date:'H:i:s'?}</td>
+    <td><a href="{?function jieqi_geturl:'system':'user':$logrows[i].userid?}" target="_blank">{?$logrows[i].username?}</a></td>
+    <td>{?$logrows[i].articlename?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+<br /><br />

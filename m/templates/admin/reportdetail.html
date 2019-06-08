@@ -1,0 +1,61 @@
+<table class="grid" width="100%" align="center">
+<caption>
+标题：{?$reporttitle?}
+</caption>
+  <tr>
+    <td width="20%" class="tdl">报告人：</td>
+    <td width="80%" class="tdr"><a href="{?function jieqi_geturl:'system':'user':$reportuid?}" target="_blank">{?$reportname?}</a></td>
+  </tr>
+  <tr>
+    <td class="tdl">报告类型：</td>
+    <td class="tdr">{?$sortname?} - {?$typename?}</td>
+  </tr>
+  <tr>
+    <td class="tdl">报告时间：</td>
+    <td class="tdr">{?$reporttime|date:"Y-m-d H:i:s"?}</td>
+  </tr>
+  <tr>
+    <td class="tdl">报告内容：</td>
+    <td class="tdr">{?$reporttext?}</td>
+  </tr>
+  <tr>
+    <td colspan="2" class="foot">{?if $reportuid > 0?}<a href="{?$jieqi_url?}/admin/newmessage.php?receiver={?$reportname|urlencode?}">使用短消息回复</a>&nbsp;&nbsp;&nbsp;&nbsp;{?/if?}<a id="act_delete" href="javascript:;" onclick="if(confirm('确实要删除该报告么？')) Ajax.Tip('{?$jieqi_url?}/admin/reportlist.php?checkid[]={?$reportid?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除报告</a></td>
+  </tr>
+</table>
+{?if $reportuid > 0?}
+<br />
+<form name="frmnewmessage" id="frmnewmessage" action="{?$jieqi_url?}/admin/newmessage.php?do=submit" method="post" onsubmit="return frmnewmessage_validate();">
+<table class="grid" width="100%" align="center">
+  <caption>快速短消息回复</caption>
+  <tr valign="middle" align="left">
+    <td class="tdl" width="25%">收件人：</td>
+    <td class="tdr"><a href="{?function jieqi_geturl:'system':'user':$reportuid?}" target="_blank">{?$reportname?}</a><input type="hidden" name="receiver" id="receiver" size="30" maxlength="30" value="{?$reportname?}" /></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="tdl" width="25%">标题：</td>
+    <td class="tdr"><input type="text" class="text" name="title" id="title" size="30" maxlength="100" value="Re:{?$reporttitle?}" /></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="tdl" width="25%">内容：</td>
+    <td class="tdr"><textarea class="textarea" name="content" id="content" rows="8" cols="60"></textarea></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="tdl" width="25%">&nbsp;</td>
+    <td class="tdr">
+	<!-- <button type="submit" class="button" name="submit">回复消息</button> -->
+	<button type="button" name="submit" class="button" style="cursor:pointer;" onclick="Ajax.Request('frmnewmessage',{onComplete:function(){alert(this.response.replace(/<br[^<>]*>/g,'\n'));Form.reset('frmnewmessage');}});">回复消息</button>
+	<input type="hidden" name="act" value="add" />{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>
+<script type="text/javascript">
+  function frmnewmessage_validate(){
+    if ( document.frmnewmessage.title.value == "" ){
+      alert( "请输入标题" );
+      document.frmnewmessage.title.focus();
+      return false;
+    }
+  }
+</script>
+{?/if?}

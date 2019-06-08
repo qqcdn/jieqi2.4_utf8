@@ -1,0 +1,126 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "topindex"?}
+{?set $jieqi_pagetitle = "排行榜-{$jieqi_sitename}"?}
+{?set $meta_keywords = "小说 排行榜 {$jieqi_sitename}"?}
+<div class="main">
+	<div class="block">
+		<div class="blockcontent">
+			<ul class="ulnav cf">
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'allvisit'?}">总点击榜</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'monthvisit'?}">月点击榜</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'weekvisit'?}">周点击榜</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'allvote'?}">总推荐榜</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'monthvote'?}">月推荐榜</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'weekvote'?}">周推荐榜</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'goodnum'?}">总收藏榜</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'words'?}">总字数榜 </a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'toptime'?}">编辑推荐</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'postdate'?}">最新入库</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'allflower'?}">总鲜花榜</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'monthflower'?}">月鲜花榜</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'weekflower'?}">周鲜花榜</a></li>
+				<li style="width:14.28%;float:left;text-align:center;"><a href="{?function jieqi_geturl:'article':'toplist':1:'allvipvote'?}">总月票榜</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="main row">
+	<div class="col3 bbd">
+		<div class="block">
+			<div class="blocktitle"><h2 class="fl">点击榜</h2>
+				<ul class="tabf fr">
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this);" class="selected">周</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this);">月</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this);">总</a></li>
+				</ul>
+			</div>
+			<div class="blockcontent">
+				<div>{?$jieqi_pageblocks['111']['content']?}</div>
+				<div style="display:none;">{?$jieqi_pageblocks['112']['content']?}</div>
+				<div style="display:none;">{?$jieqi_pageblocks['113']['content']?}</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col3 bbd">
+		<div class="block">
+			<div class="blocktitle"><h2 class="fl">推荐榜</h2>
+				<ul class="tabf fr">
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)" class="selected">周</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">月</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">总</a></li>
+				</ul>
+			</div>
+			<div class="blockcontent">
+				<div>{?$jieqi_pageblocks['121']['content']?}</div>
+				<div style="display:none;">{?$jieqi_pageblocks['122']['content']?}</div>
+				<div style="display:none;">{?$jieqi_pageblocks['123']['content']?}</div>
+			</div>
+		</div>
+	</div>	
+				
+	<div class="col3 bbd">
+		<div class="block">
+			<div class="blocktitle"><h2 class="fl">鲜花榜</h2>
+				<ul class="tabf fr">
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)" class="selected">周</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">月</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">总</a></li>
+				</ul>
+			</div>
+			<div class="blockcontent">
+				<div>{?$jieqi_pageblocks['131']['content']?}</div>
+				<div style="display:none;">{?$jieqi_pageblocks['132']['content']?}</div>
+				<div style="display:none;">{?$jieqi_pageblocks['133']['content']?}</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col3 last">
+		<div class="block">
+			<div class="blocktitle"><h2 class="fl">月票榜</h2>
+				<ul class="tabf fr">
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)" class="selected">周</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">月</a></li>
+				<li><a href="javascript:void(0)" onmouseover="selecttab(this)">总</a></li>
+				</ul>
+			</div>
+			<div class="blockcontent">
+				<div>{?$jieqi_pageblocks['141']['content']?}</div>
+				<div style="display:none;">{?$jieqi_pageblocks['142']['content']?}</div>
+				<div style="display:none;">{?$jieqi_pageblocks['143']['content']?}</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="main row">
+	<div class="col3 bbd">
+		<div class="block">
+			<div class="blocktitle">收藏榜</div>
+			<div class="blockcontent">{?$jieqi_pageblocks['211']['content']?}</div>
+		</div>
+	</div>
+
+	<div class="col3 bbd">
+		<div class="block">
+			<div class="blocktitle">字数榜</div>
+			<div class="blockcontent">{?$jieqi_pageblocks['221']['content']?}</div>
+		</div>
+	</div>
+
+	<div class="col3 bbd">
+		<div class="block">
+			<div class="blocktitle">编辑推荐</div>
+			<div class="blockcontent">{?$jieqi_pageblocks['231']['content']?}</div>
+		</div>
+	</div>
+
+	<div class="col3 last">
+		<div class="block">
+			<div class="blocktitle">最新入库</div>
+			<div class="blockcontent">{?$jieqi_pageblocks['241']['content']?}</div>
+		</div>
+	</div>
+</div>

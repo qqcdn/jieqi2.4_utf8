@@ -1,0 +1,18 @@
+{?if $ownerid > 0?}
+<table class="hide fix" width="100%" align="center">
+  <tr align="center">
+    <th width="30%">小说名称</th>
+    <th width="40%">最新章节</th>
+    <th width="20%">更新</th>
+    <th width="10%">操作</th>
+  </tr>
+{?section name=i loop=$articlerows?}
+  <tr>
+    <td><a href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a></td>
+    <td>{?if $articlerows[i].vipchapterid > 0?}<a href="{?$articlerows[i].url_vipchapter?}" target="_blank">{?$articlerows[i].vipvolume?} {?$articlerows[i].vipchapter?}</a><span class="hot">vip</span>{?else?}<a href="{?$articlerows[i].url_lastchapter?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a>{?/if?}</td>
+    <td align="center">{?$articlerows[i].lastupdate|date:"m-d"?}</td>
+    <td align="center"><a id="ua_addbookcase_{?$articlerows[i].articleid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/addbookcase.php?bid={?$articlerows[i].articleid?}', {method: 'POST'});">收藏</a></td>
+  </tr>
+{?/section?}  
+</table>
+{?/if?}

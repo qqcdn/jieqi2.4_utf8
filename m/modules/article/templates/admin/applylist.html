@@ -1,0 +1,88 @@
+{?set jieqi_page_rows = "30"?}
+<script type="text/javascript">
+//审核
+function act_confirm(url, id){
+	var param = {
+		method: 'POST', 
+		onFinish: function(res){
+			if(res.match('成功')){
+				$_('act_do_' + id).hide();
+				$_('info_status_' + id).innerHTML = '已审核';
+			}
+		}
+	}
+	Ajax.Tip(url, param);
+	return false;
+}
+//拒绝
+function act_refuse(url, id){
+	var param = {
+		method: 'POST', 
+		onFinish: function(res){
+			if(res.match('成功')){
+				$_('act_do_' + id).hide();
+				$_('info_status_' + id).innerHTML = '未通过';
+			}
+		}
+	}
+	Ajax.Tip(url, param);
+	return false;
+}
+//删除
+function act_delete(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onReturn: function(){
+			$_(o.parentNode.parentNode).remove();
+		}
+	}
+	if(confirm('确实要删除该申请记录么？')) Ajax.Tip(url, param);
+	return false;
+}
+</script>
+
+<form id="form1" name="form1" method="post" action="{?$jieqi_modules['article']['url']?}/admin/applylist.php" onSubmit="javascript:if(confirm('确实要删除选中记录么？')) return true; else return false;">
+<table class="grid" width="100%" align="center">
+	<caption>作者申请记录&nbsp;&nbsp;&nbsp; <a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php">全部记录</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php?display=ready">待审记录</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php?display=success">已审记录</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/applylist.php?display=failure">被拒记录</a></caption>
+  <tr align="center">
+    <th width="4%"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></th>
+    <th width="14%">申请时间</th>
+	<th width="11%">申请人</th>
+	<th width="8%">申请内容</th>
+    <th width="20%">审核时间/审核人</th>
+    <th width="8%">审核状态</th>
+	<th width="22%">申请人操作</th>
+    <th width="17%">审核操作</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$applyrows?}
+  <tr>
+    <td align="center"><input name="applyid[]" type="checkbox" id="applyid[]" value="{?$applyrows[i].applyid?}" /></td>
+    <td align="center">{?$applyrows[i].applytime|date:'Y-m-d H:i'?}</td>
+    <td><a href="{?$jieqi_url?}/userinfo.php?id={?$applyrows[i].applyuid?}" target="_blank">{?$applyrows[i].applyname?}</a></td>
+	<td align="center"><a href="{?$jieqi_modules['article']['url']?}/admin/applyinfo.php?id={?$applyrows[i].applyid?}" target="_blank">点击查看</a></td>
+    <td>{?if $applyrows[i].authtime > 0?}{?$applyrows[i].authtime|date:'m-d H:i'?} / <a href="{?function jieqi_geturl:'system':'user':$applyrows[i].authuid?}" target="_blank">{?$applyrows[i].authname?}</a>{?/if?}</td>
+    <td align="center"><span id="info_status_{?$applyrows[i].applyid?}">{?$applyrows[i].authstatus?}</span></td>
+	<td align="center"><a href="{?$jieqi_url?}/admin/usermanage.php?id={?$applyrows[i].applyuid?}" target="_blank">管理会员</a> | <a href="{?$jieqi_url?}/admin/personmanage.php?id={?$applyrows[i].applyuid?}" target="_blank">联系方式</a> | <a href="{?$jieqi_url?}/admin/newmessage.php?receiver={?$applyrows[i].applyname?}" target="_blank">短信回复</a></td> 
+    <td align="center">
+	{?if $applyrows[i].applyflag == 0?}
+	<span id="act_do_{?$applyrows[i].applyid?}">
+	<a id="act_confirm_{?$applyrows[i].applyid?}" href="javascript:;" onclick="act_confirm('{?$jieqi_modules['article']['url']?}/admin/applylist.php?id={?$applyrows[i].applyid?}&act=confirm{?$jieqi_token_url?}', '{?$applyrows[i].applyid?}');">审核</a> | 
+	<a id="act_refuse_{?$applyrows[i].applyid?}" href="javascript:;" onclick="act_refuse('{?$jieqi_modules['article']['url']?}/admin/applylist.php?id={?$applyrows[i].applyid?}&act=refuse{?$jieqi_token_url?}', '{?$applyrows[i].applyid?}');">拒绝</a> | 
+	</span>
+	{?/if?}
+	<a id="act_delete_{?$applyrows[i].applyid?}" href="javascript:;" onclick="act_delete('{?$jieqi_modules['article']['url']?}/admin/applylist.php?id={?$applyrows[i].applyid?}&act=delete{?$jieqi_token_url?}');">删除</a></td>
+  </tr>
+  {?/section?}
+  </tbody>
+  <tr>
+    <td colspan="8" align="left">
+	<input type="hidden" name="act" value="batchdel" />{?$jieqi_token_input?}
+	<button type="submit" name="Submit" class="button">批量删除</button>
+	</td>
+    </tr>  
+</table>
+</form>
+
+<div class="pages">{?$url_jumppage?}</div>

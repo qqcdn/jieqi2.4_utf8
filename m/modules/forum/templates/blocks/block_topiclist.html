@@ -1,0 +1,6 @@
+<ul class="ullist cf">
+{?section name=i loop=$topicrows?}
+<li class="fl lm" style="width:80%;"><a href="{?function jieqi_geturl:'forum':showtopic:$topicrows[i].topicid:1:1?}" target="_blank">{?$topicrows[i].title?}</a> / <a class="note" href="{?function jieqi_geturl:'system':'user':$topicrows[i].posterid?}" target="_blank">{?$topicrows[i].poster?}</a></li>
+<li class="fr tr" style="width:20%;">{?$topicrows[i].posttime|date:'m-d H:i'?}</li>
+{?/section?}
+</ul>

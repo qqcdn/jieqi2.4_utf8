@@ -1,0 +1,96 @@
+// 表格
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: $spacer;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  background: $table-bg;
+  caption, .title {
+    line-height: $caption-line-height;
+    font-weight: $caption-font-weight;
+    font-size: $caption-font-size;
+    background-color: $caption-font-bg;
+    color: $caption-font-color;
+  }
+  tr {
+    border-top: 1px solid $table-border-color;
+  }
+  th, td, .head {
+    padding: $table-cell-padding;
+    line-height: $line-height;
+    vertical-align: top;
+  }
+  th, .head {
+    font-weight: bold;
+    vertical-align: bottom;
+    border-bottom: 2px solid $table-border-color;
+  }
+
+  &.rh tr:hover {
+    background-color: $table-bg-hover;
+  }
+  &.fix {
+    table-layout: fixed;
+    td {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+    }
+  }
+  &.grid {
+  }
+  &.stripe {
+    border: 0;
+    caption {
+      border: 0;
+      border-bottom: 2px solid $border-color;
+    }
+    th {
+      border: 0;
+      border-bottom: 2px solid $border-color;
+    }
+    tr {
+      border: 0;
+      border-bottom: 1px solid $border-color;
+    }
+  }
+  &.hide {
+    border: 0;
+    caption, tr, th, td {
+      border: 0;
+    }
+  }
+}
+
+//表格内部样式
+.odd {
+  background: $table-bg-odd;
+}
+.even {
+  background: $table-bg-even;
+}
+.topic {
+  background: $table-bg-topic;
+  text-align: left;
+  font-weight: bold;
+  line-height: 2;
+}
+
+.foot {
+  background: $table-bg-foot;
+  text-align: center;
+  line-height: 2;
+}
+
+
+.tdl {
+  text-align: right;
+  font-weight: bold;
+}
+
+.tdr {
+
+}

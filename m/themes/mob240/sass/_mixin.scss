@@ -1,0 +1,80 @@
+//函数
+
+// 盒子模型
+@mixin box-sizing($sizing) {
+  -webkit-box-sizing: $sizing;
+  -moz-box-sizing: $sizing;
+  box-sizing: $sizing;
+}
+
+// 显示圆角
+@mixin border-radius($radius: $border-radius) {
+  @if $enable-rounded {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+  }
+}
+
+// 显示阴影
+@mixin box-shadow($shadow) {
+  @if $enable-shadows {
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+  }
+}
+
+// 内容超出隐藏
+@mixin text-hidden() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 强制一行隐藏
+@mixin text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多列布局宽度计算
+@mixin col-width($colnum: 1, $colcount: $row-columns, $colmargin: $row-column-margin) {
+  $colwidth: (100% - ($colmargin * ($colcount - 1))) / $colcount;
+  width: $colwidth * $colnum + ($colmargin * ($colnum - 1));
+}
+
+// 边框样式
+@mixin box-border($border: 0, $radius: 0, $shadow: none) {
+  @if $radius != 0 {
+    border: $border;
+    @include border-radius($radius);
+  }@else{
+    @if $border != 0 {border: $border;}
+  }
+  @if $shadow != none {@include box-shadow($shadow);}
+}
+
+// 背景色设置
+@mixin color-background($background, $color){
+  background: $background;
+  color: $color;
+}
+
+// 边框色设置
+@mixin color-border($color, $background){
+  color: $color;
+  border: $border-width solid $color;
+  background: $background;
+}
+
+// 按钮颜色
+@mixin button-color($background, $color: $color-bg, $border: transparent){
+  background: $background;
+  color: $color;
+  @if $border != 0 {border-color: $border;}
+  &:hover {
+    background: darken($background, 10%);
+    @if $border != transparent {border-color: darken($border, 12%);}
+  }
+}

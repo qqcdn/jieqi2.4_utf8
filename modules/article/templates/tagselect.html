@@ -1,0 +1,8 @@
+{?set $jieqi_pagetitle = "标签-{$jieqi_sitename}"?}
+
+<ul class="ulcenter">
+{?section name=i loop=$tagrows?}
+  <li style="width:50%;float:left;"><a href="{?function jieqi_geturl:'article':'tagarticle':1:$tagrows[i].tagname_n?}">{?$tagrows[i].tagname?}</a></li>
+{?/section?}
+</ul>
+<div class="cb"></div>

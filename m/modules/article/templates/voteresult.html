@@ -1,0 +1,21 @@
+{?set $jieqi_pagetitle = "投票结果-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "投票结果"?}
+
+<table class="grid mt" width="100%" align="center">
+  <tr>
+    <th colspan="4">{?$title?}</th>
+  </tr>
+  {?section name=i loop=$resultrows?}
+  <tr>
+    <td width="40%">{?$resultrows[i].item?}</td>
+    <td width="15%" align="center">共：{?$resultrows[i].stat?}票</td>
+    <td width="15%" align="center">百分比：{?$resultrows[i].percent?}%</td>
+	<td width="30%" align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr height="10">
+        <td bgcolor="#0099FF" width="{?$resultrows[i].percent?}%"></td>
+        <td width="{?$resultrows[i].recent?}%"></td>
+      </tr>
+    </table></td>
+  </tr>
+  {?/section?}
+</table>

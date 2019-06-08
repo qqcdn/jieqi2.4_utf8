@@ -1,0 +1,51 @@
+<script type="text/javascript">
+function frmgift_validate(){
+  if(document.frmgift.num.value == ""){
+    alert("请输入赠送数量");
+    document.frmgift.num.focus();
+    return false;
+  }
+  return true;
+}
+</script>
+<form name="frmgift" id="frmgift" action="{?$jieqi_modules['article']['url']?}/gift.php?do=submit" method="post" onsubmit="return frmgift_validate();" enctype="mulgiftart/form-data">
+<table class="grid" align="center" style="width:60%; min-width:480px;">
+<caption>我要赠送</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="20%">目标小说</td>
+  <td class="tdr" width="80%"><a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">{?$articlename?}</a></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">赠送内容</td>
+  <td class="tdr">
+    {?$giftvals['caption']?} （现有：{?$jieqi_setting['gift'][$gift_type]|intval?}）
+	{?if $giftvals['sprice'] > 0 || $giftvals['eprice'] > 0?}
+	&nbsp; 
+	<!--< a href="{?$jieqi_modules['article']['url']?}/giftbuy.php?type={?$gift_type?}" target="_blank">&gt;购买</a> -->
+	<a class="btnlink" id="a_buy_{?$gift_type?}" href="javascript:;" onclick="openDialog('{?$jieqi_modules['article']['url']?}/giftbuy.php?type={?$gift_type?}&ajax_gets=jieqi_contents&jumpurl={?$jumpurl?}', false);">购买</a>
+	{?/if?}
+	<input type="hidden" name="type" value="{?$gift_type?}" />
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">赠送数量</td>
+  <td class="tdr">
+  <input type="text" class="text" name="num" size="10" maxlength="10" value="1" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">
+  &nbsp;
+  <input type="hidden" name="act" value="post" />{?$jieqi_token_input?}
+  <input type="hidden" name="id" value="{?$articleid?}" />
+  </td>
+  <td class="tdr">
+  {?if $ajax_request > 0?}
+  <button type="button" name="Submit" class="button" style="cursor:pointer;" onclick="Form.disable('frmgift');Ajax.Request('frmgift',{onComplete:function(){alert(this.response.replace(/<br[^<>]*>/g,'\n'));closeDialog();
+}});">提 交</button>
+  {?else?}
+  <button type="submit" class="button" name="submit">提 交</button>
+  {?/if?}
+  </td>
+</tr>
+</table>
+</form>

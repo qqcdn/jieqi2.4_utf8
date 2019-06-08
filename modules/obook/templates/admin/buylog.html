@@ -1,0 +1,42 @@
+<form name="frmsearch" action="{?$obook_dynamic_url?}/admin/buylog.php" method="get">
+<table class="grid" width="100%" align="center">
+  <tr>
+    <td>购买用户：
+      <input name="uname" type="text" id="uname" size="20" maxlength="30" class="text" value="{?$_request['uname']?}">
+      &nbsp; 小说名：
+      <input name="oname" type="text" id="oname" size="20" maxlength="60" class="text" value="{?$_request['oname']?}">
+	  &nbsp; 订阅日期：<input name="datestart" type="text" class="text" size="10" maxlength="10" value="{?$_request['datestart']?}">-<input name="dateend" type="text" class="text" size="10" maxlength="10" value="{?$_request['dateend']?}">
+	  &nbsp; <button type="submit" name="Submit" class="button">搜  索</button>
+	  日期格式：2012-05-06
+      &nbsp; <a href="{?$obook_dynamic_url?}/admin/buylog.php">显示全部</a></td>
+  </tr>
+  <tr>
+		<td>
+		总记录数：{?$osalestat['cot']?}， 总价格：{?$osalestat['sumsaleprice']?}
+		</td>
+	</tr>
+</table>
+</form>
+<table class="grid" width="100%" align="center">
+<caption>电子书订阅记录</caption>
+  <tr align="center">
+    <th width="20%">书名</th>
+    <th width="35%">章节</th>
+    <th width="10%">价格</th>
+    <th width="15%">购买人</th>
+    <th width="20%">购买日期</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$osalerows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'article':'article':$osalerows[i].articleid:'info'?}" target="_blank">{?$osalerows[i].obookname?}</a></td>
+    <td><a href="{?$obook_static_url?}/reader.php?oid={?$osalerows[i].obookid?}&cid={?$osalerows[i].ochapterid?}" target="_blank">{?$osalerows[i].chaptername?}</a></td>
+    <td align="center">{?$osalerows[i].saleprice?}</td>
+    <td align="center"><a href="{?function jieqi_geturl:'system':'user':$osalerows[i].accountid?}" target="_blank">{?$osalerows[i].account?}</a></td>
+    <td align="center">{?$osalerows[i].buytime|date:'Y-m-d H:i:s'?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+

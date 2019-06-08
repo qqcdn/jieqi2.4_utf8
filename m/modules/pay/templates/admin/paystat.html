@@ -1,0 +1,48 @@
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td>
+				<form name="frmsearch" method="get" action="{?$jieqi_modules['pay']['url']?}/admin/paystat.php">
+				{?if $jieqi_channels|count > 0?}
+				用户渠道：
+				<select class="select"  size="1" name="channel">
+					<option value="">不限</option>
+					{?section name=i loop=$jieqi_channels?}
+					<option value="{?$i['key']?}"{?if $_request['channels'] == $i['key']?} selected="selected"{?/if?}>{?$jieqi_channels[i].name?}</option>
+					{?/section?}
+				</select>
+				&nbsp;&nbsp;
+				{?/if?}
+					交易日期：<input name="datestart" type="text" class="text" size="10" maxlength="10" value="{?$_request['datestart']?}">-<input name="dateend" type="text" class="text" size="10" maxlength="10" value="{?$_request['dateend']?}">
+					<button type="submit" name="btnsearch" class="button">搜索</button>
+					<button type="button" name="btnexport" class="button" onclick="document.getElementById('isexport').value = 1;this.form.submit();document.getElementById('isexport').value = 0;">导出</button>
+					<label class="checkbox"><input type="checkbox" name="statall" value="1"{?if $_request['statall'] > 0?} checked="checked"{?/if?} />包括非现金充值</label>
+
+					<input id="isexport" name="isexport" type="hidden" value="0">
+					<input name="exportformat" type="hidden" value="exceltext">
+					<p class="gray">日期有两种写法：1、按日期统计使用8位数字，比如从 20160501 到 20160530；2、按月份统计用6为数字，比如从 201601 到 201612</p>
+					<p class="hot">总记录数：{?$paystatsum['cot']?}， 总金额：{?$paystatsum['summoney']|fen2yuan?}， 总{?$egoldname?}：{?$paystatsum['sumegold']?}</p>
+				</form>
+        </td>
+    </tr>
+</table>
+
+<table class="grid" width="100%" align="center" style="margin-top:10px;">
+  <caption>充值统计表</caption>
+  <tr align="center" valign="middle">
+    <th width="20%">统计日期</th>
+    <th width="20%">充值次数</th>
+    <th width="30%">总金额</th>
+    <th width="30%">总{?$egoldname?}</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$paystatrows?}
+  <tr valign="middle">
+    <td align="center">{?$paystatrows[i].datevalue?}</td>
+    <td align="center">{?$paystatrows[i].paycount?}</td>
+    <td align="center">{?$paystatrows[i].summoney|fen2yuan?}</td>
+	<td align="center">{?$paystatrows[i].sumegold?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+

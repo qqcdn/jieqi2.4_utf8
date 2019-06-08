@@ -1,0 +1,48 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<script type="text/javascript">
+function frmvoteedit_validate(){
+  if(document.frmvoteedit.title.value == ""){
+    alert("请输入标题");
+    document.frmvoteedit.title.focus();
+    return false;
+  }
+}
+</script>
+<form name="frmvoteedit" id="frmvoteedit" action="{?$jieqi_modules['article']['url']?}/voteedit.php?do=submit" method="post" onsubmit="return frmvoteedit_validate();">
+<table width="80%" class="grid" cellspacing="1" align="center">
+<caption>编辑投票</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">标题：</td>
+  <td class="tdr"><input type="text" class="text" name="title" id="title" size="50" maxlength="100" value="{?$votetitle?}" /></td>
+</tr>
+{?section name=i loop=$voterows?}
+<tr valign="middle" align="left">
+  <td class="tdl">选项{?$i['order']?}：</td>
+  <td class="tdr"><input type="text" class="text" name="item{?$i['order']?}" id="item{?$i['order']?}" size="50" maxlength="100" value="{?$voterows[i]?}" /></td>
+</tr>
+{?/section?}
+<tr valign="middle" align="left">
+  <td class="tdl">单选/多选：</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="mulselect" value="0"{?if $mulselect == 0?} checked="checked"{?/if?} />单选</label>
+  <label class="radio"><input type="radio" name="mulselect" value="1"{?if $mulselect == 1?} checked="checked"{?/if?} />多选</label>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">是否发布：</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="ispublish" value="1"{?if $ispublish == 1?} checked="checked"{?/if?} />发布</label>
+  <label class="radio"><input type="radio" name="ispublish" value="0"{?if $ispublish == 0?} checked="checked"{?/if?} />不发布</label>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;
+  <input type="hidden" name="act" value="update" />{?$jieqi_token_input?}
+  <input type="hidden" name="id" value="{?$id?}" />
+  <input type="hidden" name="aid" value="{?$aid?}" />
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提 交</button></td>
+</tr>
+</table>
+</form>

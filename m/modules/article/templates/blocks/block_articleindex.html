@@ -1,0 +1,9 @@
+<ul class="ulmul" style="width:100%">
+{?section name=i loop=$chapterrows?}
+  {?if $chapterrows[i].chaptertype == 0?}
+  <li class="fl lm" style="width:25%;"><a href="{?$chapterrows[i].url_chapter?}">{?$chapterrows[i].chaptername?}</a></li>
+  {?else?}
+  <li style="width:100%;text-align:center;">{?$chapterrows[i].chaptername?}</li>
+  {?/if?}
+{?/section?}
+</ul>

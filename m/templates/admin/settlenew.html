@@ -1,0 +1,57 @@
+<script type="text/javascript">
+function frmsettlenew_validate(){
+  if(document.frmsettlenew.payamount.value == ""){
+    alert("请输入提现的金额");
+    document.frmsettlenew.payamount.focus();
+    return false;
+  }
+}
+</script>
+<br />
+<form name="frmsettlenew" id="frmsettlenew" action="settlenew.php?do=submit" method="post" onsubmit="return frmsettlenew_validate();" enctype="multipart/form-data">
+<table width="80%" class="grid" cellspacing="1" align="center">
+<caption>收入提现</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">用户名：</td>
+  <td class="tdr"><a href="{?function jieqi_geturl:'system':'user':$uid:'info'?}" target="_blank">{?$name?}</a></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">联系信息：</td>
+  <td class="tdr">
+  真实姓名：{?$personsvars['realname']?} <br />
+  性别：{?$personsvars['gender']?} <br />
+  电话：{?$personsvars['telephone']?} <br />
+  手机：{?$personsvars['mobilephone']?} <br />
+  收款银行：{?$personsvars['banktype']?}<br />
+  银行地区：{?$personsvars['bankname']?}<br />
+  收款账号：{?$personsvars['bankcard']?}<br />
+  收款人：{?$personsvars['bankuser']?}<br />
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">当前收入：</td>
+  <td class="tdr">{?$esilver|fen2yuan?}元
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">提现金额：</td>
+  <td class="tdr">
+  <input type="text" class="text" name="payamount" size="10" maxlength="10" value="" /> 元
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">付款方式备注：</td>
+  <td class="tdr">
+  <textarea class="textarea" name="payinfo" style="width:90%;height:5em;">{?$articlevals['intro']?}</textarea>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">
+  &nbsp;
+  <input type="hidden" name="act" value="post" />{?$jieqi_token_input?}
+  <input type="hidden" name="uid" value="{?$uid?}" />
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提 交</button></td>
+</tr>
+</table>
+</form>

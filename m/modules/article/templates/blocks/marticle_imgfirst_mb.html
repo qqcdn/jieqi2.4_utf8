@@ -1,0 +1,21 @@
+{?section name=i loop=$articlerows?}
+{?if $i['order'] < 2?}
+<div class="c_row cf">
+<a class="db cf" href="{?$articlerows[i].url_articleinfo?}">
+	<div class="row_cover">
+	<img class="cover_i" src="{?$articlerows[i].url_simage?}" />
+	</div>
+
+	<div class="row_text">
+	<h4>{?$articlerows[i].articlename?}</h4>
+    <p class="gray fss">{?$articlerows[i].sort?} | {?$articlerows[i].author?}<br />{?$articlerows[i].intro|truncate:80:'..'?}</p>
+	</div>
+</a>
+</div>
+{?else?}
+{?if $i['order'] == 2?}<ul class="ullist">{?/if?}
+	<li><a class="db" href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename?} <span class="gray fss">[{?$articlerows[i].sort?}]</span></a></li>
+{?if $i['order'] == $i['count']?}</ul>{?/if?}
+{?/if?}
+{?/section?}
+<div class="tc"><a href="{?$url_more?}" class="db btnlink b_gray">显示更多...</a></div>

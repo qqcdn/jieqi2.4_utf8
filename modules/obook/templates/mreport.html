@@ -1,0 +1,72 @@
+{?set jieqi_blocks_module = "obook"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<table class="grid mb" width="100%" align="center">
+<tr><td>
+  <form name="frmsearch" method="get" action="{?$obook_dynamic_url?}/mreport.php">
+  作品：
+  <select name="obookid">
+    <option value="0"{?if $_request['obookid'] == 0?} selected="selected"{?/if?}>全部</option>
+    {?section name=i loop=$obookrows?}
+    <option value="{?$obookrows[i].obookid?}"{?if $_request['obookid'] == $obookrows[i].obookid?} selected="selected"{?/if?}>{?$obookrows[i].obookname?}</option>
+    {?/section?}
+  </select>
+  &nbsp;
+  月份：从
+    <select name="startyear">
+      <option value="0"{?if $_request['startyear'] == 0?} selected="selected"{?/if?}>----</option>
+  {?section name=i loop=$ryearrows?}
+  <option value="{?$ryearrows[i]?}"{?if $ryearrows[i] == $_request['startyear']?} selected="selected"{?/if?}>{?$ryearrows[i]?}年</option>
+  {?/section?}
+</select>
+  <select name="startmonth">
+    <option value="0"{?if $_request['startmonth'] == 0?} selected="selected"{?/if?}>--</option>
+    {?section name=i loop=$rmonthrows?}
+    <option value="{?$rmonthrows[i]?}"{?if $rmonthrows[i] == $_request['startmonth']?} selected="selected"{?/if?}>{?$rmonthrows[i]?}月</option>
+    {?/section?}
+  </select>
+    到
+    <select name="endyear">
+      <option value="0"{?if $_request['endyear'] == 0?} selected="selected"{?/if?}>----</option>
+      {?section name=i loop=$ryearrows?}
+      <option value="{?$ryearrows[i]?}"{?if $ryearrows[i] == $_request['endyear']?} selected="selected"{?/if?}>{?$ryearrows[i]?}年</option>
+      {?/section?}
+    </select>
+    <select name="endmonth">
+      <option value="0"{?if $_request['endmonth'] == 0?} selected="selected"{?/if?}>--</option>
+      {?section name=i loop=$rmonthrows?}
+      <option value="{?$rmonthrows[i]?}"{?if $rmonthrows[i] == $_request['endmonth']?} selected="selected"{?/if?}>{?$rmonthrows[i]?}月</option>
+      {?/section?}
+    </select>
+    &nbsp;
+    <button type="submit" name="btnsearch" class="button">查询</button>
+  </form>
+</td></tr>
+</table>
+<table class="grid" width="100%" align="center">
+<caption>
+销售统计月报表
+</caption>
+  <td colspan="6">总记录数：{?$mreportstat['cot']?}， 总订阅：{?$mreportstat['sumegold']|intval?}， 总打赏：{?$mreportstat['sumtip']|intval?}， 总收入：{?$mreportstat['sumemoney']|intval?}</td>
+  </tr>
+  <tr align="center">
+    <th width="15%">统计月份</th>
+    <th width="25%">小说名称</th>
+    <th width="15%">作者</th>
+    <th width="15%">总订阅</th>
+	<th width="15%">总打赏</th>
+    <th width="15%">总收入</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$mreportrows?}
+  <tr>
+    <td align="center">{?$mreportrows[i].reportmonth?}</td>
+    <td><a href="{?function jieqi_geturl:'article':'article':$mreportrows[i].articleid:'info'?}" target="_blank">{?$mreportrows[i].obookname?}</a></td>
+    <td>{?if $mreportrows[i].authorid == 0?}{?$mreportrows[i].author?}{?else?}<a href="{?function jieqi_geturl:'system':'user':$mreportrows[i].authorid:'info'?}" target="_blank">{?$mreportrows[i].author?}</a>{?/if?}</td>
+    <td align="center">{?$mreportrows[i].sumegold?}</td>
+	<td align="center">{?$mreportrows[i].sumtip?}</td>
+    <td align="center">{?$mreportrows[i].sumemoney?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

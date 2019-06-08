@@ -1,0 +1,104 @@
+//ндубее╟Ф
+.c_main {
+  border: 1px solid $border-color;
+  border-top: 3px solid $gray;
+  margin-bottom: 0.6em;
+  overflow: hidden;
+  background: $color-bg;
+}
+
+.c_nav {
+  margin-bottom: 0.3em;
+  line-height: 2.25em;
+  font-weight: bold;
+  font-size: $font-size-lg;
+  border: 1px solid $border-color;
+  padding-left: 0.6em;
+  background: #fff;
+}
+
+.c_title {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 128.6%;
+  line-height: 2.5;
+}
+
+.c_head {
+  line-height: 2;
+  padding: 0.3em;
+  border-bottom: 1px solid $border-color;
+}
+
+.c_content {
+  line-height: 1.6;
+  padding: 1.25em;
+  p{
+    margin-bottom: 0.8em;
+  }
+  h2,h3,h4{
+    margin: 0.5em 0;
+  }
+}
+
+.c_foot {
+  font-size: $font-size-lg;
+  line-height: 1.6;
+  list-style: none;
+}
+
+.c_tag {
+  padding: 0.5em 0;
+}
+
+.c_label {
+  color: $gray-light;
+}
+
+.c_value {
+  color: #666;
+  margin-right: 1.25em;
+}
+
+.c_row {
+  border-bottom: 1px dotted $border-color-light;
+  padding: 0.3em;
+}
+
+.c_subject {
+  font-weight: bold;
+  line-height: 2.2;
+  background: $gray-lighter;
+  padding-left: 0.5em;
+}
+
+.c_description{
+  color: #666;
+}
+.c_cover{
+  max-width: 100%;
+}
+.cover img, img.cover{
+  max-width: 100%;
+}
+.cover_h img, img.cover_h{
+  width:210px;
+  height: 280px;
+}
+.cover_l img, img.cover_l{
+  width:180px;
+  height: 240px;
+}
+.cover_m img, img.cover_m{
+  width:120px;
+  height: 150px;
+}
+.cover_s img, img.cover_s{
+  width:90px;
+  height: 120px;
+}
+.cover_i img, img.cover_i{
+  width:60px;
+  height: 80px;
+}

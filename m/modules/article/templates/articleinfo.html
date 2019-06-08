@@ -1,0 +1,96 @@
+{?set $jieqi_pagetitle = "{$articlename}-{$author}-{$jieqi_sitename}"?}
+{?set $meta_keywords = "{$articlename} {$author} {$sort}"?}
+{?set $jieqi_contenttitle = "作品信息"?}
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/json2.js"></script>
+<script type="text/javascript" src="{?$jieqi_modules['article']['themeurl']?}/scripts/readchapter.js"></script>
+<ul class="tabb tab3 cf mb">
+	<li><a href="javascript:void(0);" class="selected">信息</a></li>
+	<li><a href="{?$url_index?}">目录</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/reviews.php?aid={?$articleid?}">书评</a></li>
+</ul>
+<div class="blockc mt">
+	<div class="c_row cf">
+	<div class="row_coverl">
+	<img class="cover_l" src="{?$url_simage?}" />
+	</div>
+
+	<div class="row_textl">
+	<h4 class="mbs"><span class="fr fss">[{?$sort?}]</span>{?$articlename?}</h4>
+    <p class="gray fss">
+		<span class="fr fss">{?$words?}字</span>{?$author?} 着<br />
+		<span class="fr fss">{?$allvote?}人推荐</span>{?$allvisit?}人看过<br />
+	</p>
+		<div class="mt">
+			<a class="btnlink b_hot" href="javascript:read_chapter({?$articleid?});"><span class="iconfont">&#xee50;</span>追书</a>
+			<a class="btnlink b_s" id="a_addbookcase" href="javascript:;" onclick="Ajax.Tip('{?$url_bookcase?}', {method: 'POST'});"><span class="iconfont">&#xee81;</span>收藏</a>
+			<a class="btnlink b_s" id="a_uservote" href="javascript:;" onclick="Ajax.Tip('{?$url_uservote?}', {method: 'POST'});"><span class="iconfont">&#xee5d;</span>推荐</a>
+		</div>
+	</div>
+	</div>
+
+	<div class="c_row nw">
+		<span class="note">最新：</span>{?if $isvip_n > 0 && $vipchapterid > 0?}<a href="{?$url_vipchapter?}">{?if $vipvolume != ''?}{?$vipvolume?} {?/if?}{?$vipchapter?}</a> <i class="hot">vip</i>{?else?}<a href="{?$url_lastchapter?}">{?if $lastvolume != ''?}{?$lastvolume?} {?/if?}{?$lastchapter?}</a>{?/if?}
+	</div>
+</div>
+
+<div class="block">
+	<div class="blocktitle">送礼物捧场</div>
+	<div class="blockcontent">
+		<script type="text/javascript">
+		function act_tiptype(tiptype, tipegold, tipname){
+			if(confirm('确定要赠送1'+tipname+'么？ （价值'+tipegold+'{?$egoldname?}）')) Ajax.Tip('{?$jieqi_modules['article']['url']?}/tip.php?act=post&id={?$articleid?}&tiptype='+tiptype+'{?$jieqi_token_url?}', {method: 'POST'});
+		}
+		</script>
+		<ul class="df mts mb">
+			{?section name=i loop=$tiptyperows?}
+			<li class="tc"><p id="a_tiptype_{?$i['key']?}" class="iconfont bg_{?$i['order']?}" style="cursor:pointer; color:#fff; font-size:2.2em;width:1.5em;height:1.5em;line-height:1.5em;" onclick="act_tiptype({?$i['key']?}, {?$tiptyperows[i].eprice?}, '{?$tiptyperows[i].unit?}{?$tiptyperows[i].caption?}');" title="1{?$tiptyperows[i].unit?}{?$tiptyperows[i].caption?}={?$tiptyperows[i].eprice?}{?$egoldname?}">&#xeea{?$i['order']?};</a><p>{?$tiptyperows[i].caption?}</p><p class="hot">{?$setting['tipinfo'][$i['key']]|intval?}{?$tiptyperows[i].unit?}</p></li>
+			{?/section?}
+		</ul>
+	</div>
+</div>
+
+<div class="block">
+	<div class="blocktitle">内容简介</div>
+	<div class="blockcontent fss">
+		<div id="introl">{?$intro|str_replace:'<br />':'&nbsp;'|truncate:150:'..'?} <a href="javascript:;" onclick="$_('introl').style.display = 'none';$_('introa').style.display = '';$_('introd').style.height = 'auto';" class="hot">[显示全部]</a></div>
+		<div id="introa" style="display:none;">{?$intro?} <a href="javascript:;" onclick="$_('introl').style.display = '';$_('introa').style.display = 'none';$_('introd').style.height = '4.5em;';" class="hot">[收起内容]</a></div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="blockcontent">
+		{?block bid="0" blockname="开始最新章节" module="article" filename="block_achapters" classname="BlockArticleAchapters" side="-1" title="" vars="chapterorder,5,2,$articleid,1" template="mchapter_startlast.html" contenttype="4" custom="0" publish="3" hasvars="1"?}
+	</div>
+</div>
+
+<div class="block">
+	<div class="blocktitle">最新书评</div>
+	<div class="blockcontent">
+	{?block bid="0" blockname="最新书评" module="article" filename="block_areviews" classname="BlockArticleAreviews" side="-1" title="" vars="6,0,0,id" template="mblock_areviews.html" contenttype="4" custom="0" publish="3" hasvars="1"?}
+	</div>
+</div>
+
+<div class="block">
+	<div class="blocktitle">发表书评</div>
+	<div class="blockcontent">
+	{?if $jieqi_userid > 0?}
+		<form class="cf" name="frmreview" id="frmreview" method="post" action="{?$jieqi_modules['article']['url']?}/reviews.php?aid={?$articleid?}">
+		<fieldset>
+		<div class="frow">
+		<textarea class="textarea" name="pcontent" id="pcontent" rows="5"></textarea>
+		</div>
+		{?if $postcheckcode > 0?}
+		<div class="frow">验证码：<input type="text" class="text" style="width:6em;" name="checkcode" id="checkcode" onfocus="if(this.form.imgccode.style.display == 'none'){this.form.imgccode.src = '{?$jieqi_url?}/checkcode.php?rand={?$jieqi_time?}';this.form.imgccode.style.display = '';}" title="点击显示验证码"><img name="imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码"></div>
+		{?/if?}
+		<div class="frow">
+		<input type="hidden" name="act" value="newpost" />{?$jieqi_token_input?}
+		<button type="button" name="Submit" class="button" style="cursor:pointer;" onclick="postsubmit();"> 发表书评 </button>
+		</div>
+		</fieldset>
+		</form>
+	{?else?}
+		<br />您需要 <a class="hot" href="{?$jieqi_url?}/login.php">登录</a> 才能发表书评！<br /><br />
+		如果您尚未注册，请先点击 <a class="hot" href="{?$jieqi_url?}/register.php">注册</a><br /><br />
+	{?/if?}
+	</div>
+</div>

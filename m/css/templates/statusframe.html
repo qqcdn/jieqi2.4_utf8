@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="keywords" content="{?$meta_keywords?}" />
+<meta name="description" content="{?$meta_description?}" />
+<meta name="author" content="{?$meta_author?}" />
+<meta name="copyright" content="{?$meta_copyright?}" />
+<meta name="generator" content="jieqi.com" />
+<meta http-equiv="Cache-Control" content="no-cache">
+<title>{?$jieqi_pagetitle?}</title>
+<link rel="stylesheet" type="text/css" media="all" href="{?$jieqi_url?}/themes/{?$jieqi_theme?}/style.css" />
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/common.js"></script>
+{?$jieqi_head?}
+</head>
+<body>
+<div style="line-height:20px;">
+<strong>{?$jieqi_username?}</strong> ┊ <a href="{?$jieqi_url?}/message.php?box=inbox" target="_top">短消息</a>{?if $jieqi_newmessage > 0?}<span class="hot">({?$jieqi_newmessage?})</span>{?/if?}{?if $jieqi_modules['article']['publish'] > 0?} ┊ <a href="{?$jieqi_modules['article']['url']?}/bookcase.php" target="_top">我的书架</a>{?/if?} ┊ <a href="{?$jieqi_url?}/userdetail.php" target="_top">个人中心</a>{?if $jieqi_modules['pay']['publish'] > 0?} ┊ <a href="{?$jieqi_modules['pay']['url']?}/buyegold.php" target="_top">帐户充值</a>{?/if?} ┊ <a href="{?$jieqi_user_url?}/logout.php" target="_top">退出</a>
+</div>
+</body>
+</html>

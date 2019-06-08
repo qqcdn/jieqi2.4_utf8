@@ -1,0 +1,26 @@
+<table class="grid" width="100%" align="center">
+  <caption>用户组管理</caption>
+  <tr align="center">
+    <th width="10%">序号</th>
+    <th width="20%">名称</th>
+    <th width="50%">描述</th>
+    <th width="20%">操作</th>
+  </tr>
+  {?section name=i loop=$groups?}
+  <tr>
+    <td align="center">{?$groups[i].groupid?}</td>
+    <td align="center">{?$groups[i].name?}</td>
+    <td align="left">{?$groups[i].description?}</td>
+    <td align="center"><a href="{?$jieqi_url?}/admin/groups.php?id={?$groups[i].groupid?}&act=edit">编辑</a>{?if $groups[i].grouptype == 0?}  <a id="act_delete_{?$groups[i].groupid?}" href="javascript:;" onclick="if(confirm('确实要删除该用户组么？')) Ajax.Tip('{?$jieqi_url?}/admin/groups.php?id={?$groups[i].groupid?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除</a>{?/if?}</td>
+  </tr>
+  {?/section?}
+  <tr>
+    <td colspan="4" class="foot">&nbsp;</td>
+  </tr>
+</table>
+<br />
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center">{?$form_addgroup?}</td>
+  </tr>
+</table>

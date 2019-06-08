@@ -1,0 +1,14 @@
+<ul class="ulrow">
+  <li>用户名：{?$name?}</li>
+  <li>等　级：{?$group?}</li>
+  <li>头  衔：{?$honor?}</li>
+  {?if $avatar > 0?}<li><img src="{?$url_avatar?}" class="avatar" alt="头像"></li>{?/if?}
+  {?if $jieqi_use_badge == 1?}
+  <li>{?if $jieqi_group_imageurl != ""?}<img src="{?$jieqi_group_imageurl?}" border="0" alt="{?$jieqi_groupname?}">{?/if?}{?if $jieqi_honor_imageurl != ""?}<img src="{?$jieqi_honor_imageurl?}" border="0" alt="{?$jieqi_honor?}">{?/if?}</li>
+  <li>
+  {?section name=i loop=$jieqi_badgerows?}<img src="{?$jieqi_badgerows[i].imageurl?}" border="0" alt="{?$jieqi_badgerows[i].caption?}">{?/section?}
+  </li>
+  {?/if?}
+  <li>[<a id="addfriends{?$uid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_url?}/addfriends.php?id={?$uid?}&act=add{?$jieqi_token_url?}', {method: 'POST'});">加为好友</a>]&nbsp;[<a href="{?$jieqi_url?}/newmessage.php?receiver={?$name|urlencode?}">发送短信</a>]</li>
+  <li>[<a href="{?function jieqi_geturl:'system':'user':$uid?}">查看资料</a>]&nbsp;[<a href="{?$jieqi_url?}/ptopics.php?oid={?$uid?}">会 客 室</a>]</li>
+</ul>

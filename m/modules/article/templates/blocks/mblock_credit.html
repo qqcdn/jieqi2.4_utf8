@@ -1,0 +1,6 @@
+<ul class="ulnum">
+{?section name=i loop=$creditrows?}
+  <li><em>{?$creditrows[i].rank?}</em> {?if $i['order'] < 4?}<b>{?$i['order']?}</b>{?else?}<i>{?$i['order']?}</i>{?/if?}<a href="{?function jieqi_geturl:'system':'user':$creditrows[i].uid:'info'?}">{?$creditrows[i].uname?}</a></li>
+{?/section?}
+</ul>
+<div class="more"><a href="{?$jieqi_modules['article']['url']?}/creditlist.php?id={?$articleid?}">更多...</a></div> 

@@ -1,0 +1,7 @@
+<ul class="ulrow">
+{?section name=i loop=$newrows?}
+  <li>□ <a href="{?$article_dynamic_url?}/review.php?aid={?$newrows[i].articleid?}" target="_blank">{?$newrows[i].reviewtitle?}</a></li>
+  <li>&nbsp;&nbsp;--{?$newrows[i].poster?} 于 {?$newrows[i].postdate?} 评 《<a href="{?$newrows[i].url_articleinfo?}" target="_blank">{?$newrows[i].articlename?}</a>》</li>
+{?/section?}
+</ul>
+<div class="more"><a href="{?$url_more?}" target="_blank">更多...</a></div>

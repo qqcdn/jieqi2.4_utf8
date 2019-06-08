@@ -1,0 +1,40 @@
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>
+查看{?if $draftvals['display'] > 0?}待审章节{?else?}草稿章节{?/if?}
+[<a href="{?$jieqi_modules['article']['url']?}/admin/draftedit.php?id={?$draftvals['draftid']?}">编辑</a> | <a id="act_delete" href="javascript:;" onclick="if(confirm('确实要删除么？')) Ajax.Tip('{?$jieqi_modules['article']['url']?}/admin/draftlist.php?checkid={?$draftvals['draftid']?}&type={?if $draftvals['display'] > 0?}3{?elseif $draftvals['ispub'] > 0?}2{?else?}1{?/if?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除</a>{?if $draftvals['display'] > 0?} | <a id="act_audit" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/admin/draftlist.php?checkid={?$draftvals['draftid']?}&type={?if $draftvals['display'] > 0?}3{?elseif $draftvals['ispub'] > 0?}2{?else?}1{?/if?}&act=audit{?$jieqi_token_url?}', {method: 'POST'});">审核</a>{?/if?}]
+</caption>
+<tr valign="middle" align="left">
+	<td class="tdl" width="20%">作品名称：</td>
+	<td class="tdr"><a href="{?function jieqi_geturl:'article':'article':$draftvals['articleid']:'info'?}" target="_blank">{?$draftvals['articlename']?}</a></td>
+</tr>
+<tr valign="middle" align="left">
+	<td class="tdl" width="20%">作者：</td>
+	<td class="tdr"><a href="{?function jieqi_geturl:'system':'user':$draftvals['posterid']?}" target="_blank">{?$draftvals['poster']?}</a></td>
+</tr>
+<tr valign="middle" align="left">
+	<td class="tdl">章节标题：</td>
+	<td class="tdr">{?$draftvals['chaptername']?}</td>
+</tr>
+<tr valign="middle" align="left">
+	<td class="tdl">章节类型：</td>
+	<td class="tdr">{?if $draftvals['isvip'] == 1?}电子书{?else?}公众小说{?/if?}</td>
+</tr>
+{?if $draftvals['ispub'] > 0?}
+<tr valign="middle" align="left">
+	<td class="tdl">定时发表时间：</td>
+	<td class="tdr">{?$draftvals['postdate']|date:'Y-m-d H:i:s'?}</td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+	<td class="tdl">章节内容：</td>
+	<td class="tdr">{?$draftvals['chaptercontent']?}</td>
+</tr>
+<tr valign="middle" align="left">
+	<td class="tdl">操作：</td>
+	<td class="tdr">
+	<a class="btnlink" href="{?$jieqi_modules['article']['url']?}/admin/draftedit.php?id={?$draftvals['draftid']?}">编辑</a> 
+	<a class="btnlink" id="act_delete_1" href="javascript:;" onclick="if(confirm('确实要删除么？')) Ajax.Tip('{?$jieqi_modules['article']['url']?}/admin/draftlist.php?checkid={?$draftvals['draftid']?}&type={?if $draftvals['display'] > 0?}3{?elseif $draftvals['ispub'] > 0?}2{?else?}1{?/if?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除</a> 
+	{?if $draftvals['display'] > 0?}<a class="btnlink" id="act_audit_1" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/admin/draftlist.php?checkid={?$draftvals['draftid']?}&type={?if $draftvals['display'] > 0?}3{?elseif $draftvals['ispub'] > 0?}2{?else?}1{?/if?}&act=audit{?$jieqi_token_url?}', {method: 'POST'});">审核</a>{?/if?}
+	</td>
+</tr>
+</table>

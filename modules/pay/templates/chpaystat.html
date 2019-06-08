@@ -1,0 +1,32 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "充值统计-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="推广分成" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_channelnav_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<form name="frmsearch" method="get" action="{?$jieqi_modules['pay']['url']?}/chpaystat.php">
+	<div class="textbox">
+		交易日期：<input name="datestart" type="text" class="text" size="10" maxlength="10" value="{?$_request['datestart']?}">-<input name="dateend" type="text" class="text" size="10" maxlength="10" value="{?$_request['dateend']?}">
+		<button type="submit" name="btnsearch" class="button">搜索</button>
+		<p class="gray fss">日期有两种写法：1、按日期统计使用8位数字，比如从 20160501 到 20160530；2、按月份统计用6为数字，比如从 201601 到 201612</p>
+	</div>
+</form>
+
+<table class="grid" width="100%" align="center" style="margin-top:10px;">
+  <tr align="center" valign="middle">
+    <th width="20%">统计日期</th>
+    <th width="15%">充值次数</th>
+    <th width="20%">充值金额</th>
+    <th width="45%">柱形图</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$paystatrows?}
+  <tr valign="middle">
+    <td align="center">{?$paystatrows[i].datevalue?}</td>
+    <td align="center">{?$paystatrows[i].paycount?}</td>
+    <td align="center">{?$paystatrows[i].summoney|fen2yuan?}</td>
+	<td align="center"><div style="background:#66CC33; height:1em; width:{?$paystatrows[i].paypercent?}%;"></div></td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+

@@ -1,0 +1,15 @@
+<a href="{?$url_more?}" class="moretop"><i class="iconfont">&#xee6a;</i></a>
+{?section name=i loop=$articlerows?}
+<div class="c_row cf">
+<a class="db cf" href="{?$articlerows[i].url_articleinfo?}">
+	<div class="row_cover">
+	<img class="cover_i" src="{?$articlerows[i].url_simage?}" />
+	</div>
+
+	<div class="row_text">
+	<h4>{?$articlerows[i].articlename?}</h4>
+    <p class="gray fss">{?$articlerows[i].sort?} | {?$articlerows[i].author?}<br />{?$articlerows[i].intro|truncate:80:'..'?}</p>
+	</div>
+</a>
+</div>
+{?/section?}

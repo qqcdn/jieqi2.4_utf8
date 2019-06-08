@@ -1,0 +1,23 @@
+<table class="grid" width="100%" align="center">
+  <caption>
+    <a href="{?$jieqi_modules['article']['url']?}/admin/searchcache.php">全部搜索</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/searchcache.php?order=hot">热门搜索</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/searchcache.php?results=0">没有结果</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/searchcache.php?results=1">一个结果</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/searchcache.php?results=2">多个结果</a>
+  </caption>
+  <tr align="center">
+    <th width="25%">搜索时间</th>
+    <th width="40%">关键字</th>
+    <th width="20%">搜索类型</th>
+    <th width="15%">结果数</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$cacherows?}
+  <tr>
+    <td height="14" align="center">{?$cacherows[i].lasttime|date:'Y-m-d H:i:s'?}</td>
+    <td>{?$cacherows[i].keywords?}</td>
+    <td align="center">{?$cacherows[i].searchtype?}</td>
+    <td align="center">{?$cacherows[i].results?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+

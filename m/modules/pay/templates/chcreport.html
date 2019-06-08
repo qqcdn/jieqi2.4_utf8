@@ -1,0 +1,49 @@
+{?set jieqi_page_rows = "50"?}
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "channelblocks"?}
+{?set $jieqi_pagetitle = "充值月报表-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="渠道功能" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_channelnav_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<table class="grid" width="100%" align="center">
+    <tr>
+      <td>
+	  <form name="frmsearch" method="get" action="{?$jieqi_modules['pay']['url']?}/chcreport.php">
+	  &nbsp; 月份：从 <input name="startmonth" type="text" class="text" size="10" maxlength="10" value="{?$_request['startmonth']?}"> 到 <input name="endmonth" type="text" class="text" size="10" maxlength="10" value="{?$_request['endmonth']?}">
+	  &nbsp; <button type="submit" name="Submit" class="button">搜  索</button>
+	  月份格式：201205
+	  </form>
+	  </td>
+    </tr>
+	<tr>
+		<td>
+		总记录数：{?$creportstat['cot']?}， 总金额：{?$creportstat['summoney']|fen2yuan?}， 总{?$egoldname?}：{?$creportstat['sumegold']|intval?} <span class="hot fss">（月报表非实时数据，每月结束之后生成）</span>
+		</td>
+	</tr>
+</table>
+
+
+
+<table class="grid" width="100%" align="center">
+<caption>
+充值统计月报表
+</caption>
+  <tr align="center">
+    <th width="20%">统计月份</th>
+    <th width="20%">用户渠道</th>
+    <th width="20%">充值次数</th>
+	<th width="20%">总金额</th>
+	<th width="20%">总{?$egoldname?}</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$creportrows?}
+  <tr>
+    <td align="center">{?$creportrows[i].reportmonth?}</td>
+    <td>{?$creportrows[i].channel?}</td>
+    <td align="center">{?$creportrows[i].paycount?}</td>
+    <td align="center">{?$creportrows[i].summoney|fen2yuan?}</td>
+    <td align="center">{?$creportrows[i].sumegold?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

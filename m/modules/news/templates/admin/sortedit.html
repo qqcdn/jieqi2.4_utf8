@@ -1,0 +1,39 @@
+<script type="text/javascript">
+function frmsortedit_validate(){
+  if(document.frmsortedit.sortname.value == ""){
+    alert("请输入分类名称");
+    document.frmsortedit.sortname.focus();
+    return false;
+  }
+}
+</script>
+<br /><br />
+<form name="frmsortedit" id="frmsortedit" action="sortedit.php" method="post" onsubmit="return frmsortedit_validate();">
+<table style="width:60%; min-width:480px;" class="grid" cellspacing="1" align="center">
+<caption>修改分类</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">上级分类：</td>
+  <td class="tdr">
+  <select name="parentid" id="parentid" class="select">
+    <option value="0"{?if $sortdata['parentid'] == 0?} selected{?/if?}>无(作为顶级分类)</option>
+	{?section name=i loop=$sortrows?}
+    <option value="{?$sortrows[i].sortid?}"{?if $sortdata['parentid'] == $sortrows[i].sortid?} selected{?/if?}>{?$sortrows[i].layer|str_repeat:'&nbsp;&nbsp;'?}├{?$sortrows[i].sortname?}</option>
+	{?/section?}
+  </select></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">分类名称：</td>
+  <td class="tdr">
+  <input type="text" class="text" name="sortname" id="sortname" size="20" maxlength="30" value="{?$sortdata['sortname']?}" />
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">
+  &nbsp;
+  <input type="hidden" name="act" value="sortedit" />{?$jieqi_token_input?}
+  <input type="hidden" name="sortid" value="{?$sortdata['sortid']?}" />
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">修改分类</button></td>
+</tr>
+</table>
+</form>

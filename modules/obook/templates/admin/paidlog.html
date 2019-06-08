@@ -1,0 +1,42 @@
+<form name="frmsearch" method="get" action="paidlog.php?do=submit">
+<table width="100%" align="center" cellpadding="0" cellspacing="1" class="grid">
+    <tr>
+        <td>关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="15" maxlength="50"> 
+            <label class="radio"><input type="radio" name="keytype" value="0" checked="checked">书名</label>
+            <label class="radio"><input type="radio" name="keytype" value="1">作者</label> 
+			&nbsp;&nbsp;
+            <button type="submit" name="btnsearch" class="button">搜 索</button>
+			&nbsp; <a href="{?$obook_dynamic_url?}/admin/paidlog.php">显示全部</a>
+        </td>
+    </tr>
+</table>
+</form>
+<table width="100%" cellpadding="0" cellspacing="1" class="grid">
+  <caption>收入结算记录</caption>
+  <tr align="center">
+    <td width="25%" class="head">电子书名</td>
+    <td width="15%" class="head">结算时间</td>
+    <td width="10%" class="head">总收入</td>
+	<td width="10%" class="head">待结算</td>
+    <td width="10%" class="head">本次结算</td>
+    <td width="10%" class="head">本次未结算</td>
+    <td width="10%" class="head">付款金额</td>
+	<td width="10%" class="head">结算类型</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$paidrows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'article':'article':$paidrows[i].articleid:'info'?}" target="_blank">{?$paidrows[i].obookname?}</a></td>
+    <td align="center">{?$paidrows[i].paytime|date:Y-m-d H:i?}</td>
+    <td align="center">{?$paidrows[i].sumemoney?}</td>
+	<td align="center">{?$paidrows[i].unpaidemoney?}</td>
+    <td align="center">{?$paidrows[i].payemoney?}</td>
+    <td align="center">{?$paidrows[i].remainemoney?}</td>
+    <td align="center">{?$paidrows[i].paymoney|fen2yuan?}元</td>
+	<td align="center">{?$paidrows[i].paidtype?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

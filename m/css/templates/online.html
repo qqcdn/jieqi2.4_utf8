@@ -1,0 +1,14 @@
+<br />
+<table class="grid" width="100%" align="center">
+  <caption>当前在线会员：{?$usernum?} 位（游客不计）</caption>
+  <tr>
+    <td>
+	<ul class="ulrow">
+{?section name=i loop=$userrows?}
+	<li style="float:left;width:24%;"><a href="{?function jieqi_geturl:'system':'user':$userrows[i].uid:'info'?}" target="_blank" title="{?$userrows[i].updatetime|date:"Y-m-d H:i:s"?}&lt;br /&gt;{?$userrows[i].location?}">{?$userrows[i].name?}</a></li>
+{?/section?}
+    </ul>
+	</td>
+  </tr>
+</table>
+<br /><br />

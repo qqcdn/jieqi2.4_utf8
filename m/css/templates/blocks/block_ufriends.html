@@ -1,0 +1,8 @@
+{?if $ownerid > 0?}
+<ul class="ultop">
+{?section name=i loop=$friendrows?}
+<li><a href="{?function jieqi_geturl:'system':'user':$friendrows[i].yourid?}">{?$friendrows[i].yourname?}</a></li>
+{?/section?}
+</ul>
+<div class="more"><a href="{?$jieqi_url?}/userfriends.php?uid={?$ownerid?}" target="_blank">¸ü¶à...</a></div>
+{?/if?}

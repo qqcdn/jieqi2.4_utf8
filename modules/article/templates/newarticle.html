@@ -1,0 +1,139 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<script type="text/javascript">
+function frmnewarticle_validate(){
+  if(document.frmnewarticle.sortid.value == "0"){
+    alert("请输入类别");
+    document.frmnewarticle.sortid.focus();
+    return false;
+  }
+  if(document.frmnewarticle.articlename.value == ""){
+    alert("请输入小说名称");
+    document.frmnewarticle.articlename.focus();
+    return false;
+  }
+}
+
+var ArticleSorts = {
+	tags : {union : 'articlesorts',  rgroup : 'rgroup',  sort : 'sort',  type : 'type'},
+	values : {rgroup : 0,  sort : 0,  type : 0},
+	rgroups : {{?if $rgroup['items']|is_array == true?}{?section name=i loop=$rgroup['items']?}{?if $i['order'] > 1?}, {?/if?}{?$i['key']?}:'{?$rgroup['items'][i]?}'{?/section?}{?/if?}},
+	sorts : {
+	{?section name=i loop=$sortrows?}{?if $i['order'] > 1?}, 
+	{?/if?}{?$i['key']?}:{
+		group : '{?$sortrows[i].group|intval?}',
+		caption : '{?$sortrows[i].caption?}',
+		types : {{?if $sortrows[i]['types']|is_array == true?}{?section name=j loop=$sortrows[i]['types']?}{?if $j['order'] > 1?}, {?/if?}'{?$j['key']?}':'{?$sortrows[i]['types'][j]?}'{?/section?}{?/if?}}
+	}{?/section?}
+  }
+}
+</script>
+<script type="text/javascript" src="{?$jieqi_modules['article']['url']?}/scripts/sortselect.js"></script>
+
+<form name="frmnewarticle" id="frmnewarticle" action="{?$url_newarticle?}" method="post" onsubmit="return frmnewarticle_validate();" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>发表新作</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">类别：</td>
+  <td class="tdr" width="75%" id="articlesorts">
+  <script type="text/javascript">SortSelect.init(); </script>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">小说名称：</td>
+  <td class="tdr">
+  <input type="text" class="text" name="articlename" id="articlename" size="30" maxlength="50" value="" onBlur="Ajax.Update('{?$jieqi_modules['article']['url']?}/articlecheck.php?articlename='+this.value, {outid:'anamemsg', tipid:'anamemsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /> <span id="anamemsg"></span>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">副标题：</td>
+  <td class="tdr"><input type="text" class="text" name="backupname" id="backupname" size="30" maxlength="100" value="" /> <span class="hot">一句话简介</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">标签：</td>
+  <td class="tdr">
+  <div class="dropdown">
+  <div><input type="text" class="text" name="keywords" id="tagwords" size="60" maxlength="100" value=""{?if $taglimit > 0?} readonly="readonly"{?/if?} />{?if $tagnum == 0?} <span class="hot">多个标签用英文空格分隔</span>{?/if?}</div>
+  {?if $tagnum > 0?}
+  <div class="dropbox" style="width:400px;padding:5px 10px;">
+    <ul class="ultag">
+	{?section name=i loop=$tagwords?}
+	<li onclick="selecttag('tagwords', this);">{?$tagwords[i].name?}</li>
+	{?/section?}
+    </ul>
+  </div>
+  {?/if?}
+  </div>
+  </td>
+</tr>
+{?if $allowtrans > 0?}
+<tr valign="middle" align="left">
+  <td class="tdl">作者：</td>
+  <td class="tdr"><input type="text" class="text" name="author" id="author" size="30" maxlength="30" value="" /> <span class="hot">发表自己作品请留空</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">作者授权：</td>
+  <td class="tdr">
+  {?section name=i loop=$authorflag['items']?}
+  <label class="radio"><input type="radio" name="authorflag" value="{?$i['key']?}" {?if $i['key'] == $authorflag['default']?}checked="checked" {?/if?}/>{?$authorflag['items'][i]?}</label> 
+  {?/section?}
+</td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="tdl">授权级别：</td>
+  <td class="tdr">
+  {?section name=i loop=$permission['items']?}
+  <label class="radio"><input type="radio" name="permission" value="{?$i['key']?}" {?if $i['key'] == $permission['default']?}checked="checked" {?/if?}/>{?$permission['items'][i]?}</label> 
+  {?/section?}
+</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">首发状态：</td>
+  <td class="tdr">
+  {?section name=i loop=$firstflag['items']?}
+  <label class="radio"><input type="radio" name="firstflag" value="{?$i['key']?}" {?if $i['key'] == $firstflag['default']?}checked="checked" {?/if?}/>{?$firstflag['items'][i]?}</label> 
+  {?/section?}
+</td>
+</tr>
+{?if $ismanager > 0?}
+<tr valign="middle" align="left">
+  <td class="tdl">责任编辑：</td>
+  <td class="tdr"><input type="text" class="text" name="agent" id="agent" size="30" maxlength="30" value="" /> <span class="hot">可以留空或者指定本站会员名称</span></td>
+</tr>
+  {?if $customsites|count > 0?}
+<tr valign="middle" align="left">
+  <td class="tdl">来源网站：</td>
+  <td class="tdr">
+  <select class="select" size="1" name="siteid">
+  <option value="0" selected="selected">本站原创</option>
+  {?section name=i loop=$customsites?}
+  <option value="{?$i['key']?}">{?$customsites[i].name?}</option>
+  {?/section?}
+  </select>
+  </td>
+</tr>
+  {?/if?}
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="tdl">内容简介：</td>
+  <td class="tdr"><textarea class="textarea" name="intro" id="intro" rows="6" cols="60"></textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">本书公告：</td>
+  <td class="tdr"><textarea class="textarea" name="notice" id="notice" rows="6" cols="60"></textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">封面小图：</td>
+  <td class="tdr"><input type="file" class="text" size="30" name="articlespic" id="articlespic" /> <span class="hot">图片格式：{?$imagetype?}</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">封面大图：</td>
+  <td class="tdr"><input type="file" class="text" size="30" name="articlelpic" id="articlelpic" /> <span class="hot">图片格式：{?$imagetype?}</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;<input type="hidden" name="act" value="newarticle" />{?$jieqi_token_input?}</td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提 交</button></td>
+</tr>
+</table>
+</form>

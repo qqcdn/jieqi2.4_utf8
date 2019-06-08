@@ -1,0 +1,38 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "设置头像-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="用户设置" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_userset_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<form name="setavatar" id="setavatar" action="{?$jieqi_url?}/setavatar.php?do=submit" method="post" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>设置头像</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">用户名：</td>
+  <td class="tdr">{?$jieqi_username?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">当前头像：</td>
+  <td class="tdr">
+{?if $avatartype > 0?}
+<img id="cut_img" src="{?$url_avatar?}?{?$jieqi_time?}" style="margin:0;padding:0;border:1px solid #000000;" />
+{?if $avatarcut == 1?}
+<img id="cut_img" src="{?$url_avatars?}?{?$jieqi_time?}" style="margin:0;padding:0;border:1px solid #000000;" />
+<img id="cut_img" src="{?$url_avatari?}?{?$jieqi_time?}" style="margin:0;padding:0;border:1px solid #000000;" />
+{?/if?}
+{?/if?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">上传头像：</td>
+  <td class="tdr"><input type="file" class="text" size="30" name="avatarimage" id="avatarimage" /><br />
+  <span class="hot">头像图片格式为 {?$need_imagetype?} ，文件大小不能超过 {?$max_imagesize?}K</span>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">&nbsp;
+  <input type="hidden" name="act" value="upload" />{?$jieqi_token_input?}
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">上传头像</button></td>
+</tr>
+</table>
+</form>

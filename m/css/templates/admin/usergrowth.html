@@ -1,0 +1,43 @@
+{?set jieqi_page_rows = "100"?}
+<form name="frmquery" method="post" action="{?$jieqi_url?}/admin/usergrowth.php">
+<table class="grid" width="100%" align="center">
+  <tr>
+    <td>
+	    {?if $jieqi_channels|count > 0?}
+		来源渠道：
+		<select class="select"  size="1" name="channel">
+			<option value="">不限</option>
+			{?section name=i loop=$jieqi_channels?}
+			<option value="{?$i['key']?}"{?if $_request['channels'] == $i['key']?} selected="selected"{?/if?}>{?$jieqi_channels[i].name?}</option>
+			{?/section?}
+		</select>
+		&nbsp;&nbsp;
+		{?/if?}		
+		注册日期：
+		<input name="datestart" type="text" class="text" size="10" maxlength="10" value="{?$_request['datestart']?}">-<input name="dateend" type="text" class="text" size="10" maxlength="10" value="{?$_request['dateend']?}">
+		<button type="submit" name="btnsearch" class="button">搜索</button>
+		<p>注册日期支持两种写法：1、按日期统计使用8位数字，比如从 20160501 到 20160530；2、按月份统计用6为数字，比如从 201601 到 201612</p>
+		<p class="hot">总记录数：{?$growthsum['cot']?}， 总新增用户数：{?$growthsum['sumgrowth']?}</p>
+    </td>
+  </tr>
+</table>
+</form>
+<br />
+<table class="grid" width="100%" align="center">
+<caption>用户增长统计</caption>
+  <tr align="center" class="head">
+    <td width="20%">日期</td>
+    <td width="20%">新增用户数</td>
+	<td width="60%">柱形图</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$growthrows?}
+  <tr>
+    <td align="center">{?$growthrows[i].datevalue?}</td>
+    <td align="center">{?$growthrows[i].growthnum?}</td>
+	<td align="left"><div style="background:#66CC33; height:1em; width:{?$growthrows[i].growthpercent?}%;"></div></td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+

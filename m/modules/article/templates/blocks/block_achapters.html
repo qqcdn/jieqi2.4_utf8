@@ -1,0 +1,5 @@
+<ul class="ulnav">
+{?section name=i loop=$chapterrows?}
+{?if $chapterrows[i].chaptertype == 0?}<li><a class="pop" href="{?$chapterrows[i].url_chapter?}">{?$chapterrows[i].chaptername?}</a> [{?$chapterrows[i].lastupdate|date:'Y-m-d H:i'?}]</li>{?/if?}
+{?/section?}
+</ul>

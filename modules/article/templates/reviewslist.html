@@ -1,0 +1,41 @@
+{?set jieqi_page_rows = "30"?}
+<form name="frmsearch" method="get" action="{?$article_dynamic_url?}/reviewslist.php">
+<div class="cf pd">
+	<div class="fl">关键字：
+		<input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50"> 
+		<label class="radio"><input type="radio" name="keytype" value="0" checked="checked">小说名称</label> 
+		<label class="radio"><input type="radio" name="keytype" class="radio" value="1">发表人</label> &nbsp;&nbsp;
+		<button type="submit" name="btnsearch" class="button">搜 索</button>
+	</div>
+	<div class="fr">[<a href="{?$article_dynamic_url?}/reviewslist.php?type=all">全部书评</a>] &nbsp;&nbsp; [<a href="{?$article_dynamic_url?}/reviewslist.php?type=good">精华书评</a>]</div>
+</div>
+</form>
+
+<div class="blockcontent" id="jieqi_page_contents">
+	{?section name=i loop=$reviewrows?}
+	<div class="c_row cf">
+		<div style="float: left; width: 100px; text-align: center;">
+		{?if $reviewrows[i].posterid > 0?}
+		<a href="{?function jieqi_geturl:'system':'user':$reviewrows[i].posterid?}" target="_blank"><img class="avatars" src="{?function jieqi_geturl:'system':'avatar':$reviewrows[i].posterid:'s':2?}" onerror="this.src='{?$jieqi_url?}/images/noavatars.jpg';this.onerror=null;" /><p{?if $reviewrows[i].posterid == $authorid?} class="hot"{?/if?}>{?$reviewrows[i].poster?}</p></a>
+		{?else?}
+		<img class="avatars" src="{?$jieqi_url?}/images/noavatars.jpg" />
+		<p class="gray">游客</p>
+		{?/if?}
+		<a href="{?function jieqi_geturl:'system':'user':$reviewrows[i].posterid?}" target="_blank">
+		</a>
+		</div>
+		<div style="margin-left: 100px;">
+			<div class="c_subject">{?if $reviewrows[i].istop == 1?}<span class="pop">[顶]</span>{?/if?}{?if $reviewrows[i].isgood == 1?}<span class="pop">[精]</span>{?/if?}<a class="pop" href="{?function jieqi_geturl:'article':'reviewshow':1:$reviewrows[i].topicid?}" target="_blank">{?$reviewrows[i].title|str_replace:"<br />":" "|truncate:80:'..'?}</a></div>
+			<div class="c_description">{?$reviewrows[i].content|truncate:320:'..'?}</div>
+			<div class="c_tag">
+				<span class="fr"><a href="{?function jieqi_geturl:'article':'reviewshow':1:$reviewrows[i].topicid?}#postnew" target="_blank">[我要回复]</a></span>
+				<span class="c_label">作品：</span><span class="c_value"><a href="{?function jieqi_geturl:'article':'article':$reviewrows[i].articleid:'info' ?}" target="_blank">{?$reviewrows[i].articlename?}</a></span>
+				<span class="c_label">时间：</span><span class="c_value">{?$reviewrows[i].replytime|date:Y-m-d H:i:s?}</span>
+				<span class="c_label">点击：</span><span class="c_value">{?$reviewrows[i].views?}</span>
+				<span class="c_label">回复：</span><span class="c_value">{?$reviewrows[i].replies?}</span>
+			</div>
+		</div>
+	</div>
+	{?/section?}
+</div>
+<div class="pages">{?$url_jumppage?}</div>

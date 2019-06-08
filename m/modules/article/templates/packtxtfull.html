@@ -1,0 +1,24 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "guideblocks"?}
+
+<table class="grid" width="100%" align="center">
+<caption>
+《<a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">{?$articlename?}</a>》TXT全文下载
+</caption>
+  <tr align="center">
+    <th width="10%">分册</th>
+    <th width="10%">大小</th>
+    <th width="10%">时间</th>
+	<th width="60%">起始章节 - 结束章节</th>
+    <th width="10%">下载</th>
+  </tr>
+  {?section name=i loop=$packrows?}
+  <tr>
+    <td align="center">{?if $vsize > 1?}第 {?$i['key']?} 册{?else?}全本{?/if?}</td>
+    <td align="center">{?$packrows[i].filesize|arithmetic:"/":1024|round?}K</td>
+    <td align="center">{?$packrows[i].maketime|date:"Y-m-d"?}</td>
+    <td>{?$packrows[i].fromvolume?} {?$packrows[i].fromchapter?} - {?$packrows[i].tovolume?} {?$packrows[i].tochapter?}</td>
+    <td align="center"><a href="{?$article_static_url?}/packdown.php?type=txt&id={?$articleid?}" rel="nofollow">下载TXT全文</a>
+  </tr>
+  {?/section?}
+</table>

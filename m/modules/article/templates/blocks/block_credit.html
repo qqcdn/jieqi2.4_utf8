@@ -1,0 +1,6 @@
+<ul class="ultop">
+{?section name=i loop=$creditrows?}
+  <li><span class="fr">{?$creditrows[i].rank?}</span><a href="{?function jieqi_geturl:'system':'user':$creditrows[i].uid:'info'?}" target="_blank">{?$creditrows[i].uname?}</a></li>
+{?/section?}
+</ul>
+<div class="more"><a href="{?$jieqi_modules['article']['url']?}/creditlist.php?id={?$articleid?}" target="_blank">更多...</a></div> 

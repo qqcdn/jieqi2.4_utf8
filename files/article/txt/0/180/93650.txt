@@ -1,0 +1,5 @@
+﻿    </dd>
+
+    <div class="adhtml"><script>show_htm2();</script></div>
+
+    <dd id="contfoot"><a href="Javascript:void(0);" onClick="window.external.addFavorite('https://www.x23us.com/book/70467','带着工业革命系统回明朝-顶点小说');" class="keep">没看完？将本书加入收藏</a><a rel="nofollow" href="/modules/article/addbookcase.php?bid=70467&cid=32973067" class="case" target="_blank">我是会员，将本章节放入书签</a><a href="Javascript:void(0);" onClick="window.clipboardData.setData('Text','推荐一本书哈 《带着工业革命系统回明朝》 \r\n https://www.x23us.com/book/70467');alert('复制成功！');" class="copy">复制本书地址，推荐给好友获取积分</a><a rel="nofollow" href="/newmessage.php?tosys=1&title=带着工业革命系统回明朝 -  第一千三百零七章 总攻序幕（上） - %D5%C2%BD%DA%B4%ED%CE%F3&content=%B6%D4%B1%C8%CD%F8%D6%B7%CA%C7%A3%BA" class="report" target="_blank">章节错误？点此举报</a>

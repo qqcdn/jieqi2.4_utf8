@@ -1,0 +1,19 @@
+{?set $jieqi_pagetitle = "论坛版块-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "论坛版块"?}
+
+<div class="block">
+	<div class="blocktitle"><a class="fr iconfont" style="padding-right: 0.6em;" href="{?$url_search?}">&#xee28;</a>论坛版块</div>
+	<div class="blockcontent">
+		<ul class="ulnav">
+			{?section name=i loop=$forumcats?}
+			<li class="fsl note">{?$forumcats[i]?}</li>
+			{?section name=j loop=$forums[i]?}
+			<li><a class="db" href="{?function jieqi_geturl:'forum':topiclist:1:$forums[i][j].forumid?}">
+			<em class="fr gray">{?$forums[i][j].topics?}/{?$forums[i][j].posts?}</em>
+			{?$forums[i][j].forumname?}
+			</a></li>
+			{?/section?}
+			{?/section?}
+		</ul>
+	</div>
+</div>

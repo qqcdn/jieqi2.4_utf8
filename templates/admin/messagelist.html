@@ -1,0 +1,70 @@
+<script type="text/javascript">
+//显示消息
+function showmsg(id){
+	var msg = document.getElementById(id);
+	if(msg.style.display == 'none') msg.style.display='';
+	else msg.style.display = 'none';
+}
+//删除
+function act_delete(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onReturn: function(){
+			$_(o.parentNode.parentNode).remove();
+		}
+	}
+	if(confirm('确实要删除该记录么？')) Ajax.Tip(url, param);
+	return false;
+}
+</script>
+<form name="frmquery" method="post" action="{?$jieqi_url?}/admin/messagelist.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td align="right">关键字：
+            <input name="keyword" type="text" class="text" id="keyword" size="20" maxlength="50">
+			     <label class="radio"><input type="radio" name="keytype" value="fromname" checked="checked" />发件人</label>
+			     <label class="radio"><input type="radio" name="keytype" value="toname" />收件人</label>
+			     <label class="radio"><input type="radio" name="keytype" value="title" />标题</label>
+            <button type="submit" name="Submit" class="button">搜 索</button>&nbsp;&nbsp;<a href="{?$jieqi_url?}/admin/messagelist.php">显示全部</a>&nbsp;&nbsp;</td>
+    </tr>
+</table>
+</form>
+<br />
+<form action="{?$jieqi_url?}/admin/messagelist.php" method="post" name="checkform">
+<table class="grid" width="100%" align="center">
+<caption>站内短消息列表</caption>
+  <tr>
+    <th width="5%"><input type="checkbox" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></th>
+    <th width="15%">发件人</th>
+    <th width="15%">收件人</th>
+    <th width="40%">标题</th>
+    <th width="15%">日期</th>
+    <th width="10%">操作</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$messagerows?}
+  <tr>
+    <td align="center" valign="top"><input type="checkbox" name="id[]" value="{?$messagerows[i].messageid?}"></td>
+    <td valign="top">{?if $messagerows[i].fromid > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagerows[i].fromid:'info'?}" target="_blank">{?$messagerows[i].fromname?}</a>{?else?}<span class="hot">网站管理员</span>{?/if?}</td>
+    <td valign="top">{?if $messagerows[i].toid > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagerows[i].toid:'info'?}" target="_blank">{?$messagerows[i].toname?}</a>{?else?}<span class="hot">网站管理员</span>{?/if?}</td>
+    <td valign="top"><a href="javascript:showmsg('msgc_{?$messagerows[i].messageid?}')">{?$messagerows[i].title?}</a>
+	<div id="msgc_{?$messagerows[i].messageid?}" style="display:none;padding:3px;width:100%;">
+	{?$messagerows[i].content?}	</div>
+	</td>
+    <td valign="top">{?$messagerows[i].postdate|date:"Y-m-d"?}</td>
+    <td valign="top"><a id="act_delete_{?$messagerows[i].messageid?}" href="javascript:;" onclick="act_delete('{?$jieqi_url?}/admin/messagelist.php?id={?$messagerows[i].messageid?}&act=delete{?$jieqi_token_url?}');">删除</a></td>
+  </tr>
+{?/section?}
+  </tbody>
+  <tr>
+    <td colspan="6" class="foot">
+		<button type="button" name="selectall" class="button" onclick="for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = true; }" >全部选中</button>&nbsp;&nbsp;
+		<button type="button" name="cancelall" class="button" onclick="for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = false; }" >全部取消</button>&nbsp;&nbsp;
+		<button type="button" name="act_remove" class="button" onclick="if(confirm('确实要删除选中记录么？')) this.form.submit();">删除选中记录</button>
+		<input type="hidden" name="act" value="delete">{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

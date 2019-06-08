@@ -1,0 +1,7 @@
+<div class="c_title">作家申请信息</div>
+<hr />
+<div class="c_head">申请时间：{?$applytime|date:'Y-m-d H:i:s'?} | 申请人：<a href="{?function jieqi_geturl:'system':'user':$applyuid?}" target="_blank">{?$applyname?}</a> | 申请内容字数：{?$applywords?}</div>
+<hr />
+<div class="c_content">{?$applytext?}</div>
+<hr />
+<div class="tr"><a id="act_confirm" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/admin/applylist.php?id={?$applyid?}&act=confirm{?$jieqi_token_url?}', {method: 'POST'});">审核</a> <a id="act_refuse" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/admin/applylist.php?id={?$applyid?}&act=refuse{?$jieqi_token_url?}', {method: 'POST'});">拒绝</a> <a id="act_delete" href="javascript:;" onclick="if(confirm('确实要删除该申请记录么？')) Ajax.Tip('{?$jieqi_modules['article']['url']?}/admin/applylist.php?id={?$applyid?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除</a><br /><br /></div>

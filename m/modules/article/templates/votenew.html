@@ -1,0 +1,52 @@
+{?set $jieqi_pagetitle = "新建投票-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "新建投票"?}
+
+<script type="text/javascript">
+function frmvotenew_validate(){
+  if(document.frmvotenew.title.value == ""){
+    alert("请输入标题");
+    document.frmvotenew.title.focus();
+    return false;
+  }
+}
+</script>
+<form class="form" name="frmvotenew" id="frmvotenew" action="{?$jieqi_modules['article']['url']?}/votenew.php?do=submit" method="post" onsubmit="return frmvotenew_validate();">
+<fieldset>
+	<div class="frow">
+		<label class="col4 flabel">标题：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="title" id="title" maxlength="100" value="" />
+		</div>
+	</div>
+	{?section name=i loop=$voterows?}
+	<div class="frow">
+		<label class="col4 flabel">选项{?$i['order']?}：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="item{?$i['order']?}" id="item{?$i['order']?}" maxlength="100" value="" />
+		</div>
+	</div>
+	{?/section?}
+	<div class="frow">
+		<label class="col4 flabel">单选/多选：</label>
+		<div class="col8 last">
+			<label class="radio"><input type="radio" name="mulselect" value="0" checked="checked" />单选</label>
+  			<label class="radio"><input type="radio" name="mulselect" value="1" />多选</label>
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">是否发布：</label>
+		<div class="col8 last">
+			<label class="radio"><input type="radio" name="ispublish" value="1" checked="checked" />发布</label>
+  			<label class="radio"><input type="radio" name="ispublish" value="0" />不发布</label>
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">&nbsp;</label>
+		<div class="col8 last">
+			<button type="submit" class="button" name="submit">提 交</button>
+			<input type="hidden" name="act" value="newvote" />{?$jieqi_token_input?}
+  			<input type="hidden" name="aid" value="{?$aid?}" />
+		</div>
+	</div>
+</fieldset>
+</form>

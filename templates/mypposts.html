@@ -1,0 +1,28 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set jieqi_page_rows = "10"?}
+{?set $jieqi_pagetitle = "我的留言帖子-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="会员工具" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_userbox_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<table class="grid" width="100%" align="center">
+  <caption>我的留言帖子 | <a href="{?$jieqi_url?}/myptopics.php">查看留言主题</a></caption>
+  <tr>
+    <td width="75%" class="head">主题</td>
+    <td width="25%" class="head">发表时间</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$postrows?}
+  <tr>
+    <td class="topic">{?if $postrows[i].istopic > 0?}<span class="hot">主题：</span>{?else?}<span class="hot">回复：</span>{?/if?}<a href="{?$jieqi_url?}/ptopicshow.php?tid={?$postrows[i].topicid?}" target="_blank"{?if $postrows[i].display_n == 1?} class="note"{?/if?}>{?$postrows[i].title|truncate:'54':'..'?}</a></td>
+    <td class="topic" align="center">{?$postrows[i].posttime|date:"Y-m-d H:i:s"?}</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+		<div style="padding:3px;border:0;height:150px;width:100%;overflow-y:scroll;">{?$postrows[i].posttext?}</div>
+	  </td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,179 @@
+/* basic */
+*{
+	margin: 0px;
+	padding: 0px;
+	font: 12px/1.6 "Microsoft YaHei",SimSun,Verdana,Arial,sans-serif;
+}
+
+body{
+	color:#333333;
+	background: #eeeeee;
+	text-align: center;
+	padding-bottom:40px;
+}
+
+body, html{overflow-x:hidden;}
+
+a{
+	color: #333333;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+a:hover{
+	color: #339933;
+	text-decoration : underline;
+}
+
+span, p{
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-size: 16px;
+}
+
+img{
+	border: 0px;
+}
+
+div{
+	text-align: left;
+}
+
+hr{
+	height: 1px;
+	border: 1px solid #dddddd;
+	clear: both;
+	margin: 5px 0px;
+}
+
+ul{
+	list-style: none;
+	clear: both;
+	text-align: left;
+}
+
+li{
+	line-height: 150%;
+}
+
+table{
+	text-align: left;
+}
+
+table td{
+}
+
+.cb, .clear{clear:both; font-size:0px; height:0px; overflow:hidden;}
+
+
+#leftmenu {
+	padding: 3px;
+}
+
+.ltop{
+	line-height: 36px;
+	text-align: center;
+	font-size: 14px;
+	background: #339933;
+	color: #ffffff;
+	margin-bottom: 10px;
+}
+
+.ltop a{
+	font-size: 14px;
+	color: #ffffff;
+}
+
+.lmenu{
+	font-size: 14px;
+	border: 2px solid #666666;
+	margin-bottom: 10px;
+}
+
+.lmenu a{
+	font-size: 14px;
+}
+
+.lmenu_title {
+	line-height:30px;
+	font-weight:bold;
+	font-size:14px;
+	text-align: center;
+	background: #666666;
+	color:#ffffff;
+}
+.lmenu_title a{
+	color: #ffffff;
+}
+
+.lmenu_content {
+	margin:0 auto;
+}
+
+.lmenu_list{
+}
+
+.lmenu_list li a{
+	display:block;
+	line-height:30px;
+	font-size: 14px;
+	text-align:left;
+	text-indent: 15px;
+}
+
+.lmenu_list li a:hover{
+ 	background: #dddddd;
+	text-decoration: none;
+}
+   
+.hd {
+	display: none
+}
+.in {
+	cursor: hand
+}
+
+.arrow_up {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #fff;
+	font-size: 0;
+	line-height: 0;
+	margin:0 0 3px 3px;
+}
+
+.arrow_down {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid #fff;
+	font-size: 0;
+	line-height: 0;
+	margin:0 0 3px 3px;
+}
+
+.arrow_left {
+	display: inline-block;
+	width: 0; 
+	height: 0; 
+	border-bottom: 5px solid transparent;
+	border-top: 5px solid transparent;
+	border-right: 5px solid #368ee0;
+	font-size: 0;
+	line-height: 0;
+}
+.arrow_right {
+	display: inline-block;
+	width: 0; 
+	height: 0; 
+	border-bottom: 5px solid transparent;
+	border-top: 5px solid transparent;
+	border-left: 5px solid #368ee0;
+	line-height: 0;
+}

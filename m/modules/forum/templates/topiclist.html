@@ -1,0 +1,29 @@
+{?set $jieqi_pagetitle = "{$forumname}-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "{$forumname}"?}
+{?set jieqi_page_rows = "20"?}
+
+<div class="blockn cf">
+  <a href="{?$jieqi_modules['forum']['url']?}/" class="btnlink b_note fl">论坛首页</a>
+  <a href="{?$jieqi_modules['forum']['url']?}/newpost.php?fid={?$forumid?}" class="btnlink b_note fr">发表新主题</a>
+</div>
+
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+  {?section name=i loop=$topicrows?}
+  <div class="c_row cf">
+  <a class="db cf" href="{?function jieqi_geturl:'forum':showtopic:$topicrows[i].topicid:1:$page?}">
+    <h4>
+    {?if $topicrows[i].istop > 0?}<span class="iconfont note">&#xee53;</span>{?elseif $topicrows[i].islock > 0?}<span class="iconfont">&#xee29;</span>{?elseif $topicrows[i].isgood > 0?}<span class="iconfont hot">&#xee54;</span>{?else?}<span class="iconfont primary">&#xee59;</span>{?/if?}
+    <span class="iconfont gray">&#xee4b;</span>
+    {?$topicrows[i].title?}
+    <h4>
+    <p class="gray">
+    <span class="fr">{?$topicrows[i].replies?}/{?$topicrows[i].views?}</span>{?if $topicrows[i].posterid > 0?}{?$topicrows[i].poster?}{?else?}<i>游客</i>{?/if?} 发表于 {?$topicrows[i].posttime|date:"m-d H:i"?}
+    </p>
+  </a>
+  </div>
+  {?/section?}
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,44 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "sortblocks"?}
+{?set $jieqi_pagetitle = "{$articletitle}-{$jieqi_sitename}"?}
+{?set jieqi_page_rows = "15"?}
+
+<div class="blockb">
+<div class="blocktitle">
+	<div class="fl">
+	&nbsp;&nbsp;
+	<span class="dropdown">{?if $sort == ''?}全部分类{?else?}{?$sort?}{?/if?}<b class="dropico"></b>
+	<ul class="droplist">
+	<li><a href="{?function jieqi_geturl:'article':'articlelist':1:0:$fullflag?}" {?if $sortid == 0?} class="hot"{?/if?}>全部分类</a></li>
+	{?section name=i loop=$sortrows?}
+	<li><a href="{?function jieqi_geturl:'article':'articlelist':1:$i['key']:$fullflag?}" {?if $sortid == $i['key']?} class="hot"{?/if?}>{?$sortrows[i].caption?}</a></li>
+	{?/section?}
+	</ul>
+	</span>
+	</div>
+	<div class="fr">
+	<label class="checkbox fsb nw"><input type="checkbox" name="showfull" value="1"{?if $fullflag > 0?} checked="checked"{?/if?} onclick="if(this.checked) document.location='{?function jieqi_geturl:'article':'articlelist':1:$sortid:1?}';else document.location='{?function jieqi_geturl:'article':'articlelist':1:$sortid:0?}';">只看全本</label>
+	</div>
+</div>
+<div class="blockcontent" id="jieqi_page_contents">
+	{?section name=i loop=$articlerows?}
+	<div class="c_row cf">
+		<div class="fl" style="width:16%;">
+		<a href="{?$articlerows[i].url_articleinfo?}" target="_blank"><img style="width:90%;margin:5px auto;" src="{?$articlerows[i].url_simage?}" alt="{?$articlerows[i].articlename?}"/></a>
+		</div>
+		<div class="fl" style="width:84%;overflow:hidden;">
+			<div class="c_subject"><a href="{?$articlerows[i].url_articleindex?}" class="note iconfont" target="_blank" title="目录">&#xee32;</a><a href="{?$articlerows[i].url_articleinfo?}" target="_blank">{?$articlerows[i].articlename?}</a> {?if $articlerows[i].vipchapterid > 0?}<a href="{?$articlerows[i].url_vipchapter?}" class="gray" target="_blank">{?$articlerows[i].vipvolume?} {?$articlerows[i].vipchapter?}</a><span class="hot">vip</span>{?else?}<a href="{?$articlerows[i].url_lastchapter?}" class="gray" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a>{?/if?}</div>
+			<div class="c_tag">
+				<span class="c_label">作者：</span><span class="c_value">{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author?}</a>{?/if?}</span>
+				<span class="c_label">字数：</span><span class="c_value">{?$articlerows[i].words?}</span>
+				<span class="c_label">更新：</span><span class="c_value">{?$articlerows[i].lastupdate|date:'Y-m-d'?}</span>
+				<span class="c_label">状态：</span><span class="c_value">{?$articlerows[i].fullflag?}</span>
+			</div>
+			<div class="c_description">{?$articlerows[i].intro|truncate:240:'..'?}</div>
+		</div>
+	</div>
+	{?/section?}
+</div>
+</div>
+
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,78 @@
+<script type="text/javascript">
+//删除
+function act_delete(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onReturn: function(){
+			$_(o.parentNode.parentNode).remove();
+		}
+	}
+	if(confirm('确实要删除该记录么？')) Ajax.Tip(url, param);
+	return false;
+}
+</script>
+<form name="frmsearch" method="get" action="{?$jieqi_modules['article']['url']?}/admin/draftlist.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td>关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="15" maxlength="50" value="{?$_request['keyword']?}"> 
+            <label class="radio"><input type="radio" name="keytype" value="0"{?if $_request['keytype'] == 0?} checked="checked"{?/if?}>小说名称</label>
+            <label class="radio"><input type="radio" name="keytype" value="1"{?if $_request['keytype'] == 1?} checked="checked"{?/if?}>发表者</label> 
+            <button type="submit" name="btnsearch" class="button">搜 索</button>
+			<input name="type" type="hidden" value="{?$_request['type']?}">
+
+            &nbsp;&nbsp;&nbsp;&nbsp;[<a href="{?$jieqi_modules['article']['url']?}/admin/draftlist.php">显示全部</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/draftlist.php?type=1">普通草稿</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/draftlist.php?type=2">定时章节</a> | <a href="{?$jieqi_modules['article']['url']?}/admin/draftlist.php?type=3">待审章节</a>]  
+        </td>
+    </tr>
+</table>
+</form>
+<br />
+
+<form action="{?$jieqi_modules['article']['url']?}/admin/draftlist.php" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+  <caption>{?if $_request['type'] == 1?}普通草稿列表{?elseif $_request['type'] == 2?}定时章节列表{?elseif $_request['type'] == 3?}待审章节列表{?else?}全部草稿列表{?/if?}</caption>
+</table>
+<table class="grid" width="100%" align="center">
+  <tr align="center" valign="middle">
+    <th width="4%">&nbsp;</th>
+    <th width="14%" class="head">小说名称</th>
+    <th width="18%" class="head">章节标题</th>
+	<th width="12%" class="head">更新</th>
+	<th width="6%" class="head">类型</th>
+	<th width="16%" class="head">状态</th>
+	<th width="15%" class="head">发表者</th>
+    <th width="15%" class="head">操作</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$draftrows?}
+  <tr valign="middle">
+    <td align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$draftrows[i].draftid?}"></td>
+    <td><a href="{?function jieqi_geturl:'article':'article':$draftrows[i].articleid:'info'?}" target="_blank">{?$draftrows[i].articlename?}</a></td>
+    <td><a href="{?$article_static_url?}/admin/draftshow.php?id={?$draftrows[i].draftid?}" target="_blank">{?$draftrows[i].chaptername?}</a></td>
+	<td align="center">{?$draftrows[i].lastupdate|date:'Y-m-d H:i'?}</td>
+	<td align="center">{?if $draftrows[i].isvip_n == 1?}<span class="hot">VIP</span>{?else?}免费{?/if?}</td>
+	<td align="center">{?if $draftrows[i].ispub_n == 1?}定时：{?$draftrows[i].pubdate|date:'Y-m-d H:i'?}{?else?}草稿{?/if?}{?if $draftrows[i].display_n == 1?}(待审){?/if?}</td>
+	<td align="center"><a href="{?function jieqi_geturl:'system':'user':$draftrows[i].posterid:'info'?}" target="_blank">{?$draftrows[i].poster?}</a> [<a href="{?$jieqi_url?}/admin/newmessage.php?receiver={?$draftrows[i].poster|urlencode?}&title=" target="_blank">发消息</a>]</td>
+    <td align="center">
+	<a href="{?$article_static_url?}/admin/draftshow.php?id={?$draftrows[i].draftid?}" target="_blank">查看</a> 
+	<a href="{?$article_static_url?}/admin/draftedit.php?id={?$draftrows[i].draftid?}" target="_blank">编辑</a> 
+	<a id="act_delete_{?$draftrows[i].draftid?}" href="javascript:;" onclick="act_delete('{?$jieqi_modules['article']['url']?}/admin/draftlist.php?checkid={?$draftrows[i].draftid?}&type={?$_request['type']?}&act=delete{?$jieqi_token_url?}');">删除</a>
+	{?if $draftrows[i].display_n == 1?} <a id="act_audit_{?$draftrows[i].draftid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/admin/draftlist.php?checkid={?$draftrows[i].draftid?}&type={?$_request['type']?}&act=audit{?$jieqi_token_url?}', {method: 'POST'});">审核</a>{?/if?}</td>
+{?/section?}
+  </tbody>
+  </tr>
+  <tr>
+    <td align="center"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></td>
+    <td colspan="7" align="left">
+	<input name="act" type="hidden" value="">{?$jieqi_token_input?}
+	<input name="keyword" type="hidden" value="{?$_request['keyword']?}">
+	<input name="keytype" type="hidden" value="{?$_request['keytype']?}">
+	<input name="type" type="hidden" value="{?$_request['type']?}">
+	<button type="button" name="batchdelete" class="button" onclick="if(confirm('确实要删除选中记录么？')){this.form.act.value='delete'; this.form.submit();}">批量删除</button>
+	{?if $_request['type'] == 3?}<button type="button" name="batchaudit" class="button" onclick="this.form.act.value='audit'; this.form.submit();">批量审核</button>{?/if?}
+	</td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

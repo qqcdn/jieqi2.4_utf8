@@ -1,0 +1,32 @@
+{?if $ownerid > 0?}
+<div style="padding-left:10px">
+<div>
+  {?if $avatar > 0?}<img src="{?function jieqi_geturl:'system':'avatar':$uid:'s':$avatar?}" class="avatars" style="float:left; margin:10px 10px 0 0;" alt="{?$name?}">{?/if?}
+  <p><a href="{?function jieqi_geturl:'system':'user':$uid:'info'?}"><strong>{?$name?}</strong></a></p>
+  {?if $jieqi_modules['badge']['publish'] > 0?}
+    {?if $url_group != ""?}<p><img src="{?$url_group?}" border="0" title="{?$group?}"></p>{?/if?}
+    {?if $url_honor != ""?}<p><img src="{?$url_honor?}" border="0" title="{?$honor?}"></p>{?/if?}
+    {?if $badgerows|count > 0?}<p>{?/if?}
+    {?section name=i loop=$badgerows?}
+      <img src="{?$badgerows[i].imageurl?}" border="0" alt="{?$badgerows[i].caption?}">
+    {?/section?}
+    {?if $badgerows|count > 0?}</p>{?/if?}
+  {?else?}
+   <p>{?$group?}</p>
+    <p>{?$honor?}</p>
+  {?/if?}
+</div>
+<div class="cb"></div>
+<ul class="ulcenter" style="margin:10px 0">
+  <li style="width:50%;float:left;"><a href="javascript:;" onclick="openDialog('{?$jieqi_url?}/newmessage.php?receiver={?$name|urlencode?}&ajax_gets=jieqi_contents', false);" class="message">发送消息</a></li>
+  <li style="width:50%;float:left;"><a id="addfriends{?$uid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_url?}/addfriends.php?id={?$uid?}&act=add{?$jieqi_token_url?}', {method: 'POST'});" class="friend">加为好友</a></li>
+  {?if $jieqi_modules['space']['publish']==1?}
+  <li style="width:50%;float:left;"><a href="{?function jieqi_geturl:'system':'user':$uid:'space'?}" class="space">个人空间</a></li>
+  {?else?}
+  <li style="width:50%;float:left;"><a href="{?function jieqi_geturl:'system':'user':$uid:'info'?}"  class="userinfo">查看资料</a></li>
+  {?/if?}
+  <li style="width:50%;float:left;"><a href="{?$jieqi_url?}/ptopics.php?oid={?$uid?}"  class="parlor">会 客 室</a></li>
+</ul>
+<div class="cb"></div>
+</div>
+{?/if?}

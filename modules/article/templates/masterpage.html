@@ -1,0 +1,45 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+{?set jieqi_page_rows = "30"?}
+<form action="{?$url_article?}" method="post" name="checkform" id="checkform">
+<ul class="ultab">
+	<li><a href="{?$jieqi_modules['article']['url']?}/masterpage.php"{?if $_request['display'] == 'all' || $_request['display'] == ''?} class="selected"{?/if?}>全部小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/masterpage.php?display=author"{?if $_request['display'] == 'author'?} class="selected"{?/if?}>原创小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/masterpage.php?display=poster"{?if $_request['display'] == 'poster'?} class="selected"{?/if?}>转载小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/masterpage.php?display=agent"{?if $_request['display'] == 'agent'?} class="selected"{?/if?}>代管小说</a></li>
+</ul>
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <th width="30%">小说名称</th>
+    <th width="35%">最新章节</th>
+    <th width="15%">更新</th>
+    <th width="20%">操作</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td><a href="{?$articlerows[i].url_articleinfo?}" target="_blank" title="作者：{?$articlerows[i].author?}">{?$articlerows[i].articlename?}</a></td>
+    <td>
+	{?if $articlerows[i].vipchapterid > 0?}
+	<a href="{?$articlerows[i].url_articleindex?}" target="_blank">{?$articlerows[i].vipvolume?} {?$articlerows[i].vipchapter?}</a> <em class="hot">vip</em>
+	{?else?}
+	<a href="{?$articlerows[i].url_articleindex?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a>
+	{?/if?}
+	</td>
+    <td align="center">{?$articlerows[i].lastupdate|date:'Y-m-d'?}</td>
+    <td align="center">
+	<a href="{?$article_static_url?}/articlemanage.php?id={?$articlerows[i].articleid?}">管理</a>
+	{?if $articlerows[i].sourceid == 0?}
+	| <a href="{?$article_static_url?}/newchapter.php?aid={?$articlerows[i].articleid?}">更新</a>
+	{?if $articlerows[i].issign_n == 0?}
+	| <a href="{?$jieqi_url?}/newmessage.php?tosys=1&title=《{?$articlerows[i].articlename?}》申请VIP签约&content=《{?$articlerows[i].articlename?}》（ID：{?$articlerows[i].articleid?}）申请VIP签约" class="hot" title="申请VIP签约">签约</a>
+	{?/if?}
+	{?/if?}
+	</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>
+

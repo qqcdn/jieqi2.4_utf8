@@ -1,0 +1,22 @@
+//≥ı ºªØ
+
+html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, a, del, dfn, em, img, small, strong, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, section, summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  @include box-sizing(border-box);
+}
+
+*,
+*:before,
+*:after {
+  @include box-sizing(inherit);
+}
+
+table, form {
+  margin: 0 auto;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}

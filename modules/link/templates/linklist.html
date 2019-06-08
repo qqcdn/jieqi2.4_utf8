@@ -1,0 +1,27 @@
+<div class="c_title">友情链接</div>
+<table cellspacing="1" cellpadding="3" width="100%" align="center" border="0">
+   <!--文字链接循环开始-->  
+		  {?section name=j loop=$linkrows columns=5?}
+		  {?if $j['column'] == 1?}<tr>{?/if?}
+            <td width="20%">
+			  <a href="{?$linkrows[j].url?}" title="{?$linkrows[j].name?}" style="color:{?$linkrows[j].namecolor?}" target="_blank">
+			   {?$linkrows[j].name?}
+			  </a>
+			</td>
+			 {?if $j['column'] == $j['columns']?}</tr>{?/if?}
+          {?/section?}
+     <!--文字链接循环结束--> 
+</table>
+<br />
+<table cellspacing="1" cellpadding="3" width="100%" align="center" border="0">
+    <!--图片链接循环开始-->      
+		  {?section name=i loop=$tlinkrows columns=5?}
+		  {?if $i['column'] == 1?}<tr>{?/if?}
+            <td align="left" width="20%">
+		  {?if $tlinkrows[i].url!=''?}
+            <span style="width: 100px; text-align: left"><a title="{?$tlinkrows[i].name?}" target="_blank" href="{?$tlinkrows[i].url?}"><img height="33" alt="{?$tlinkrows[i].name?}" width="88" border="0" src="{?$tlinkrows[i].logo?}" /></a></span>{?/if?}
+			  </td>
+			{?if $i['column'] == $i['columns']?}</tr>{?/if?}
+          {?/section?}  
+    <!--图片链接循环结束--> 
+</table>

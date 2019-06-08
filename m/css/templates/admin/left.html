@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{?$jieqi_pagetitle?}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="generator" content="jieqi.com" />
+<link rel="stylesheet" type="text/css" media="all" href="{?$jieqi_url?}/css/admin_left.css" />
+<script type="text/javascript">
+function showsubmenu(id){
+  var smenu=document.getElementById(id);
+  if (smenu.style.display == 'none'){
+    smenu.style.display = '';
+  }else{
+    smenu.style.display = 'none';
+  }
+}
+</script>
+</head>
+<body>
+<div id="leftmenu">
+	<div class="ltop">
+		<a class="title_link" href="{?$jieqi_url?}/" target="_top">网站首页</a>&nbsp;&nbsp;<a class="title_link" href="{?$jieqi_adminurl?}" target="mainframe">后台首页</a>
+	</div>
+
+	<div id="mu_system" name="mu_system" class="lmenu">
+		<div class="lmenu_title in" onClick="showsubmenu('sm_system')">系统管理<span class="arrow_down"></span></div>
+		<div id="sm_system" name="sm_system" class="lmenu_content">
+			<ul class="lmenu_list">
+			{?section name=j loop=$adminmenus['system']?}
+			{?if $adminmenus['system'][j].publish == 1?}
+			<li><a href="{?$adminmenus['system'][j].command?}" target="mainframe">{?$adminmenus['system'][j].caption?}</a></li>
+			{?/if?}
+			{?/section?}
+			</ul>
+		</div>
+	</div>
+
+	<div id="mu_users" name="mu_users" class="lmenu hd">
+		<div class="lmenu_title in" onClick="showsubmenu('sm_users')">用户管理<span class="arrow_down"></span></div>
+		<div id="sm_users" name="sm_users" class="lmenu_content">
+			<ul class="lmenu_list">
+			{?section name=j loop=$adminmenus['users']?}
+			{?if $adminmenus['users'][j].publish == 1?}
+			<li><a href="{?$adminmenus['users'][j].command?}" target="mainframe">{?$adminmenus['users'][j].caption?}</a></li>
+			{?/if?}
+			{?/section?}
+			</ul>
+		</div>
+	</div>
+
+	<div id="mu_tools" name="mu_tools" class="lmenu hd">
+		<div class="lmenu_title in" onClick="showsubmenu('sm_tools')">系统工具<span class="arrow_down"></span></div>
+		<div id="sm_tools" name="sm_tools" class="lmenu_content">
+			<ul class="lmenu_list">
+			{?section name=j loop=$adminmenus['tools']?}
+			{?if $adminmenus['tools'][j].publish == 1?}
+			<li><a href="{?$adminmenus['tools'][j].command?}" target="mainframe">{?$adminmenus['tools'][j].caption?}</a></li>
+			{?/if?}
+			{?/section?}
+			</ul>
+		</div>
+	</div>
+
+	<div id="mu_database" name="mu_database" class="lmenu hd">
+		<div class="lmenu_title in" onClick="showsubmenu('sm_database')">数据维护<span class="arrow_down"></span></div>
+		<div id="sm_database" name="sm_database" class="lmenu_content">
+			<ul class="lmenu_list">
+			{?section name=j loop=$adminmenus['database']?}
+			{?if $adminmenus['database'][j].publish == 1?}
+			<li><a href="{?$adminmenus['database'][j].command?}" target="mainframe">{?$adminmenus['database'][j].caption?}</a></li>
+			{?/if?}
+			{?/section?}
+			</ul>
+		</div>
+	</div>
+
+	{?section name=i loop=$jieqimodules?}
+	<div id="mod_{?$i['key']?}" name="mod_{?$i['key']?}" class="lmenu hd">
+		<div class="lmenu_title in" onClick="showsubmenu('sm_{?$i['key']?}')">{?$jieqimodules[i].caption?} {?$jieqimodules[i].version?}{? if $adminmenus[i]|count > 0?}<span class="arrow_down"></span>{?/if?}</div>
+		<div id="sm_{?$i['key']?}" name="sm_{?$i['key']?}" class="lmenu_content">
+			<ul class="lmenu_list">
+			{?section name=j loop=$adminmenus[i]?}
+			{?if $adminmenus[i][j].publish == 1?}
+			<li><a href="{?$adminmenus[i][j].command?}" target="mainframe">{?$adminmenus[i][j].caption?}</a></li>
+			{?/if?}
+			{?/section?}
+			</ul>
+		</div>
+	</div>
+	{?/section?}
+  
+</div>
+</body>
+</html>

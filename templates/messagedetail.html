@@ -1,0 +1,66 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "阅读消息-{$jieqi_sitename}"?}
+
+{?block bid="0" blockname="站内消息" module="system" filename="" classname="BlockSystemCustom" side="-1" title="" vars="" template="block_message_tab.html" contenttype="4" custom="1" publish="3" hasvars="0"?}
+<table class="grid" width="100%" align="center">
+<caption>标题：{?$messagevals['title']?}</caption>
+  <tr>
+    <td width="15%" class="tdl">发送人：</td>
+    <td width="85%" class="tdr">{?if $messagevals['fromid'] > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagevals['fromid']?}" target="_blank">{?$messagevals['fromname']?}</a>{?else?}<span class="hot">网站管理员</span>{?/if?}</td>
+  </tr>
+  <tr>
+    <td class="tdl">接收人：</td>
+    <td class="tdr">{?if $messagevals['toid'] > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagevals['toid']?}" target="_blank">{?$messagevals['toname']?}</a>{?else?}<span class="hot">网站管理员</span>{?/if?}</td>
+  </tr>
+  <tr>
+    <td class="tdl">时&nbsp; 间：</td>
+    <td class="tdr">{?$messagevals['postdate']|date:'Y-m-d H:i:s'?}</td>
+  </tr>
+  <tr>
+    <td class="tdl">内&nbsp; 容：</td>
+    <td class="tdr">{?$messagevals['content']?}</td>
+  </tr>
+  <tr>
+    <td colspan="2" class="foot">
+	{?if $messagevals['toid'] == $jieqi_userid?}<a href="{?$jieqi_url?}/newmessage.php?reid={?$messagevals['messageid']?}&tosys={?if $messagevals['fromid'] > 0?}0{?else?}0{?/if?}">回复消息</a>&nbsp;&nbsp;&nbsp;&nbsp;{?/if?}<a href="{?$jieqi_url?}/newmessage.php?fwid={?$messagevals['messageid']?}">转发消息</a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="act_delete" href="javascript:;" onclick="if(confirm('确实要删除该消息么？')) Ajax.Tip('{?$jieqi_url?}/message.php?box={?$box?}&id={?$messagevals['messageid']?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除消息</a>&nbsp;&nbsp;&nbsp;&nbsp;{?if $box == 'outbox'?}<a href="{?$jieqi_url?}/message.php?box=outbox">返回发件箱</a>{?else?}<a href="{?$jieqi_url?}/message.php?box=inbox">返回收件箱</a>{?/if?}
+	</td>
+  </tr>
+</table>
+{?if $messagevals['toid'] == $jieqi_userid?}
+<script type="text/javascript">
+  function jieqiFormValidate_newmessage(){
+    if ( window.document.newmessage.title.value == "" ){
+      alert( "请输入 标题" );
+      window.document.newmessage.title.focus();
+      return false;
+    }
+  }
+</script>
+<br />
+<form name="newmessage" action="{?$jieqi_url?}/newmessage.php?do=submit" method="post" onsubmit="return jieqiFormValidate_newmessage();">
+<table class="grid" width="100%" align="center">
+  <caption>快速回复</caption>
+  <tr valign="middle" align="left">
+    <td class="tdl" width="25%">收件人：</td>
+    <td class="tdr" width="75%">{?if $messagevals['fromid'] > 0?}<a href="{?function jieqi_geturl:'system':'user':$messagevals['fromid']?}" target="_blank">{?$messagevals['fromname']?}</a><input type="hidden" name="receiver" size="30" value="{?$messagevals['fromname']?}" />{?else?}<span class="hot">网站管理员</span><input type="hidden" name="tosys" id="tosys" value="1" />{?/if?}</td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="tdl">标题：</td>
+    <td class="tdr"><input type="text" class="text" name="title" size="60" value="Re:{?$messagevals['title']?}" /></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="tdl">内容：</td>
+    <td class="tdr"><textarea class="textarea" name="content" rows="8" cols="60"></textarea></td>
+  </tr>
+  <tr valign="middle" align="left">
+    <td class="tdl">&nbsp;</td>
+    <td class="tdr">
+	<button type="submit" class="button" name="submit">回复消息</button>
+	<input type="hidden" name="act" value="add" />
+	{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>
+{?/if?}

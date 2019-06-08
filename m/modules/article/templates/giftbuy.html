@@ -1,0 +1,44 @@
+{?set $jieqi_pagetitle = "我要购买-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "我要购买"?}
+
+<script type="text/javascript">
+function frmgiftbuy_validate(){
+  if(document.frmgiftbuy.num.value == ""){
+    alert("请输入购买数量");
+    document.frmgiftbuy.num.focus();
+    return false;
+  }
+  return true;
+}
+</script>
+<form class="form" name="frmgiftbuy" id="frmgiftbuy" action="{?$jieqi_modules['article']['url']?}/giftbuy.php?do=submit&jumpurl={?$jumpurl?}" method="post" onsubmit="return frmgiftbuy_validate();" enctype="mulgiftart/form-data">
+<fieldset>
+	<div class="frow">
+		<label class="col4 flabel">我拥有：</label>
+		<div class="col8 last">
+			{?if $giftvals['sprice'] > 0?}{?$userscore?}积分{?else?}{?$useregold?}{?$egoldname?}{?/if?}
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">购买内容：</label>
+		<div class="col8 last">
+			{?$giftvals['caption']?} （单价：{?if $giftvals['sprice'] > 0?}{?$giftvals['sprice']?}积分<input type="hidden" name="currency" value="score" />{?else?}{?$giftvals['eprice']?}{?$egoldname?}<input type="hidden" name="currency" value="egold" />{?/if?}）
+			<input type="hidden" name="type" value="{?$gift_type?}" />
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">购买数量：</label>
+		<div class="col8 last">
+			<input type="text" class="text" name="num" id="buy_num" maxlength="10" value="" />
+  			<br /><span class="hot">最多：{?$dft_maxnum?}</span>
+		</div>
+	</div>
+	<div class="frow">
+		<label class="col4 flabel">&nbsp;</label>
+		<div class="col8 last">
+			<button type="submit" class="button" name="submit">提 交</button>
+			<input type="hidden" name="act" value="post" />{?$jieqi_token_input?}
+		</div>
+	</div>
+</fieldset>
+</form>

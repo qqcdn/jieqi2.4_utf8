@@ -1,0 +1,23 @@
+<table class="grid" width="60%" align="center">
+  <caption>系统授权信息</caption>
+  <tr>
+    <td class="tdl" width="35%">授权域名</td>
+    <td class="tdr" width="65%">{?$license_domain?}</td>
+  </tr>
+  <tr>
+    <td class="tdl">系统版本</td>
+    <td class="tdr">{?$jieqi_version?} {?$jieqi_vtype?}</td>
+  </tr>
+  <tr>
+    <td colspan="2" class="title" align="center">模块版本</td>
+  </tr>
+  {?section name=i loop=$licenses?}
+  <tr>
+    <td class="tdl">{?$licenses[i].modname?}</td>
+    <td class="tdr">{?$licenses[i].modversion?} {?$licenses[i].modvtype?}</td>
+  </tr>
+  {?/section?}
+  <tr>
+    <td colspan="2" class="foot" align="center">Powered by <strong><a href="http://www.jieqi.com" target="_blank">JIEQI CMS</a></strong></td>
+  </tr>
+</table>

@@ -1,0 +1,32 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<table width="100%" cellpadding="0" cellspacing="1" class="grid">
+  <caption>
+  《{?$articlename?}》催更记录 [ <a href="articlehurry.php?id={?$articleid?}">显示全部</a> | <a href="articlehurry.php?id={?$articleid?}&payflag=0">进行中</a> | <a href="articlehurry.php?id={?$articleid?}&payflag=1">已成功</a> | <a href="articlehurry.php?id={?$articleid?}&payflag=2">已失败</a> ]
+  </caption>
+  <tr>
+    <td colspan="6" class="title">合计催更次数：{?$hurrysum['count']?}，合计{?$egoldname?}：{?$hurrysum['payegold']?}，合计催更字数：{?$hurrysum['minwords']?}</td>
+  </tr>
+  <tr align="center">
+    <td width="20%" class="head">提交时间</td>
+    <td width="20%" class="head">提交人</td>
+    <td width="12%" class="head">促更{?$egoldname?}</td>
+    <td width="13%" class="head">最少更新字数</td>
+    <td width="20%" class="head">截止更新时间</td>
+    <td width="15%" class="head">状态</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+{?section name=i loop=$hurryrows?}
+  <tr>
+    <td align="center">{?$hurryrows[i].addtime|date:Y-m-d H:i:s?}</td>
+    <td align="center"><a href="{?function jieqi_geturl:'system':'user':$hurryrows[i].uid:'info'?}" target="_blank">{?$hurryrows[i].uname?}</a></td>
+    <td align="center">{?$hurryrows[i].payegold?}</td>
+    <td align="center">{?$hurryrows[i].minwords?}</td>
+    <td align="center">{?$hurryrows[i].overtime|date:'Y-m-d H:i:s'?}</td>
+    <td align="center">{?if $hurryrows[i].payflag == 1?}已成功{?elseif $hurryrows[i].payflag == 2?}已失败{?else?}进行中{?/if?}</td>
+  </tr>
+{?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>
+

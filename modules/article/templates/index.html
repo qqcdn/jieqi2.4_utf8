@@ -1,0 +1,40 @@
+{?set jieqi_page_template = "themer.html"?}
+{?set $jieqi_pagetitle = "{$articlename}-{$author}-{$sort}-{$jieqi_sitename}"?}
+{?set $meta_keywords = "{$articlename} {$author} {$sort} {$jieqi_sitename}"?}
+{?set $jieqi_articleread = "1"?}
+
+<div class="main">
+<div class="mainbody">
+<div class="headlink cf">
+<div class="linkleft"><a href="{?$jieqi_main_url?}/">{?$jieqi_sitename?}</a> &gt; <a href="{?function jieqi_geturl:'article':'articlelist':1:$sortid?}">{?$sort?}</a> &gt; <a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">{?$articlename?}</a></div>
+
+<div class="linkright"><a id="a_addbookcase" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/addbookcase.php?bid={?$articleid?}', {method: 'POST'});">加入书架</a> | <a id="a_uservote"  href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/uservote.php?id={?$articleid?}', {method: 'POST'});">推荐本书</a> | <a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">返回书页</a></div>
+</div>
+
+<div class="fullbar"><script type="text/javascript" src="{?$jieqi_modules['article']['url']?}/scripts/indextop.js"></script></div>
+
+<div class="atitle">{?$articlename?}</div>
+
+<div class="ainfo">作者：<a href="{?function jieqi_geturl:'article':'author':$authorid:$author?}" target="_blank">{?$author?}</a></div>
+
+<dl class="index">
+{?section name=i loop=$chapterrows?}
+	{?if $chapterrows[i].chaptertype > 0?}
+		<dt>
+		{?$chapterrows[i].chaptername?}
+		</dt>
+	{?else?}
+		<dd>
+		{?if $chapterrows[i].isvip > 0?}
+		<a href="{?$chapterrows[i].url_chapter?}" title="{?$chapterrows[i].lastupdate|date:'Y-m-d H:i'?}更新，共{?$chapterrows[i].words?}字，价格：{?$chapterrows[i].saleprice?}"{?if $chapterrows[i].display != 0?} class="gray"{?/if?}>{?$chapterrows[i].chaptername?}</a><em class="iconfont">&#xee8b;</em>
+		{?else?}
+		<a href="{?$chapterrows[i].url_chapter?}" title="{?$chapterrows[i].lastupdate|date:'Y-m-d H:i'?}更新，共{?$chapterrows[i].words?}字"{?if $chapterrows[i].display != 0?} class="gray"{?/if?}>{?$chapterrows[i].chaptername?}</a>
+		{?/if?}
+		</dd>
+	{?/if?}
+{?/section?}
+</dl>
+
+<div class="fullbar"><script type="text/javascript" src="{?$jieqi_modules['article']['url']?}/scripts/indexbottom.js"></script></div>
+</div>
+</div>

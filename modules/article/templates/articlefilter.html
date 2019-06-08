@@ -1,0 +1,168 @@
+{?set $jieqi_pagetitle = "小说书库-{$jieqi_sitename}"?}
+{?set jieqi_page_rows = "50"?}
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>筛选条件</caption>
+{?if $rgrouprows|count > 1?}
+<tr valign="middle" align="left">
+  <td class="tdl" width="100"><strong>所属频道：</strong></td>
+  <td class="tdr">
+    {?section name=i loop=$rgrouprows?}
+    {?if $rgrouprows[i]['selected'] > 0?}
+    <a href="{?$rgrouprows[i]['url']?}" class="hot"><strong>{?$rgrouprows[i]['name']?}</strong></a>&nbsp;
+    {?else?}
+    <a href="{?$rgrouprows[i]['url']?}">{?$rgrouprows[i]['name']?}</a>&nbsp;
+    {?/if?}
+    {?/section?}
+  </td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="tdl" width="100"><strong>作品分类：</strong></td>
+  <td class="tdr">
+  {?if $rgrouprows|count > 1?}
+    {?section name=i loop=$rgrouprows?}
+      {?if $rgrouprows[i]['id'] > 0?}
+      <p>
+      {?section name=j loop=$sortidrows?}
+      {?if $sortidrows[j]['rgroup'] == $rgrouprows[i]['id']?}
+      {?if $sortidrows[j]['selected'] > 0?}
+      <a href="{?$sortidrows[j]['url']?}" class="hot"><strong>{?$sortidrows[j]['name']?}</strong></a>&nbsp;
+      {?else?}
+      <a href="{?$sortidrows[j]['url']?}">{?$sortidrows[j]['name']?}</a>&nbsp;
+      {?/if?}
+      {?/if?}
+      {?/section?}
+      <p>
+      {?if $nowrgroup == $rgrouprows[i]['id'] && $typeidrows|count > 0?}
+      <div class="textbox">
+      {?section name=k loop=$typeidrows?}
+      {?if $typeidrows[k]['selected'] > 0?}
+      <a href="{?$typeidrows[k]['url']?}" class="hot"><strong>{?$typeidrows[k]['name']?}</strong></a>&nbsp;
+      {?else?}
+      <a href="{?$typeidrows[k]['url']?}">{?$typeidrows[k]['name']?}</a>&nbsp;
+      {?/if?}
+      {?/section?}
+      </div>
+      {?/if?}
+      {?/if?}
+    {?/section?}
+  {?else?}
+    {?section name=i loop=$sortidrows?}
+      {?if $sortidrows[i]['selected'] > 0?}
+      <a href="{?$sortidrows[i]['url']?}" class="hot"><strong>{?$sortidrows[i]['name']?}</strong></a>&nbsp;
+      {?else?}
+      <a href="{?$sortidrows[i]['url']?}">{?$sortidrows[i]['name']?}</a>&nbsp;
+      {?/if?}
+    {?/section?}
+    {?if $typeidrows|count > 0?}
+    <div class="textbox">
+    {?section name=i loop=$typeidrows?}
+      {?if $typeidrows[i]['selected'] > 0?}
+      <a href="{?$typeidrows[i]['url']?}" class="hot"><strong>{?$typeidrows[i]['name']?}</strong></a>&nbsp;
+      {?else?}
+      <a href="{?$typeidrows[i]['url']?}">{?$typeidrows[i]['name']?}</a>&nbsp;
+      {?/if?}
+    {?/section?}
+    </div>
+    {?/if?}
+  {?/if?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl"><strong>作品字数：</strong></td>
+  <td class="tdr">
+  {?section name=i loop=$wordsrows?}
+  {?if $wordsrows[i]['selected'] > 0?}
+  <a href="{?$wordsrows[i]['url']?}" class="hot"><strong>{?$wordsrows[i]['name']?}</strong></a>&nbsp;
+  {?else?}
+  <a href="{?$wordsrows[i]['url']?}">{?$wordsrows[i]['name']?}</a>&nbsp;
+  {?/if?}
+  {?/section?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl"><strong>排序方式：</strong></td>
+  <td class="tdr">
+  {?section name=i loop=$orderrows?}
+  {?if $orderrows[i]['selected'] > 0?}
+  <a href="{?$orderrows[i]['url']?}" class="hot"><strong>{?$orderrows[i]['name']?}</strong></a>&nbsp;
+  {?else?}
+  <a href="{?$orderrows[i]['url']?}">{?$orderrows[i]['name']?}</a>&nbsp;
+  {?/if?}
+  {?/section?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl"><strong>更新时间：</strong></td>
+  <td class="tdr">
+  {?section name=i loop=$updaterows?}
+  {?if $updaterows[i]['selected'] > 0?}
+  <a href="{?$updaterows[i]['url']?}" class="hot"><strong>{?$updaterows[i]['name']?}</strong></a>&nbsp;
+  {?else?}
+  <a href="{?$updaterows[i]['url']?}">{?$updaterows[i]['name']?}</a>&nbsp;
+  {?/if?}
+  {?/section?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl"><strong>书名首字母：</strong></td>
+  <td class="tdr">
+  {?section name=i loop=$initialrows?}
+  {?if $initialrows[i]['selected'] > 0?}
+  <a href="{?$initialrows[i]['url']?}" class="hot"><strong>{?$initialrows[i]['name']?}</strong></a>&nbsp;
+  {?else?}
+  <a href="{?$initialrows[i]['url']?}">{?$initialrows[i]['name']?}</a>&nbsp;
+  {?/if?}
+  {?/section?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl"><strong>写作进度：</strong></td>
+  <td class="tdr">
+  {?section name=i loop=$isfullrows?}
+  {?if $isfullrows[i]['selected'] > 0?}
+  <a href="{?$isfullrows[i]['url']?}" class="hot"><strong>{?$isfullrows[i]['name']?}</strong></a>&nbsp;
+  {?else?}
+  <a href="{?$isfullrows[i]['url']?}">{?$isfullrows[i]['name']?}</a>&nbsp;
+  {?/if?}
+  {?/section?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl"><strong>VIP状态：</strong></td>
+  <td class="tdr">
+  {?section name=i loop=$isviprows?}
+  {?if $isviprows[i]['selected'] > 0?}
+  <a href="{?$isviprows[i]['url']?}" class="hot"><strong>{?$isviprows[i]['name']?}</strong></a>&nbsp;
+  {?else?}
+  <a href="{?$isviprows[i]['url']?}">{?$isviprows[i]['name']?}</a>&nbsp;
+  {?/if?}
+  {?/section?}
+  </td>
+</tr>
+</table>
+
+<table class="grid" width="100%" align="center">
+<caption>作品列表</caption>
+  <tr align="center">
+    <th width="25%">小说名称</th>
+    <th width="32%">最新章节</th>
+    <th width="15%">作者</th>
+	<th width="12%">{?if $orderfield == 'lastupdate'?}字数{?else?}{?$ordername?}{?/if?}</th>
+    <th width="10%">更新时间</th>
+    <th width="6%">状态</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td><a href="{?$articlerows[i].url_articleindex?}" class="note iconfont" target="_blank" title="目录">&#xee32;</a><a class="pop" href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename?}</a></td>
+    <td>{?if $articlerows[i].vipchapterid > 0?}<a href="{?$articlerows[i].url_vipchapter?}" target="_blank">{?$articlerows[i].vipvolume?} {?$articlerows[i].vipchapter?}</a><span class="hot">vip</span>{?else?}<a href="{?$articlerows[i].url_lastchapter?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a>{?/if?}</td>
+    <td align="center">{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author?}</a>{?/if?}</td>
+	<td align="center">{?if $orderfield == 'lastupdate'?}{?$articlerows[i].words?}{?else?}{?$articlerows[i].ordervalue?}{?/if?}</td>
+    <td align="center">{?$articlerows[i].lastupdate|date:'Y-m-d'?}</td>
+    <td align="center">{?$articlerows[i].fullflag?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

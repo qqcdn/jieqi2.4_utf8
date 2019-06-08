@@ -1,0 +1,30 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "userblocks"?}
+{?set $jieqi_pagetitle = "会员中心-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "会员中心"?}
+
+<div class="block mt">
+	<div class="blocktitle">会员信息</div>
+	<div class="blockcontent">
+
+	<div class="c_row cf">
+	<div class="row_cover">
+	<a href="{?$jieqi_url?}/setavatar.php">
+	<img src="{?function jieqi_geturl:'system':'avatar':$uid:'s':$avatar?}{?if $refresh > 0?}?{?$jieqi_time?}{?/if?}" class="avatar bdc" alt="头像">
+	</a>
+	</div>
+
+	<div class="row_text">
+	<a class="db" href="{?$jieqi_url?}/useredit.php">
+		<h4>{?$name?}{?if $isvip > 0?} <span class="iconfont fsl hot">&#xee6f;</span>{?/if?}</h4>
+	<p class="gray">{?$group?} / {?$honor?}</p>
+  </a>
+	</div>
+	</div>
+
+	<ul class="ulrow mts">
+	<li>{?$egoldname?}：{?$egold?} &nbsp; <a class="btnlink b_s b_hot" href="{?$jieqi_modules['pay']['url']?}/buyegold.php">&nbsp;充值&nbsp;</a></li>
+	<li>积分：{?$score?}</li>
+	</ul>
+	</div>
+</div>

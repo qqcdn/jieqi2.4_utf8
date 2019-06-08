@@ -1,0 +1,23 @@
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+		{?section name=i loop=$articlerows?}
+		{?if $i['order'] % 3 == 1?}<div class="swiper-slide"><ul class="ulmul cf">{?/if?}
+		<li style="float:left;width:30.3%;padding:0;margin:8px 1.5%;overflow:hidden;text-align:center;">
+		<a class="db" href="{?$articlerows[i].url_articleinfo?}"><div class="cover_m"><img class="cover_s" src="{?$articlerows[i].url_simage?}"></div><p class="nw">{?$articlerows[i].articlename?}</p></a>
+		</li>
+		{?if $i['order'] % 3 == 0 || $i['order'] == $i['count']?}</ul><div style="height:12px;"></div></div>{?/if?}
+		{?/section?}
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+    
+    <!-- 如果需要导航按钮 -->
+	<!--
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    -->
+    <!-- 如果需要滚动条 -->
+	<!--
+    <div class="swiper-scrollbar"></div>
+	-->
+</div>

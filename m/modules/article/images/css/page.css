@@ -1,0 +1,171 @@
+/* layout */
+.fullbar{
+    text-align: center;
+}
+
+.linkall{
+    width: 100%;
+	float: left;
+	text-align: left;
+}
+
+.linkleft{
+    float: left;
+	text-align: left;
+}
+
+.linkright{
+    float: right;
+	text-align: right;
+}
+
+.readset{
+    text-align: left;
+}
+
+.atitle{
+    text-align: center;
+	font-size: 115%;
+	font-weight: bold;
+	line-height: 2.5;
+}
+
+.ainfo{
+    text-align: center;
+	line-height: 2;
+}
+
+.acontent{
+    text-align: left;
+	padding: 0.8em 5% 0.8em 5%;
+	font-size: 115%;
+	line-height: 1.6;
+    border-top: 1px solid #dddddd;
+}
+
+
+.copyright{
+	margin: 1.5em auto;
+	padding: 0.8em 0px;
+    text-align: center;
+	line-height: 2;
+	border-top:1px dashed #dddddd;
+}
+
+.headlink{
+	border-bottom: solid 1px #ddd;
+	line-height: 2.2em; 
+	margin: 0 auto 1em auto;
+	padding: 0;
+}
+
+.footlink{
+	margin: 0.8em auto;
+	padding: 0.4em 0px;
+    text-align: center;
+	line-height: 2;
+}
+
+.cb{clear:both; font-size:0px; height:0px; overflow:hidden;}
+
+.index{
+	margin: auto;
+	border: 1px solid #dddddd;
+    background: #ffffff;
+}
+.index dt, .volume{
+	height: 2.2em;
+	line-height: 2.2em;
+	width: 100%;
+	clear: both;
+    font-size: 115%;
+    text-align: center;
+    color: #017ab6;
+    border-bottom: 1px solid #d2d2d2;
+    background: #ffffff;
+    background-image: -webkit-linear-gradient(top, #f2f2f2, #ffffff);
+    background-image: -moz-linear-gradient(top, #f2f2f2, #ffffff);
+    background-image: -ms-linear-gradient(top, #f2f2f2, #ffffff);
+    background-image: -o-linear-gradient(top, #f2f2f2, #ffffff);
+    background-image: linear-gradient(top, #f2f2f2, #ffffff);
+}
+.chapters{
+	display: block;
+	clear: both;
+	list-style: none;
+}
+.index:after, .chapters:after{content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+.index dd, .chapters li{
+	width: 25%;
+	float: left;
+	overflow: hidden;
+	border-bottom: 1px dashed #dddddd;
+	height: 2.5em;
+	line-height: 2.5em;
+	text-indent: 1em;
+}
+
+@media (min-width: 801px) and (max-width: 1024px) {
+	.index dd, .chapters li{
+		width: 33.33%;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 800px) {
+	.index dd, .chapters li{
+		width: 50%;
+	}
+}
+
+@media all and (max-width: 480px) {
+	.index dd, .chapters li{
+		width: 100%;
+	}
+}
+.index dd em, .chapters em{
+	color: #ff6600;
+	font-style: normal;
+	font-size: 80%;
+	text-indent: 0;
+}
+
+.chapterblock{
+	margin: auto;
+}
+
+.chaptertitle{
+	height: 2.5em;
+	line-height: 2.5em;
+	clear: both;
+    font-size: 115%;
+    text-align: center;
+	font-weight: bold;
+	border-bottom: 1px solid #dddddd;
+}
+
+.chaptercontent{
+    text-align: left;
+	font-size: 115%;
+	line-height: 1.6;
+	padding: 0.8em;
+}
+
+.divimage{
+    text-align: center;
+}
+
+.imagecontent{
+}
+
+.aimage{
+	cursor: pointer;
+}
+.viptitle{
+	height: 2.2em;
+	line-height: 2.2em;
+	width: 100%;
+	clear: both;
+	background: #f9f9f9;
+    font-size: 115%;
+    text-align: center;
+}

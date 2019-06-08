@@ -1,0 +1,9 @@
+<ul class="ulnav">
+<li><i class="iconfont">&#xee21;</i><a href="{?$jieqi_url?}/userdetail.php"{?if $jieqi_thisfile|basename == 'userdetail.php'?} class="selected"{?/if?}>用户资料</a></li>
+<li><i class="iconfont">&#xee4a;</i><a href="{?$jieqi_url?}/useredit.php"{?if $jieqi_thisfile|basename == 'useredit.php'?} class="selected"{?/if?}>修改资料</a></li>
+<li><i class="iconfont">&#xee24;</i><a href="{?$jieqi_url?}/persondetail.php"{?if $jieqi_thisfile|basename == 'persondetail.php'?} class="selected"{?/if?}>联系方式</a></li>
+<li><i class="iconfont">&#xee25;</i><a href="{?$jieqi_url?}/setavatar.php"{?if $jieqi_thisfile|basename == 'setavatar.php'?} class="selected"{?/if?}>设置头像</a></li>
+{?if $jieqi_api_sites['qq']['publish'] > 0 || $jieqi_api_sites['weibo']['publish'] > 0?}<li><i class="iconfont">&#xee24;</i><a href="{?$jieqi_url?}/userbind.php"{?if $jieqi_thisfile|basename == 'userbind.php'?} class="selected"{?/if?}>账号绑定</a></li>{?/if?}
+<li><i class="iconfont">&#xee29;</i><a href="{?$jieqi_url?}/passedit.php"{?if $jieqi_thisfile|basename == 'passedit.php'?} class="selected"{?/if?}>修改密码</a></li>
+<li><i class="iconfont">&#xee2a;</i><a href="{?$jieqi_url?}/logout.php"{?if $jieqi_thisfile|basename == 'logout.php'?} class="selected"{?/if?}>退出登录</a></li>
+</ul>

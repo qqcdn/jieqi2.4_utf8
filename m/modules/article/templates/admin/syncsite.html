@@ -1,0 +1,38 @@
+
+<form name="frmlogin" method="get" action="{?$jieqi_modules['article']['url']?}/admin/syncsite.php" target="_blank">
+ <table class="grid" style="width:600px;margin:60px auto;">
+   <caption>采集CP网站作品</caption>
+    <tr>
+      <td class="tdl">来源网站:</td>
+	  <td class="tdr">
+	  <select class="select" size="1" name="siteid">
+	  {?section name=i loop=$siterows?}
+	  {?if $siterows[i].interface != ''?}
+		  <option value="{?$siterows[i].siteid?}"{?if $_request['siteid'] == $siterows[i].siteid?} selected="selected"{?/if?}>{?$siterows[i].name?}</option>
+	  {?/if?}
+	  {?/section?}
+	  </select>
+	  </td>
+    </tr>
+	<tr>
+		<td class="tdl">采集方式：</td>
+		<td class="tdr" style="line-height: 2">
+			<label class="radio"><input type="radio" name="synctype" value="0" checked="checked" />自动采集有更新的作品<span class="hot">（默认采集方式，效率较高）</span></label><br />
+			<label class="radio"><input type="radio" name="synctype" value="1" />强制采集所有作品<span class="hot">（检查所有作品是否需要更新，耗时较长）</span></label><br />
+			<label class="radio"><input type="radio" name="synctype" value="2" />采集一本，作品ID：<input type="text" class="text" name="articleid" size="10" value="" /> 或 对方ID：<input type="text" class="text" name="sourceid" size="10" value="" /> <span class="hot">（只需输入其中一个）</span></label>
+		</td>
+	</tr>
+	<tr> 
+      <td class="tdl"><input type="hidden" name="confirm" value="1" />{?$jieqi_token_input?}</td>
+	  <td class="tdr"><button type="submit" class="button" name="submit">开始采集</button></td>
+    </tr>
+	<tr> 
+      <td class="tdl">说明：</td>
+	  <td class="tdr">
+		  1、采集将打开新窗口运行，可能会需要比较长时间，请耐心等待！<br />
+		  2、提示采集完成前请勿关闭窗口，也不要同时打开多个窗口采集同一网站。<br />
+		  3、如果因为网络问题导致采集中断，可尝试刷新浏览器可继续采集。
+	  </td>
+    </tr>
+  </table>
+</form>

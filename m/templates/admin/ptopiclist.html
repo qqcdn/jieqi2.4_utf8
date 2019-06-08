@@ -1,0 +1,50 @@
+<form name="frmsearch" method="get" action="{?$jieqi_url?}/admin/ptopiclist.php">
+<table class="grid" width="100%" align="center">
+    <tr>
+      <td>
+	  <span class="fr">[<a href="{?$jieqi_url?}/admin/ptopiclist.php?type=all">全部主题</a>] &nbsp;&nbsp; [<a href="{?$jieqi_url?}/admin/ptopiclist.php?type=good">精华主题</a>]&nbsp;</span>
+        关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="0" maxlength="50">
+            <input type="radio" name="keytype" value="0" checked="checked">
+            会客室主人 
+            <input type="radio" name="keytype" class="radio" value="1">
+            帖子发表人 &nbsp;&nbsp;
+			<input type="radio" name="keytype" class="radio" value="2">
+            主题&nbsp;&nbsp;
+            <button type="submit" name="btnsearch" class="button">搜 索</button>
+	  </td>
+    </tr>
+</table>
+</form>
+
+<form name="frmsearch" method="get" action="{?$jieqi_url?}/admin/ptopiclist.php">
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+  	<td width="5%" class="title">&nbsp;</th>
+    <td width="40%" class="title">主题</td>
+    <td width="11%" class="title">会客室主人</td>
+    <td width="11%" class="title">点击/回复</td>
+    <td width="11%" class="title">发表人</td>
+    <td width="16%" class="title">发表时间</td>
+	  <td width="6%" class="title">操作</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$topicrows?}
+  <tr>
+  	<td align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$topicrows[i].topicid?}"></td>
+    <td>{?if $topicrows[i].istop == 1?}<span class="hot">[顶]</span>{?/if?}{?if $topicrows[i].isgood == 1?}<span class="hot">[精]</span>{?/if?}<a href="{?$jieqi_url?}/ptopicshow.php?tid={?$topicrows[i].topicid?}" target="_blank"{?if $topicrows[i].display_n == 1?} class="note"{?/if?}>{?$topicrows[i].title?}</a></td>
+    <td><a href="{?function jieqi_geturl:'system':'user':$topicrows[i].uid?}" target="_blank">{?$topicrows[i].name?}</a></td>
+    <td align="center">{?$topicrows[i].views?}/{?$topicrows[i].replies?}</td>
+    <td><a href="{?function jieqi_geturl:'system':'user':$topicrows[i].posterid?}" target="_blank">{?$topicrows[i].poster?}</a></td>
+    <td align="center">{?$topicrows[i].posttime|date:"Y-m-d H:i:s"?}</td>
+	<td align="center"><a id="act_del_{?$topicrows[i].topicid?}" href="javascript:;" onclick="if(confirm('确实要删除该主题么？')) Ajax.Tip('{?$jieqi_url?}/admin/ptopiclist.php?tid={?$topicrows[i].topicid?}&type={?$type?}&act=delete{?$jieqi_token_url?}', {method: 'POST'});">删除</a></td>
+  </tr>
+  {?/section?}
+  </tbody>
+   <tr>
+    <td align="center"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></td>
+    <td colspan="6"><button type="submit" name="Submit" class="button">批量删除</button><input name="act" type="hidden" value="delete"></td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

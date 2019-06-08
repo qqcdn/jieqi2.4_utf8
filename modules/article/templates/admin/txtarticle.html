@@ -1,0 +1,15 @@
+<<{?$articlename?}>>
+[[{?$author?}]]
+====================
+{?$intro?}
+====================
+{?section name=i loop=$chapterrows?}
+{?if $chapterrows[i].chaptertype > 0?}
+$${?$chapterrows[i].chaptername?}$$
+{?else?}
+##{?$chapterrows[i].chaptername?}##
+
+{?$chapterrows[i].chaptercontent?}
+
+{?/if?}
+{?/section?}

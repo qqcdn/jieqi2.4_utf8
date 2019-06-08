@@ -1,0 +1,46 @@
+<br />
+<form action="{?$jieqi_modules['link']['url']?}/admin/link.php" method="post" name="checkform">
+<table class="grid" width="100%">
+<caption>友情链接列表</caption>
+  <tr align="center">
+    <th width="5%">&nbsp;</td>
+    <th width="20%">链接标识</td>    
+    <th width="15%">联系人</td>
+    <th width="15%">联系方式</td>
+	<th width="20%">发布时间</td>
+    <th width="10%">排序</td>
+    <th width="15%">操作</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$linkrows?}
+  <tr>
+    <td align="center">{?$linkrows[i].checkbox?}</td>
+    <td>{?if $linkrows[i].logo!=''?}<a title="{?$linkrows[i].name?}" target="_blank" href="{?$linkrows[i].url?}"><img height="33" alt="{?$linkrows[i].name?}" width="88" border="0" src="{?$linkrows[i].logo?}" /></a>{?else?}<a href="{?$linkrows[i].url?}" target="_blank" style="color:{?$linkrows[i].namecolor?}">{?$linkrows[i].name?}</a>{?/if?}</td>
+
+    <td align=center><input name="mastername{?$linkrows[i].linkid?}" type="text" size="16" value="{?$linkrows[i].mastername?}" /></td>
+    <td align="center"><input name="mastertell{?$linkrows[i].linkid?}" type="text" size="16" value="{?$linkrows[i].mastertell?}" /></td>
+	 <td align=center>{?$linkrows[i].addtime?}</td>
+    <td align="center"><input name="listorder{?$linkrows[i].linkid?}" type="text" size="8" value="{?$linkrows[i].listorder?}" /></td>
+    <td align="center">
+	{?if $linkrows[i].passed < 1?}
+	<a id="act_show_{?$linkrows[i].linkid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['link']['url']?}/admin/link.php?id={?$linkrows[i].linkid?}&act=show{?$jieqi_token_url?}', {method: 'POST'});">显示</a>
+	{?else?}
+	<a id="act_hide_{?$linkrows[i].linkid?}" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['link']['url']?}/admin/link.php?id={?$linkrows[i].linkid?}&act=hide{?$jieqi_token_url?}', {method: 'POST'});">隐藏</a>
+	{?/if?} 
+	<a href="{?$jieqi_modules['link']['url']?}/admin/addlink.php?id={?$linkrows[i].linkid?}" class="red">管理</a> 
+	<a id="act_del_{?$linkrows[i].linkid?}" href="javascript:;" onclick="if(confirm('确实要删除该链接么？')) Ajax.Tip('{?$jieqi_modules['link']['url']?}/admin/link.php?id={?$linkrows[i].linkid?}&act=del{?$jieqi_token_url?}', {method: 'POST'});">删除</a>
+	</td>
+  </tr>
+  {?/section?}
+  </tbody>
+  <tr>
+    <td width="5%" align="center">{?$checkall?}</td>
+    <td colspan="6" align="left">
+	<button type="submit" name="batchdel" class="button" onclick="if(confirm('确实要批量删除信息么？')){this.form.act.value='batchdel'; this.form.submit();}">批量删除</button> &nbsp;
+    <button type="submit" name="batchchg" class="button" onclick="if(confirm('确实要批量修改信息么？')){this.form.act.value='batchchg'; this.form.submit();}">批量审核</button>
+    <input name="act" type="hidden" value="">{?$jieqi_token_input?}
+	</td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>

@@ -1,0 +1,23 @@
+{?set $jieqi_pagetitle = "{$articletitle}-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "{$articletitle}"?}
+{?set jieqi_page_rows = "50"?}
+
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <th width="15%">分类</th>
+    <th width="50%">书名/作者</th>
+		<th width="20%">{?if $orderfield == 'lastupdate'?}字数{?else?}{?$ordername?}{?/if?}</th>
+    <th width="15%">状态</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td align="center">{?$articlerows[i].sort|truncate:4:''?}</td>
+    <td><a class="db nw" href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename?}<span class="gray fss">/{?$articlerows[i].author?}</span></a></td>
+		<td align="center">{?if $orderfield == 'lastupdate'?}{?$articlerows[i].words?}{?else?}{?$articlerows[i].ordervalue?}{?/if?}</td>
+    <td align="center">{?$articlerows[i].fullflag?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

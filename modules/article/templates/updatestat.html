@@ -1,0 +1,35 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+{?set jieqi_page_rows = "30"?}
+<form action="{?$url_article?}" method="post" name="checkform" id="checkform">
+<ul class="ultab">
+	<li><a href="{?$jieqi_modules['article']['url']?}/updatestat.php"{?if $_request['display'] == 'all' || $_request['display'] == ''?} class="selected"{?/if?}>全部小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/updatestat.php?display=author"{?if $_request['display'] == 'author'?} class="selected"{?/if?}>原创小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/updatestat.php?display=poster"{?if $_request['display'] == 'poster'?} class="selected"{?/if?}>转载小说</a></li>
+	<li><a href="{?$jieqi_modules['article']['url']?}/updatestat.php?display=agent"{?if $_request['display'] == 'agent'?} class="selected"{?/if?}>代管小说</a></li>
+</ul>
+<table class="grid" width="100%" align="center">
+  <tr align="center">
+    <th width="30%">小说名称</th>
+    <th width="14%">总字数</th>
+    <th width="14%">本月更新天数</th>
+    <th width="14%">本月更新字数</th>
+    <th width="14%">上月更新天数</th>
+    <th width="14%">上月更新字数</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td><a href="{?$articlerows[i].url_articleinfo?}" target="_blank" title="作者：{?$articlerows[i].author?}">{?$articlerows[i].articlename?}</a></td>
+    <td align="center">{?$articlerows[i].words?}字</td>
+	<td align="center">{?$articlerows[i].monthupds?}天</td>
+	<td align="center">{?$articlerows[i].monthwords?}字</td>
+	<td align="center">{?$articlerows[i].preupds?}天</td>
+	<td align="center">{?$articlerows[i].prewords?}字</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>
+

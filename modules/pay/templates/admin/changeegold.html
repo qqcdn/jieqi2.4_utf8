@@ -1,0 +1,43 @@
+<script type="text/javascript">
+function frmchangeegold_validate(){
+  if(typeof(document.frmchangeegold.egold) != "undefined"){
+    if(document.frmchangeegold.egold.value == "" ){
+      alert("请输入{?$egoldname?}的值");
+	  document.frmchangeegold.egold.focus();
+	  return false;
+    }
+  }
+}
+</script>
+<form name="frmchangeegold" id="frmchangeegold" action="{?$jieqi_modules['pay']['url']?}/admin/changeegold.php?do=submit" method="post" onsubmit="return frmchangeegold_validate();">
+<table width="80%" class="grid" cellspacing="1" align="center">
+<caption>手工充值{?$egoldname?}</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">用户名：</td>
+  <td class="tdr"><a href="{?function jieqi_geturl:'system':'user':$uid?}">{?$uname?}</a> (ID: {?$uid?})</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">现有{?$egoldname?}：</td>
+  <td class="tdr">{?$egold?}</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">增加{?$egoldname?}：</td>
+  <td class="tdr"><input type="text" class="text" name="egold" id="egold" size="10" maxlength="11" value="" /> <span class="hot"> 必须整数，如：12 为增加12点{?$egoldname?}，-8 为扣除8点{?$egoldname?}</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">支付金额：</td>
+  <td class="tdr"><input type="text" class="text" name="money" id="money" size="10" maxlength="11" value="" /> 元 <span class="hot">用户汇款购买{?$egoldname?}，这里输入金额，否则可以留空</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">备注：</td>
+  <td class="tdr"><input type="text" class="text" name="note" id="note" size="50" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;
+  <input type="hidden" name="act" value="update" />{?$jieqi_token_input?}
+  <input type="hidden" name="uid" value="{?$uid?}" />
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提 交</button></td>
+</tr>
+</table>
+</form>

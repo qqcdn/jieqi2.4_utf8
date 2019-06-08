@@ -1,0 +1,57 @@
+<form name="batchreplace" id="batchreplace" action="{?$url_batchclean?}" method="post" target="_blank" onsubmit="return confirm('确实要开始内容批量替换么？');">
+<table width="100%" class="grid" align="center">
+<caption>小说内容批量替换</caption>
+<tr>
+  <td class="tdl" width="25%">限制条件：</td>
+  <td class="tdr" width="75%">
+  <label class="radio"><input type="radio" name="act" value="replacewithid" checked="checked"> 小说ID从</label> <input type="text" class="text" name="fromid" id="fromid" size="10" maxlength="15" value="{?$minaid?}" /> 到 <input type="text" class="text" name="toid" id="toid" size="10" maxlength="15" value="{?$maxaid?}" /> <span class="hot">当前数据库小说ID为：{?$minaid?} - {?$maxaid?}</span>
+  <hr />
+  <label class="radio"><input type="radio" name="act" value="replacewithtime"> 更新时间从</label> <input type="text" class="text" name="starttime" id="starttime" size="20" maxlength="20" value="" /> 到 <input type="text" class="text" name="stoptime" id="stoptime" size="20" maxlength="20" value="" /> <span class="hot">时间格式举例：2005-01-23 23:06:30</span>
+  </td>
+</tr>
+<tr>
+  <td class="tdl">分类：</td>
+  <td class="tdr">
+  {?section name=i loop=$sortrows?}
+  <label class="checkbox"><input type="checkbox" name="sortid[]" value="{?$i['key']?}" />{?$sortrows[i].caption?}</label>&nbsp;&nbsp; 
+  {?/section?}
+  </td>
+</tr>
+<tr>
+  <td class="tdl">查找字符串</td>
+  <td class="tdr"><textarea class="textarea" name="txtsearch" id="txtsearch" rows="5" cols="60"></textarea></td>
+</tr>
+<tr>
+  <td class="tdl">替换成</td>
+  <td class="tdr"><textarea class="textarea" name="txtreplace" id="txtreplace" rows="5" cols="60"></textarea></td>
+</tr>
+<tr>
+  <td class="tdl">替换方法</td>
+  <td class="tdr">
+  <label class="radio"><input type="radio" name="replacetype" value="0" checked="checked" />整个内容作为一个字符串替换</label>
+  <label class="radio"><input type="radio" name="replacetype" value="1" />每行内容作为一个字符串替换</label>
+  </td>
+</tr>
+<tr>
+  <td class="tdl">替换文件类型</td>
+  <td class="tdr">
+  <label class="checkbox"><input type="checkbox" name="replaceflag[]" value="filetxt" />小说原始内容(txt)</label>
+  <label class="checkbox"><input type="checkbox" name="replaceflag[]" value="filetxtjs" />章节JS格式内容(js)</label>
+  <label class="checkbox"><input type="checkbox" name="replaceflag[]" value="filehtml" />分章节阅读(html)</label>
+  <label class="checkbox"><input type="checkbox" name="replaceflag[]" value="filefull" />全文阅读(html)</label>
+  </td>
+</tr>
+<tr>
+  <td class="tdl">文件大小</td>
+  <td class="tdr"><select class="select"  size="1" name="filesize" id="filesize">
+<option value="sizeunlimit">不限制</option>
+<option value="sizeless">小于1K</option>
+<option value="sizemore">大于1K</option>
+</select></td>
+</tr>
+<tr>
+  <td class="tdl">&nbsp;{?$jieqi_token_input?}</td>
+  <td class="tdr"><button type="submit" class="button" name="submit">开始生成</button></td>
+</tr>
+</table>
+</form>

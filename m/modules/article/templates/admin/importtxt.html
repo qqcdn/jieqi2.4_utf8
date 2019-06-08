@@ -1,0 +1,232 @@
+<script type="text/javascript">
+function frmimporttxt_validate(){
+  if(document.frmimporttxt.sortid.value == "0"){
+    alert("请输入类别");
+    document.frmimporttxt.sortid.focus();
+    return false;
+  }
+  if(document.frmimporttxt.articlename.value == ""){
+    alert("请输入小说名称");
+    document.frmimporttxt.articlename.focus();
+    return false;
+  }
+}
+
+function frmimporttxt_getaname(){
+	var filename = $_('articletxt').getValue();
+	if(filename.indexOf('.') >= 0 && filename.substr(filename.lastIndexOf('.')).toLowerCase() == '.txt'){
+		
+		filename = filename.replace('/', '\\');
+		filename = filename.replace(/《|》|（完结）|（完）|（全）/g, '');
+		filename = filename.replace('作者：', '-');
+		if(filename.indexOf('\\') >= 0) filename = filename.substr(filename.lastIndexOf('\\')+1); 
+		if(filename.indexOf('.') >= 0) filename = filename.substring(0,filename.lastIndexOf('.'));
+		
+		if(filename.indexOf('-') >= 0){
+			var author = filename.substr(filename.lastIndexOf('-')+1); 
+			$_('authorname').setValue(author);
+			filename = filename.substring(0,filename.lastIndexOf('-'));
+		}
+		$_('articlename').setValue(filename);
+	}
+}
+</script>
+{?if $before_articleid > 0?}
+<div class="block">
+	<div class="blocktitle">
+	<a class="hot fsl" href="{?$jieqi_modules['article']['url']?}/articleinfo.php?id={?$before_articleid?}" target="_blank">《{?$before_articlename?}》</a> 导入成功，您可以选择继续导入！ <a class="hot fsl" href="{?$jieqi_modules['article']['url']?}/articlemanage.php?id={?$before_articleid?}" target="_blank">[管理]</a> &nbsp; <a class="hot fsl" href="{?$jieqi_modules['article']['url']?}/reader.php?aid={?$before_articleid?}" target="_blank">[目录]</a> &nbsp; {?if $articleid > 0?}<a class="hot fsl" href="{?$jieqi_modules['article']['url']?}/admin/importtxt.php">[导入新书]</a>{?else?}<a class="hot fsl" href="{?$jieqi_modules['article']['url']?}/admin/importtxt.php?articleid={?$before_articleid?}">[续传本书]</a>{?/if?}
+	</div>
+</div>
+{?/if?}
+
+{?if $articleid > 0?}
+<form name="frmimporttxt" id="frmimporttxt" action="{?$url_importtxt?}" method="post" enctype="multipart/form-data">
+  <table width="100%" class="grid" cellspacing="1" align="center">
+    <caption>导入txt小说</caption>
+
+    <tr valign="middle" align="left">
+      <td class="tdl" width="25%">TXT小说文件：</td>
+      <td class="tdr" width="75%"><input type="file" class="text" size="30" name="articletxt" id="articletxt" /> </td>
+    </tr>
+    <tr valign="middle" align="left">
+      <td class="tdl">小说名称：</td>
+      <td class="tdr">
+        <a href="{?$jieqi_modules['article']['url']?}/articlemanage.php?id={?$articleid?}" target="_blank">《{?$articlename?}》</a> <span class="hot">续传模式</span>
+      </td>
+    </tr>
+    <tr valign="middle" align="left">
+      <td class="tdl">&nbsp;<input type="hidden" name="articleid" value="{?$articleid?}" /><input type="hidden" name="isupdate" value="1" /><input type="hidden" name="act" value="import" />{?$jieqi_token_input?}</td>
+      <td class="tdr"><button type="submit" class="button" name="submit">提 交</button> <span class="hot">导入数据可能比较慢，提交后请耐心等待！</span></td>
+    </tr>
+  </table>
+</form>
+{?else?}
+<form name="frmimporttxt" id="frmimporttxt" action="{?$url_importtxt?}" method="post" onsubmit="return frmimporttxt_validate();" enctype="multipart/form-data">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>导入txt小说</caption>
+
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">TXT小说文件：</td>
+  <td class="tdr" width="75%"><input type="file" class="text" size="30" name="articletxt" id="articletxt" onchange="frmimporttxt_getaname();" /> </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">小说名称：</td>
+  <td class="tdr">
+  <input type="text" class="text" name="articlename" id="articlename" size="30" maxlength="50" value="" onBlur="Ajax.Update('{?$jieqi_modules['article']['url']?}/articlecheck.php?articlename='+this.value, {outid:'anamemsg', tipid:'anamemsg', onLoading:'<img border=\'0\' height=\'16\' width=\'16\' src=\'{?$jieqi_url?}/images/loading.gif\' /> Loading...'});" /> <span id="anamemsg"></span>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">类别：</td>
+  <td class="tdr" width="75%">
+  <select class="select" size="1" onchange="showtypes(this)" name="sortid" id="sortid">
+  <option value="0">请选择类别</option>
+  {?section name=i loop=$sortrows?}
+  <option value="{?$i['key']?}">{?$sortrows[i].caption?}</option>
+  {?/section?}
+  </select>
+  <span id="typeselect" name="typeselect"></span>
+  <script type="text/javascript">
+  function showtypes(obj){
+    var typeselect=document.getElementById('typeselect');
+    typeselect.innerHTML='';
+    {?section name=i loop=$sortrows?}
+	  {?if $sortrows[i].types != ''?}
+	  if(obj.options[obj.selectedIndex].value == {?$i['key']?}) typeselect.innerHTML='<select class="select" size="1" name="typeid" id="typeid">{?section name=j loop=$sortrows[i].types?}<option value="{?$j['key']?}">{?$sortrows[i]['types'][j]?}</option>{?/section?}</select>';
+	  {?/if?}
+    {?/section?}
+  }
+  </script>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">副标题：</td>
+  <td class="tdr"><input type="text" class="text" name="backupname" id="backupname" size="30" maxlength="100" value="" /> <span class="hot">一句话简介</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">标签：</td>
+  <td class="tdr">
+  <div class="dropdown">
+  <div><input type="text" class="text" name="keywords" id="tagwords" size="60" maxlength="100" value=""{?if $taglimit > 0?} readonly="readonly"{?/if?} />{?if $tagnum == 0?} <span class="hot">多个标签用英文空格分隔</span>{?/if?}</div>
+  {?if $tagnum > 0?}
+  <div class="dropbox" style="width:400px;">
+    <ul class="ultag">
+	{?section name=i loop=$tagwords?}
+	<li onclick="selecttag('tagwords', this);">{?$tagwords[i].name?}</li>
+	{?/section?}
+    </ul>
+  </div>
+  {?/if?}
+  </div>
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">管理员：</td>
+  <td class="tdr"><input type="text" class="text" name="agent" id="agent" size="30" maxlength="30" value="" /> <span class="hot">可以指定一个本站现有用户作为管理员</span></td>
+</tr>
+{?if $allowtrans > 0?}
+<tr valign="middle" align="left">
+  <td class="tdl">作者：</td>
+  <td class="tdr"><input type="text" class="text" name="author" id="authorname" size="30" maxlength="30" value="" /> <span class="hot">发表自己作品请留空</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">作者授权：</td>
+  <td class="tdr">
+  {?section name=i loop=$authorflag['items']?}
+  <label class="radio"><input type="radio" name="authorflag" value="{?$i['key']?}" {?if $i['key'] == $authorflag['default']?}checked="checked" {?/if?}/>{?$authorflag['items'][i]?}</label> 
+  {?/section?}
+</td>
+</tr>
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="tdl">授权级别：</td>
+  <td class="tdr">
+  {?section name=i loop=$permission['items']?}
+  <label class="radio"><input type="radio" name="permission" value="{?$i['key']?}" {?if $i['key'] == $permission['default']?}checked="checked" {?/if?}/>{?$permission['items'][i]?}</label> 
+  {?/section?}
+</td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">首发状态：</td>
+  <td class="tdr">
+  {?section name=i loop=$firstflag['items']?}
+  <label class="radio"><input type="radio" name="firstflag" value="{?$i['key']?}" {?if $i['key'] == $firstflag['default']?}checked="checked" {?/if?}/>{?$firstflag['items'][i]?}</label> 
+  {?/section?}
+</td>
+<tr valign="middle" align="left">
+  <td class="tdl">写作进度：</td>
+  <td class="tdr">
+  {?section name=i loop=$progress['items']?}
+  <label class="radio"><input type="radio" name="progress" value="{?$i['key']?}" {?if $i['key'] == $progress['default']?}checked="checked" {?/if?}/>{?$progress['items'][i]?}</label> 
+  {?/section?}
+</td>
+</tr>
+{?if $ismanager > 0?}
+<tr valign="middle" align="left">
+  <td class="tdl">是否显示：</td>
+  <td class="tdr">
+    {?section name=i loop=$display['items']?}
+    <label class="radio"><input type="radio" name="display" value="{?$i['key']?}" {?if $i['key'] == $display['default']?}checked="checked" {?/if?}/>{?$display['items'][i]?}</label>
+    {?/section?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">是否签约：</td>
+  <td class="tdr">
+  {?section name=i loop=$issign['items']?}
+  <label class="radio"><input type="radio" name="issign" value="{?$i['key']?}" {?if $i['key'] == $issign['default']?}checked="checked" {?/if?}/>{?$issign['items'][i]?}</label> 
+  {?/section?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">第几章开始为VIP：</td>
+  <td class="tdr"><input type="text" class="text" name="vipstart" id="vipstart" size="10" maxlength="10" value="0" /> <span class="hot">（设为0表示本书无VIP章节）</span></td>
+</tr>
+
+  {?if $rgroup['items']|count > 0?}
+<tr valign="middle" align="left">
+  <td class="tdl">所属频道：</td>
+  <td class="tdr">
+  {?section name=i loop=$rgroup['items']?}
+  <label class="radio"><input type="radio" name="rgroup" value="{?$i['key']?}" {?if $i['key'] == $rgroup['default']?}checked="checked" {?/if?}/>{?$rgroup['items'][i]?}</label> 
+  {?/section?}
+</td>
+</tr>
+  {?/if?}
+  {?if $customsites|count > 0?}
+<tr valign="middle" align="left">
+  <td class="tdl">来源网站：</td>
+  <td class="tdr">
+  <select class="select" size="1" name="siteid">
+  <option value="0" selected="selected">本站原创</option>
+  {?section name=i loop=$customsites?}
+  <option value="{?$i['key']?}">{?$customsites[i].name?}</option>
+  {?/section?}
+  </select>
+  </td>
+</tr>
+  {?/if?}
+{?/if?}
+<tr valign="middle" align="left">
+  <td class="tdl">内容简介：</td>
+  <td class="tdr"><textarea class="textarea" name="intro" id="intro" rows="6" cols="60"></textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">本书公告：</td>
+  <td class="tdr"><textarea class="textarea" name="notice" id="notice" rows="6" cols="60"></textarea></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">封面小图：</td>
+  <td class="tdr"><input type="file" class="text" size="30" name="articlespic" id="articlespic" /> <span class="hot">图片格式：.jpg</span></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">封面大图：</td>
+  <td class="tdr"><input type="file" class="text" size="30" name="articlelpic" id="articlelpic" /> <span class="hot">图片格式：.jpg</span></td>
+</tr>
+
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;<input type="hidden" name="isupdate" value="0" /><input type="hidden" name="act" value="import" />{?$jieqi_token_input?}</td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提 交</button> <span class="hot">导入数据可能比较慢，提交后请耐心等待！</span></td>
+</tr>
+</table>
+</form>
+{?/if?}

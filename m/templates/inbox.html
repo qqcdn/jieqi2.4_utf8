@@ -1,0 +1,21 @@
+{?set $jieqi_pagetitle = "收件箱-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "收件箱"?}
+{?set $jieqi_nofootlink = "1"?}
+
+<form action="{?$url_action?}" method="post" name="checkform" id="checkform">
+<div class="blockb">
+<div class="blockcontent" id="jieqi_page_contents">
+	{?section name=i loop=$messagerows?}
+	<div class="c_row cf">
+	<a class="db" href="{?$jieqi_url?}/messagedetail.php?id={?$messagerows[i].messageid?}">
+	<div><h4>{?if $messagerows[i].isread == 0?}<span class="hot">[新]</span>{?/if?}{?$messagerows[i].title?}</h4></div>
+	<div class="gray"><span class="fr">{?$messagerows[i].postdate|date:"Y-m-d"?}</span>{?if $messagerows[i].fromid > 0?}<span class="fl">{?$messagerows[i].fromname?}</span>{?else?}<span class="fl hot">网站管理员</span>{?/if?}</div>
+	</a>
+	</div>
+	{?/section?}
+</div>
+</div>
+</form>
+<div class="pages">{?$url_jumppage?}</div>
+
+

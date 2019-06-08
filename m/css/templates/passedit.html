@@ -1,0 +1,93 @@
+{?set $jieqi_pagetitle = "修改密码-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "修改密码"?}
+{?if $emptypass != 1?}
+<script type="text/javascript">
+function frmpassedit_validate(){
+  if (document.frmpassedit.oldpass.value == ""){
+	alert( "请输入原密码！" );
+	document.frmpassedit.oldpass.focus();
+	return false;
+  }
+  if(document.frmpassedit.newpass.value == ""){
+	alert( "请输入新密码！" );
+	document.frmpassedit.newpass.focus();
+	return false;
+  }
+  if (document.frmpassedit.repass.value != document.frmpassedit.newpass.value){
+	alert( "两次新密码输入不同，请重新输入！" );
+	document.frmpassedit.repass.focus();
+	return false;
+  }
+}
+</script>
+
+<form class="form cf" name="frmpassedit" method="post" action="{?$url_passedit?}" onsubmit="return frmpassedit_validate();">
+	<fieldset>
+		<div class="frow">
+	  <label class="col4 flabel">用户名：</label>
+	  <div class="col8 last">{?$jieqi_username?}</div>
+	</div>
+
+		<div class="frow">
+	  <label class="col4 flabel">原密码：</label>
+	  <div class="col8 last"><input type="password" class="text" size="20" maxlength="30" style="width:120px" name="oldpass"></div>
+	</div>
+
+		<div class="frow">
+	  <label class="col4 flabel">新密码：</label>
+	  <div class="col8 last"><input type="password" class="text" size="20" maxlength="30" style="width:120px" name="newpass"></div>
+	</div>
+
+		<div class="frow">
+	  <label class="col4 flabel">重复新密码：</label>
+	  <div class="col8 last"><input type="password" class="text" size="20" maxlength="30" style="width:120px" name="repass"></div>
+	</div>
+
+		<div class="frow">
+	  <label class="col4 flabel"><input type="hidden" name="act" value="update" />{?$jieqi_token_input?}</label>
+	  <div class="col8 last"><button type="submit" class="button" name="submit">保 存</button></div>
+	</div>
+
+	</fieldset>
+</form>
+{?else?}
+<script type="text/javascript">
+function frmpassedit_validate(){
+  if(document.frmpassedit.newpass.value == ""){
+	alert( "请输入密码！" );
+	document.frmpassedit.newpass.focus();
+	return false;
+  }
+  if (document.frmpassedit.repass.value != document.frmpassedit.newpass.value){
+	alert( "两次密码输入不同，请重新输入！" );
+	document.frmpassedit.repass.focus();
+	return false;
+  }
+}
+</script>
+
+<form class="form cf" name="frmpassedit" method="post" action="{?$url_passedit?}" onsubmit="return frmpassedit_validate();">
+	<fieldset>
+		<div class="frow">
+	  <label class="col4 flabel">用户名：</label>
+	  <div class="col8 last">{?$jieqi_username?}</div>
+	</div>
+
+		<div class="frow">
+	  <label class="col4 flabel">密码：</label>
+	  <div class="col8 last"><input type="password" class="text" size="20" maxlength="30" style="width:120px" name="newpass"></div>
+	</div>
+
+		<div class="frow">
+	  <label class="col4 flabel">重复密码：</label>
+	  <div class="col8 last"><input type="password" class="text" size="20" maxlength="30" style="width:120px" name="repass"></div>
+	</div>
+
+		<div class="frow">
+	  <label class="col4 flabel"><input type="hidden" name="act" value="update" />{?$jieqi_token_input?}</label>
+	  <div class="col8 last"><button type="submit" class="button" name="submit">保 存</button></div>
+	</div>
+
+	</fieldset>
+</form>
+{?/if?}

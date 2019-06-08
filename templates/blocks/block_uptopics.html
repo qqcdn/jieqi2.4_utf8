@@ -1,0 +1,12 @@
+{?if $ownerid > 0?}
+<table class="hide fix" width="100%" align="center">
+  {?section name=i loop=$ptopicrows?}
+  <tr>
+    <td width="50%">{?if $ptopicrows[i].istop == 1?}<span class="hot">[顶]</span>{?/if?}{?if $ptopicrows[i].isgood == 1?}<span class="hot">[精]</span>{?/if?}<a href="{?$jieqi_url?}/ptopicshow.php?tid={?$ptopicrows[i].topicid?}">{?$ptopicrows[i].title?}</a></td>
+    <td width="30%"><a href="{?function jieqi_geturl:'system':'user':$ptopicrows[i].posterid?}" target="_blank">{?$ptopicrows[i].poster?}</a></td>
+    <td width="20%">{?$ptopicrows[i].posttime|date:"Y-m-d H:i:s"?}</td>
+  </tr>
+  {?/section?}
+</table>
+<div class="more"><a href="{?$jieqi_url?}/ptopics.php?oid={?$ownerid?}" target="_blank">更多...</a></div>
+{?/if?}

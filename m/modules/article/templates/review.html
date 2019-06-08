@@ -1,0 +1,36 @@
+<table width="96%"  border="0" align="center" cellpadding="5" cellspacing="0">
+  <tr>
+    <td colspan="2" align="center"><a href="{?$url_articleinfo?}">《{?$articlename?}》</a>{?if $type == "good"?}&nbsp;&nbsp;&nbsp;&nbsp;[<a href="{?$article_dynamic_url?}/review.php?aid={?$articleid?}&type=all">全部书评</a>] &nbsp;&nbsp; [精华书评]{?else?}&nbsp;&nbsp;&nbsp;&nbsp;[全部书评] &nbsp;&nbsp; [<a href="{?$article_dynamic_url?}/review.php?aid={?$articleid?}&type=good">精华书评</a>]{?/if?}</td>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$reviewrows?}
+  <tr bgcolor="#000000">
+    <td colspan="2" height="1"></td>
+  </tr>
+  <tr>
+    <td width="80%">□ {?if $reviewrows[i].topflag == 1?}<span class="hot">[顶]</span>{?/if?}{?if $reviewrows[i].goodflag == 1?}<span class="hot">[精]</span>{?/if?}{?$reviewrows[i].content?}</td>
+    <td width="20%" align="center">{?$reviewrows[i].username?}<br />{?$reviewrows[i].postdate?}{?if $ismaster == 1?}<br />{?if $reviewrows[i].topflag == 0?}[<a href="{?$reviewrows[i].url_top?}">置顶</a>]{?else?}[<a href="{?$reviewrows[i].url_untop?}">置后</a>]{?/if?} {?if $reviewrows[i].goodflag == 0?}[<a href="{?$reviewrows[i].url_good?}">加精</a>]{?else?}[<a href="{?$reviewrows[i].url_normal?}">去精</a>]{?/if?} [<a href="javascript:if(confirm('确实要删除该书评么？')) document.location='{?$reviewrows[i].url_delete?}';">删除</a>]{?/if?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+  <tr align="right">
+    <td colspan="2">{?$url_jumppage?}</td>
+  </tr>
+  {?if $enablepost == 1?}
+  <tr>
+      <td colspan="2"><form name="frmreview" method="post" action="{?$article_dynamic_url?}/review.php?aid={?$articleid?}">
+          <table width="100%"  border="0" cellspacing="0" cellpadding="3">
+              <tr>
+                  <td>发表书评：</td>
+              </tr>
+              <tr>
+                  <td><textarea name="content" cols="60" rows="6" id="content" class="textarea"></textarea></td>
+              </tr>
+              <tr>
+                  <td><button type="submit" name="Submit" class="button"> 发表书评 </button></td>
+              </tr>
+          </table>
+      </form></td>
+  </tr>
+  {?/if?}
+</table>

@@ -1,0 +1,6 @@
+<ul class="ultab">
+<li><a href="{?$jieqi_url?}/message.php?box=inbox"{?if $box == 'inbox'?} class="selected"{?/if?}><i class="iconfont">&#xee36;</i>收件箱</a></li>
+<li><a href="{?$jieqi_url?}/message.php?box=outbox"{?if $box == 'outbox'?} class="selected"{?/if?}><i class="iconfont">&#xee37;</i>发件箱</a></li>
+<li><a href="{?$jieqi_url?}/newmessage.php"{?if $jieqi_thisfile|basename == 'newmessage.php' && $_request['tosys'] == 0?} class="selected"{?/if?}><i class="iconfont">&#xee38;</i>写新消息</a></li>
+<li><a href="{?$jieqi_url?}/newmessage.php?tosys=1"{?if $jieqi_thisfile|basename == 'newmessage.php' && $_request['tosys'] == 1?} class="selected"{?/if?}><i class="iconfont">&#xee39;</i>写给管理员</a></li>
+</ul>

@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.0
+MicroEdition-Configuration: CLDC-1.0
+MIDlet-Version: 1.0
+Created-By: 10.0-b19 (Sun Microsystems Inc.)
+MIDlet-Vendor: JIEQI CMS (www.jieqi.com)
+MicroEdition-Profile: MIDP-1.0
+MIDlet-1: 杰奇电子书, /icon.png, JavaBook
+MIDlet-Name: 杰奇电子书

@@ -1,0 +1,38 @@
+{?set jieqi_page_rows = "50"?}
+
+<table class="grid" width="100%" align="center">
+<caption>
+  更新排行榜
+  <select class="select" size="1" onchange="document.location.href='?order='+this.options[this.options.selectedIndex].value;" name="toporder">
+    <option value="monthupds"{?if $_request['order'] == 'monthupds'?} selected="selected"{?/if?}>按本月更新天数</option>
+    <option value="monthwords"{?if $_request['order'] == 'monthwords'?} selected="selected"{?/if?}>按本月更新字数</option>
+    <option value="preupds"{?if $_request['order'] == 'preupds'?} selected="selected"{?/if?}>按上月更新天数</option>
+    <option value="prewords"{?if $_request['order'] == 'prewords'?} selected="selected"{?/if?}>按上月更新字数</option>
+    <option value="words"{?if $_request['order'] == 'words'?} selected="selected"{?/if?}>按总字数</option>
+  </select>
+</caption>
+  <tr align="center">
+    <th width="15%">小说名称</th>
+    <th width="25%">最新章节</th>
+    <th width="10%">作者</th>
+    <th width="8%">总字数</th>
+    <th width="16%">上月更新</th>
+    <th width="16%">本月更新</th>
+    <th width="12%">更新时间</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'article':'article':$articlerows[i].articleid:'info':$articlerows[i].articlecode?}" target="_blank">{?$articlerows[i].articlename?}</a>{?if $articlerows[i].isvip_n > 0?}<span class="hot">vip</span>{?/if?}</td>
+    <td>{?if $articlerows[i].vipchapterid > 0?}<a href="{?$articlerows[i].url_vipchapter?}" target="_blank">{?$articlerows[i].vipvolume?} {?$articlerows[i].vipchapter?}</a><span class="hot">vip</span>{?else?}<a href="{?$articlerows[i].url_lastchapter?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a>{?/if?}</td>
+    <td>{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author?}</a>{?/if?}</td>
+    <td align="center">{?$articlerows[i].words?}</td>
+    <td align="center">{?if $articlerows[i].prework > 0?}<strong class="hot">{?$articlerows[i].preupds?}天：{?$articlerows[i].prewords?}字</strong>{?else?}{?$articlerows[i].preupds?}天：{?$articlerows[i].prewords?}字{?/if?}</td>
+    <td align="center">{?if $articlerows[i].monthwork > 0?}<strong class="hot">{?$articlerows[i].monthupds?}天：{?$articlerows[i].monthwords?}字</strong>{?else?}{?$articlerows[i].monthupds?}天：{?$articlerows[i].monthwords?}字{?/if?}</td>
+    <td align="center">{?$articlerows[i].lastupdate|date:'Y-m-d'?}</td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+
+<div class="pages">{?$url_jumppage?}</div>

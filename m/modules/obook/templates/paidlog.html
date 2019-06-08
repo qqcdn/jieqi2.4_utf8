@@ -1,0 +1,20 @@
+{?set $jieqi_pagetitle = "结算记录-{$jieqi_sitename}"?}
+{?set $jieqi_contenttitle = "结算记录"?}
+
+<div class="blockb">
+	<div class="blockcontent" id="jieqi_page_contents">
+		{?section name=i loop=$obookrows?}
+		<div class="c_row cf">
+			<h4><a href="{?function jieqi_geturl:'article':'article':$obookrows[i].articleid:'info'?}">{?$obookrows[i].obookname?}</a></h4>
+			<p class="gray" style="line-height:2;">
+				时间：{?$paidrows[i].paytime|date:Y-m-d H:i?}，金额：{?$paidrows[i].paymoney|fen2yuan?}元，类型：{?$paidrows[i].paidtype?}
+			</p>
+			<p>
+				总收入：{?$paidrows[i].sumemoney?}，待结算：{?$paidrows[i].unpaidemoney?}<br />
+				本次结算：{?$paidrows[i].payemoney?}，本次未结算：{?$paidrows[i].remainemoney?}
+			</p>
+		</div>
+		{?/section?}
+	</div>
+</div>
+<div class="pages">{?$url_jumppage?}</div>

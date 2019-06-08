@@ -1,0 +1,39 @@
+{?set jieqi_blocks_module = "article"?}
+{?set jieqi_blocks_config = "authorblocks"?}
+<script type="text/javascript">
+function frmnewvolume_validate(){
+  if(document.frmnewvolume.chaptername.value == ""){
+    alert("请输入新增分卷");
+    document.frmnewvolume.chaptername.focus();
+    return false;
+  }
+}
+</script>
+<form name="frmnewvolume" id="frmnewvolume" action="{?$jieqi_modules['article']['url']?}/newvolume.php?do=submit" method="post" onsubmit="return frmnewvolume_validate();">
+<table width="100%" class="grid" cellspacing="1" align="center">
+<caption>增加分卷</caption>
+<tr valign="middle" align="left">
+  <td class="tdl" width="25%">小说名称：</td>
+  <td class="tdr"><a href="{?$jieqi_modules['article']['url']?}/articlemanage.php?id={?$articleid?}">{?$articlename?}</a></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">现有分卷：</td>
+  <td class="tdr">
+  {?section name=i loop=$volumerows?}
+  {?$volumerows[i].chaptername?}<br />
+  {?/section?}
+  </td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">新增分卷：</td>
+  <td class="tdr"><input type="text" class="text" name="chaptername" id="chaptername" size="50" maxlength="50" value="" /></td>
+</tr>
+<tr valign="middle" align="left">
+  <td class="tdl">&nbsp;
+  <input type="hidden" name="act" value="newvolume" />{?$jieqi_token_input?}
+  <input type="hidden" name="aid" value="{?$articleid?}" />
+  </td>
+  <td class="tdr"><button type="submit" class="button" name="submit">提 交</button></td>
+</tr>
+</table>
+</form>

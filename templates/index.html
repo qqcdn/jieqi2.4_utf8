@@ -1,0 +1,45 @@
+{?set jieqi_blocks_module = "system"?}
+{?set jieqi_blocks_config = "indexblocks"?}
+<div class="main">
+    <div class="mainbody">
+
+		{?if $jieqi_pageblocks['200']['content'] != ''?}
+        <div class="mb">
+            {?$jieqi_pageblocks['200']['content']?}
+        </div>
+		{?/if?}
+
+
+        <div class="row">
+            <div class="col3">
+                <div class="block" style="height:365px;">
+                    <div class="blocktitle">推荐榜</div>
+                    <div class="blockcontent">
+                        {?$jieqi_pageblocks['131']['content']?}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col6">
+                <div class="block" style="height:365px;">
+                    <div class="blocktitle">
+                        <ul class="tabb tab2">
+                            <li>最近更新</li>
+                        </ul>
+                    </div>
+                    <div class="blockcontent">
+                        <div>{?$jieqi_pageblocks['321']['content']?}</div>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="col3 last">
+                <div class="block" style="height:365px;">
+                    <div class="blocktitle">收藏榜</div>
+                    <div class="blockcontent">{?$jieqi_pageblocks['331']['content']?}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,178 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	font-family: 宋体,新细明体,Verdana,Arial,sans-serif;
+	font-size: 14px;
+}
+
+a {
+	color: #113e60;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ff6600;
+}
+
+.ad{
+    text-align: center;
+}
+
+.linkall{
+    width: 100%;
+	float: left;
+	text-align: left;
+}
+
+.linkleft{
+    float: left;
+	text-align: left;
+}
+
+.linkright{
+    float: right;
+	text-align: right;
+}
+
+.readset{
+    text-align: left;
+}
+
+.title{
+    text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 200%;
+}
+
+.info{
+    text-align: center;
+	line-height: 200%;
+}
+
+.content{
+    text-align: left;
+	padding: 10px 6% 10px 6%;
+	font-size: 16px;
+	line-height: 160%;
+}
+
+
+.copyright{
+	width: 90%;
+	margin: 20px auto;
+	padding: 10px 0px;
+    text-align: center;
+	line-height: 200%;
+	border-top:1px dashed #cccccc;
+}
+
+.headlink{
+	background: #ffffff; 
+	border-left: solid 1px #ddd;
+	border-right: solid 1px #ddd;
+	border-bottom: solid 1px #ddd;
+	width: 90%;
+	height:28px; 
+	line-height:28px; 
+	margin: 0px auto 15px auto;
+	padding: 0px 10px;
+}
+
+.footlink{
+	width: 90%;
+	margin: 10px auto;
+	padding: 5px 0px;
+    text-align: center;
+	line-height: 200%;
+	border-top: 1px solid #cccccc;
+}
+
+.cb{clear:both; font-size:0px; height:0px; overflow:hidden;}
+
+.index{
+	width: 90%;
+	margin: auto;
+	border: 1px solid #cccccc;
+}
+
+.volume{
+	height:30px;
+	line-height:30px;
+	width: 100%;
+	clear: both;
+	background: #cbe1f4;
+    font-size: 16px;
+    text-align: center;
+}
+
+.chapters{
+	display: block;
+	clear: both;
+	list-style: none;
+	margin: 10px 0px;
+}
+.chapters:after{content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+
+.chapters li{
+	width:25%;
+	float:left;
+	border-bottom: 1px dashed #cccccc;
+	height:30px;
+	line-height:30px;
+	text-indent: 12px;
+}
+
+.chapters em{
+	color: #fe0000;
+	font-family: Arial,Helvetica,sans-serif;
+	font-style: normal;
+	font-size: 11px;
+	margin: 0px 3px;
+}
+
+.chapterblock{
+	width: 90%;
+	margin: auto;
+}
+
+.chaptertitle{
+	height:40px;
+	line-height:40px;
+	clear: both;
+    font-size: 16px;
+    text-align: center;
+	font-weight: bold;
+	border-bottom: 1px solid #cccccc;
+}
+
+.chaptercontent{
+    text-align: left;
+	font-size: 16px;
+	line-height: 160%;
+	padding: 10px;
+}
+
+.divimage{
+    text-align: center;
+}
+
+.imagecontent{
+	border: 0;
+}
+
+.aimage{
+	cursor: pointer;
+}
+.viptitle{
+	height:35px;
+	line-height:35px;
+	width: 100%;
+	clear: both;
+	background: #f9f9f9;
+    font-size: 16px;
+    text-align: center;
+}

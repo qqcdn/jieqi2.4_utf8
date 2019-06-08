@@ -1,0 +1,60 @@
+{?set jieqi_page_template = "themer.html"?}
+{?set $jieqi_pagetitle = "{$articlename}-{$chaptername}-{$author}-{$sort}-{$jieqi_sitename}"?}
+{?set $meta_keywords = "{$articlename} {$chaptername} {$author} {$sort} {$jieqi_sitename}"?}
+{?set $jieqi_articleread = "1"?}
+
+<div class="main">
+<div class="mainbody" id="apage">
+<div class="headlink cf">
+<div class="linkleft"><a href="{?$jieqi_main_url?}/">{?$jieqi_sitename?}</a>-&gt;<a href="{?$jieqi_modules['article']['url']?}/">书库首页</a>-&gt;<a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">{?$articlename?}</a></div>
+
+<div class="linkright"><a href="{?$url_previous?}">上一章</a> | <a href="{?$url_index?}">返回书目</a> | <a href="{?$url_next?}">下一章</a> | <a id="a_addbookcase" href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/addbookcase.php?bid={?$articleid?}&cid={?$chapterid?}', {method: 'POST'});">加入书签</a> | <a id="a_uservote"  href="javascript:;" onclick="Ajax.Tip('{?$jieqi_modules['article']['url']?}/uservote.php?id={?$articleid?}', {method: 'POST'});">推荐本书</a> | <a href="{?function jieqi_geturl:'article':'article':$articleid:'info':$articlecode?}">返回书页</a></div>
+</div>
+
+<div class="fullbar"><script type="text/javascript" src="{?$jieqi_modules['article']['url']?}/scripts/pagetop.js"></script></div>
+
+<div class="atitle">{?$chaptername?}</div>
+
+<div class="ainfo">作者：<a href="{?function jieqi_geturl:'article':'author':$authorid:$author?}" target="_blank">{?$author?}</a> &nbsp;&nbsp;&nbsp;&nbsp; 更新：{?$chaptertime|date:'Y-m-d H:i'?} &nbsp;&nbsp;&nbsp;&nbsp; 字数：{?$chapterwords?}</div>
+
+<div id="acontent" class="acontent">
+	<div id="asummary" class="asummary">{?$summary?}</div>
+	{?if $jieqi_userid > 0?}
+	<form name="frmbuychapter" method="post" action="{?$jieqi_modules['obook']['url']?}/buychapter.php">
+	<div class="block" style="width:60%;margin:2em auto;">
+	<div class="blocktitle">这是VIP章节，需要订阅后阅读</div>
+	<div class="blockcontent">
+		<div class="tc mb">
+			<div class="dib tl">
+			<label class="radio"><input type="radio" name="buytype" value="0" checked="checked" /> 只订阅本章节（<span class="hot">{?$saleprice?}</span> {?$egoldname?}）</label><br />
+			<label class="radio"><input type="radio" name="buytype" value="1" /> 自动订阅本书VIP章节</label>
+			{?if $obookprice > 0?}<br /><label class="radio"><input type="radio" name="buytype" value="2" /> 整本订阅本书，价格更实惠（<span class="hot">{?$obookprice?}</span> {?$egoldname?}）</label>{?/if?}
+			</div>
+		</div>
+		<div class="tc mb">
+			<input type="hidden" name="act" value="buy">{?$jieqi_token_input?}
+			<input type="hidden" name="cid" value="{?$chapterid?}">
+			<button type="submit" class="button" name="submit">确定订阅并阅读</button>
+			&emsp;&emsp;若余额不足，请点击 <a href="{?$jieqi_modules['pay']['url']?}/buyegold.php" class="hot">充值</a>
+		</div>
+	</div>
+	</div>
+	</form>
+	{?else?}
+	<div class="block" style="width:60%;margin:2em auto;">
+	<div class="blocktitle">这是VIP章节，需要登录并订阅</div>
+	<div class="blockcontent">
+	  <p class="mt mb">&emsp;&emsp;您尚未登录，<a class="hot" href="{?$jieqi_user_url?}/login.php" onclick="openDialog('{?$jieqi_user_url?}/login.php?ajax_gets=jieqi_contents', false);stopEvent();">点击这里登录</a><p>
+	  <p class="gray mb">&emsp;&emsp;如果您之前已经订阅过，登录后即可直接阅读。</p>
+	</div>
+	</div>
+	{?/if?}
+</div>
+
+<div class="footlink"><a href="{?$url_previous?}" title="{?$previous_chaptername?}">上一章</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{?$url_index?}">返回目录</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{?$url_next?}" title="{?$next_chaptername?}">下一章</a></div>
+
+<div class="fullbar"><script type="text/javascript" src="{?$jieqi_modules['article']['url']?}/scripts/pagebottom.js"></script></div>
+</div>
+</div>
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/json2.js"></script>
+<script type="text/javascript" src="{?$jieqi_modules['article']['url']?}/scripts/readlog.js"></script>

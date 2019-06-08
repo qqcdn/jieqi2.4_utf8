@@ -1,0 +1,8 @@
+<table width="100%"  border="0" cellspacing="0" cellpadding="2">
+{?section name=i loop=$topicrows?}
+  <tr>
+    <td width="80%"><a href="{?function jieqi_geturl:'forum':showtopic:$topicrows[i].topicid:1:1?}">{?$topicrows[i].title?}</a>&nbsp;</td>
+    <td width="20%" align="right"><a href="{?function jieqi_geturl:'system':'user':$topicrows[i].posterid?}" target="_blank">{?$topicrows[i].poster?}</a></td>
+  </tr>
+{?/section?}
+</table>

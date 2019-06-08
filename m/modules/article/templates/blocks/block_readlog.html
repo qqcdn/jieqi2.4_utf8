@@ -1,0 +1,18 @@
+<table class="grid" width="100%" align="center">
+  <caption>我最近阅读的作品</caption>
+  <tr align="center">
+    <th width="20%">作品名称</th>
+    <th width="35%">最新章节</th>
+    <th width="15%">作者</th>
+    <th width="15%">最后更新</th>
+    <th width="15%">上次阅读</th>
+  </tr>
+{?section name=i loop=$articlerows?}
+  <tr>
+    <td><a class="pop" href="{?$articlerows[i].url_articleinfo?}">{?$articlerows[i].articlename?}</a></td>
+    <td><a href="{?$articlerows[i].url_lastchapter?}">{?$articlerows[i].lastchapter?}</a></td>
+    <td align="center">{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a class="note" href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}">{?$articlerows[i].author?}</a>{?/if?}</td>
+    <td align="center">{?$articlerows[i].lastupdate|date:'Y-m-d H:i'?}</td>
+    <td align="center">{?if $articlerows[i].readtime > 0?}{?$articlerows[i].readtime|date:'Y-m-d H:i'?}{?else?}尚未阅读{?/if?}</td>
+{?/section?}  </tr>
+</table>

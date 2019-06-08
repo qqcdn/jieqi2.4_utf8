@@ -1,0 +1,261 @@
+//–ﬁ Œ
+
+.fix, .lm {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.cf, .row, .frow, .form {
+  *zoom: 1;
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+.cb {
+  clear: both;
+  font-size: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.db {
+  display: block;
+}
+
+.dn {
+  display: none;
+}
+
+.di {
+  display: inline;
+}
+
+.dib {
+  display: inline-block;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.fn {
+  float: none;
+}
+
+.mt {
+  margin-top: $spacer;
+}
+
+.mts {
+  margin-top: $spacer / 2;
+}
+
+.mb {
+  margin-bottom: $spacer;
+}
+
+.mbs {
+  margin-bottom: $spacer / 2;
+}
+
+.mtb {
+  margin-top: $spacer / 2;
+  margin-bottom: $spacer / 2;
+}
+
+.pd {
+  padding: $spacer;
+}
+
+.bn {
+  @include box-border(0, 0, none);
+}
+
+.bd {
+  border: $border-width solid $border-color;
+}
+
+.bt {
+  border-top: $border-width solid $border-color;
+}
+
+.bb {
+  border-bottom: $border-width solid $border-color;
+}
+
+.bl {
+  border-left: $border-width solid $border-color;
+}
+
+.br {
+  border-right: $border-width solid $border-color;
+}
+
+.bdr {
+  @include border-radius($border-radius);
+}
+
+.bdc {
+  @include border-radius(50%);
+}
+
+.tl {
+  text-align: left;
+}
+
+.tc {
+  text-align: center;
+}
+
+.tr {
+  text-align: right;
+}
+
+.fss {
+  font-size: $font-size-sm;
+}
+
+.fsl {
+  font-size: $font-size-lg;
+}
+
+.fwb {
+  font-weight: bold;
+}
+
+.nw {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.wn {
+  white-space: normal;
+  overflow: auto;
+}
+
+.w0 {
+  width:auto;
+}
+
+.w1 {
+  width:100%;
+}
+
+.w2 {
+  width: 50%;
+}
+
+.w3 {
+  width: 33.33%;
+}
+
+.w4 {
+  width: 25%;
+}
+
+.w5 {
+  width: 20%;
+}
+
+.hot, a.hot {
+  color: $brand-warning;
+}
+
+.bg_hot {
+  @include color-background($brand-warning, $color-bg);
+}
+
+.bd_hot {
+  @include color-border($brand-warning, $color-bg);
+}
+
+.note, a.note {
+  color: $brand-info;
+}
+
+.bg_note {
+  @include color-background($brand-info, $color-bg);
+}
+
+.bd_note {
+  @include color-border($brand-info, $color-bg);
+}
+
+.gray, a.gray {
+  color: $gray-light;
+}
+
+.bg_gray {
+  @include color-background($gray-light, $color-bg);
+}
+
+.bd_gray {
+  @include color-border($gray-light, $color-bg);
+}
+
+.success, a.success {
+  color: $brand-success;
+}
+
+.bg_success {
+  @include color-background($brand-success, $color-bg);
+}
+
+.bd_success {
+  @include color-border($brand-success, $color-bg);
+}
+
+.error, a.error {
+  color: $brand-danger;
+}
+
+.bg_error {
+  @include color-background($brand-danger, $color-bg);
+}
+
+.bd_error {
+  @include color-border($brand-danger, $color-bg);
+}
+
+.primary, a.primary {
+  color: $brand-primary;
+}
+
+.bg_primary {
+  @include color-background($brand-primary, $color-bg);
+}
+
+.bd_primary {
+  @include color-border($brand-primary, $color-bg);
+}
+
+a.more, .more a {
+  display: block;
+  color: $gray;
+  text-align: right;
+  padding-right: 0.3em;
+  line-height: 2;
+  border-top: 1px dotted $gray-lighter;
+}
+
+a.moretop, .moretop a {
+  display: block;
+  height: 2.25em;
+  line-height: 2.25;
+  font-size: $font-size-base;
+  color: $gray;
+  text-align: right;
+  margin: -3.2em 0.3em 0.5em 0;
+}

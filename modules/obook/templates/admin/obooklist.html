@@ -1,0 +1,40 @@
+{?set jieqi_page_rows = "50"?}
+<form name="frmsearch" method="get" action="{?$url_obook?}">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td>关键字：
+            <input name="keyword" type="text" id="keyword" class="text" size="15" maxlength="50"> 
+            <label class="radio"><input type="radio" name="keytype" value="0" checked="checked">书名</label>
+            <label class="radio"><input type="radio" name="keytype" value="1">作者</label> 
+			&nbsp;&nbsp;
+            <button type="submit" name="btnsearch" class="button">搜 索</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="{?$obook_dynamic_url?}/admin/obooklist.php">全部电子书</a> | <a href="{?$obook_dynamic_url?}/admin/obooklist.php?display=self">本站电子书</a>        
+        </td>
+    </tr>
+</table>
+</form>
+<table class="grid" width="100%" align="center">
+<caption>{?$obooktitle?}</caption>
+  <tr align="center">
+    <th width="25%">电子书名称</th>
+    <th width="20%">作者</th>
+	<th width="10%">订阅</th>
+	<th width="10%">打赏</th>
+    <th width="10%">总收入</th>
+    <th width="25%">操作</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$obookrows?}
+  <tr>
+    <td><a href="{?function jieqi_geturl:'article':'article':$obookrows[i].articleid:'info'?}" target="_blank">{?$obookrows[i].obookname?}</a></td>
+    <td>{?if $obookrows[i].authorid == 0?}{?$obookrows[i].author?}{?else?}<a href="{?function jieqi_geturl:'system':'user':$obookrows[i].authorid?}" target="_blank">{?$obookrows[i].author?}</a>{?/if?}</td>
+	<td align="center">{?$obookrows[i].sumegold?}</td>
+	<td align="center">{?$obookrows[i].sumtip?}</td>
+    <td align="center">{?$obookrows[i].sumemoney?}</td>
+    <td align="center"><a href="{?$jieqi_modules['article']['url']?}/articlemanage.php?id={?$obookrows[i].articleid?}" target="_blank">管理</a> | 
+	<a href="{?$jieqi_modules['article']['url']?}/articleedit.php?id={?$obookrows[i].articleid?}" target="_blank">编辑</a> | <a href="{?function jieqi_geturl:'article':'article':$obookrows[i].articleid:'index'?}" target="_blank">目录</a></td>
+  </tr>
+  {?/section?}
+  </tbody>
+</table>
+<div class="pages">{?$url_jumppage?}</div>

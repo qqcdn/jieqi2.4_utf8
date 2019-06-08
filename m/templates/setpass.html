@@ -1,0 +1,41 @@
+{?set $jieqi_contenttitle = "重设密码"?}
+
+<script type="text/javascript">
+function frmsetpass_validate(){
+  if(document.frmsetpass.newpass.value == ""){
+	alert("请输入密码");
+	document.frmsetpass.newpass.focus();
+	return false;
+  }
+  if(document.frmsetpass.repass.value == ""){
+	alert("请输入确认密码");
+	document.frmsetpass.repass.focus();
+	return false;
+  }
+}
+</script>
+
+<form class="form cf" name="frmsetpass" action="{?$jieqi_url?}/setpass.php?do=submit" method="post" onsubmit="return frmsetpass_validate();">
+	<fieldset>
+		<div class="frow">
+			<label>用户名：</label>
+			{?$username?}
+		</div>
+		<div class="frow">
+			<label>密码：</label>
+			<input type="password" class="text" name="newpass" value="" />
+		</div>
+		<div class="frow">
+			<label>确认密码：</label>
+			<input type="password" class="text" name="repass" value="" />
+		</div>
+		<div class="frow">
+			<label>
+			<input type="hidden" name="act" value="newpass" />{?$jieqi_token_input?}
+			<input type="hidden" name="id" value="{?$id?}" />
+			<input type="hidden" name="checkcode" id="checkcode" value="{?$checkcode?}" />
+			</label>
+			<button type="submit" class="button" name="submit">提 交</button>
+		</div>
+	</fieldset>
+</form>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={?$jieqi_charset?}" />
+<meta name="keywords" content="{?$meta_keywords?}" />
+<meta name="description" content="{?$meta_description?}" />
+<meta name="author" content="{?$meta_author?}" />
+<meta name="copyright" content="{?$meta_copyright?}" />
+<meta name="generator" content="jieqi.com" />
+<meta http-equiv="Cache-Control" content="no-cache">
+<title>{?$jieqi_pagetitle?}</title>
+<link rel="stylesheet" type="text/css" media="all" href="{?$jieqi_url?}/themes/{?$jieqi_theme?}/style.css" />
+<script type="text/javascript" src="{?$jieqi_url?}/scripts/common.js"></script>
+{?$jieqi_head?}
+</head>
+<body>
+<div style="line-height:20px;">
+<form name="f_framelogin" method="post" action="{?$jieqi_user_url?}/loginframe.php">
+	<span class="error">{?$errstr?}</span>
+	用户名：
+    <input name="username" type="text" class="text" onkeypress="javascript: if (event.keyCode==32) return false;" value="{?$username?}" size="10" maxlength="30" />
+    密码：
+    <input type="password" class="text" size="10" maxlength="30" name="password" />
+{?if $show_checkcode == 1?}
+	验证码：
+    <input type="text" class="text" style="width:6em;" name="checkcode" id="checkcode" onfocus="if(this.form.imgccode.style.display == 'none'){this.form.imgccode.src = '{?$jieqi_url?}/checkcode.php?rand={?$jieqi_time?}';this.form.imgccode.style.display = '';}" title="点击显示验证码"><img name="imgccode" src="" style="cursor:pointer;vertical-align:middle;margin-left:3px;display:none;" onclick="this.src='{?$jieqi_url?}/checkcode.php?rand='+Math.random();" title="点击刷新验证码">
+{?/if?}
+<label class="checkbox"><input type="checkbox" name="usecookie" value="1" />自动登录</label>
+<input type="hidden" name="act" value="login" />
+<button type="submit" class="button" name="submit">登录</button> 
+<a href="{?$jieqi_url?}/api/qq/login.php" rel="nofollow" target="_top"><img src="{?$jieqi_url?}/images/api/qq_ico.gif" title="用QQ账号登录" style="border:0;vertical-align:middle;"></a>
+<a href="{?$jieqi_url?}/api/weibo/login.php" rel="nofollow" target="_top"><img src="{?$jieqi_url?}/images/api/weibo_ico.gif" title="用新浪微博账号登录" style="border:0;vertical-align:middle;"></a>
+<a href="{?$jieqi_url?}/api/taobao/login.php" rel="nofollow" target="_top"><img src="{?$jieqi_url?}/images/api/taobao_ico.gif" title="用淘宝账号登录" style="border:0;vertical-align:middle;"></a>
+&nbsp;&nbsp;<a href="{?$jieqi_user_url?}/register.php" target="_top">注册用户</a> &nbsp;&nbsp;<a href="{?$jieqi_url?}/getpass.php" target="_top">忘记密码？</a>
+</form>
+</div>
+</body>
+</html>

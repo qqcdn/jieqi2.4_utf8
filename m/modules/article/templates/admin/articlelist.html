@@ -1,0 +1,217 @@
+{?set jieqi_page_rows = "50"?}
+<script type="text/javascript">
+//隐藏显示
+function act_hide(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onFinish: ''
+	}
+	if(o.getAttribute('switch') == '0'){
+		url = url.replace('act=show', 'act=hide');
+		param.onFinish = function(res){
+			if(res.match('成功')){
+				o.setAttribute('switch', '1');
+				o.innerHTML = '显示';
+			}
+		}
+	}else{
+		url = url.replace('act=hide', 'act=show');
+		param.onFinish = function(res){
+			if(res.match('成功')){
+				o.setAttribute('switch', '0');
+				o.innerHTML = '隐藏';
+			}
+		}
+	}
+	Ajax.Tip(url, param);
+	return false;
+}
+//待审审核
+function act_ready(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onFinish: ''
+	}
+	if(o.getAttribute('switch') == '0'){
+		url = url.replace('act=show', 'act=ready');
+		param.onFinish = function(res){
+			if(res.match('成功')){
+				o.setAttribute('switch', '1');
+				o.innerHTML = '审核';
+			}
+		}
+	}else{
+		url = url.replace('act=ready', 'act=show');
+		param.onFinish = function(res){
+			if(res.match('成功')){
+				o.setAttribute('switch', '0');
+				o.innerHTML = '待审';
+			}
+		}
+	}
+	Ajax.Tip(url, param);
+	return false;
+}
+//推荐不荐
+function act_toptime(url){
+	Ajax.Tip(url, {method: 'POST'});
+	return false;
+}
+//删除
+function act_delete(url){
+	var o = getTarget();
+	var param = {
+		method: 'POST', 
+		onReturn: function(){
+			$_(o.parentNode.parentNode).remove();
+		}
+	}
+	if(confirm('确实要删除该小说么？')) Ajax.Tip(url, param);
+	return false;
+}
+</script>
+<form name="frmsearch" method="get" action="{?$url_article?}">
+<table class="grid" width="100%" align="center">
+    <tr>
+        <td>
+		状态：
+		<select class="select" size="1" name="display">
+		  <option value="">全部</option>
+		  <option value="ready"{?if $_request['display'] == 'ready'?} selected="selected"{?/if?}>待审</option>
+		  <option value="show"{?if $_request['display'] == 'show'?} selected="selected"{?/if?}>已审</option>
+		  <option value="hide"{?if $_request['display'] == 'hide'?} selected="selected"{?/if?}>隐藏</option>
+		  <option value="empty"{?if $_request['display'] == 'empty'?} selected="selected"{?/if?}>无章节</option>
+		  <option value="sign"{?if $_request['display'] == 'sign'?} selected="selected"{?/if?}>签约作品</option>
+		  <option value="nosign"{?if $_request['display'] == 'nosign'?} selected="selected"{?/if?}>尚未签约</option>
+		  <option value="vip"{?if $_request['display'] == 'vip'?} selected="selected"{?/if?}>VIP作品</option>
+		  <option value="free"{?if $_request['display'] == 'free'?} selected="selected"{?/if?}>免费作品</option>
+		</select>
+		{?if $customsites|count > 0?}
+		来源：
+		<select class="select" size="1" name="siteid">
+		  <option value="0">不限</option>
+		  <option value="-1"{?if $_request['siteid'] == '-1'?} selected="selected"{?/if?}>本站原创</option>
+		  <option value="-2"{?if $_request['siteid'] == '-2'?} selected="selected"{?/if?}>他站作品</option>
+		{?section name=i loop=$customsites?}
+		  <option value="{?$i['key']?}"{?if $_request['siteid'] == $i['key']?} selected="selected"{?/if?}>{?$customsites[i].name?}</option>
+		{?/section?}
+		</select>
+		{?/if?}
+		进度：
+		<select class="select" size="1" name="isfull">
+		  <option value="0">不限</option>
+		  <option value="1"{?if $_request['isfull'] == 1?} selected="selected"{?/if?}>全本</option>
+		  <option value="2"{?if $_request['isfull'] == 2?} selected="selected"{?/if?}>连载</option>
+		</select>
+		分类：
+		<select class="select" size="1" onchange="showtypes(this)" name="sortid" id="sortid">
+		<option value="0">不限分类</option>
+		{?section name=i loop=$sortrows?}
+		<option value="{?$i['key']?}"{?if $_request['sortid'] == $i['key']?} selected="selected"{?/if?}>{?$sortrows[i].caption?}</option>
+		{?/section?}
+		</select>
+		<span id="typeselect" name="typeselect"></span>
+        <script type="text/javascript">
+        function showtypes(obj){
+          var typeselect=document.getElementById('typeselect');
+          typeselect.innerHTML='';
+          {?section name=i loop=$sortrows?}
+	      {?if $sortrows[i].types != ''?}
+	      if(obj.options[obj.selectedIndex].value == {?$i['key']?}) typeselect.innerHTML='<select class="select" size="1" name="typeid" id="typeid"><option value="0">不限子类</option>{?section name=j loop=$sortrows[i].types?}<option value="{?$j['key']?}"{?if $_request['typeid'] == $j['key']?} selected="selected"{?/if?}>{?$sortrows[i]['types'][j]?}</option>{?/section?}</select>';
+	      {?/if?}
+          {?/section?}
+         }
+		 {?if $_request['sortid'] > 0?}showtypes(document.getElementById('sortid'));{?/if?}
+        </script>
+		排序：
+		<select class="select" size="1" name="order">
+		  <option value="lastupdate"{?if $_request['order'] == 'lastupdate'?} selected="selected"{?/if?}>最近更新</option>
+		  <option value="postdate"{?if $_request['order'] == 'postdate'?} selected="selected"{?/if?}>入库时间</option>
+		  <option value="toptime"{?if $_request['order'] == 'toptime'?} selected="selected"{?/if?}>编辑推荐</option>
+		  <option value="goodnum"{?if $_request['order'] == 'goodnum'?} selected="selected"{?/if?}>收藏数</option>
+		  <option value="size"{?if $_request['order'] == 'words'?} selected="selected"{?/if?}>小说字数</option>
+		  <option value="allvisit"{?if $_request['order'] == 'allvisit'?} selected="selected"{?/if?}>总点击</option>
+		  <option value="monthvisit"{?if $_request['order'] == 'monthvisit'?} selected="selected"{?/if?}>月点击</option>
+		  <option value="allvote"{?if $_request['order'] == 'allvote'?} selected="selected"{?/if?}>总推荐</option>
+		  <option value="monthvote"{?if $_request['order'] == 'monthvote'?} selected="selected"{?/if?}>月推荐</option>
+		</select>
+		<select class="select" size="1" name="asc">
+		  <option value="0"{?if $_request['asc'] == 0?} selected="selected"{?/if?}>倒序</option>
+		  <option value="1"{?if $_request['asc'] == 1?} selected="selected"{?/if?}>顺序</option>
+		</select>
+
+		<br />
+		 搜索条件：
+		<label class="radio"><input type="radio" name="keytype" value="0"{?if $_request['keytype'] == 0?} checked="checked"{?/if?}>小说名称</label>
+    	<label class="radio"><input type="radio" name="keytype" value="1"{?if $_request['keytype'] == 1?} checked="checked"{?/if?}>作者</label> 
+		<label class="radio"><input type="radio" name="keytype" value="2"{?if $_request['keytype'] == 2?} checked="checked"{?/if?}>发表者</label> 
+		<label class="radio"><input type="radio" name="keytype" value="3"{?if $_request['keytype'] == 3?} checked="checked"{?/if?}>责任编辑</label> 
+		&nbsp;&nbsp;
+		<button type="submit" name="btnsearch" class="button">搜 索</button>
+		<span class="hot">（下方允许多个关键字，用英文空格分隔）</span>
+		<textarea class="textarea" name="keyword" style="width:80%;height:3em;">{?$_request['keyword']?}</textarea>
+        </td>
+    </tr>
+</table>
+</form>
+<form action="{?$url_batchaction?}" method="post" name="checkform" id="checkform">
+<table class="grid" width="100%" align="center">
+<caption>小说列表<span class="fss">（共{?$rowcount?}本）</span></caption>
+  <tr align="center">
+    <th width="4%">&nbsp;</th>
+    <th width="18%">小说名称</th>
+    <th width="24%">最新章节</th>
+    <th width="8%">作者</th>
+    <th width="6%">字数</th>
+    <th width="16%">入库=&gt;更新</th>
+    <th width="24%">操作</th>
+  </tr>
+  <tbody id="jieqi_page_contents">
+  {?section name=i loop=$articlerows?}
+  <tr>
+    <td align="center"><input type="checkbox" id="checkid[]" name="checkid[]" value="{?$articlerows[i].articleid?}"></td>
+    <td><a href="{?function jieqi_geturl:'article':'article':$articlerows[i].articleid:'info':$articlerows[i].articlecode?}" target="_blank">{?$articlerows[i].articlename?}</a>{?if $articlerows[i].isvip_n > 0?}<span class="hot">vip</span>{?/if?}</td>
+    <td>{?if $articlerows[i].vipchapterid > 0?}<a href="{?$articlerows[i].url_vipchapter?}" target="_blank">{?$articlerows[i].vipvolume?} {?$articlerows[i].vipchapter?}</a><span class="hot">vip</span>{?else?}<a href="{?$articlerows[i].url_lastchapter?}" target="_blank">{?$articlerows[i].lastvolume?} {?$articlerows[i].lastchapter?}</a>{?/if?}</td>
+    <td>{?if $articlerows[i].authorid == 0?}{?$articlerows[i].author?}{?else?}<a href="{?$jieqi_modules['article']['url']?}/authorpage.php?id={?$articlerows[i].authorid?}" target="_blank">{?$articlerows[i].author?}</a>{?/if?}</td>
+    <td>{?$articlerows[i].words?}</td>
+    <td align="center">{?$articlerows[i].postdate|date:'Y-m-d'?}=&gt;{?$articlerows[i].lastupdate|date:'Y-m-d'?}</td>
+    <td align="center">
+	{?if $articlerows[i].display_n == 0?}
+	<a id="act_hide_{?$articlerows[i].articleid?}" href="javascript:;" onclick="act_hide('{?$article_dynamic_url?}/admin/article.php?id={?$articlerows[i].articleid?}&display={?$_request['display']?}&act=hide{?$jieqi_token_url?}');" switch="0">隐藏</a> 
+	<a id="act_ready_{?$articlerows[i].articleid?}" href="javascript:;" onclick="act_ready('{?$article_dynamic_url?}/admin/article.php?id={?$articlerows[i].articleid?}&display={?$_request['display']?}&act=ready{?$jieqi_token_url?}');" switch="0">待审</a>
+	{?elseif $articlerows[i].display_n == 1?}
+	<a id="act_hide_{?$articlerows[i].articleid?}" href="javascript:;" onclick="act_hide('{?$article_dynamic_url?}/admin/article.php?id={?$articlerows[i].articleid?}&display={?$_request['display']?}&act=hide{?$jieqi_token_url?}');" switch="0">隐藏</a> 
+	<a id="act_show_{?$articlerows[i].articleid?}" href="javascript:;" onclick="act_ready('{?$article_dynamic_url?}/admin/article.php?id={?$articlerows[i].articleid?}&display={?$_request['display']?}&act=show{?$jieqi_token_url?}');" switch="1">审核</a>
+	{?else?}
+	<a id="act_show_{?$articlerows[i].articleid?}" href="javascript:;" onclick="act_hide('{?$article_dynamic_url?}/admin/article.php?id={?$articlerows[i].articleid?}&display={?$_request['display']?}&act=show{?$jieqi_token_url?}');" switch="1">显示</a> 
+	<a id="act_ready_{?$articlerows[i].articleid?}" href="javascript:;" onclick="act_ready('{?$article_dynamic_url?}/admin/article.php?id={?$articlerows[i].articleid?}&display={?$_request['display']?}&act=ready{?$jieqi_token_url?}');" switch="0">待审</a>
+	{?/if?}
+	{?if $articlerows[i].display_n == 0?} 
+	<a id="act_toptime_{?$articlerows[i].articleid?}" href="javascript:;" onclick="act_toptime('{?$article_dynamic_url?}/admin/article.php?id={?$articlerows[i].articleid?}&display={?$_request['display']?}&act=toptime{?$jieqi_token_url?}');" switch="0">推荐</a>/<a id="act_untoptime_{?$articlerows[i].articleid?}" href="javascript:;" onclick="act_toptime('{?$article_dynamic_url?}/admin/article.php?id={?$articlerows[i].articleid?}&display={?$_request['display']?}&act=untoptime{?$jieqi_token_url?}');" switch="1">不荐</a>
+	{?else?} 
+	推荐/不荐
+	{?/if?} 
+	<a href="{?$article_static_url?}/articlemanage.php?id={?$articlerows[i].articleid?}" target="_blank">管理</a> 
+	<a href="{?$article_static_url?}/articleedit.php?id={?$articlerows[i].articleid?}&display={?$_request['display']?}" target="_blank">编辑</a> 
+	<a id="act_del_{?$articlerows[i].articleid?}" href="javascript:;" onclick="act_delete('{?$article_dynamic_url?}/admin/article.php?id={?$articlerows[i].articleid?}&display={?$_request['display']?}&act=del{?$jieqi_token_url?}');">删除</a>
+	<a href="{?$article_static_url?}/admin/txtarticle.php?id={?$articlerows[i].articleid?}">下载</a>
+	</td>
+  </tr>
+  {?/section?}
+  </tbody>
+  <tr>
+    <td align="center"><input type="checkbox" id="checkall" name="checkall" value="checkall" onclick="for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = this.form.checkall.checked; }"></td>
+    <td colspan="6" align="left">
+	<input name="act" type="hidden" value="del">{?$jieqi_token_input?}
+	<input name="url_jump" type="hidden" value="{?$url_jump?}">
+	<button type="button" name="batchdel" class="button" onclick="if(confirm('确实要删除选中记录么？')){ this.form.act.value='del'; this.form.submit();}">批量删除</button> &nbsp;
+	<button type="button" name="batchhide" class="button" onclick="if(confirm('确实要隐藏选中记录么？')){ this.form.act.value='hide'; this.form.submit();}">批量隐藏</button> &nbsp;
+	<button type="button" name="batchshow" class="button" onclick="if(confirm('确实要把选中记录审核通过么？')){ this.form.act.value='show'; this.form.submit();}">批量审核</button> &nbsp;
+	<button type="button" name="batchready" class="button" onclick="if(confirm('确实要把选中记录设为待审么？')){ this.form.act.value='ready'; this.form.submit();}">批量待审</button> &nbsp;
+	</td>
+  </tr>
+</table>
+</form>
+<div class="pages">{?$url_jumppage?}</div>
